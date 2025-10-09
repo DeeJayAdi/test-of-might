@@ -2,7 +2,19 @@
 
 ### Co to będzie?
 
-Gra 2d pixelart
+Gra 2D Pixel
+
+Gatunek: Dunegone crawl
+
+Poziomy:
+
+- Tutorial - nauka jak w to grać
+- W podziemiach
+- Na powierzchni
+- W kopalni
+- Opustoszała wioska
+- Cmentarz
+- Zamek
 
 ### Techstack
 
