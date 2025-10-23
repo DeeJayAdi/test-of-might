@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://d30f5dgjsj02l"]
+
+[ext_resource type="Texture2D" uid="uid://d1inicvj8wrun" path="res://map.png" id="1_jl26d"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-1525, 606)
+scale = Vector2(25, 25)
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(61, -24.24)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_jl26d")
+
+[node name="FloorCollision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorCollision"]
+polygon = PackedVector2Array(98.36, -42.96, 23.68, -42.96, 23.72, -5.6, 98.36, -5.6)
+
+[node name="Wall1Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall1Collision"]
+polygon = PackedVector2Array(18.92, -47.68, 23.68, -42.96, 23.72, -5.6, 18.92, -0.84)
+
+[node name="Wall2Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall2Collision"]
+polygon = PackedVector2Array(18.92, -47.68, 103.04, -47.64, 98.36, -42.96, 23.68, -42.96)
+
+[node name="Wall3Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall3Collision"]
+polygon = PackedVector2Array(103.04, -47.64, 103.04, -0.880001, 98.36, -5.6, 98.36, -42.96)
+
+[node name="Wall4Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall4Collision"]
+polygon = PackedVector2Array(18.92, -0.84, 23.72, -5.6, 98.36, -5.6, 103.04, -0.880001)
