@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Test of Might"
-run/main_scene="uid://b60ho6btoc5of"
+run/main_scene="uid://d30f5dgjsj02l"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

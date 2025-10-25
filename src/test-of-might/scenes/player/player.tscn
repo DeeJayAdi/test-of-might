@@ -7,7 +7,6 @@
 size = Vector2(130, 130)
 
 [node name="player" type="CharacterBody2D"]
-position = Vector2(70, 73)
 script = ExtResource("1_dovo2")
 speed = 300
 
