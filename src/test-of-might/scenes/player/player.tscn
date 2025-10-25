@@ -7,6 +7,7 @@
 size = Vector2(130, 130)
 
 [node name="player" type="CharacterBody2D"]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_dovo2")
 speed = 300
 
@@ -15,3 +16,5 @@ shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8afob")
+
+[node name="Camera2D" type="Camera2D" parent="."]
