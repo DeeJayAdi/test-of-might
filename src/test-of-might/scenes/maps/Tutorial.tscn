@@ -11,11 +11,6 @@ position = Vector2(61, -24.24)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_jl26d")
 
-[node name="FloorCollision" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorCollision"]
-polygon = PackedVector2Array(98.36, -42.96, 23.68, -42.96, 23.72, -5.6, 98.36, -5.6)
-
 [node name="Wall1Collision" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall1Collision"]
