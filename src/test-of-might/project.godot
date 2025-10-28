@@ -14,3 +14,22 @@ config/name="Projekt"
 run/main_scene="uid://d30f5dgjsj02l"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[input]
+
+left={
+"deadzone": 0.5,
+"events": []
+}
+right={
+"deadzone": 0.5,
+"events": []
+}
+up={
+"deadzone": 0.5,
+"events": []
+}
+down={
+"deadzone": 0.5,
+"events": []
+}
