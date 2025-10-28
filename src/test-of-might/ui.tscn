@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://det5vlnlsyq2e"]
+
+[ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://Assety/pasek.png" id="1_m6e0p"]
+[ext_resource type="Texture2D" uid="uid://7pjywbdogoxw" path="res://Assety/itemy_slot.png" id="2_27fn8"]
+[ext_resource type="Texture2D" uid="uid://bpi6g36wfqsrs" path="res://Assety/pasek_pelny_2.png" id="2_n5ude"]
+[ext_resource type="Texture2D" uid="uid://ccx017gjkwlt1" path="res://Assety/Pasek_pusty_2.png" id="2_y4yjw"]
+[ext_resource type="Texture2D" uid="uid://beeyrmwtyrsgv" path="res://Assety/ekiwpunek_64.png" id="3_nltto"]
+[ext_resource type="Texture2D" uid="uid://cf3q74ajtsc8k" path="res://Assety/mapa_64.png" id="5_n5ude"]
+[ext_resource type="Texture2D" uid="uid://ijd5xt6su0mc" path="res://Assety/LVL.png" id="7_y4yjw"]
+[ext_resource type="Texture2D" uid="uid://dgnfr6rsm1k5n" path="res://Assety/lvl_pasek.png" id="8_waa4j"]
+[ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://Font/Jersey10-Regular.ttf" id="9_ok7cu"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HP" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 413.0
+offset_bottom = 124.0
+
+[node name="Zdrowie" type="TextureRect" parent="HP"]
+layout_mode = 2
+texture = ExtResource("1_m6e0p")
+expand_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HP/Zdrowie"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 45.0
+offset_right = 378.0
+offset_bottom = 77.0
+value = 50.0
+texture_under = ExtResource("2_y4yjw")
+texture_progress = ExtResource("2_n5ude")
+
+[node name="Menu_lewo" type="VBoxContainer" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -67.5
+offset_right = 84.0
+offset_bottom = 67.5
+grow_vertical = 2
+
+[node name="Ekwipunek" type="TextureButton" parent="Menu_lewo"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("3_nltto")
+
+[node name="Mapa_dziennik" type="TextureButton" parent="Menu_lewo"]
+layout_mode = 2
+texture_normal = ExtResource("5_n5ude")
+
+[node name="Itemki" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -244.0
+offset_top = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Item_1" type="TextureRect" parent="Itemki"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_27fn8")
+expand_mode = 3
+
+[node name="Item_2" type="TextureRect" parent="Itemki"]
+layout_mode = 2
+texture = ExtResource("2_27fn8")
+expand_mode = 2
+
+[node name="LvL" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -213.0
+offset_bottom = 197.0
+grow_horizontal = 0
+
+[node name="LVL+Pasek" type="TextureRect" parent="LvL"]
+layout_mode = 2
+texture = ExtResource("7_y4yjw")
+expand_mode = 5
+
+[node name="Pasek_EXPA" type="TextureProgressBar" parent="LvL/LVL+Pasek"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.069000006
+offset_left = 12.0
+offset_top = 124.0
+offset_right = 186.303
+offset_bottom = 134.0
+value = 100.0
+texture_progress = ExtResource("8_waa4j")
+
+[node name="TEXT_LVL" type="Label" parent="LvL/LVL+Pasek"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 22.0
+offset_right = 145.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("9_ok7cu")
+theme_override_font_sizes/font_size = 62
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
