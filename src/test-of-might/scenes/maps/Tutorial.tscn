@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://d30f5dgjsj02l"]
+[gd_scene load_steps=4 format=3 uid="uid://d30f5dgjsj02l"]
 
 [ext_resource type="Texture2D" uid="uid://d1inicvj8wrun" path="res://map.png" id="1_jl26d"]
-[ext_resource type="Texture2D" uid="uid://ce66mw4yraflp" path="res://icon.svg" id="2_30580"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/player.tscn" id="3_rgysx"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="4_rgysx"]
 
@@ -34,13 +33,9 @@ polygon = PackedVector2Array(103.04, -47.64, 103.04, -0.880001, 98.36, -5.6, 98.
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall4Collision"]
 polygon = PackedVector2Array(18.92, -0.84, 23.72, -5.6, 98.36, -5.6, 103.04, -0.880001)
 
-[node name="tempOfReference" type="Sprite2D" parent="."]
-position = Vector2(72.56, -15.039999)
-scale = Vector2(0.03343749, 0.03343749)
-texture = ExtResource("2_30580")
-
 [node name="player" parent="." instance=ExtResource("3_rgysx")]
 position = Vector2(61.439995, -26.079998)
+scale = Vector2(0.1, 0.1)
 
 [node name="Skeleton" parent="." instance=ExtResource("4_rgysx")]
 position = Vector2(35.04, -12.559999)
