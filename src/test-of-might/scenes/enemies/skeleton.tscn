@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://c1t3jqtd5ecfb"]
+[gd_scene load_steps=67 format=3 uid="uid://c1t3jqtd5ecfb"]
 
 [ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_6ucyf"]
 [ext_resource type="Texture2D" uid="uid://uej46ytxa1tp" path="res://Assety/enemies/skeleton/Skeleton_01_White_Attack1.png" id="1_s0h66"]
@@ -429,8 +429,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ucyf"]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vncds"]
+radius = 35.0
+
 [node name="Skeleton" type="CharacterBody2D"]
 script = ExtResource("1_6ucyf")
+detect_radius = 150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
@@ -441,5 +448,21 @@ texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_umco3")
 animation = &"idle"
-frame_progress = 0.38604614
+frame_progress = 0.75356466
 offset = Vector2(2.465, -31.195)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_6ucyf")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, -24.285)
+shape = SubResource("CircleShape2D_vncds")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_AttackRange_body_entered"]

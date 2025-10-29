@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(130, 130)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_dovo2")
 speed = 300
@@ -18,3 +18,4 @@ shape = SubResource("RectangleShape2D_dovo2")
 texture = ExtResource("1_8afob")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
