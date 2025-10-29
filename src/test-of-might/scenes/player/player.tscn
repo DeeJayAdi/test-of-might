@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
 radius = 14.000003
-height = 44.000008
+height = 36.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
 atlas = ExtResource("3_lvxji")
@@ -1802,10 +1802,11 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
 script = ExtResource("1_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(10, 5.0000005)
+position = Vector2(8, 11)
 scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("CapsuleShape2D_5gtgg")
 
@@ -1817,6 +1818,6 @@ texture_filter = 1
 position = Vector2(9.999998, 10.000008)
 scale = Vector2(1.8749999, 1.875)
 sprite_frames = SubResource("SpriteFrames_fm80t")
-animation = &"Hurt_Up"
+animation = &"Attack_Down"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
