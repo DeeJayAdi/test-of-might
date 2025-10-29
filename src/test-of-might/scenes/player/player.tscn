@@ -1,6 +1,5 @@
-[gd_scene load_steps=245 format=3 uid="uid://b60ho6btoc5of"]
+[gd_scene load_steps=244 format=3 uid="uid://b60ho6btoc5of"]
 
-[ext_resource type="Texture2D" uid="uid://ce66mw4yraflp" path="res://icon.svg" id="1_8afob"]
 [ext_resource type="Script" uid="uid://df8qyfrdo37ja" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://bofuavksyecrl" path="res://Sprite_Player/Swordsman_lvl2_attack_with_shadow.png" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://dg51buq6xkj3t" path="res://Sprite_Player/Swordsman_lvl2_Run_Attack_with_shadow.png" id="4_h17s1"]
@@ -11,8 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://c8jjirx6vmkvu" path="res://Sprite_Player/Swordsman_lvl2_Walk_with_shadow.png" id="8_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://ko60i8i5g4l3" path="res://Sprite_Player/Swordsman_lvl2_Run_with_shadow.png" id="9_je7p5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
-size = Vector2(130, 130)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
+radius = 14.000003
+height = 44.000008
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
 atlas = ExtResource("3_lvxji")
@@ -1802,22 +1802,18 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D"]
-scale = Vector2(0.1, 0.1)
 script = ExtResource("1_dovo2")
 speed = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9.999997, 9.999997)
+position = Vector2(10, 5.0000005)
 scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("RectangleShape2D_dovo2")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(269.99997, 129.99998)
-texture = ExtResource("1_8afob")
+shape = SubResource("CapsuleShape2D_5gtgg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(9.999998, 10.000008)
 scale = Vector2(1.8749999, 1.875)
 sprite_frames = SubResource("SpriteFrames_fm80t")
