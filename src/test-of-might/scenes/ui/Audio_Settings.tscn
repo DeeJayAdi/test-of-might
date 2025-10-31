@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfyt2rf60e4in"]
+[gd_scene load_steps=4 format=3 uid="uid://cfyt2rf60e4in"]
 
 [ext_resource type="Script" uid="uid://c5k4fkfk7uaqa" path="res://scenes/ui/audio_settings_Control.gd" id="1_yhfnd"]
 [ext_resource type="AudioStream" uid="uid://drxydiwaca2ca" path="res://Assety/Audio/Music/logo-sfx-316751.mp3" id="2_3glfk"]
+[ext_resource type="Texture2D" uid="uid://mypdllmmobv5" path="res://Assety/Menu/Exit/close.png" id="3_7t4dr"]
 
 [node name="AudioSettings" type="Control"]
 layout_mode = 3
@@ -70,5 +71,14 @@ volume_db = -23.853
 autoplay = true
 bus = &"Music"
 
+[node name="Close_Settings" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 48.0
+offset_right = 1105.0
+offset_bottom = 73.0
+texture_normal = ExtResource("3_7t4dr")
+
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/Music_HSlider" to="." method="_on_music_h_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/SFX_HSlider" to="." method="_on_sfx_h_slider_value_changed"]
+[connection signal="pressed" from="Close_Settings" to="." method="_on_close_settings_pressed"]
