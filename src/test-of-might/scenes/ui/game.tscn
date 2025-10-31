@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://t08d1itw7hn7"]
 
-[ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://Assety/pasek.png" id="1_kfd0b"]
-[ext_resource type="Texture2D" uid="uid://bpi6g36wfqsrs" path="res://Assety/pasek_pelny_2.png" id="2_lakwo"]
-[ext_resource type="Texture2D" uid="uid://ijd5xt6su0mc" path="res://Assety/LVL.png" id="3_5mgl0"]
-[ext_resource type="Texture2D" uid="uid://dgnfr6rsm1k5n" path="res://Assety/lvl_pasek.png" id="4_xafdj"]
+[ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://Assety/Ui/pasek.png" id="1_kfd0b"]
+[ext_resource type="Texture2D" uid="uid://bpi6g36wfqsrs" path="res://Assety/Ui/pasek_pelny_2.png" id="2_lakwo"]
+[ext_resource type="Texture2D" uid="uid://ijd5xt6su0mc" path="res://Assety/Ui/LVL.png" id="3_5mgl0"]
+[ext_resource type="Texture2D" uid="uid://dgnfr6rsm1k5n" path="res://Assety/Ui/lvl_pasek.png" id="4_xafdj"]
 
 [node name="Game" type="Node2D"]
 
