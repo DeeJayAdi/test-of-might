@@ -229,6 +229,9 @@ func perform_attack():
 	var shape = CircleShape2D.new()
 	shape.radius = attack_radius
 
+	#losowy pitch dźwięku ataku dla urozmaicenia
+	$sfxAttack.pitch_scale = randf_range(0.9, 1.1)
+	$sfxAttack.play()
 	var params = PhysicsShapeQueryParameters2D.new()
 	params.shape_rid = shape.get_rid()
 	var attack_pos = global_position + get_attack_offset()
@@ -245,3 +248,16 @@ func perform_attack():
 		if collider and collider.has_method("take_damage"):
 			collider.take_damage(attack_damage)
 		# alternatywnie można sprawdzać grupy: if collider.is_in_group("enemies")...
+
+
+func _on_frame_changed():
+	var frame = animated_sprite.frame
+	
+	match current_state:
+		State.WALK, State.RUN:
+			if frame == 2 or frame == 5 or frame == 8:
+				if not $sfxWalk.playing:
+					$sfxWalk.pitch_scale = randf_range(0.9, 1.1)
+					$sfxWalk.play()
+		State.IDLE:
+			$sfxWalk.stop()

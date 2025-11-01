@@ -20,11 +20,9 @@ func _ready():
 func _physics_process(delta: float):
 	match current_state:
 		State.IDLE:
-			$AnimatedSprite2D.play("idle")
 			velocity = Vector2.ZERO
 		State.CHASE:
 			if player != null:
-				$AnimatedSprite2D.play("walk")
 				$NavigationAgent2D.target_position = player.global_position
 				var direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
 				velocity = direction * speed
@@ -36,7 +34,6 @@ func _physics_process(delta: float):
 				current_state = State.IDLE
 
 		State.ATTACK:
-			$AnimatedSprite2D.play("attack1")
 			var direction = (player.global_position - global_position).normalized()
 			if direction.x > 0:
 				$AnimatedSprite2D.flip_h = false
@@ -45,11 +42,11 @@ func _physics_process(delta: float):
 			velocity = Vector2.ZERO
 			# Atak: na koniec animacji sprawdzamy, czy gracz jest w zasięgu i zadajemy obrażenia
 		State.HURT:
-			$AnimatedSprite2D.play("hurt")
 			velocity = Vector2.ZERO
 		State.DEATH:
-			$AnimatedSprite2D.play("die")
 			velocity = Vector2.ZERO
+		
+	play_animation()
 			
 	move_and_slide()
 
@@ -64,8 +61,14 @@ func play_animation():
 			$AnimatedSprite2D.play("attack1")
 		State.HURT:
 			$AnimatedSprite2D.play("hurt")
+			if not $sfxHurt.playing:
+				$sfxHurt.pitch_scale = randf_range(0.9, 1.1)
+				$sfxHurt.play()
 		State.DEATH:
 			$AnimatedSprite2D.play("die")
+			if not $sfxDie.playing:
+				$sfxDie.pitch_scale = randf_range(0.9, 1.1)
+				$sfxDie.play()
 
 func _on_DetectionArea_body_entered(body):
 	if body.is_in_group("player"):
@@ -92,6 +95,7 @@ func take_damage(amount: int):
 		current_state = State.DEATH
 	else:
 		current_state = State.HURT
+
 		
 func _on_animation_finished():
 	# Jeśli animacja ataku się skończyła, zadaj obrażenia jeśli cel jest w zasięgu
@@ -116,3 +120,19 @@ func _on_animation_finished():
 	# Obsługa końca animacji przy obrażeniach/śmierci
 	if current_state == State.DEATH:
 		queue_free()
+
+
+func _on_frame_changed():
+	var frame = $AnimatedSprite2D.frame
+
+	match current_state:
+		State.CHASE:
+			if not $sfxWalk.playing:
+				$sfxWalk.pitch_scale = randf_range(0.9, 1.1)
+				$sfxWalk.play()
+		State.IDLE:
+			$sfxWalk.stop()
+		State.HURT:
+			$sfxWalk.stop()
+		State.DEATH:
+			$sfxWalk.stop()

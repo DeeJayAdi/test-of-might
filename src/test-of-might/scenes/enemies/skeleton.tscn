@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://c1t3jqtd5ecfb"]
+[gd_scene load_steps=70 format=3 uid="uid://c1t3jqtd5ecfb"]
 
 [ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_6ucyf"]
 [ext_resource type="Texture2D" uid="uid://uej46ytxa1tp" path="res://Assety/enemies/skeleton/Skeleton_01_White_Attack1.png" id="1_s0h66"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bd3jerni7kubb" path="res://Assety/enemies/skeleton/Skeleton_01_White_Hurt.png" id="4_bmy85"]
 [ext_resource type="Texture2D" uid="uid://u6n6lbba81u7" path="res://Assety/enemies/skeleton/Skeleton_01_White_Idle.png" id="5_2t5sy"]
 [ext_resource type="Texture2D" uid="uid://cro6igg14uq37" path="res://Assety/enemies/skeleton/Skeleton_01_White_Walk.png" id="6_pxfki"]
+[ext_resource type="AudioStream" uid="uid://ceoio15wnxqhn" path="res://Assety/Audio/effects/skeleton/rattling-bones-105394.mp3" id="8_2t5sy"]
+[ext_resource type="AudioStream" uid="uid://c60oxhfgugsd1" path="res://Assety/Audio/effects/skeleton/bone-break-sound-269658.mp3" id="9_pxfki"]
+[ext_resource type="AudioStream" uid="uid://b47tygd7djw0f" path="res://Assety/Audio/effects/skeleton/falling-bones-87568.mp3" id="10_quxur"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s0h66"]
 height = 22.0
@@ -469,7 +472,17 @@ path_desired_distance = 4.0
 path_max_distance = 10.0
 simplify_path = true
 
+[node name="sfxWalk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_2t5sy")
+
+[node name="sfxHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_pxfki")
+
+[node name="sfxDie" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_quxur")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_AttackRange_body_entered"]

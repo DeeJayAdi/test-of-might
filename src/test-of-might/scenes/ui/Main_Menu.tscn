@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcwwcthdweq8w"]
+[gd_scene load_steps=18 format=3 uid="uid://dcwwcthdweq8w"]
 
 [ext_resource type="Script" uid="uid://bbsqheiexmu0d" path="res://scripts/ui/main_menu.gd" id="1_1yx65"]
 [ext_resource type="Texture2D" uid="uid://7vbjvh67kyte" path="res://Assety/Menu/Background.png" id="1_abljk"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bk17s2k1cmrd4" path="res://Assety/Menu/Exit/exit.png" id="13_1yx65"]
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://Font/Jersey10-Regular.ttf" id="14_ll4xq"]
 [ext_resource type="AudioStream" uid="uid://lxe23n1idjrh" path="res://Music/Misc/chronicles-of-valor-204107.mp3" id="16_2il0p"]
+[ext_resource type="AudioStream" uid="uid://dhbo2bbe7qlvb" path="res://Assety/Audio/effects/ui/ui-click-43196.mp3" id="17_gaoh0"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -94,7 +95,14 @@ stream = ExtResource("16_2il0p")
 autoplay = true
 bus = &"Music"
 
+[node name="sfxHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_gaoh0")
+
+[connection signal="mouse_entered" from="VBoxContainer/New Game" to="." method="_play_Sound"]
 [connection signal="pressed" from="VBoxContainer/New Game" to="." method="_on_new_game_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Load" to="." method="_play_Sound"]
 [connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Settings" to="." method="_play_Sound"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Exit" to="." method="_play_Sound"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
