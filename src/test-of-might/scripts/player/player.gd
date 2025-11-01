@@ -8,6 +8,8 @@ enum State { IDLE, WALK, RUN, ATTACK, HURT, DEATH }
 @export var max_health: int = 100
 @export var speed: float = 200.0
 @export var run_multiplier: float = 1.5 
+@export var attack_radius: float = 30.0
+@export var attack_damage: int = 25
 
 var current_health: int
 var current_state: State = State.IDLE
@@ -17,10 +19,17 @@ var facing_direction: String = "Down"
 var is_moving: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+var walls_map: Node = null
 
 func _ready():
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
+
+	# Spróbuj znaleźć warstwę z kafelkami ścian (nazwa z Dungeon.tscn: "Walls_Floors")
+	if get_parent() and get_parent().has_node("Walls_Floors"):
+		walls_map = get_parent().get_node("Walls_Floors")
+	elif get_tree().get_root().has_node("Walls_Floors"):
+		walls_map = get_tree().get_root().get_node("Walls_Floors")
 
 
 func _physics_process(delta: float):
@@ -40,6 +49,16 @@ func _physics_process(delta: float):
 	
 	play_animation()
 
+	# Jeśli mamy referencję do TileMapLayer (Walls_Floors) — wykonaj prostą blokadę ruchu
+	if walls_map and walls_map.has_method("world_to_map"):
+		var next_pos = global_position + velocity * get_physics_process_delta_time()
+		var cell = walls_map.world_to_map(next_pos)
+		# get_cellv może zwracać -1 gdy brak kafelka
+		var tile = walls_map.get_cellv(cell)
+		if tile != -1:
+			# Kafelek istnieje -> zablokuj ruch
+			velocity = Vector2.ZERO
+
 	move_and_slide()
 
 
@@ -47,6 +66,8 @@ func get_input_and_update_state():
 	# Sprawdź atak
 	if Input.is_action_just_pressed("attack"):
 		current_state = State.ATTACK
+		# Wykonaj prostą detekcję kolizji broni na moment ataku
+		perform_attack()
 
 	# Pobierz kierunek ruchu
 	var dir = Input.get_vector("left", "right", "up", "down")
@@ -187,3 +208,40 @@ func die():
 	current_state = State.DEATH
 	died.emit()
 	
+
+
+# --- Prosta detekcja trafienia przeciwników podczas ataku ---
+func get_attack_offset() -> Vector2:
+	match facing_direction:
+		"Right":
+			return Vector2(24, 0)
+		"Left":
+			return Vector2(-24, 0)
+		"Up":
+			return Vector2(0, -24)
+		"Down":
+			return Vector2(0, 24)
+		_:
+			return Vector2.ZERO
+
+func perform_attack():
+	# Tworzymy tymczasowy kształt i zapytanie do świata fizyki 2D
+	var shape = CircleShape2D.new()
+	shape.radius = attack_radius
+
+	var params = PhysicsShapeQueryParameters2D.new()
+	params.shape_rid = shape.get_rid()
+	var attack_pos = global_position + get_attack_offset()
+	params.transform = Transform2D(0, attack_pos)
+
+	var space = get_world_2d().direct_space_state
+	var results = space.intersect_shape(params, 32)
+
+	for r in results:
+		var collider = r.collider
+		if collider == self:
+			continue
+		# jeśli obiekt ma metodę do przyjmowania obrażeń, wywołaj ją
+		if collider and collider.has_method("take_damage"):
+			collider.take_damage(attack_damage)
+		# alternatywnie można sprawdzać grupy: if collider.is_in_group("enemies")...

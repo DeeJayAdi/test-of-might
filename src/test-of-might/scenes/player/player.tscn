@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://ko60i8i5g4l3" path="res://Sprite_Player/Swordsman_lvl2_Run_with_shadow.png" id="9_je7p5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
-radius = 14.000003
-height = 36.0
+radius = 11.000001
+height = 22.000002
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
 atlas = ExtResource("3_lvxji")
@@ -1811,11 +1811,10 @@ scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("CapsuleShape2D_5gtgg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(9.999998, 10.000008)
+position = Vector2(9, -8)
 scale = Vector2(1.8749999, 1.875)
 sprite_frames = SubResource("SpriteFrames_fm80t")
 animation = &"Attack_Down"
