@@ -1,5 +1,5 @@
 extends CharacterBody2D
-enum State {IDLE, CHASE, ATTACK}
+enum State {IDLE, CHASE, ATTACK, HURT, DEATH}
 
 var current_state = State.IDLE
 var player = null
@@ -25,13 +25,12 @@ func _physics_process(delta: float):
 		State.CHASE:
 			if player != null:
 				$AnimatedSprite2D.play("walk")
-				var facing_direction = (player.global_position - global_position).normalized()
 				$NavigationAgent2D.target_position = player.global_position
 				var direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
 				velocity = direction * speed
-				if facing_direction.x > 0:
+				if direction.x > 0:
 					$AnimatedSprite2D.flip_h = false
-				elif facing_direction.x < 0:
+				elif direction.x < 0:
 					$AnimatedSprite2D.flip_h = true
 			else:
 				current_state = State.IDLE
@@ -45,12 +44,28 @@ func _physics_process(delta: float):
 				$AnimatedSprite2D.flip_h = true
 			velocity = Vector2.ZERO
 			# Atak: na koniec animacji sprawdzamy, czy gracz jest w zasięgu i zadajemy obrażenia
+		State.HURT:
+			$AnimatedSprite2D.play("hurt")
+			velocity = Vector2.ZERO
+		State.DEATH:
+			$AnimatedSprite2D.play("die")
+			velocity = Vector2.ZERO
 			
-			
-			
-
 	move_and_slide()
 
+
+func play_animation():
+	match current_state:
+		State.IDLE:
+			$AnimatedSprite2D.play("idle")
+		State.CHASE:
+			$AnimatedSprite2D.play("walk")
+		State.ATTACK:
+			$AnimatedSprite2D.play("attack1")
+		State.HURT:
+			$AnimatedSprite2D.play("hurt")
+		State.DEATH:
+			$AnimatedSprite2D.play("die")
 
 func _on_DetectionArea_body_entered(body):
 	if body.is_in_group("player"):
@@ -74,14 +89,9 @@ func take_damage(amount: int):
 	print("Skeleton otrzymał obrażenia:", amount, " pozostało:", current_health)
 
 	if current_health <= 0:
-		# zagraj animację śmierci
-		$AnimatedSprite2D.play("die")
-		# na koniec animacji zostanie usunięty (w _on_animation_finished)
-		current_state = State.IDLE
+		current_state = State.DEATH
 	else:
-		# zagraj animację obrażeń i zatrzymaj się
-		$AnimatedSprite2D.play("hurt")
-		current_state = State.IDLE
+		current_state = State.HURT
 		
 func _on_animation_finished():
 	# Jeśli animacja ataku się skończyła, zadaj obrażenia jeśli cel jest w zasięgu
@@ -95,7 +105,14 @@ func _on_animation_finished():
 			current_state = State.CHASE
 		else:
 			current_state = State.IDLE
+	
+	if current_state == State.HURT:
+		# Po otrzymaniu obrażeń wróć do ścigania lub bezczynności
+		if player and $DetectionArea.get_overlapping_bodies().has(player):
+			current_state = State.CHASE
+		else:
+			current_state = State.IDLE
 
 	# Obsługa końca animacji przy obrażeniach/śmierci
-	if $AnimatedSprite2D.animation == "die":
+	if current_state == State.DEATH:
 		queue_free()

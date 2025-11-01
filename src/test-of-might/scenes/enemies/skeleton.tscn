@@ -447,8 +447,9 @@ shape = SubResource("CapsuleShape2D_s0h66")
 texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_umco3")
-animation = &"idle"
-frame_progress = 0.75356466
+animation = &"hurt"
+frame = 4
+frame_progress = 1.0
 offset = Vector2(2.465, -31.195)
 
 [node name="DetectionArea" type="Area2D" parent="."]
