@@ -1,55 +1,91 @@
 extends CharacterBody2D
+
 enum State {IDLE, CHASE, ATTACK, HURT, DEATH}
 
 var current_state = State.IDLE
 var player = null
 @export var detect_radius: int = 300
 @export var speed: int = 150
-@export var max_health: int = 50
+@export var max_health: int = 200
+var can_attack: bool = true
+@export var attack_cooldown: float = 1.0
+@export var crit_chance: float = 0.1  
+@export var crit_multiplier: float = 2.0
 @export var attack_damage: int = 10
 var current_health: int
 var rng = RandomNumberGenerator.new()
+var current_attack_animation: String = "attack1"
+
 
 func _ready():
 	$DetectionArea/CollisionShape2D.shape.radius = detect_radius
-
 	# Dodajemy do grupy 'enemies' aby ułatwić selekcję
 	add_to_group("enemies")
 	rng.randomize()
 	current_health = max_health
 
+func reset_attack_cooldown():
+	can_attack = true
+
 func _physics_process(delta: float):
 	match current_state:
 		State.IDLE:
 			velocity = Vector2.ZERO
+			# Jeśli stoimy, ale gracz jest wykryty, zacznij go gonić
+			if player and $DetectionArea.get_overlapping_bodies().has(player):
+				current_state = State.CHASE
+
 		State.CHASE:
 			if player != null:
-				$NavigationAgent2D.target_position = player.global_position
-				var direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-				velocity = direction * speed
-				if direction.x > 0:
-					$AnimatedSprite2D.flip_h = false
-				elif direction.x < 0:
-					$AnimatedSprite2D.flip_h = true
+				# Sprawdź, czy gracz jest w zasięgu ataku
+				if $AttackRange.get_overlapping_bodies().has(player):
+					# --- Jest w zasięgu ---
+					if can_attack:
+						# 1. Może atakować -> ATAKUJ
+						current_state = State.ATTACK
+						
+						# Rzut na krytyka
+						if rng.randf() < crit_chance:
+							# Użyj animacji krytycznej
+							current_attack_animation = "attack2" 
+						else:
+							# Użyj animacji normalnej
+							current_attack_animation = "attack1"
+
+						velocity = Vector2.ZERO
+						var dir = (player.global_position - global_position).normalized()
+						if dir.x > 0: $AnimatedSprite2D.flip_h = false
+						elif dir.x < 0: $AnimatedSprite2D.flip_h = true
+					else:
+						current_state = State.IDLE
+						velocity = Vector2.ZERO
+				else:
+					# --- Jest poza zasięgiem -> GOŃ ---
+					$NavigationAgent2D.target_position = player.global_position
+					var direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
+					velocity = direction * speed
+					if direction.x > 0:
+						$AnimatedSprite2D.flip_h = false
+					elif direction.x < 0:
+						$AnimatedSprite2D.flip_h = true
 			else:
 				current_state = State.IDLE
 
 		State.ATTACK:
-			var direction = (player.global_position - global_position).normalized()
-			if direction.x > 0:
-				$AnimatedSprite2D.flip_h = false
-			elif direction.x < 0:
-				$AnimatedSprite2D.flip_h = true
+			# Ten stan tylko odtwarza animację. Logika jest w _on_animation_finished
 			velocity = Vector2.ZERO
+		
 		State.HURT:
 			velocity = Vector2.ZERO
+		
 		State.DEATH:
 			velocity = Vector2.ZERO
 
-		
 	play_animation()
-			
 	move_and_slide()
+
+
+
 
 
 func play_animation():
@@ -59,11 +95,16 @@ func play_animation():
 		State.CHASE:
 			$AnimatedSprite2D.play("walk")
 		State.ATTACK:
-			$AnimatedSprite2D.play("attack1")
+			# --- POPRAWKA TUTAJ ---
+			# Musisz odtworzyć animację, którą wylosowaliśmy (attack1 lub attack2)
+			$AnimatedSprite2D.play(current_attack_animation)
+			# --- KONIEC POPRAWKI ---
 		State.HURT:
 			$AnimatedSprite2D.play("hurt")
 		State.DEATH:
 			$AnimatedSprite2D.play("die")
+
+
 
 func _on_DetectionArea_body_entered(body):
 	if current_state == State.DEATH:
@@ -71,24 +112,30 @@ func _on_DetectionArea_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		current_state = State.CHASE
-		
+
+
 func _on_DetectionArea_body_exited(body):
 	if current_state == State.DEATH:
 		return
 	if body.is_in_group("player"):
 		player = null
 		current_state = State.IDLE
-		
+
+
 func _on_AttackRange_body_entered(body):
-	if current_state == State.DEATH:
+	if current_state == State.DEATH or current_state == State.ATTACK:	
 		return
-	if body == player:
+	if body == player and can_attack:
 		current_state = State.ATTACK
+
+
+
 
 
 func take_damage(amount: int):
 	if current_state == State.DEATH:
 		return
+		
 	# Prosta obsługa otrzymania obrażeń
 	current_health -= amount
 	current_health = clamp(current_health, 0, max_health)
@@ -107,28 +154,40 @@ func take_damage(amount: int):
 			$sfxHurt.pitch_scale = rng.randf_range(0.9, 1.1)
 			$sfxHurt.play()
 
-		
 func _on_animation_finished():
-	# Jeśli animacja ataku się skończyła, zadaj obrażenia jeśli cel jest w zasięgu
 	if current_state == State.ATTACK:
-		var overlapping = $AttackRange.get_overlapping_bodies()
-		if player and overlapping.has(player):
-			if player.has_method("take_damage"):
-				player.take_damage(attack_damage)
-		# Po ataku przejdź z powrotem do ścigania jeśli cel wciąż jest widoczny
-		if player and $DetectionArea.get_overlapping_bodies().has(player):
-			current_state = State.CHASE
-		else:
-			current_state = State.IDLE
+		# Sprawdzamy 'can_attack', aby upewnić się, że to "prawdziwy"
+		# atak, a nie wywołanie z zapętlonej animacji.
+		if can_attack:
+			# 1. Rozpocznij cooldown
+			can_attack = false
+			get_tree().create_timer(attack_cooldown).timeout.connect(reset_attack_cooldown)
+
+			# 2. Zadaj obrażenia (Twoja logika)
+			var overlapping = $AttackRange.get_overlapping_bodies()
+			if player and overlapping.has(player):
+				if player.has_method("take_damage"):
+					
+					# Oblicz obrażenia (z uwzględnieniem krytyka)
+					var damage_to_deal = attack_damage
+					# Sprawdź, jaka animacja właśnie się skończyła
+					if current_attack_animation == "attack2":
+						damage_to_deal = int(attack_damage * crit_multiplier)
+						print("Szkielet zadał cios krytyczny!")
+					
+					player.take_damage(damage_to_deal)
+
+		# 3. NATYCHMIAST zmień stan. To zatrzyma pętlę animacji.
+		# Maszyna stanów w _physics_process zdecyduje, co dalej.
+		current_state = State.CHASE
+
 	
 	elif current_state == State.HURT:
-		# Po otrzymaniu obrażeń wróć do ścigania lub bezczynności
 		if player and $DetectionArea.get_overlapping_bodies().has(player):
 			current_state = State.CHASE
 		else:
 			current_state = State.IDLE
 
-	# Obsługa końca animacji przy obrażeniach/śmierci
 	elif current_state == State.DEATH:
 		queue_free()
 
