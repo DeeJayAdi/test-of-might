@@ -97,6 +97,7 @@ bus = &"Music"
 
 [node name="sfxHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_gaoh0")
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="VBoxContainer/New Game" to="." method="_play_Sound"]
 [connection signal="pressed" from="VBoxContainer/New Game" to="." method="_on_new_game_pressed"]

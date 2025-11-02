@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ouxgk5sarjj" path="res://Sprite_Player/Swordsman_lvl2_Idle_with_shadow.png" id="6_75vfm"]
 [ext_resource type="Texture2D" uid="uid://c8jjirx6vmkvu" path="res://Sprite_Player/Swordsman_lvl2_Walk_with_shadow.png" id="8_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://ko60i8i5g4l3" path="res://Sprite_Player/Swordsman_lvl2_Run_with_shadow.png" id="9_je7p5"]
-[ext_resource type="AudioStream" uid="uid://de4mitkb8yuj0" path="res://Assety/Audio/effects/player/Steps_floor-005.ogg" id="10_je7p5"]
+[ext_resource type="AudioStream" uid="uid://cfu1xsv6tnoka" path="res://Assety/Audio/effects/player/footstep.wav" id="10_je7p5"]
 [ext_resource type="AudioStream" uid="uid://cbj1px7pe6stn" path="res://Assety/Audio/effects/player/sword-slide-44167.mp3" id="11_fm80t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]

@@ -13,7 +13,8 @@ enum State { IDLE, WALK, RUN, ATTACK, HURT, DEATH }
 
 var current_health: int
 var current_state: State = State.IDLE
-
+var _step = true
+var rng = RandomNumberGenerator.new()
 var facing_direction: String = "Down"
 
 var is_moving: bool = false
@@ -24,6 +25,8 @@ var walls_map: Node = null
 func _ready():
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
+
+	rng.randomize()
 
 	# Spróbuj znaleźć warstwę z kafelkami ścian (nazwa z Dungeon.tscn: "Walls_Floors")
 	if get_parent() and get_parent().has_node("Walls_Floors"):
@@ -63,36 +66,39 @@ func _physics_process(delta: float):
 
 
 func get_input_and_update_state():
-	# Sprawdź atak
-	if Input.is_action_just_pressed("attack"):
-		current_state = State.ATTACK
-		# Wykonaj prostą detekcję kolizji broni na moment ataku
-		perform_attack()
 
-	# Pobierz kierunek ruchu
 	var dir = Input.get_vector("left", "right", "up", "down")
 
 	if dir != Vector2.ZERO:
 		is_moving = true
-		# Aktualizuj kierunek patrzenia
 		update_facing_direction(dir)
+	else:
+		is_moving = false
 		
-		# Ustaw prędkość
+	if Input.is_action_just_pressed("attack"):
+		current_state = State.ATTACK
+		perform_attack()
+
+	if current_state != State.ATTACK:
+		if is_moving:
+			if Input.is_action_pressed("sprint"):
+				velocity = dir.normalized() * speed * run_multiplier
+				current_state = State.RUN
+			else:
+				velocity = dir.normalized() * speed
+				current_state = State.WALK
+		else:
+			velocity = Vector2.ZERO
+			current_state = State.IDLE
+	elif is_moving: 
+
 		if Input.is_action_pressed("sprint"):
 			velocity = dir.normalized() * speed * run_multiplier
-			# Ustaw stan na RUN tylko jeśli *nie* jesteśmy w trakcie ataku
-			if current_state != State.ATTACK:
-				current_state = State.RUN
 		else:
 			velocity = dir.normalized() * speed
-			if current_state != State.ATTACK:
-				current_state = State.WALK
 	else:
-		# Brak ruchu
-		is_moving = false
 		velocity = Vector2.ZERO
-		if current_state != State.ATTACK:
-			current_state = State.IDLE
+
 
 # Funkcja pomocnicza do aktualizacji 'facing_direction' na podstawie wektora
 func update_facing_direction(dir: Vector2):
@@ -119,9 +125,11 @@ func play_animation():
 		State.RUN:
 			anim_name_prefix = "Run"
 		State.ATTACK:
-			# Obsługa dwóch różnych animacji ataku
-			if is_moving:
+			# Obsługa 3 różnych animacji ataku
+			if is_moving and Input.is_action_pressed("sprint"):
 				anim_name_prefix = "Attack_Run"
+			elif is_moving:
+				anim_name_prefix = "Attack_Walk"
 			else:
 				anim_name_prefix = "Attack"
 		State.HURT:
@@ -230,7 +238,8 @@ func perform_attack():
 	shape.radius = attack_radius
 
 	#losowy pitch dźwięku ataku dla urozmaicenia
-	$sfxAttack.pitch_scale = randf_range(0.9, 1.1)
+	$sfxAttack.volume_db = rng.randf_range(-10.0, 0.0)
+	$sfxAttack.pitch_scale = rng.randf_range(0.9, 1.1)
 	$sfxAttack.play()
 	var params = PhysicsShapeQueryParameters2D.new()
 	params.shape_rid = shape.get_rid()
@@ -251,13 +260,9 @@ func perform_attack():
 
 
 func _on_frame_changed():
-	var frame = animated_sprite.frame
-	
-	match current_state:
-		State.WALK, State.RUN:
-			if frame == 2 or frame == 5 or frame == 8:
-				if not $sfxWalk.playing:
-					$sfxWalk.pitch_scale = randf_range(0.9, 1.1)
-					$sfxWalk.play()
-		State.IDLE:
-			$sfxWalk.stop()
+	_step = not _step
+	if not _step: return
+	if $AnimatedSprite2D.animation.begins_with("Walk") or $AnimatedSprite2D.animation.begins_with("Run"):
+		$sfxWalk.volume_db = rng.randf_range(-20.0, -10.0)
+		$sfxWalk.pitch_scale = rng.randf_range(0.7, 1.3)
+		$sfxWalk.play(0.0)
