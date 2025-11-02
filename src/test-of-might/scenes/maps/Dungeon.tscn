@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bkqrfhelxnrc3"]
+[gd_scene load_steps=41 format=4 uid="uid://bkqrfhelxnrc3"]
 
 [ext_resource type="Texture2D" uid="uid://bynoa7gwbkt8a" path="res://tile sets/Dungeon/walls_floor.png" id="1_0m47n"]
 [ext_resource type="Texture2D" uid="uid://cny3j7msoxlw0" path="res://tile sets/Dungeon/doors_lever_chest_animation.png" id="2_2y25m"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://2sggyck5a2yq" path="res://tile sets/Dungeon/Bridges.png" id="12_g6xvf"]
 [ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://Music/Tutorial/dawnforest_chill-215553.mp3" id="14_1h2u7"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/player.tscn" id="15_player"]
+[ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="16_jaou4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2y25m"]
 texture = ExtResource("1_0m47n")
@@ -5945,6 +5946,12 @@ sources/1 = SubResource("TileSetAtlasSource_g6xvf")
 sources/2 = SubResource("TileSetAtlasSource_ppy5s")
 sources/4 = SubResource("TileSetAtlasSource_vixn3")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jaou4"]
+vertices = PackedVector2Array(26.507813, -23.96875, 195.20313, -27.726563, 298.9297, -28.796875, 340, -28.796875, 453.60156, -27.5, 586.28125, -22.421875, 453.09375, -139.71875, 453.60156, -68.546875, 413.32813, -69.85156, 273.60156, -80.17969, 273.60156, -130.57813, 410.6797, -30.101563, 82.92969, -29.046875, 154.92969, -29.070313, 42.632813, -27.710938, 584.10156, -182.36719, 451.75, -178.67969, 156.28125, -68.27344, 84.28125, -66.921875, 84.28125, -140.79688, 156, -141.0625, 45.328125, -68.25781, 28.6875, -180.82031, 42.90625, -140.79688, 412.79688, -181.36719, 412.79688, -141.0625, 340.3125, -142.92188, 338.89844, -178.14063, 340, -70.953125, 300.25, -68.296875, 195.20313, -66.92969, 222.39844, -79.02344, 156, -180.59375, 82.921875, -180.27344, 196.60938, -139.71094, 298.89063, -140.25, 222.39844, -129.42188, 44.273438, -178.9375, 300.28906, -179.46875, 193.89063, -177.89063)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 4, 3), PackedInt32Array(12, 13, 1, 0, 14), PackedInt32Array(15, 5, 6, 16), PackedInt32Array(17, 13, 18, 19, 20), PackedInt32Array(12, 18, 13), PackedInt32Array(21, 14, 0, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(11, 3, 28, 8), PackedInt32Array(9, 8, 28), PackedInt32Array(9, 28, 29, 30, 31), PackedInt32Array(2, 1, 30, 29), PackedInt32Array(32, 20, 19, 33), PackedInt32Array(5, 4, 7), PackedInt32Array(6, 5, 7), PackedInt32Array(34, 35, 6, 10, 36), PackedInt32Array(34, 36, 31, 30, 17, 20), PackedInt32Array(19, 18, 21, 23), PackedInt32Array(37, 23, 22), PackedInt32Array(33, 37, 22), PackedInt32Array(15, 16, 24), PackedInt32Array(22, 15, 24, 32), PackedInt32Array(35, 26, 25, 6), PackedInt32Array(24, 27, 38), PackedInt32Array(38, 35, 34, 39), PackedInt32Array(38, 39, 32, 24), PackedInt32Array(33, 22, 32)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(591.99994, -190.4, 20.8, -188.79999, 18.399998, -16, 594.39996, -14.399994), PackedVector2Array(443.99997, -171.19998, 444.8, -148, 420.8, -148.79999, 420.8, -172.79999), PackedVector2Array(445.59998, -60.799988, 445.59998, -36, 419.19998, -37.600006, 420.8, -61.600006), PackedVector2Array(331.99997, -62.399994, 331.99997, -36.799988, 307.19998, -36.799988, 307.99997, -60.799988), PackedVector2Array(265.59998, -122.399994, 265.59998, -88, 230.39998, -87.19998, 230.39998, -121.599976), PackedVector2Array(187.19998, -59.19998, 187.19998, -36, 163.2, -36.799988, 163.99998, -60), PackedVector2Array(75.99999, -59.19998, 75.2, -36.799988, 51.199997, -36, 52.799995, -60), PackedVector2Array(75.2, -172, 75.99999, -148.79999, 51.199997, -148.79999, 51.999996, -171.19998), PackedVector2Array(186.4, -170.4, 187.99998, -148, 163.99998, -148.79999, 163.99998, -172), PackedVector2Array(331.19998, -170.4, 331.99997, -150.4, 307.19998, -148.79999, 307.99997, -171.19998)])
+agent_radius = 8.0
+
 [node name="Node2D" type="Node2D"]
 light_mask = 3
 visibility_layer = 3
@@ -6007,3 +6014,12 @@ bus = &"Music"
 position = Vector2(102.400024, -113.599976)
 scale = Vector2(0.5, 0.5)
 disable_mode = 2
+speed = 100.0
+
+[node name="Skeleton" parent="." instance=ExtResource("16_jaou4")]
+position = Vector2(521.6, -125.59999)
+scale = Vector2(0.5, 0.5)
+speed = 50
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_jaou4")
