@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcwwcthdweq8w"]
+[gd_scene load_steps=17 format=3 uid="uid://dcwwcthdweq8w"]
 
 [ext_resource type="Script" uid="uid://bbsqheiexmu0d" path="res://scripts/ui/main_menu.gd" id="1_1yx65"]
 [ext_resource type="Texture2D" uid="uid://7vbjvh67kyte" path="res://Assety/Menu/Background.png" id="1_abljk"]
@@ -15,10 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://beccb84736uj3" path="res://Assety/Menu/Exit/exit2.png" id="12_ll4xq"]
 [ext_resource type="Texture2D" uid="uid://bk17s2k1cmrd4" path="res://Assety/Menu/Exit/exit.png" id="13_1yx65"]
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://Font/Jersey10-Regular.ttf" id="14_ll4xq"]
-[ext_resource type="AudioStream" uid="uid://lxe23n1idjrh" path="res://Music/Misc/chronicles-of-valor-204107.mp3" id="16_2il0p"]
 [ext_resource type="AudioStream" uid="uid://dhbo2bbe7qlvb" path="res://Assety/Audio/effects/ui/ui-click-43196.mp3" id="17_gaoh0"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" groups=["music_settigns", "music_settings"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,11 +88,6 @@ theme_override_font_sizes/font_size = 90
 text = "Test of Might"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_2il0p")
-autoplay = true
-bus = &"Music"
 
 [node name="sfxHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_gaoh0")
