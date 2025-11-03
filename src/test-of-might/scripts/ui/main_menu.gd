@@ -3,10 +3,12 @@ extends Control
 
 func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/maps/Dungeon.tscn")
+	PersistentMusic.queue_free()
 
 
 func _on_load_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/maps/Dungeon.tscn")
+	PersistentMusic.queue_free()
 
 
 func _on_settings_pressed() -> void:
