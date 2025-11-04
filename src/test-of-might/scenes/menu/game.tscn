@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://t08d1itw7hn7"]
+
+[ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://assets/ui/pasek.png" id="1_kfd0b"]
+[ext_resource type="Texture2D" uid="uid://bpi6g36wfqsrs" path="res://assets/ui/pasek_pelny_2.png" id="2_lakwo"]
+[ext_resource type="Texture2D" uid="uid://ijd5xt6su0mc" path="res://assets/ui/LVL.png" id="3_5mgl0"]
+[ext_resource type="Texture2D" uid="uid://dgnfr6rsm1k5n" path="res://assets/ui/lvl_pasek.png" id="4_xafdj"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Health" type="CanvasGroup" parent="."]
+
+[node name="HealthBar" type="TextureProgressBar" parent="Health"]
+offset_right = 620.0
+offset_bottom = 187.0
+scale = Vector2(0.5, 0.5)
+texture_under = ExtResource("1_kfd0b")
+texture_progress = ExtResource("2_lakwo")
+
+[node name="Level" type="CanvasGroup" parent="."]
+
+[node name="LevelBar" type="TextureProgressBar" parent="Level"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 920.0
+offset_right = 2040.0
+offset_bottom = 758.0
+grow_horizontal = 0
+scale = Vector2(0.2, 0.2)
+texture_under = ExtResource("3_5mgl0")
+texture_progress = ExtResource("4_xafdj")
