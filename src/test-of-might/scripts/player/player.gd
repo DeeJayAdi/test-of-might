@@ -23,7 +23,7 @@ var current_state: State = State.IDLE
 var _step = true
 var rng = RandomNumberGenerator.new()
 var facing_direction: String = "Down"
-
+var interactables_in_range = []
 var is_moving: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -354,3 +354,23 @@ func _apply_attack_damage(args: Dictionary):
 
 func _reset_attack_cooldown():
 	can_attack = true
+
+#INTERAKCJE
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("Interaction"):
+		if interactables_in_range.is_empty():
+			return
+		var closest = get_closest_interactable()
+		if closest:
+			closest.interact()
+func get_closest_interactable():
+	var closest_obj = null
+	var min_dist_sq = INF 
+	for obj in interactables_in_range:
+		if not is_instance_valid(obj):
+			continue
+		var dist_sq = self.global_position.distance_squared_to(obj.global_position)
+		if dist_sq < min_dist_sq:
+			min_dist_sq = dist_sq
+			closest_obj = obj
+	return closest_obj
