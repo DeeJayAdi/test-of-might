@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://bkqrfhelxnrc3"]
+[gd_scene load_steps=42 format=4 uid="uid://bkqrfhelxnrc3"]
 
 [ext_resource type="Texture2D" uid="uid://bynoa7gwbkt8a" path="res://assets/maps/dungeon/walls_floor.png" id="1_3b7po"]
 [ext_resource type="Texture2D" uid="uid://cny3j7msoxlw0" path="res://assets/maps/dungeon/doors_lever_chest_animation.png" id="2_g7mha"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="14_f6rsi"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="15_6fqx2"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="16_3m3hp"]
+[ext_resource type="PackedScene" uid="uid://cidua0lrk7lmc" path="res://scenes/Interaction_Objects/Flag.tscn" id="17_g7mha"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2y25m"]
 texture = ExtResource("1_3b7po")
@@ -6009,6 +6010,10 @@ tile_set = SubResource("TileSet_1h2u7")
 stream = ExtResource("14_f6rsi")
 autoplay = true
 bus = &"Music"
+
+[node name="Flag" parent="." instance=ExtResource("17_g7mha")]
+position = Vector2(249.59998, -312)
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="player" parent="." instance=ExtResource("15_6fqx2")]
 position = Vector2(102.400024, -113.599976)
