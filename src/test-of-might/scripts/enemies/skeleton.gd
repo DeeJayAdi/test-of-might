@@ -82,7 +82,6 @@ func _physics_process(delta: float):
 		
 		State.DEATH:
 			velocity = Vector2.ZERO
-	$HpBar.value = current_health
 	play_animation()
 	move_and_slide()
 
@@ -155,6 +154,7 @@ func take_damage(amount: int):
 			$sfxHurt.volume_db = rng.randf_range(-10.0, 0.0)
 			$sfxHurt.pitch_scale = rng.randf_range(0.9, 1.1)
 			$sfxHurt.play()
+	$HpBar.value = current_health
 
 func _on_animation_finished():
 	if current_state == State.ATTACK:
