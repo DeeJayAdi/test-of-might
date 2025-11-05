@@ -23,6 +23,8 @@ func _ready():
 	add_to_group("enemies")
 	rng.randomize()
 	current_health = max_health
+	$HpBar.max_value = max_health
+	$HpBar.value = current_health
 
 func reset_attack_cooldown():
 	can_attack = true
@@ -80,7 +82,7 @@ func _physics_process(delta: float):
 		
 		State.DEATH:
 			velocity = Vector2.ZERO
-
+	$HpBar.value = current_health
 	play_animation()
 	move_and_slide()
 
