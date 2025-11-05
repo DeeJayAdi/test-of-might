@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PersistentMusic="*res://scripts/ui/persistent_music.gd"
+PersistentMusic="*res://scripts/menu/persistent_music.gd"
 
 [display]
 

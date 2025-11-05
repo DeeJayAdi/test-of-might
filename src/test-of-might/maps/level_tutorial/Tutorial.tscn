@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://d30f5dgjsj02l"]
+
+[ext_resource type="Texture2D" uid="uid://d1inicvj8wrun" path="res://map.png" id="1_18u6w"]
+[ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="2_fxqx6"]
+[ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="3_mravl"]
+[ext_resource type="Texture2D" uid="uid://ce66mw4yraflp" path="res://icon.svg" id="4_672dd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgysx"]
+size = Vector2(120.58536, 119.62622)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rgysx"]
+vertices = PackedVector2Array(-33.476563, -16.359375, 32.96875, -16.46875, -0.0390625, -8.4296875, -20.71875, -8.890625, -33.546875, 12.78125, -20.71875, 12.09375, -8.2734375, 12.7109375, -0.21875, 11.6328125, -1.2890625, 12.6875, -0.2734375, 12.6875, 33.0625, 12.6015625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(2, 1, 10, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-37.559998, 16.8, -37.48, -20.36, 36.96, -20.48, 37.08, 16.76, -4.28, 16.92, -4.08, -4.52, -16.720001, -4.7999997, -16.720001, 8, -3.9199998, 7.7199993, -4.28, 16.92, -37.879997, 16.92, 37.04, 16.6)])
+agent_radius = 4.0
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-1525, 606)
+scale = Vector2(25, 25)
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(61, -24.24)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_18u6w")
+
+[node name="Wall1Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall1Collision"]
+polygon = PackedVector2Array(18.92, -47.68, 23.68, -42.96, 23.72, -5.6, 18.92, -0.84)
+
+[node name="Wall2Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall2Collision"]
+polygon = PackedVector2Array(18.92, -47.68, 103.04, -47.64, 98.36, -42.96, 23.68, -42.96)
+
+[node name="Wall3Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall3Collision"]
+polygon = PackedVector2Array(103.04, -47.64, 103.04, -0.880001, 98.36, -5.6, 98.36, -42.96)
+
+[node name="Wall4Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall4Collision"]
+polygon = PackedVector2Array(18.92, -0.84, 23.72, -5.6, 98.36, -5.6, 103.04, -0.880001)
+
+[node name="player" parent="." instance=ExtResource("2_fxqx6")]
+z_index = 1
+position = Vector2(61.439995, -26.079998)
+scale = Vector2(0.1, 0.1)
+
+[node name="Skeleton" parent="." instance=ExtResource("3_mravl")]
+z_index = 1
+position = Vector2(35.04, -12.559999)
+scale = Vector2(0.1, 0.1)
+
+[node name="for_colission_testing" type="Sprite2D" parent="."]
+position = Vector2(50.96, -20.779999)
+scale = Vector2(0.10250004, 0.100312494)
+texture = ExtResource("4_672dd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="for_colission_testing"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="for_colission_testing/StaticBody2D"]
+position = Vector2(0.19511414, -0.19937134)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_rgysx")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(61.28, -22.32)
+navigation_polygon = SubResource("NavigationPolygon_rgysx")
