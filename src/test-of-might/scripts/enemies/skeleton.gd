@@ -23,6 +23,8 @@ func _ready():
 	add_to_group("enemies")
 	rng.randomize()
 	current_health = max_health
+	$HpBar.max_value = max_health
+	$HpBar.value = current_health
 
 func reset_attack_cooldown():
 	can_attack = true
@@ -88,7 +90,6 @@ func _physics_process(delta: float):
 		
 		State.DEATH:
 			velocity = Vector2.ZERO
-
 	play_animation()
 	move_and_slide()
 
@@ -161,6 +162,7 @@ func take_damage(amount: int):
 			$sfxHurt.volume_db = rng.randf_range(-10.0, 0.0)
 			$sfxHurt.pitch_scale = rng.randf_range(0.9, 1.1)
 			$sfxHurt.play()
+	$HpBar.value = current_health
 
 func _on_animation_finished():
 	if current_state == State.ATTACK:
