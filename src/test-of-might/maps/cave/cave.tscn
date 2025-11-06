@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=29 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjyiis05qu5qa" path="res://assets/maps/cave/anim/light1A.png" id="3_jqe3u"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="4_up3r0"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="6_2jint"]
+[ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="7_hy0pv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqe3u"]
 texture = ExtResource("1_v23if")
@@ -7823,3 +7824,8 @@ polygon = PackedVector2Array(1835, 884, 1845, 885, 1848, 882, 1844, 872, 1838, 8
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_up3r0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_hy0pv")
+autoplay = true
+bus = &"Music"
