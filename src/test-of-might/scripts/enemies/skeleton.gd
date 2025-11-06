@@ -39,23 +39,31 @@ func _physics_process(delta: float):
 			if player != null:
 				# Sprawdź, czy gracz jest w zasięgu ataku
 				if $AttackRange.get_overlapping_bodies().has(player):
-					# --- Jest w zasięgu ---
 					if can_attack:
-						# 1. Może atakować -> ATAKUJ
 						current_state = State.ATTACK
-						
-						# Rzut na krytyka
 						if rng.randf() < crit_chance:
-							# Użyj animacji krytycznej
-							current_attack_animation = "attack2" 
+							current_attack_animation = "attack2"
 						else:
-							# Użyj animacji normalnej
 							current_attack_animation = "attack1"
-
 						velocity = Vector2.ZERO
 						var dir = (player.global_position - global_position).normalized()
 						if dir.x > 0: $AnimatedSprite2D.flip_h = false
 						elif dir.x < 0: $AnimatedSprite2D.flip_h = true
+
+						get_tree().create_timer(0.5).timeout.connect(func():
+							var overlapping = $AttackRange.get_overlapping_bodies()
+							if player and overlapping.has(player):
+								if player.has_method("take_damage"):
+									var damage_to_deal = attack_damage
+									if current_attack_animation == "attack2":
+										damage_to_deal = int(attack_damage * crit_multiplier)
+										print("Szkielet zadał cios krytyczny!")
+									player.take_damage(damage_to_deal)
+						)
+
+						# Begin cooldown
+						can_attack = false
+						get_tree().create_timer(attack_cooldown).timeout.connect(reset_attack_cooldown)
 					else:
 						current_state = State.IDLE
 						velocity = Vector2.ZERO

@@ -1807,6 +1807,17 @@ animations = [{
 [node name="player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_dovo2")
+max_health = null
+speed = null
+run_multiplier = null
+attack_radius = null
+attack_damage = null
+attack_cooldown = null
+crit_chance = null
+crit_multiplier = null
+heavy_attack_damage = null
+heavy_attack_radius = null
+heavy_attack_cooldown = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 11)

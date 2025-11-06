@@ -58,16 +58,23 @@ func _physics_process(delta: float):
 		move_and_slide()
 		play_animation()
 		return
-		
-	if current_state == State.HURT:
-		velocity = Vector2.ZERO
-		move_and_slide()
-		play_animation()
-		return
 
+
+	if current_state == State.HURT:
+		var dir = Input.get_vector("left", "right", "up", "down")
+		if dir != Vector2.ZERO:
+			velocity = dir.normalized() * speed * 0.5 # slower movement while hurt
+		else:
+			velocity = Vector2.ZERO
+
+		move_and_slide()
+		play_animation() # will play Hurt_*
+		return
+		
 	get_input_and_update_state()
-	
+	update_facing_direction_by_mouse()
 	play_animation()
+
 
 	# Jeśli mamy referencję do TileMapLayer (Walls_Floors) — wykonaj prostą blokadę ruchu
 	if walls_map and walls_map.has_method("world_to_map"):
@@ -88,7 +95,7 @@ func get_input_and_update_state():
 
 	if dir != Vector2.ZERO:
 		is_moving = true
-		update_facing_direction(dir)
+		
 	else:
 		is_moving = false
 
@@ -354,3 +361,18 @@ func _apply_attack_damage(args: Dictionary):
 
 func _reset_attack_cooldown():
 	can_attack = true
+	
+func update_facing_direction_by_mouse():
+	var mouse_pos = get_global_mouse_position()
+	var dir = (mouse_pos - global_position).normalized()
+
+	if abs(dir.x) > abs(dir.y):
+		if dir.x > 0:
+			facing_direction = "Right"
+		else:
+			facing_direction = "Left"
+	else:
+		if dir.y > 0:
+			facing_direction = "Down"
+		else:
+			facing_direction = "Up"
