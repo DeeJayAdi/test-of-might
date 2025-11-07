@@ -1809,19 +1809,20 @@ motion_mode = 1
 script = ExtResource("1_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 11)
+position = Vector2(0, -12)
 scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("CapsuleShape2D_5gtgg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -12)
 zoom = Vector2(1.5, 1.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(9, -8)
 scale = Vector2(1.8749999, 1.875)
 sprite_frames = SubResource("SpriteFrames_fm80t")
 animation = &"Attack_Down"
+offset = Vector2(0, -12)
 
 [node name="sfxWalk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_je7p5")

@@ -5,7 +5,7 @@ func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 
 func _on_load_pressed() -> void:
-	get_tree().change_scene_to_file("res://maps/level1/Dungeon.tscn")
+	get_tree().change_scene_to_file("res://maps/cave/cave.tscn")
 	PersistentMusic.queue_free()
 
 
