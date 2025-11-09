@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://btm16lerp5a1c"]
+
+[ext_resource type="Script" uid="uid://c6u2pwpm0n4i8" path="res://scripts/enemies/bosses/caveboss/poison_shot.gd" id="1_davpr"]
+[ext_resource type="Texture2D" uid="uid://b10shfw311yy7" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - ending.png" id="1_hpx58"]
+[ext_resource type="Texture2D" uid="uid://dy42dy8phntdh" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - loop.png" id="2_davpr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjhjg"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yineb"]
+atlas = ExtResource("1_hpx58")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynyhe"]
+atlas = ExtResource("1_hpx58")
+region = Rect2(40, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjrdd"]
+atlas = ExtResource("1_hpx58")
+region = Rect2(80, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr3pv"]
+atlas = ExtResource("2_davpr")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib0ps"]
+atlas = ExtResource("2_davpr")
+region = Rect2(40, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppknf"]
+atlas = ExtResource("2_davpr")
+region = Rect2(80, 0, 40, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1jnk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yineb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynyhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjrdd")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr3pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib0ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppknf")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[node name="PoisonShot" type="CharacterBody2D"]
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_jjhjg")
+script = ExtResource("1_davpr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g1jnk")
+animation = &"loop"
