@@ -1,0 +1,552 @@
+[gd_scene load_steps=16 format=3 uid="uid://b1bi3gmoehto8"]
+
+[ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
+[ext_resource type="Script" uid="uid://wkj8t6se6tm8" path="res://scripts/player/inventory/inventory.gd" id="1_xeaml"]
+[ext_resource type="Resource" uid="uid://ck27msfqrytrw" path="res://assets/resources/items/sword.tres" id="3_5yy05"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/sword.png" id="4_ulvp7"]
+[ext_resource type="Resource" uid="uid://b1hiis2km4r2g" path="res://assets/resources/items/bow.tres" id="5_bfvro"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/helm.png" id="5_i8fht"]
+[ext_resource type="Script" uid="uid://bwqtfua0mo0gm" path="res://scripts/player/inventory/equipment_slot.gd" id="5_ulvp7"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor_1.png" id="6_5suo7"]
+[ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="7_q8qhs"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/boots.png" id="7_u3v1c"]
+[ext_resource type="Texture2D" uid="uid://cc5ajjy5lgy8v" path="res://assets/sprites/items/bow_short.png" id="8_hjfas"]
+[ext_resource type="Resource" uid="uid://5qpk7xhqxi6u" path="res://assets/resources/items/armor.tres" id="9_map31"]
+[ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/boots.tres" id="11_8poyu"]
+[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="14_map31"]
+[ext_resource type="Texture2D" uid="uid://ctr4map400rf" path="res://assets/ui/cog-64.png" id="15_8poyu"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -255.0
+offset_right = 330.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inventory" type="Panel" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -250.0
+offset_right = 325.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xeaml")
+
+[node name="Backpack" type="MarginContainer" parent="CanvasLayer/ColorRect/Inventory"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_bottom = 250.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 15
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory/Backpack"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="ItemSlot" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+item = ExtResource("3_5yy05")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ulvp7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot2" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+item = ExtResource("5_bfvro")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_hjfas")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot3" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+item = ExtResource("7_q8qhs")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_i8fht")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot4" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+item = ExtResource("9_map31")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5suo7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot5" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+item = ExtResource("11_8poyu")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_u3v1c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot6" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot7" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot8" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot9" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot10" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot11" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot12" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot13" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot14" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot15" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot16" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot17" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot18" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot19" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot20" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot21" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot21"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemSlot22" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_avmd0")
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot22"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CharacterSheet" type="MarginContainer" parent="CanvasLayer/ColorRect/Inventory"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 15.0
+offset_right = 285.0
+offset_bottom = 347.8
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="Helmet" type="Panel" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("5_ulvp7")
+slot_type = "helmet"
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer/Helmet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Armor" type="Panel" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("5_ulvp7")
+slot_type = "armor"
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer/Armor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Boots" type="Panel" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("5_ulvp7")
+slot_type = "boots"
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer/Boots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Weapon" type="Panel" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("5_ulvp7")
+slot_type = "weapon"
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer/Weapon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect/Inventory"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 0
+offset_left = 109.5
+offset_top = 15.0
+offset_right = 329.5
+offset_bottom = 235.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/ColorRect"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -112.0
+offset_right = 107.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_map31")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Settings" type="TextureButton" parent="CanvasLayer/ColorRect/Inventory"]
+layout_mode = 0
+offset_left = 586.5
+offset_top = 443.0
+offset_right = 626.5
+offset_bottom = 483.0
+texture_normal = ExtResource("15_8poyu")
+ignore_texture_size = true
+stretch_mode = 5
