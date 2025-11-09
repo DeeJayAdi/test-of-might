@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c0tv0so3t7tgu"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_5airs"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/helm.png" id="1_5emwq"]
+
+[resource]
+script = ExtResource("1_5airs")
+item_name = "Helmet"
+rarity = "common"
+type = "helmet"
+icon = ExtResource("1_5emwq")
+defense = 5
+metadata/_custom_type_script = "uid://elca6sp6br8g"
