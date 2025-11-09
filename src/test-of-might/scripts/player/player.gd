@@ -1,5 +1,12 @@
 extends CharacterBody2D
 @onready var health_bar: TextureProgressBar = $UI/HP/Zdrowie/TextureProgressBar
+@onready var inventory_scene = preload("res://scenes/ui/inventory.tscn")
+@onready var ui_layer: CanvasLayer = $UI
+var inventory_instance: Control = null
+var inventory_open: bool = false
+var dark_overlay: ColorRect = null
+
+
 signal health_changed(current_health, max_health)
 signal died
 
@@ -34,10 +41,9 @@ func _ready():
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	health_changed.emit(current_health, max_health)
-
 	rng.randomize()
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
-	# Spróbuj znaleźć warstwę z kafelkami ścian (nazwa z Dungeon.tscn: "Walls_Floors")
 	if get_parent() and get_parent().has_node("Walls_Floors"):
 		walls_map = get_parent().get_node("Walls_Floors")
 	elif get_tree().get_root().has_node("Walls_Floors"):
@@ -52,7 +58,12 @@ func _on_health_changed(new_health, max_health_value):
 	# Na wypadek, gdyby maksymalne zdrowie też się zmieniło
 	health_bar.max_value = max_health_value
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
+	if inventory_open:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
 	if current_state == State.DEATH:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -84,6 +95,11 @@ func _physics_process(delta: float):
 
 func get_input_and_update_state():
 
+	if inventory_open:
+		velocity = Vector2.ZERO
+		current_state = State.IDLE
+		return
+	
 	var dir = Input.get_vector("left", "right", "up", "down")
 
 	if dir != Vector2.ZERO:
@@ -356,7 +372,7 @@ func _reset_attack_cooldown():
 	can_attack = true
 
 #INTERAKCJE
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("Interaction"):
 		if interactables_in_range.is_empty():
 			return
@@ -374,3 +390,70 @@ func get_closest_interactable():
 			min_dist_sq = dist_sq
 			closest_obj = obj
 	return closest_obj
+	
+	
+################################################
+
+
+func _process(_delta):
+	if Input.is_action_just_pressed("inventory"):
+		_toggle_inventory()
+
+func _toggle_inventory():
+	if inventory_open:
+		_close_inventory()
+	else:
+		_open_inventory()
+
+func _open_inventory():
+	if inventory_instance == null:
+		inventory_instance = inventory_scene.instantiate()
+		get_tree().get_root().add_child(inventory_instance)
+
+	# Hide HUD
+	ui_layer.visible = false
+
+	# Make sure inventory (and its canvas layer) are visible
+	inventory_instance.visible = true
+	var inv_canvas_layer = inventory_instance.get_node_or_null("CanvasLayer")
+	if inv_canvas_layer:
+		inv_canvas_layer.visible = true
+
+	# --- DARK OVERLAY CREATION ---
+	if dark_overlay == null:
+		dark_overlay = ColorRect.new()
+		dark_overlay.color = Color(0, 0, 0, 0.5)  # semi-transparent black
+		dark_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		dark_overlay.size = get_viewport_rect().size
+		get_tree().get_root().add_child(dark_overlay)
+		dark_overlay.move_to_front() # put overlay above world
+	# move inventory above overlay
+	inventory_instance.move_to_front()
+
+	# Pause the game world, but keep UI active
+	get_tree().paused = true
+	inventory_instance.process_mode = Node.PROCESS_MODE_ALWAYS
+
+	inventory_open = true
+
+
+func _close_inventory():
+	# Remove or hide inventory
+	if inventory_instance:
+		var inv_canvas_layer = inventory_instance.get_node_or_null("CanvasLayer")
+		if inv_canvas_layer:
+			inv_canvas_layer.visible = false
+		inventory_instance.visible = false
+
+	# Remove overlay
+	if dark_overlay:
+		dark_overlay.queue_free()
+		dark_overlay = null
+
+	# Show UI again
+	ui_layer.visible = true
+
+	# Unpause game
+	get_tree().paused = false
+
+	inventory_open = false
