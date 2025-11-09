@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://bpfvkxa3jtv3w"]
+[gd_scene load_steps=154 format=3 uid="uid://bpfvkxa3jtv3w"]
 
 [ext_resource type="Texture2D" uid="uid://cwd7bvcuqtkgm" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - attack1.png" id="1_6fgxj"]
 [ext_resource type="Script" uid="uid://c8vm0d0t5y7sk" path="res://scripts/enemies/bosses/caveboss/cave_boss.gd" id="1_oreq0"]
@@ -1079,7 +1079,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j7gv4")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle_down",
 "speed": 5.0
 }, {
@@ -1141,8 +1141,15 @@ bg_color = Color(0, 0, 0, 0.18431373)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oreq0"]
 bg_color = Color(0.75686276, 0, 0.09411765, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oreq0"]
+radius = 1000.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yerkl"]
+radius = 95.0
+
 [node name="CaveBoss" type="CharacterBody2D"]
 texture_filter = 1
+motion_mode = 1
 script = ExtResource("1_oreq0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1150,13 +1157,11 @@ position = Vector2(0, -42)
 shape = SubResource("CapsuleShape2D_6fgxj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.28627452)
 sprite_frames = SubResource("SpriteFrames_x7x6y")
-animation = &"idle_down"
+animation = &"idle_up"
 offset = Vector2(0, -48)
 
 [node name="HpBar" type="ProgressBar" parent="."]
-visible = false
 offset_left = -27.0
 offset_top = -103.0
 offset_right = 27.0
@@ -1165,3 +1170,35 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6fgxj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oreq0")
 value = 50.0
 show_percentage = false
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, -42)
+shape = SubResource("CircleShape2D_oreq0")
+
+[node name="MeleeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
+position = Vector2(0, -42)
+shape = SubResource("CircleShape2D_yerkl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HideTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HideCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_animation_finished"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_player_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_player_detection_area_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
+[connection signal="timeout" from="HideCooldownTimer" to="." method="_on_hide_cooldown_timer_timeout"]

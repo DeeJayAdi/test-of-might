@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://btm16lerp5a1c"]
+[gd_scene load_steps=12 format=3 uid="uid://btm16lerp5a1c"]
 
+[ext_resource type="Script" uid="uid://c6u2pwpm0n4i8" path="res://scripts/enemies/bosses/caveboss/poison_shot.gd" id="1_davpr"]
 [ext_resource type="Texture2D" uid="uid://b10shfw311yy7" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - ending.png" id="1_hpx58"]
 [ext_resource type="Texture2D" uid="uid://dy42dy8phntdh" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - loop.png" id="2_davpr"]
 
@@ -67,6 +68,7 @@ texture_filter = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 0)
 shape = SubResource("CircleShape2D_jjhjg")
+script = ExtResource("1_davpr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g1jnk")
