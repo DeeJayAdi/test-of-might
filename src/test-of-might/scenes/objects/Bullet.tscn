@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://qkn7l1icevam"]
+
+[ext_resource type="Texture2D" uid="uid://b10shfw311yy7" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - ending.png" id="1_d4b24"]
+[ext_resource type="Script" uid="uid://c5uy7ubnqus2v" path="res://scripts/objects/bullet.gd" id="1_k3s4m"]
+[ext_resource type="Texture2D" uid="uid://dy42dy8phntdh" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - loop.png" id="2_k3s4m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gcv5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cxov"]
+atlas = ExtResource("1_d4b24")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg1el"]
+atlas = ExtResource("1_d4b24")
+region = Rect2(40, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsfsr"]
+atlas = ExtResource("1_d4b24")
+region = Rect2(80, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8afij"]
+atlas = ExtResource("2_k3s4m")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1txnh"]
+atlas = ExtResource("2_k3s4m")
+region = Rect2(40, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3gxl"]
+atlas = ExtResource("2_k3s4m")
+region = Rect2(80, 0, 40, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5727x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cxov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg1el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsfsr")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8afij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1txnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3gxl")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_k3s4m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_gcv5w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5727x")
+animation = &"loop"
+frame_progress = 0.95004547
