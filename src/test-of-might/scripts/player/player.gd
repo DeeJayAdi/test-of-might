@@ -11,6 +11,7 @@ signal health_changed(current_health, max_health)
 signal died
 
 enum State { IDLE, WALK, RUN, ATTACK, HURT, DEATH }
+enum AttackMode { MELEE, RANGED }
 
 @export var max_health: int = 100
 @export var speed: float = 200.0
@@ -32,6 +33,7 @@ var rng = RandomNumberGenerator.new()
 var facing_direction: String = "Down"
 var interactables_in_range = []
 var is_moving: bool = false
+var attack_mode: AttackMode = AttackMode.MELEE
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var walls_map: Node = null
@@ -90,6 +92,9 @@ func _physics_process(_delta: float):
 			# Kafelek istnieje -> zablokuj ruch
 			velocity = Vector2.ZERO
 
+	if attack_mode == AttackMode.RANGED:
+		rotate_weapon_towards_mouse()
+
 	move_and_slide()
 
 
@@ -109,12 +114,18 @@ func get_input_and_update_state():
 		is_moving = false
 
 	if Input.is_action_just_pressed("attack") and can_attack:
+		if attack_mode == AttackMode.RANGED:
+			perform_ranged_attack()
+			return
 		current_state = State.ATTACK
 		perform_attack()
 		
 	if Input.is_action_just_pressed("heavy_attack") and can_attack:
 		current_state = State.ATTACK
 		perform_attack(true)
+	
+	if Input.is_action_just_pressed("swap_weapon"):
+		switch_attack_mode()
 
 	if current_state != State.ATTACK:
 		if is_moving:
@@ -457,3 +468,64 @@ func _close_inventory():
 	get_tree().paused = false
 
 	inventory_open = false
+
+
+
+################################
+#logika walki dystansowej
+
+var upgrades : Array[BaseBulletStrategy] = []
+
+func add_bullet_upgrade(upgrade: BaseBulletStrategy):
+	upgrades.append(upgrade)
+
+
+func switch_attack_mode():
+	if attack_mode == AttackMode.MELEE:
+		attack_mode = AttackMode.RANGED
+		$RangedWeapon.visible = true
+	else:
+		attack_mode = AttackMode.MELEE
+		$RangedWeapon.visible = false
+
+func perform_ranged_attack():
+	if not can_attack:
+		return
+	can_attack = false
+
+	var bullet = preload("res://scenes/objects/bullet.tscn").instantiate() as Bullet
+	for upgrade in upgrades:
+		upgrade.apply_upgrade(bullet)
+
+	var muzzle = $RangedWeapon/Marker2D
+	
+	bullet.global_position = muzzle.global_position
+
+	bullet.rotation = muzzle.global_rotation + PI / 4
+
+	get_parent().add_child(bullet)
+
+	var cooldown = attack_cooldown
+	get_tree().create_timer(cooldown).timeout.connect(_reset_attack_cooldown)
+
+
+func rotate_weapon_towards_mouse():
+	var mouse_pos = get_global_mouse_position()
+	var dir_to_mouse = (mouse_pos - global_position).normalized()
+	var player_offset = Vector2(0, -20)
+	
+	var horizontal_radius = 16.0 
+	var vertical_radius = 32.0
+
+
+	var real_angle = dir_to_mouse.angle()
+	
+	var ellipse_pos = Vector2(
+		horizontal_radius * cos(real_angle),
+		vertical_radius * sin(real_angle)
+	)
+	
+	$RangedWeapon.position = ellipse_pos + player_offset
+
+	var visual_angle = dir_to_mouse.angle() - PI / 4
+	$RangedWeapon.global_rotation = visual_angle
