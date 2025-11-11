@@ -175,8 +175,9 @@ func update_facing_direction(dir: Vector2):
 
 # Główna funkcja logiki animacji
 func play_animation():
-	var anim_name_prefix: String = "" # np. "Walk", "Idle", "Attack_Run"
-	
+	var anim_name_prefix: String = ""
+	var anim_direction: String = facing_direction
+
 	match current_state:
 		State.IDLE:
 			anim_name_prefix = "Idle"
@@ -185,55 +186,43 @@ func play_animation():
 		State.RUN:
 			anim_name_prefix = "Run"
 		State.ATTACK:
-			# Obsługa 3 różnych animacji ataku
-			if is_moving and Input.is_action_pressed("sprint"):
-				anim_name_prefix = "Attack_Run"
-			elif is_moving:
-				anim_name_prefix = "Attack_Walk"
+			# When attacking, ignore movement input changes completely.
+			# Use the locked direction and animation prefix decided at attack start.
+			var locked_dir = attack_locked_direction_mouse if PreviousScene.combat_style_mouse_based else attack_locked_direction
+			if locked_dir != "":
+				anim_direction = locked_dir
+
+			# Do NOT change attack animation based on movement — keep what was started
+			# This ensures no re-triggering if player moves mid-attack
+			if not animated_sprite.is_playing() or not animated_sprite.animation.begins_with("Attack"):
+				# Only choose the correct attack anim when first entering the state
+				if is_moving and Input.is_action_pressed("sprint"):
+					anim_name_prefix = "Attack_Run"
+				elif is_moving:
+					anim_name_prefix = "Attack_Walk"
+				else:
+					anim_name_prefix = "Attack"
+				var final_anim_name = anim_name_prefix + "_" + anim_direction
+				if animated_sprite.sprite_frames.has_animation(final_anim_name):
+					animated_sprite.play(final_anim_name)
+				return
 			else:
-				anim_name_prefix = "Attack"
+				# Already playing an attack animation → do nothing (let it finish)
+				return
 		State.HURT:
 			anim_name_prefix = "Hurt"
 		State.DEATH:
 			anim_name_prefix = "Death"
-			
-	# Decide which direction to use for the animation:
-	# - If mouse-based combat: always use current facing_direction (mouse sets it at attack time)
-	# - If movement-based combat and we are attacking: use attack_locked_direction (if set)
-	var anim_direction = facing_direction
-	if current_state == State.ATTACK and not PreviousScene.combat_style_mouse_based and attack_locked_direction != "":
-		anim_direction = attack_locked_direction
 
-	# łączenie prefiksu z kierunkiem, np. "Walk_Up"
+	# Only non-attack animations reach here
 	var final_anim_name = anim_name_prefix + "_" + anim_direction
 	var current_anim_name = animated_sprite.animation
-	
+
 	if current_anim_name != final_anim_name:
-		
 		if not animated_sprite.sprite_frames.has_animation(final_anim_name):
-			print("BŁĄD: Nie znaleziono animacji: ", final_anim_name)
+			print("Missing animation:", final_anim_name)
 			return
-		# kontynuacja animacji od tej samej pozycji dla animacji ataku
-		if current_anim_name.begins_with("Attack") and final_anim_name.begins_with("Attack"):
-			
-			var current_frame_index = animated_sprite.frame
-			var current_frame_count = animated_sprite.sprite_frames.get_frame_count(current_anim_name)
-			
-			if current_frame_count > 0:
-				var progress_percent = float(current_frame_index) / float(current_frame_count)
-			
-				var new_frame_count = animated_sprite.sprite_frames.get_frame_count(final_anim_name)
-				var new_frame_index = int(progress_percent * new_frame_count)
-				animated_sprite.play(final_anim_name)
-				animated_sprite.frame = new_frame_index
-			
-			else:
-				animated_sprite.play(final_anim_name)
-		
-		else:
-			#pozostałe animacje zaczynają się od początku
-			animated_sprite.play(final_anim_name)
-		
+		animated_sprite.play(final_anim_name)
 
 func _on_animation_finished():
 	# Clear locked attack direction when attack animation finishes
