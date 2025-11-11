@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://rci4sb42bpu8"]
+
+[ext_resource type="Script" uid="uid://emqvcep8h3ma" path="res://scripts/menu/settings_menu.gd" id="1_rqcjd"]
+[ext_resource type="Texture2D" uid="uid://lrge16b0o5h4" path="res://assets/menu/Exit/close.png" id="2_dxr1k"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rqcjd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+
+[node name="Close_Settings" type="TextureButton" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 1072.0
+offset_top = 48.0
+offset_right = 1097.0
+offset_bottom = 73.0
+texture_normal = ExtResource("2_dxr1k")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 74.0
+offset_top = 246.0
+offset_right = 1072.0
+offset_bottom = 381.0
+alignment = 1
+
+[node name="Video" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "    Video    "
+
+[node name="Audio" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "    Audio    "
+
+[node name="Gameplay" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "    Gameplay    "
+
+[node name="Accessibility" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "    Accessibility    "
+
+[node name="Advanced" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "    Advanced    "
+
+[connection signal="pressed" from="CanvasLayer/Panel/Close_Settings" to="." method="_on_close_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Gameplay" to="." method="_on_gameplay_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Accessibility" to="." method="_on_accessibility_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Advanced" to="." method="_on_advanced_pressed"]
