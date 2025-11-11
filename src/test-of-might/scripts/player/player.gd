@@ -24,7 +24,11 @@ enum AttackMode { MELEE, RANGED }
 @export var heavy_attack_damage: int = 75
 @export var heavy_attack_radius: float = 45.0
 @export var heavy_attack_cooldown: float = 1.2
+@export var settings_scene_path: String = "res://scenes/menu/settings.tscn"
+#@export var combat_style_mouse_based: bool = true
 
+var attack_locked_direction: String = ""
+var attack_locked_direction_mouse: String = ""
 var can_attack: bool = true
 var current_health: int
 var current_state: State = State.IDLE
@@ -34,6 +38,8 @@ var facing_direction: String = "Down"
 var interactables_in_range = []
 var is_moving: bool = false
 var attack_mode: AttackMode = AttackMode.MELEE
+var settings_instance: Node = null
+var settings_open: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var walls_map: Node = null
@@ -45,6 +51,8 @@ func _ready():
 	health_changed.emit(current_health, max_health)
 	rng.randomize()
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	
 
 	if get_parent() and get_parent().has_node("Walls_Floors"):
 		walls_map = get_parent().get_node("Walls_Floors")
@@ -73,7 +81,12 @@ func _physics_process(_delta: float):
 		return
 		
 	if current_state == State.HURT:
-		velocity = Vector2.ZERO
+		# Allow limited movement while hurt
+		var dir = Input.get_vector("left", "right", "up", "down")
+		if dir != Vector2.ZERO:
+			velocity = dir.normalized() * speed * 0.5  # 50% speed when hurt
+		else:
+			velocity = Vector2.ZERO
 		move_and_slide()
 		play_animation()
 		return
@@ -100,7 +113,7 @@ func _physics_process(_delta: float):
 
 func get_input_and_update_state():
 
-	if inventory_open:
+	if inventory_open or settings_open:
 		velocity = Vector2.ZERO
 		current_state = State.IDLE
 		return
@@ -109,7 +122,8 @@ func get_input_and_update_state():
 
 	if dir != Vector2.ZERO:
 		is_moving = true
-		update_facing_direction(dir)
+		if not PreviousScene.combat_style_mouse_based:
+			update_facing_direction(dir)
 	else:
 		is_moving = false
 
@@ -126,6 +140,22 @@ func get_input_and_update_state():
 	
 	if Input.is_action_just_pressed("swap_weapon"):
 		switch_attack_mode()
+	# --- NEW: update facing to mouse if mouse-based combat ---
+	if PreviousScene.combat_style_mouse_based and current_state != State.ATTACK:
+		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
+		if abs(mouse_dir.x) > abs(mouse_dir.y):
+			facing_direction = "Right" if mouse_dir.x > 0 else "Left"
+		else:
+			facing_direction = "Down" if mouse_dir.y > 0 else "Up"
+
+	if current_state not in [State.HURT, State.DEATH]:
+		if Input.is_action_just_pressed("attack") and can_attack:
+			current_state = State.ATTACK
+			perform_attack()
+			
+		if Input.is_action_just_pressed("heavy_attack") and can_attack:
+			current_state = State.ATTACK
+			perform_attack(true)
 
 	if current_state != State.ATTACK:
 		if is_moving:
@@ -163,8 +193,9 @@ func update_facing_direction(dir: Vector2):
 
 # Główna funkcja logiki animacji
 func play_animation():
-	var anim_name_prefix: String = "" # np. "Walk", "Idle", "Attack_Run"
-	
+	var anim_name_prefix: String = ""
+	var anim_direction: String = facing_direction
+
 	match current_state:
 		State.IDLE:
 			anim_name_prefix = "Idle"
@@ -173,50 +204,49 @@ func play_animation():
 		State.RUN:
 			anim_name_prefix = "Run"
 		State.ATTACK:
-			# Obsługa 3 różnych animacji ataku
-			if is_moving and Input.is_action_pressed("sprint"):
-				anim_name_prefix = "Attack_Run"
-			elif is_moving:
-				anim_name_prefix = "Attack_Walk"
+			# When attacking, ignore movement input changes completely.
+			# Use the locked direction and animation prefix decided at attack start.
+			var locked_dir = attack_locked_direction_mouse if PreviousScene.combat_style_mouse_based else attack_locked_direction
+			if locked_dir != "":
+				anim_direction = locked_dir
+
+			# Do NOT change attack animation based on movement — keep what was started
+			# This ensures no re-triggering if player moves mid-attack
+			if not animated_sprite.is_playing() or not animated_sprite.animation.begins_with("Attack"):
+				# Only choose the correct attack anim when first entering the state
+				if is_moving and Input.is_action_pressed("sprint"):
+					anim_name_prefix = "Attack_Run"
+				elif is_moving:
+					anim_name_prefix = "Attack_Walk"
+				else:
+					anim_name_prefix = "Attack"
+				var final_anim_name = anim_name_prefix + "_" + anim_direction
+				if animated_sprite.sprite_frames.has_animation(final_anim_name):
+					animated_sprite.play(final_anim_name)
+				return
 			else:
-				anim_name_prefix = "Attack"
+				# Already playing an attack animation → do nothing (let it finish)
+				return
 		State.HURT:
 			anim_name_prefix = "Hurt"
 		State.DEATH:
 			anim_name_prefix = "Death"
-			
-	# łączenie prefiksu z kierunkiem, np. "Walk_Up"
-	var final_anim_name = anim_name_prefix + "_" + facing_direction
+
+	# Only non-attack animations reach here
+	var final_anim_name = anim_name_prefix + "_" + anim_direction
 	var current_anim_name = animated_sprite.animation
-	
+
 	if current_anim_name != final_anim_name:
-		
 		if not animated_sprite.sprite_frames.has_animation(final_anim_name):
-			print("BŁĄD: Nie znaleziono animacji: ", final_anim_name)
+			print("Missing animation:", final_anim_name)
 			return
-			#kontynuacja animacji od tej samej pozycji dla animacji ataku
-		if current_anim_name.begins_with("Attack") and final_anim_name.begins_with("Attack"):
-			
-			var current_frame_index = animated_sprite.frame
-			var current_frame_count = animated_sprite.sprite_frames.get_frame_count(current_anim_name)
-			
-			if current_frame_count > 0:
-				var progress_percent = float(current_frame_index) / float(current_frame_count)
-			
-				var new_frame_count = animated_sprite.sprite_frames.get_frame_count(final_anim_name)
-				var new_frame_index = int(progress_percent * new_frame_count)
-				animated_sprite.play(final_anim_name)
-				animated_sprite.frame = new_frame_index
-			
-			else:
-				animated_sprite.play(final_anim_name)
-		
-		else:
-			#pozostałe animacje zaczynają się od początku
-			animated_sprite.play(final_anim_name)
-		
+		animated_sprite.play(final_anim_name)
 
 func _on_animation_finished():
+	# Clear locked attack direction when attack animation finishes
+	if current_state == State.ATTACK:
+		attack_locked_direction = ""
+
 	if current_state == State.HURT:
 		current_state = State.IDLE
 		
@@ -231,6 +261,13 @@ func _on_animation_finished():
 			
 	if current_state == State.DEATH:
 		queue_free()
+	
+	if current_state == State.ATTACK:
+		attack_locked_direction = ""
+		attack_locked_direction_mouse = ""  # NEW: reset mouse-based lock
+		
+	animated_sprite.speed_scale = 1.0
+
 
 
 func take_damage(amount: int):
@@ -268,65 +305,85 @@ func die():
 
 # --- Prosta detekcja trafienia przeciwników podczas ataku ---
 func get_attack_offset() -> Vector2:
-	var mouse_pos = get_global_mouse_position()
-	var dir_to_mouse = (mouse_pos - global_position).normalized()
-	return dir_to_mouse * 24
-	
-	#MECHANIKA ,,Kierunku Uderzenia po WASD
-	#match facing_direction:
-		#"Right":
-			#return Vector2(24, 0)
-		#"Left":
-			#return Vector2(-24, 0)
-		#"Up":
-			#return Vector2(0, -24)
-		#"Down":
-			#return Vector2(0, 24)
-		#_:
-			#return Vector2.ZERO
+	if PreviousScene.combat_style_mouse_based:
+		var mouse_pos = get_global_mouse_position()
+		var dir_to_mouse = (mouse_pos - global_position).normalized()
+		return dir_to_mouse * 24
+	else:
+		match (attack_locked_direction if attack_locked_direction != "" else facing_direction):
+			"Right":
+				return Vector2(24, 0)
+			"Left":
+				return Vector2(-24, 0)
+			"Up":
+				return Vector2(0, -24)
+			"Down":
+				return Vector2(0, 24)
+			_:
+				return Vector2.ZERO
 
 func perform_attack(is_heavy := false):
 	if not can_attack:
 		return
-	can_attack = false # Blokujemy atak
+	can_attack = false
 
-	# wybierz parametry ataku (TWÓJ KOD - BEZ ZMIAN)
 	var radius = heavy_attack_radius if is_heavy else attack_radius
 	var dmg_base = heavy_attack_damage if is_heavy else attack_damage
 	var cooldown = heavy_attack_cooldown if is_heavy else attack_cooldown
 
-	# Ustal kierunek ataku (TWÓJ KOD - BEZ ZMIAN)
-	var mouse_pos = get_global_mouse_position()
-	var dir_to_mouse = (mouse_pos - global_position).normalized()
-	if abs(dir_to_mouse.x) > abs(dir_to_mouse.y):
-		facing_direction = "Right" if dir_to_mouse.x > 0 else "Left"
-	else:
-		facing_direction = "Down" if dir_to_mouse.y > 0 else "Up"
+	var dir_to_target: Vector2
 
-	# Odtwórz odpowiednią animację (TWÓJ KOD - BEZ ZMIAN)
+	if PreviousScene.combat_style_mouse_based:
+		var mouse_pos = get_global_mouse_position()
+		dir_to_target = (mouse_pos - global_position).normalized()
+		
+		# Determine facing direction for animation
+		if abs(dir_to_target.x) > abs(dir_to_target.y):
+			facing_direction = "Right" if dir_to_target.x > 0 else "Left"
+		else:
+			facing_direction = "Down" if dir_to_target.y > 0 else "Up"
+
+		# --- NEW: Lock attack direction so it doesn’t change mid-animation ---
+		attack_locked_direction_mouse = facing_direction
+
+	else:
+		attack_locked_direction = facing_direction
+		match facing_direction:
+			"Right": dir_to_target = Vector2.RIGHT
+			"Left": dir_to_target = Vector2.LEFT
+			"Up": dir_to_target = Vector2.UP
+			"Down": dir_to_target = Vector2.DOWN
+			_: dir_to_target = Vector2.DOWN
+
+	# Play attack animation
+	var anim_dir = ""
+	if PreviousScene.combat_style_mouse_based:
+		anim_dir = attack_locked_direction_mouse if attack_locked_direction_mouse != "" else facing_direction
+	else:
+		anim_dir = attack_locked_direction if attack_locked_direction != "" else facing_direction
+	var anim_speed_scale = 0.5 if is_heavy else 1.0
+	
 	if is_moving:
 		if Input.is_action_pressed("sprint"):
-			animated_sprite.play("Attack_Run_" + facing_direction)
+			animated_sprite.play("Attack_Run_" + anim_dir)
 		else:
-			animated_sprite.play("Attack_Walk_" + facing_direction)
+			animated_sprite.play("Attack_Walk_" + anim_dir)
 	else:
-		animated_sprite.play("Attack_" + facing_direction)
+		animated_sprite.play("Attack_" + anim_dir)
+		
+	# Set animation speed (heavy attacks play slower)
+	animated_sprite.speed_scale = anim_speed_scale
 
-	# --- ZMIANA: OPÓŹNIENIE OBRAŻEŃ ---
-	var attack_pos = global_position + dir_to_mouse * (radius)
-	
-	# Zbieramy wszystkie dane (w tym krytyki), których potrzebujemy
+	# Compute attack hit position
+	var attack_pos = global_position + dir_to_target * radius
+
 	var attack_args = {
 		"radius": radius,
 		"dmg_base": dmg_base,
 		"attack_pos": attack_pos
 	}
-	
-	# Wywołaj funkcję obrażeń po 0.1s (zmień ten czas, by pasował do animacji)
 	get_tree().create_timer(0.1).timeout.connect(_apply_attack_damage.bind(attack_args))
-	# --- KONIEC ZMIANY ---
 
-	# odtwórz dźwięk (TWÓJ KOD - BEZ ZMIAN)
 	if is_heavy and $sfxAttack:
 		$sfxAttack.play()
 	elif $sfxAttack:
@@ -334,8 +391,6 @@ func perform_attack(is_heavy := false):
 		$sfxAttack.pitch_scale = rng.randf_range(0.9, 1.1)
 		$sfxAttack.play()
 
-	# --- ZMIANA: POPRAWKA BŁĘDU 'await' ---
-	# Używamy Timera do zresetowania cooldownu, aby nie mrozić gry
 	get_tree().create_timer(cooldown).timeout.connect(_reset_attack_cooldown)
 
 
@@ -409,6 +464,14 @@ func get_closest_interactable():
 func _process(_delta):
 	if Input.is_action_just_pressed("inventory"):
 		_toggle_inventory()
+	
+	#if Input.is_action_just_pressed("Settings"):  # ESC key
+		#if settings_open:
+			#_close_settings_scene()
+		#else:
+			#var temp: String = get_tree().current_scene.scene_file_path
+			#PreviousScene.previous_scene_path = temp
+			#_open_settings_scene()
 
 func _toggle_inventory():
 	if inventory_open:
@@ -529,3 +592,34 @@ func rotate_weapon_towards_mouse():
 
 	var visual_angle = dir_to_mouse.angle() - PI / 4
 	$RangedWeapon.global_rotation = visual_angle
+###########################################################
+
+#func _open_settings_scene() -> void:
+	#if settings_open:
+		#return
+#
+	#get_tree().paused = true  # Pause the game world
+	#ui_layer.visible = false
+	#get_tree().paused = true
+	## Load and instance the settings scene
+	#var new_scene = load(settings_scene_path)
+	#settings_instance = new_scene.instantiate()
+	#get_tree().root.add_child(settings_instance)
+	#
+	## Ensure it still processes even while the game is paused
+	#settings_instance.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	#settings_open = true
+#
+#
+#func _close_settings_scene() -> void:
+	#if not settings_open:
+		#return
+#
+	## Free the settings scene
+	#if settings_instance and is_instance_valid(settings_instance):
+		#settings_instance.queue_free()
+		#settings_instance = null
+	#
+	#ui_layer.visible = true
+	#get_tree().paused = false  # Resume the world
+	#settings_open = false
