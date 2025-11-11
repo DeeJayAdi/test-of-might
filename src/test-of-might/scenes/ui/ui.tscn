@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://det5vlnlsyq2e"]
+[gd_scene load_steps=10 format=3 uid="uid://det5vlnlsyq2e"]
 
 [ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://assets/ui/pasek.png" id="1_m6e0p"]
-[ext_resource type="Script" uid="uid://tikghppoc2lg" path="res://scripts/menu/ui_buttons.gd" id="1_y220t"]
 [ext_resource type="Texture2D" uid="uid://7pjywbdogoxw" path="res://assets/ui/itemy_slot.png" id="2_27fn8"]
 [ext_resource type="Texture2D" uid="uid://bpi6g36wfqsrs" path="res://assets/ui/pasek_pelny_2.png" id="2_n5ude"]
 [ext_resource type="Texture2D" uid="uid://ccx017gjkwlt1" path="res://assets/ui/Pasek_pusty_2.png" id="2_y4yjw"]
@@ -12,7 +11,6 @@
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="9_ok7cu"]
 
 [node name="UI" type="CanvasLayer"]
-script = ExtResource("1_y220t")
 
 [node name="HP" type="VBoxContainer" parent="."]
 offset_right = 413.0
