@@ -10,7 +10,9 @@ func _on_load_pressed() -> void:
 	var temp: String = get_tree().current_scene.scene_file_path
 	PreviousScene.previous_scene_path = temp
 	get_tree().change_scene_to_file("res://maps/cave/cave.tscn")
-	PersistentMusic.queue_free()
+	if is_instance_valid(PersistentMusic):
+		PersistentMusic.queue_free()
+
 
 
 func _on_settings_pressed() -> void:

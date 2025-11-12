@@ -24,7 +24,9 @@ func _on_start_game_btn_pressed() -> void:
 		
 	$VBoxContainer2/ErrorLabel.text = ""
 	get_tree().change_scene_to_file(sceneLink)
-	PersistentMusic.queue_free()
+	if Engine.has_singleton("PersistentMusic") and is_instance_valid(PersistentMusic):
+		PersistentMusic.queue_free()
+
 
 func _play_Sound():
 	$sfxHover.play()
