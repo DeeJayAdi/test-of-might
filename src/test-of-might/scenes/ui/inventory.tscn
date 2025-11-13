@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
 [ext_resource type="Script" uid="uid://wkj8t6se6tm8" path="res://scripts/player/inventory/inventory.gd" id="1_xeaml"]
 [ext_resource type="Resource" uid="uid://ck27msfqrytrw" path="res://assets/resources/items/sword.tres" id="3_5yy05"]
-[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/sword.png" id="4_ulvp7"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="4_ulvp7"]
 [ext_resource type="Resource" uid="uid://b1hiis2km4r2g" path="res://assets/resources/items/bow.tres" id="5_bfvro"]
-[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/helm.png" id="5_i8fht"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="5_i8fht"]
 [ext_resource type="Script" uid="uid://bwqtfua0mo0gm" path="res://scripts/player/inventory/equipment_slot.gd" id="5_ulvp7"]
-[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor_1.png" id="6_5suo7"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="6_5suo7"]
 [ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="7_q8qhs"]
-[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/boots.png" id="7_u3v1c"]
-[ext_resource type="Texture2D" uid="uid://cc5ajjy5lgy8v" path="res://assets/sprites/items/bow_short.png" id="8_hjfas"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="7_u3v1c"]
+[ext_resource type="Texture2D" uid="uid://cc5ajjy5lgy8v" path="res://assets/sprites/items/bows/bow_short.png" id="8_hjfas"]
 [ext_resource type="Resource" uid="uid://5qpk7xhqxi6u" path="res://assets/resources/items/armor.tres" id="9_map31"]
 [ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/boots.tres" id="11_8poyu"]
 [ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="14_map31"]
@@ -550,3 +550,5 @@ offset_bottom = 483.0
 texture_normal = ExtResource("15_8poyu")
 ignore_texture_size = true
 stretch_mode = 5
+
+[connection signal="pressed" from="CanvasLayer/ColorRect/Inventory/Settings" to="CanvasLayer/ColorRect/Inventory" method="_on_settings_pressed"]

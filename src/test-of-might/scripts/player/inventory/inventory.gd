@@ -13,3 +13,7 @@ func _notification(what: int) -> void:
 			if data_bk:
 				data_bk.icon.show()
 				data_bk = null
+
+
+func _on_settings_pressed() -> void:
+	pass # Replace with function body.
