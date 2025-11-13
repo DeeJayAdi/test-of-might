@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://ck27msfqrytrw"]
 
-[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/sword.png" id="1_a06f2"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="1_a06f2"]
 [ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_y5fo1"]
 
 [resource]
