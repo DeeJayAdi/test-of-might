@@ -21,6 +21,7 @@ PersistentMusic="*res://scripts/menu/persistent_music.gd"
 PreviousScene="*res://scripts/menu/previous_scene.gd"
 SceneManager="*res://scripts/menu/SceneManager.gd"
 SaveManager="*res://scripts/menu/SaveManager.gd"
+Global="*res://scripts/globals/Global.gd"
 
 [display]
 
