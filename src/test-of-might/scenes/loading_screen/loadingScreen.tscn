@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://1tc3g8j7bg08"]
+
+[ext_resource type="Script" uid="uid://binw4sm8ub5e1" path="res://scripts/loading_screen/loading_screen.gd" id="1_56csh"]
+[ext_resource type="Texture2D" uid="uid://7vbjvh67kyte" path="res://assets/menu/Background.png" id="2_5tms7"]
+[ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="3_y13s8"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_56csh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_5tms7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 516.0
+offset_right = 745.0
+offset_bottom = 624.0
+theme_override_fonts/font = ExtResource("3_y13s8")
+theme_override_font_sizes/font_size = 100
+text = "Loading..."
