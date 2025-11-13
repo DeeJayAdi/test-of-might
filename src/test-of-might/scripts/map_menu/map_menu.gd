@@ -23,8 +23,7 @@ func _on_start_game_btn_pressed() -> void:
 		return
 		
 	$VBoxContainer2/ErrorLabel.text = ""
-	get_tree().change_scene_to_file(sceneLink)
-	PersistentMusic.queue_free()
+	get_node("/root/Global").SwitchScene(sceneLink)
 
 func _play_Sound():
 	$sfxHover.play()
