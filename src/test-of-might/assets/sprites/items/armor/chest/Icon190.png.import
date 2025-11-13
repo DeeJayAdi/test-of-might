@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvt08a06byqra"
-path="res://.godot/imported/boots.png-6eed0148c2c4788c40bf4f7428cfcdb7.ctex"
+uid="uid://ktosv0bg78us"
+path="res://.godot/imported/Icon190.png-5cdc295b88cb88f6e34e43d44b700143.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/boots.png"
-dest_files=["res://.godot/imported/boots.png-6eed0148c2c4788c40bf4f7428cfcdb7.ctex"]
+source_file="res://assets/sprites/items/armor/chest/Icon190.png"
+dest_files=["res://.godot/imported/Icon190.png-5cdc295b88cb88f6e34e43d44b700143.ctex"]
 
 [params]
 
