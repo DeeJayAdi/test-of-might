@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvtemtiop02ku"
-path="res://.godot/imported/sword_b.png-1280771ef2ff3113bc100a70ff6b06cf.ctex"
+uid="uid://boxixhdkdo12k"
+path="res://.godot/imported/Icon188.png-3c42d2bf025beb929c1fd2e48f1dd574.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/sword_b.png"
-dest_files=["res://.godot/imported/sword_b.png-1280771ef2ff3113bc100a70ff6b06cf.ctex"]
+source_file="res://assets/sprites/items/armor/chest/Icon188.png"
+dest_files=["res://.godot/imported/Icon188.png-3c42d2bf025beb929c1fd2e48f1dd574.ctex"]
 
 [params]
 
