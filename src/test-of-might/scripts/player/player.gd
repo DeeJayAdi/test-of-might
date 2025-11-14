@@ -65,7 +65,7 @@ func _ready():
 	health_bar.value = current_health
 	health_changed.emit(current_health, max_health)
 	rng.randomize()
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_INHERIT
 	
 	if get_parent() and get_parent().has_node("Walls_Floors"):
 		walls_map = get_parent().get_node("Walls_Floors")
@@ -79,6 +79,9 @@ func _on_health_changed(new_health, max_health_value):
 	health_bar.max_value = max_health_value
 
 func _physics_process(_delta: float):
+	if get_tree().paused:
+		return
+		
 	if inventory_open:
 		velocity = Vector2.ZERO
 		move_and_slide()
