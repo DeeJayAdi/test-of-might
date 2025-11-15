@@ -16,4 +16,7 @@ func _notification(what: int) -> void:
 
 
 func _on_settings_pressed() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	var next_scene = preload("res://scenes/menu/settings.tscn").instantiate()
+	get_tree().root.add_child(next_scene)
 	pass # Replace with function body.

@@ -4,18 +4,22 @@ extends Panel
 @export var item: ItemData
 @export var slot_type: String = ""  
 
+var current_placeholder: Texture2D #= icon.texture
+
 signal item_equipped(item: ItemData)
 signal item_unequipped(item: ItemData)
 
 func _ready() -> void:
+	current_placeholder = icon.texture
 	update_ui()
 
 func update_ui() -> void:
 	if not item:
-		#icon.texture = null
+		icon.texture = current_placeholder
 		tooltip_text = ""
 	else:
 		icon.texture = item.icon
+		current_placeholder = item.placeholder
 		tooltip_text = item.item_name
 
 func _get_drag_data(_at_position: Vector2) -> Variant:

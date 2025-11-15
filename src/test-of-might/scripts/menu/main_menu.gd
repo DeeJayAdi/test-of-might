@@ -1,6 +1,5 @@
 extends Control
 
-
 func _on_new_game_pressed() -> void:
 	var temp: String = get_tree().current_scene.scene_file_path
 	PreviousScene.previous_scene_path = temp

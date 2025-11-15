@@ -17,7 +17,3 @@ func _on_accessibility_pressed() -> void:
 
 func _on_advanced_pressed() -> void:
 	pass # Replace with function body.
-
-
-func _on_close_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/Main_Menu.tscn")
