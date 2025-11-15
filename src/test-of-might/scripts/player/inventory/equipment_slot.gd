@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func update_ui() -> void:
 	if not item:
-		icon.texture = null
+		#icon.texture = null
 		tooltip_text = ""
 	else:
 		icon.texture = item.icon

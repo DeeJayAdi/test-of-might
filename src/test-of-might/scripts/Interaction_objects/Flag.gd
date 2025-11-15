@@ -28,6 +28,13 @@ func interact():
 		animated_sprite.stop()
 		print("interakcja_flaga")
 		is_animated = false
+		
+		await get_tree().create_timer(5).timeout
+		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 	else:
 		animated_sprite.play(default_animation_name)
 		is_animated = true
+		
+		await get_tree().create_timer(5).timeout
+		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
+		

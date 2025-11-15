@@ -3,19 +3,22 @@ extends Control
 var sceneLink = "noLevel"
 
 func _on_tutorial_btn_pressed() -> void:
-	sceneLink = "res://maps/level_tutorial/Tutorial.tscn"
+	sceneLink = "res://maps/level1/Dungeon.tscn"
 
 func _on_level_1_btn_pressed() -> void:
-	sceneLink = "res://maps/level1/Dungeon.tscn"
-
-func _on_level_2_btn_pressed() -> void:
 	sceneLink = "res://maps/cave/cave.tscn"
 
+func _on_level_2_btn_pressed() -> void:
+	sceneLink = "noLevel"
+	return
+
 func _on_level_3_btn_pressed() -> void:
-	sceneLink = "res://maps/level1/Dungeon.tscn"
+	sceneLink = "noLevel"
+	return
 
 func _on_level_4_btn_pressed() -> void:
-	sceneLink = "res://maps/level1/Dungeon.tscn"
+	sceneLink = "noLevel"
+	return
 
 func _on_start_game_btn_pressed() -> void:
 	if sceneLink == "noLevel":

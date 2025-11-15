@@ -403,15 +403,11 @@ func _on_frame_changed():
 		$sfxWalk.pitch_scale = rng.randf_range(0.7, 1.3)
 		$sfxWalk.play(0.0)
 
-# NOWA FUNKCJA: Wykonuje obrażenia po opóźnieniu
-# (To jest twój kod z 'perform_attack', przeniesiony tutaj)
 func _apply_attack_damage(args: Dictionary):
-	# Rozpakowujemy zmienne, które przekazaliśmy
 	var radius = args["radius"]
 	var dmg_base = args["dmg_base"]
 	var attack_pos = args["attack_pos"]
 
-	# hitbox (TWÓJ KOD - BEZ ZMIAN)
 	var shape = CircleShape2D.new()
 	shape.radius = radius
 
@@ -437,7 +433,6 @@ func _apply_attack_damage(args: Dictionary):
 func _reset_attack_cooldown():
 	can_attack = true
 
-#INTERAKCJE
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("Interaction"):
 		if interactables_in_range.is_empty():
@@ -493,7 +488,6 @@ func _open_inventory():
 	if inv_canvas_layer:
 		inv_canvas_layer.visible = true
 
-	# --- DARK OVERLAY CREATION ---
 	if dark_overlay == null:
 		dark_overlay = ColorRect.new()
 		dark_overlay.color = Color(0, 0, 0, 0.5)  # semi-transparent black
@@ -593,33 +587,3 @@ func rotate_weapon_towards_mouse():
 	var visual_angle = dir_to_mouse.angle() - PI / 4
 	$RangedWeapon.global_rotation = visual_angle
 ###########################################################
-
-#func _open_settings_scene() -> void:
-	#if settings_open:
-		#return
-#
-	#get_tree().paused = true  # Pause the game world
-	#ui_layer.visible = false
-	#get_tree().paused = true
-	## Load and instance the settings scene
-	#var new_scene = load(settings_scene_path)
-	#settings_instance = new_scene.instantiate()
-	#get_tree().root.add_child(settings_instance)
-	#
-	## Ensure it still processes even while the game is paused
-	#settings_instance.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	#settings_open = true
-#
-#
-#func _close_settings_scene() -> void:
-	#if not settings_open:
-		#return
-#
-	## Free the settings scene
-	#if settings_instance and is_instance_valid(settings_instance):
-		#settings_instance.queue_free()
-		#settings_instance = null
-	#
-	#ui_layer.visible = true
-	#get_tree().paused = false  # Resume the world
-	#settings_open = false
