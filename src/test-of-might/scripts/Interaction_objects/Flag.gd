@@ -31,3 +31,9 @@ func interact():
 	else:
 		animated_sprite.play(default_animation_name)
 		is_animated = true
+		
+# Zwraca słownik ze stanem flagi
+func save():
+	return {
+		"is_animated": is_animated
+	}

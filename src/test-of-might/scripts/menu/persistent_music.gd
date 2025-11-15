@@ -21,7 +21,7 @@ func _ready() -> void:
 	add_child(music_player)
 
 	# Connect to scene change
-	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
+	get_tree().connect("scene_changed", Callable(self, "_on_scene_changed"))
 	music_player.finished.connect(_on_music_finished)
 
 	# Wait one frame, then evaluate the initially loaded scene
