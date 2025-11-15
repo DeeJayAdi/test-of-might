@@ -1,0 +1,296 @@
+[gd_scene load_steps=6 format=3 uid="uid://k2tlqt4yq31n"]
+
+[ext_resource type="Script" uid="uid://cuavi21g6u2aw" path="res://scripts/menu/Load_Menu/load_save_menu.gd" id="1_dajgj"]
+[ext_resource type="Texture2D" uid="uid://7vbjvh67kyte" path="res://assets/menu/Background.png" id="1_ugrym"]
+[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="2_hsng0"]
+[ext_resource type="Script" uid="uid://divrnlmr3iao7" path="res://scripts/menu/Load_Menu/SaveSlotCard.gd" id="3_52ccd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ugrym"]
+
+[node name="LoadSaveMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dajgj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ugrym")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -178.0
+offset_right = -6.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="SaveSlot1" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_52ccd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot1"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="SlotName" type="Label" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
+layout_mode = 2
+text = "Save 1"
+label_settings = SubResource("LabelSettings_ugrym")
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot1/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Class" type="Label" parent="HBoxContainer/SaveSlot1/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Class:"
+
+[node name="Level" type="Label" parent="HBoxContainer/SaveSlot1/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="Map" type="Label" parent="HBoxContainer/SaveSlot1/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Map:"
+
+[node name="Last_Saved" type="Label" parent="HBoxContainer/SaveSlot1/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Last Saved:
+"
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load"
+
+[node name="SaveSlot2" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_52ccd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot2"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="SlotName" type="Label" parent="HBoxContainer/SaveSlot2/VBoxContainer"]
+layout_mode = 2
+text = "Save 2"
+label_settings = SubResource("LabelSettings_ugrym")
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/SaveSlot2/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_hsng0")
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SaveSlot2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Class" type="Label" parent="HBoxContainer/SaveSlot2/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Class:"
+
+[node name="Level" type="Label" parent="HBoxContainer/SaveSlot2/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="Map" type="Label" parent="HBoxContainer/SaveSlot2/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Map:"
+
+[node name="Last_Saved" type="Label" parent="HBoxContainer/SaveSlot2/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Last Saved:
+"
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load"
+
+[node name="SaveSlot3" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_52ccd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot3"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="SlotName" type="Label" parent="HBoxContainer/SaveSlot3/VBoxContainer"]
+layout_mode = 2
+text = "Save 3"
+label_settings = SubResource("LabelSettings_ugrym")
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/SaveSlot3/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_hsng0")
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SaveSlot3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot3/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Class" type="Label" parent="HBoxContainer/SaveSlot3/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Class:"
+
+[node name="Level" type="Label" parent="HBoxContainer/SaveSlot3/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="Map" type="Label" parent="HBoxContainer/SaveSlot3/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Map:"
+
+[node name="Last_Saved" type="Label" parent="HBoxContainer/SaveSlot3/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Last Saved:
+"
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Load"
+
+[node name="SaveSlot4" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_52ccd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot4"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="SlotName" type="Label" parent="HBoxContainer/SaveSlot4/VBoxContainer"]
+layout_mode = 2
+text = "Save 4"
+label_settings = SubResource("LabelSettings_ugrym")
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/SaveSlot4/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_hsng0")
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SaveSlot4/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SaveSlot4/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Class" type="Label" parent="HBoxContainer/SaveSlot4/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Class:"
+
+[node name="Level" type="Label" parent="HBoxContainer/SaveSlot4/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="Map" type="Label" parent="HBoxContainer/SaveSlot4/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Map:"
+
+[node name="Last_Saved" type="Label" parent="HBoxContainer/SaveSlot4/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Last Saved:
+"
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load"
+
+[node name="SaveSlot1" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 121.0
+offset_top = 132.0
+offset_right = 309.0
+offset_bottom = 407.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveSlot1"]
+layout_mode = 2
+
+[node name="SlotName" type="Label" parent="SaveSlot1/VBoxContainer"]
+layout_mode = 2
+text = "Save 1"
+label_settings = SubResource("LabelSettings_ugrym")
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="SaveSlot1/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_hsng0")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveSlot1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Class" type="Label" parent="SaveSlot1/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Class:"
+
+[node name="Level" type="Label" parent="SaveSlot1/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="Map" type="Label" parent="SaveSlot1/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Map:"
+
+[node name="Last_Saved" type="Label" parent="SaveSlot1/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Last Saved:
+"
+
+[node name="Load" type="Button" parent="SaveSlot1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load"
+
+[node name="Return" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 603.0
+offset_right = 166.0
+offset_bottom = 634.0
+text = "Back to main menu"

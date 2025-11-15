@@ -2,6 +2,7 @@ extends CharacterBody2D
 @onready var health_bar: TextureProgressBar = $UI/HP/Zdrowie/TextureProgressBar
 @onready var inventory_scene = preload("res://scenes/ui/inventory.tscn")
 @onready var ui_layer: CanvasLayer = $UI
+@onready var pause_menu = $PauseMenu 
 var inventory_instance: Control = null
 var inventory_open: bool = false
 var dark_overlay: ColorRect = null
@@ -37,6 +38,8 @@ var rng = RandomNumberGenerator.new()
 var facing_direction: String = "Down"
 var interactables_in_range = []
 var is_moving: bool = false
+var _is_teleport_pending: bool = false
+var _teleport_to_position: Vector2 = Vector2.ZERO
 var attack_mode: AttackMode = AttackMode.MELEE
 var settings_instance: Node = null
 var settings_open: bool = false
@@ -45,15 +48,25 @@ var settings_open: bool = false
 var walls_map: Node = null
 
 func _ready():
-	current_health = max_health
+	var data = SaveManager.get_data_for_node(self)
+	if data:
+		print("Wczytuję dane gracza...")
+		current_health = data["current_health"]
+		
+		# Ustaw pozycję do teleportacji
+		_teleport_to_position = Vector2(data["global_pos_x"], data["global_pos_y"])
+		_is_teleport_pending = true # Ustaw flagę
+		
+	else:
+		current_health = max_health
+
+	# Reszta twojego kodu (pasek HP, itp.)
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	health_changed.emit(current_health, max_health)
 	rng.randomize()
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_INHERIT
 	
-	
-
 	if get_parent() and get_parent().has_node("Walls_Floors"):
 		walls_map = get_parent().get_node("Walls_Floors")
 	elif get_tree().get_root().has_node("Walls_Floors"):
@@ -62,13 +75,13 @@ func _ready():
 	health_changed.connect(_on_health_changed)
 		
 func _on_health_changed(new_health, max_health_value):
-	# Ustawia aktualną wartość paska na nowe zdrowie gracza
 	health_bar.value = new_health
-	
-	# Na wypadek, gdyby maksymalne zdrowie też się zmieniło
 	health_bar.max_value = max_health_value
 
 func _physics_process(_delta: float):
+	if get_tree().paused:
+		return
+		
 	if inventory_open:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -109,6 +122,33 @@ func _physics_process(_delta: float):
 		rotate_weapon_towards_mouse()
 
 	move_and_slide()
+	if _is_teleport_pending:
+		print("Nadpisuję pozycję na: %s" % _teleport_to_position)
+		# jeśli mamy mapę kafelków, sprawdź czy nie wpadamy w ścianę
+		if walls_map and walls_map.has_method("world_to_map") and walls_map.has_method("get_cellv"):
+			var cell = walls_map.world_to_map(_teleport_to_position)
+			var tile = walls_map.get_cellv(cell)
+			if tile != -1:
+				var found = false
+				for r in range(1, 8):
+					for dx in range(-r, r+1):
+						for dy in range(-r, r+1):
+							var c = cell + Vector2(dx, dy)
+							if walls_map.get_cellv(c) == -1:
+								var world_pos = walls_map.map_to_world(c)
+								if walls_map.has_method("cell_size"):
+									world_pos += walls_map.cell_size * 0.5
+								_teleport_to_position = world_pos
+								found = true
+								break
+						if found:
+							break
+					if found:
+						break
+				if not found:
+					print("UWAGA: Nie znaleziono wolnego pola w pobliżu, używam oryginalnej pozycji.")
+		global_position = _teleport_to_position
+		_is_teleport_pending = false
 
 
 func get_input_and_update_state():
@@ -439,6 +479,14 @@ func _reset_attack_cooldown():
 
 #INTERAKCJE
 func _unhandled_input(_event):
+	if Input.is_action_just_pressed("ui_cancel"):
+		# Odwróć stan pauzy
+		var is_paused = not get_tree().paused
+		get_tree().paused = is_paused
+		pause_menu.visible = is_paused # Pokaż/ukryj menu
+		
+		# Zakończ funkcję, aby nie sprawdzać 'Interaction' w tej samej klatce
+		return
 	if Input.is_action_just_pressed("Interaction"):
 		if interactables_in_range.is_empty():
 			return
@@ -593,7 +641,12 @@ func rotate_weapon_towards_mouse():
 	var visual_angle = dir_to_mouse.angle() - PI / 4
 	$RangedWeapon.global_rotation = visual_angle
 ###########################################################
-
+func save():
+	return {
+		"global_pos_x": global_position.x,
+		"global_pos_y": global_position.y,
+		"current_health": current_health
+	}
 #func _open_settings_scene() -> void:
 	#if settings_open:
 		#return

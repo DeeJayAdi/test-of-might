@@ -49,7 +49,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wv8f"]
 radius = 36.0867
 
-[node name="Flag" type="Node2D"]
+[node name="Flag" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_41tjb")
 default_animation_name = "default"
 
