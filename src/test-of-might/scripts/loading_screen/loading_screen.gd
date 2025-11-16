@@ -20,6 +20,7 @@ func _ready():
 	else:
 		print("Error: 'Label' node not found as a child of the LoadingScreen.")
 
+
 	ResourceLoader.load_threaded_request(global_node.next_scene_path)
 
 
@@ -43,5 +44,17 @@ func _process(delta: float):
 			get_tree().change_scene_to_file("res://scenes/menu/Main_Menu.tscn")
 			return
 
+
 	if scene_loaded and time_visible >= MIN_LOADING_TIME:
+		
+
+		if global_node and global_node.has_method("_stop_music"):
+			global_node._stop_music()
+		else:
+			var music_node = get_node_or_null("/root/PersistentMusic")
+			if music_node and music_node.has_method("_stop_music"):
+				music_node._stop_music()
+			else:
+				print("LoadingScreen: Could not find a node with _stop_music() to stop the music.")
+
 		get_tree().change_scene_to_packed(loaded_scene)

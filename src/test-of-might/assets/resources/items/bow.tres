@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b1hiis2km4r2g"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b1hiis2km4r2g"]
 
+[ext_resource type="Texture2D" uid="uid://co158uuocfq2x" path="res://assets/sprites/items/bows/Bow5.png" id="1_cskfv"]
 [ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_hg28l"]
 [ext_resource type="Texture2D" uid="uid://cc5ajjy5lgy8v" path="res://assets/sprites/items/bows/bow_short.png" id="1_x0rbr"]
 
@@ -9,7 +10,8 @@ item_name = "Bow"
 rarity = "common"
 type = "weapon"
 subtype = "ranged"
-icon = ExtResource("1_x0rbr")
+icon = ExtResource("1_cskfv")
+placeholder = ExtResource("1_x0rbr")
 damage = 15
 attack_range = 10.0
 attack_speed = 1.0
