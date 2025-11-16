@@ -1,21 +1,25 @@
 extends Panel
-
 @onready var icon: TextureRect = $icon
 @export var item: ItemData
 @export var slot_type: String = ""  
+
+var current_placeholder: Texture2D #= icon.texture
 
 signal item_equipped(item: ItemData)
 signal item_unequipped(item: ItemData)
 
 func _ready() -> void:
+	current_placeholder = icon.texture
 	update_ui()
 
 func update_ui() -> void:
 	if not item:
-		icon.texture = null
+		#icon.texture = null
+		icon.texture = current_placeholder
 		tooltip_text = ""
 	else:
 		icon.texture = item.icon
+		current_placeholder = item.placeholder
 		tooltip_text = item.item_name
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
@@ -30,12 +34,10 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	set_drag_preview(c)
 	icon.hide()
 	return self
-
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if not data or not data.item:
 		return false
 	return data.item.type == slot_type
-
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_at_position, data):
 		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_FORBIDDEN)
@@ -50,7 +52,6 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	data.icon.show()
 	update_ui()
 	data.update_ui()
-
 	# Emit signals to update stats
 	if item:
 		emit_signal("item_equipped", item)

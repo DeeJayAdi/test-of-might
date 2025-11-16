@@ -6,6 +6,7 @@ class_name ItemData
 @export var type: String = ""
 @export var subtype: String = ""
 @export var icon: Texture2D
+@export var placeholder: Texture2D
 
 @export var damage: int
 @export var defense: int
