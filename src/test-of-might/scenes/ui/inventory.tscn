@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/boots.tres" id="11_8poyu"]
 [ext_resource type="Texture2D" uid="uid://dso0h3r4j7wdu" path="res://assets/sprites/items/armor/boots/Icon222.png" id="12_2u8xl"]
 [ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="14_map31"]
+[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/Dialog/Avatars/portrait_player/PalMan.png" id="14_map31"]
+[ext_resource type="Texture2D" uid="uid://ctr4map400rf" path="res://assets/ui/cog-64.png" id="15_8poyu"]
 
 [node name="Inventory" type="Control"]
 visible = false
