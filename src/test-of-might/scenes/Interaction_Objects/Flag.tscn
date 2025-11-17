@@ -54,7 +54,6 @@ script = ExtResource("1_41tjb")
 default_animation_name = "default"
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(19, 1)
 sprite_frames = SubResource("SpriteFrames_3l5t7")
 frame_progress = 0.36539248
 
