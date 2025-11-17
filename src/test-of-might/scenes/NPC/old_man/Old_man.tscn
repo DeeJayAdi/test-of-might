@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://73xfdxnq8gmv"]
+
+[ext_resource type="Texture2D" uid="uid://bxbhu0ukedqsm" path="res://assets/sprites/NPC/Old_Man/old_man.png" id="1_f3d3s"]
+[ext_resource type="Script" uid="uid://c385w8ddp20r3" path="res://scripts/NPC/old_man.gd" id="1_rdkry"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdkry"]
+atlas = ExtResource("1_f3d3s")
+region = Rect2(1440, 1440, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axsfe"]
+atlas = ExtResource("1_f3d3s")
+region = Rect2(1680, 1440, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3npj"]
+atlas = ExtResource("1_f3d3s")
+region = Rect2(0, 1680, 240, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jn186"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_rdkry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axsfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3npj")
+}],
+"loop": true,
+"name": &"Animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f3d3s"]
+radius = 173.35873
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdkry"]
+size = Vector2(115, 200)
+
+[node name="OldMan" type="Node2D"]
+script = ExtResource("1_rdkry")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jn186")
+animation = &"Animation"
+autoplay = "Animation"
+frame_progress = 0.15895286
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(-4, 21.5)
+shape = SubResource("CircleShape2D_f3d3s")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_top = -165.0
+offset_bottom = -130.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+theme_override_font_sizes/font_size = 20
+text = "[E] to Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClossionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClossionArea"]
+position = Vector2(-4.5, 22)
+shape = SubResource("RectangleShape2D_rdkry")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_body_exited"]
