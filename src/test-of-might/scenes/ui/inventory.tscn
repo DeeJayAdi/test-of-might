@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cc5ajjy5lgy8v" path="res://assets/sprites/items/bows/bow_short.png" id="8_hjfas"]
 [ext_resource type="Resource" uid="uid://5qpk7xhqxi6u" path="res://assets/resources/items/armor.tres" id="9_map31"]
 [ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/boots.tres" id="11_8poyu"]
-[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="14_map31"]
+[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/Dialog/Avatars/portrait_player/PalMan.png" id="14_map31"]
 [ext_resource type="Texture2D" uid="uid://ctr4map400rf" path="res://assets/ui/cog-64.png" id="15_8poyu"]
 
 [node name="Inventory" type="Control"]
