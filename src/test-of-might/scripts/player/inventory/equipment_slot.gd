@@ -34,10 +34,12 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	set_drag_preview(c)
 	icon.hide()
 	return self
+	
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if not data or not data.item:
 		return false
 	return data.item.type == slot_type
+	
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	if not _can_drop_data(_at_position, data):
 		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_FORBIDDEN)
