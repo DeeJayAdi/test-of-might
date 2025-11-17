@@ -19,17 +19,21 @@ func _on_interaction_area_body_exited(body):
 		if body.has_method("get_closest_interactable"):
 			body.interactables_in_range.erase(self)
 func interact():
-	
+	# Odblokuj kolejny poziom po interakcji z flagą
+	var global = get_node("/root/Global")
+	# Dodaj kolejne poziomy wg uznania
+	if not global.is_level_unlocked("level1"):
+		global.unlock_level("level1")
+		global.save_unlocked_levels()
+
 	if is_animated:
 		animated_sprite.stop()
 		print("interakcja_flaga")
 		is_animated = false
-
 		await get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 	else:
 		animated_sprite.play(default_animation_name)
 		is_animated = true
-
 		await get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
