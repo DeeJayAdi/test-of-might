@@ -37,7 +37,7 @@ func _on_sfx_h_slider_value_changed(value: float) -> void:
 
 
 func _on_close_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/Main_Menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu/settings.tscn")
 
 
 # --- Optional helpers for persistence ---

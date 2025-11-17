@@ -4,8 +4,6 @@ extends CharacterBody2D
 @onready var ui_layer: CanvasLayer = $UI
 @onready var pause_menu = $PauseMenu 
 var inventory_instance: Control = null
-var inventory_open: bool = false
-var dark_overlay: ColorRect = null
 
 
 signal health_changed(current_health, max_health)
@@ -48,19 +46,31 @@ var settings_open: bool = false
 var walls_map: Node = null
 
 func _ready():
+	if inventory_instance == null:
+		inventory_instance = inventory_scene.instantiate()	
+		var inventory_script_node = inventory_instance.get_node_or_null("CanvasLayer/ColorRect/Inventory") 
+		
+		if inventory_script_node and inventory_script_node.has_method("set_player_node"):
+			inventory_script_node.set_player_node(self)
+		else:
+			print_debug("ERROR: Could not find inventory script on Panel node to set player reference.")
+			
+		inventory_instance.visible = false 
+		get_tree().get_root().add_child(inventory_instance) 
+		
+	# --- End of modification ---
+	
 	var data = SaveManager.get_data_for_node(self)
 	if data:
 		print("Wczytuję dane gracza...")
 		current_health = data["current_health"]
 		
-		# Ustaw pozycję do teleportacji
 		_teleport_to_position = Vector2(data["global_pos_x"], data["global_pos_y"])
-		_is_teleport_pending = true # Ustaw flagę
+		_is_teleport_pending = true 
 		
 	else:
 		current_health = max_health
 
-	# Reszta twojego kodu (pasek HP, itp.)
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	health_changed.emit(current_health, max_health)
@@ -82,7 +92,7 @@ func _physics_process(_delta: float):
 	if get_tree().paused:
 		return
 		
-	if inventory_open:
+	if inventory_instance and inventory_instance.visible:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -94,10 +104,9 @@ func _physics_process(_delta: float):
 		return
 		
 	if current_state == State.HURT:
-		# Allow limited movement while hurt
 		var dir = Input.get_vector("left", "right", "up", "down")
 		if dir != Vector2.ZERO:
-			velocity = dir.normalized() * speed * 0.5  # 50% speed when hurt
+			velocity = dir.normalized() * speed * 0.5  
 		else:
 			velocity = Vector2.ZERO
 		move_and_slide()
@@ -108,14 +117,11 @@ func _physics_process(_delta: float):
 	
 	play_animation()
 
-	# Jeśli mamy referencję do TileMapLayer (Walls_Floors) — wykonaj prostą blokadę ruchu
 	if walls_map and walls_map.has_method("world_to_map"):
 		var next_pos = global_position + velocity * get_physics_process_delta_time()
 		var cell = walls_map.world_to_map(next_pos)
-		# get_cellv może zwracać -1 gdy brak kafelka
 		var tile = walls_map.get_cellv(cell)
 		if tile != -1:
-			# Kafelek istnieje -> zablokuj ruch
 			velocity = Vector2.ZERO
 
 	if attack_mode == AttackMode.RANGED:
@@ -124,7 +130,6 @@ func _physics_process(_delta: float):
 	move_and_slide()
 	if _is_teleport_pending:
 		print("Nadpisuję pozycję na: %s" % _teleport_to_position)
-		# jeśli mamy mapę kafelków, sprawdź czy nie wpadamy w ścianę
 		if walls_map and walls_map.has_method("world_to_map") and walls_map.has_method("get_cellv"):
 			var cell = walls_map.world_to_map(_teleport_to_position)
 			var tile = walls_map.get_cellv(cell)
@@ -153,7 +158,7 @@ func _physics_process(_delta: float):
 
 func get_input_and_update_state():
 
-	if inventory_open or settings_open:
+	if (inventory_instance and inventory_instance.visible) or settings_open:
 		velocity = Vector2.ZERO
 		current_state = State.IDLE
 		return
@@ -180,7 +185,6 @@ func get_input_and_update_state():
 	
 	if Input.is_action_just_pressed("swap_weapon"):
 		switch_attack_mode()
-	# --- NEW: update facing to mouse if mouse-based combat ---
 	if PreviousScene.combat_style_mouse_based and current_state != State.ATTACK:
 		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		if abs(mouse_dir.x) > abs(mouse_dir.y):
@@ -208,7 +212,6 @@ func get_input_and_update_state():
 		else:
 			velocity = Vector2.ZERO
 			current_state = State.IDLE
-	# Poprawiono błąd niewidzialnej spacji (U+00A0)
 	elif is_moving:
 		if Input.is_action_pressed("sprint"):
 			velocity = dir.normalized() * speed * run_multiplier
@@ -217,8 +220,6 @@ func get_input_and_update_state():
 	else:
 		velocity = Vector2.ZERO
 
-
-# Funkcja pomocnicza do aktualizacji 'facing_direction' na podstawie wektora
 func update_facing_direction(dir: Vector2):
 	if abs(dir.x) > abs(dir.y):
 		if dir.x > 0:
@@ -231,7 +232,6 @@ func update_facing_direction(dir: Vector2):
 		else:
 			facing_direction = "Up"
 
-# Główna funkcja logiki animacji
 func play_animation():
 	var anim_name_prefix: String = ""
 	var anim_direction: String = facing_direction
@@ -244,16 +244,11 @@ func play_animation():
 		State.RUN:
 			anim_name_prefix = "Run"
 		State.ATTACK:
-			# When attacking, ignore movement input changes completely.
-			# Use the locked direction and animation prefix decided at attack start.
 			var locked_dir = attack_locked_direction_mouse if PreviousScene.combat_style_mouse_based else attack_locked_direction
 			if locked_dir != "":
 				anim_direction = locked_dir
 
-			# Do NOT change attack animation based on movement — keep what was started
-			# This ensures no re-triggering if player moves mid-attack
 			if not animated_sprite.is_playing() or not animated_sprite.animation.begins_with("Attack"):
-				# Only choose the correct attack anim when first entering the state
 				if is_moving and Input.is_action_pressed("sprint"):
 					anim_name_prefix = "Attack_Run"
 				elif is_moving:
@@ -265,14 +260,12 @@ func play_animation():
 					animated_sprite.play(final_anim_name)
 				return
 			else:
-				# Already playing an attack animation → do nothing (let it finish)
 				return
 		State.HURT:
 			anim_name_prefix = "Hurt"
 		State.DEATH:
 			anim_name_prefix = "Death"
 
-	# Only non-attack animations reach here
 	var final_anim_name = anim_name_prefix + "_" + anim_direction
 	var current_anim_name = animated_sprite.animation
 
@@ -283,7 +276,6 @@ func play_animation():
 		animated_sprite.play(final_anim_name)
 
 func _on_animation_finished():
-	# Clear locked attack direction when attack animation finishes
 	if current_state == State.ATTACK:
 		attack_locked_direction = ""
 
@@ -477,7 +469,7 @@ func _apply_attack_damage(args: Dictionary):
 func _reset_attack_cooldown():
 	can_attack = true
 
-#INTERAKCJE
+#INTERAKJE
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		# Odwróć stan pauzy
@@ -508,79 +500,11 @@ func get_closest_interactable():
 	
 ################################################
 
-
-func _process(_delta):
-	if Input.is_action_just_pressed("inventory"):
-		_toggle_inventory()
-	
-	#if Input.is_action_just_pressed("Settings"):  # ESC key
-		#if settings_open:
-			#_close_settings_scene()
-		#else:
-			#var temp: String = get_tree().current_scene.scene_file_path
-			#PreviousScene.previous_scene_path = temp
-			#_open_settings_scene()
-
-func _toggle_inventory():
-	if inventory_open:
-		_close_inventory()
-	else:
-		_open_inventory()
-
-func _open_inventory():
-	if inventory_instance == null:
-		inventory_instance = inventory_scene.instantiate()
-		get_tree().get_root().add_child(inventory_instance)
-
-	# Hide HUD
-	ui_layer.visible = false
-
-	# Make sure inventory (and its canvas layer) are visible
-	inventory_instance.visible = true
-	var inv_canvas_layer = inventory_instance.get_node_or_null("CanvasLayer")
-	if inv_canvas_layer:
-		inv_canvas_layer.visible = true
-
-	# --- DARK OVERLAY CREATION ---
-	if dark_overlay == null:
-		dark_overlay = ColorRect.new()
-		dark_overlay.color = Color(0, 0, 0, 0.5)  # semi-transparent black
-		dark_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		dark_overlay.size = get_viewport_rect().size
-		get_tree().get_root().add_child(dark_overlay)
-		dark_overlay.move_to_front() # put overlay above world
-	# move inventory above overlay
-	inventory_instance.move_to_front()
-
-	# Pause the game world, but keep UI active
-	get_tree().paused = true
-	inventory_instance.process_mode = Node.PROCESS_MODE_ALWAYS
-
-	inventory_open = true
-
-
-func _close_inventory():
-	# Remove or hide inventory
-	if inventory_instance:
-		var inv_canvas_layer = inventory_instance.get_node_or_null("CanvasLayer")
-		if inv_canvas_layer:
-			inv_canvas_layer.visible = false
-		inventory_instance.visible = false
-
-	# Remove overlay
-	if dark_overlay:
-		dark_overlay.queue_free()
-		dark_overlay = null
-
-	# Show UI again
-	ui_layer.visible = true
-
-	# Unpause game
-	get_tree().paused = false
-
-	inventory_open = false
-
-
+# --- REMOVED: All inventory functions are gone from here ---
+# REMOVED: _process()
+# REMOVED: _toggle_inventory()
+# REMOVED: _open_inventory()
+# REMOVED: _close_inventory()
 
 ################################
 #logika walki dystansowej
@@ -647,32 +571,3 @@ func save():
 		"global_pos_y": global_position.y,
 		"current_health": current_health
 	}
-#func _open_settings_scene() -> void:
-	#if settings_open:
-		#return
-#
-	#get_tree().paused = true  # Pause the game world
-	#ui_layer.visible = false
-	#get_tree().paused = true
-	## Load and instance the settings scene
-	#var new_scene = load(settings_scene_path)
-	#settings_instance = new_scene.instantiate()
-	#get_tree().root.add_child(settings_instance)
-	#
-	## Ensure it still processes even while the game is paused
-	#settings_instance.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	#settings_open = true
-#
-#
-#func _close_settings_scene() -> void:
-	#if not settings_open:
-		#return
-#
-	## Free the settings scene
-	#if settings_instance and is_instance_valid(settings_instance):
-		#settings_instance.queue_free()
-		#settings_instance = null
-	#
-	#ui_layer.visible = true
-	#get_tree().paused = false  # Resume the world
-	#settings_open = false
