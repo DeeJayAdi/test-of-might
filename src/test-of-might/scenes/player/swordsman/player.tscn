@@ -1807,7 +1807,6 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D" groups=["Persist", "player"]]
-z_index = 1
 motion_mode = 1
 script = ExtResource("1_dovo2")
 
