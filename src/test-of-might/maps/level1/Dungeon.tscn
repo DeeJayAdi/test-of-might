@@ -6140,11 +6140,9 @@ tile_map_data = PackedByteArray("AAAsAPH/AAAEAAYAAAA=")
 tile_set = SubResource("TileSet_u13pl")
 
 [node name="player" parent="Y-Sort" instance=ExtResource("15_6fqx2")]
-z_index = 0
 y_sort_enabled = true
 position = Vector2(1115.9999, -447.99997)
 disable_mode = 2
-speed = 100.0
 
 [node name="Decorations" type="TileMapLayer" parent="Y-Sort"]
 modulate = Color(0.82606, 0.82606006, 0.82606, 1)

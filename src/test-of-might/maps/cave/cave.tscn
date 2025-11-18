@@ -7784,6 +7784,7 @@ tile_map_data = PackedByteArray("AAABAAIAAAABAAcAAAABAAMAAAABAAgAAAABAAQAAAABAAk
 tile_set = SubResource("TileSet_hy0pv")
 
 [node name="player" parent="YSort" instance=ExtResource("4_up3r0")]
+z_index = 0
 y_sort_enabled = true
 position = Vector2(116, 232)
 
