@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bnavdllrapyro"]
+
+[ext_resource type="Texture2D" uid="uid://4i5miyi6wcoh" path="res://assets/sprites/items/Potions/Healing_Overtime/Round Potion - MAGENTA - 0000.png" id="1_hd0gk"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_m53ta"]
+
+[resource]
+script = ExtResource("2_m53ta")
+item_name = "Big Healing Potion(time"
+type = "potion"
+subtype = "healing"
+icon = ExtResource("1_hd0gk")
+stack_size = 3
+heal_per_second = 5
+heal_duration = 15.0
