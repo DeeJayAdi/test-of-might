@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b1bi3gmoehto8"]
+[gd_scene load_steps=27 format=3 uid="uid://b1bi3gmoehto8"]
 
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
 [ext_resource type="Script" uid="uid://wkj8t6se6tm8" path="res://scripts/player/inventory/inventory.gd" id="1_xeaml"]
@@ -17,7 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://fd85j8kbfoad" path="res://assets/sprites/items/armor/chest/Icon181.png" id="10_xo304"]
 [ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/boots.tres" id="11_8poyu"]
 [ext_resource type="Texture2D" uid="uid://dso0h3r4j7wdu" path="res://assets/sprites/items/armor/boots/Icon222.png" id="12_2u8xl"]
+[ext_resource type="Resource" uid="uid://cdxpvw5qoy378" path="res://assets/resources/items/potions/small Healing Potion.tres" id="13_2u8xl"]
+[ext_resource type="Texture2D" uid="uid://xjk2wxb5f8hb" path="res://assets/sprites/items/Potions/Healing_Instant/Small Bottle - RED - 0000.png" id="14_gvlpm"]
 [ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="14_map31"]
+[ext_resource type="Texture2D" uid="uid://ba6km5gack2kl" path="res://assets/sprites/items/Potions/Healing_Overtime/Small Vial - PINK - 0000.png" id="15_esvv3"]
+[ext_resource type="Resource" uid="uid://dyinwbcxldpos" path="res://assets/resources/items/potions/small_healing_over_time_potion.tres" id="15_lpjfq"]
+[ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="17_gww4r"]
+[ext_resource type="Texture2D" uid="uid://c0qn7prxjqqrs" path="res://assets/sprites/items/Potions/Vital/Small Vial - GOLD - 0000.png" id="18_ouhig"]
 [ext_resource type="Script" uid="uid://ckvmteoxvidlq" path="res://scripts/player/inventory/stat_box.gd" id="19_2u8xl"]
 [ext_resource type="Texture2D" uid="uid://m4pduouhhspf" path="res://assets/ui/plus.jpg" id="20_gvlpm"]
 
@@ -101,6 +107,19 @@ texture = ExtResource("4_8poyu")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot2" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -118,6 +137,19 @@ grow_vertical = 2
 texture = ExtResource("6_6qj3p")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot3" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -137,6 +169,19 @@ texture = ExtResource("8_45kyb")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot4" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -154,6 +199,19 @@ grow_vertical = 2
 texture = ExtResource("10_xo304")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot5" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -173,10 +231,24 @@ texture = ExtResource("12_2u8xl")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot6" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("1_avmd0")
+item = ExtResource("13_2u8xl")
 
 [node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot6"]
 layout_mode = 1
@@ -186,13 +258,28 @@ anchor_bottom = 1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("14_gvlpm")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot7" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("1_avmd0")
+item = ExtResource("15_lpjfq")
 
 [node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot7"]
 layout_mode = 1
@@ -202,13 +289,28 @@ anchor_bottom = 1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("15_esvv3")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot8" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("1_avmd0")
+item = ExtResource("17_gww4r")
 
 [node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot8"]
 layout_mode = 1
@@ -218,8 +320,22 @@ anchor_bottom = 1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("18_ouhig")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot9" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -237,6 +353,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot10" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -252,6 +381,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot11" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -269,6 +411,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot12" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -284,6 +439,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot13" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -301,6 +469,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot14" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -316,6 +497,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot15" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -333,6 +527,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot16" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -348,6 +555,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot17" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -365,6 +585,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot18" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -380,6 +613,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot19" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -397,6 +643,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot20" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -412,6 +671,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="ItemSlot21" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -429,6 +701,19 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot21"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
 [node name="ItemSlot22" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -444,6 +729,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot22"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
 
 [node name="CharacterSheet" type="MarginContainer" parent="CanvasLayer/ColorRect/Inventory"]
 layout_mode = 0

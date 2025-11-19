@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bj7nkjscoomrt"]
+
+[ext_resource type="Texture2D" uid="uid://d0bdie8sjdkfi" path="res://assets/sprites/items/Potions/Vital/Bubbly Brew Bottle Rising - ORANGE - 0000.png" id="1_4rnh2"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_tjkba"]
+
+[resource]
+script = ExtResource("2_tjkba")
+item_name = "Medium Vital Potion"
+type = "potion"
+subtype = "Healing"
+icon = ExtResource("1_4rnh2")
+stack_size = 3
+heal_instant = 30
+heal_per_second = 5
+heal_duration = 10.0

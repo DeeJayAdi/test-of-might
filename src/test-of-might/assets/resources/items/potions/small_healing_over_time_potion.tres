@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dyinwbcxldpos"]
+
+[ext_resource type="Texture2D" uid="uid://ba6km5gack2kl" path="res://assets/sprites/items/Potions/Healing_Overtime/Small Vial - PINK - 0000.png" id="1_2vxi1"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_h1580"]
+
+[resource]
+script = ExtResource("2_h1580")
+item_name = "Small Healing Potion (time)"
+rarity = "common"
+type = "potion"
+subtype = "Healing"
+icon = ExtResource("1_2vxi1")
+stack_size = 5
+default_quantity = 2
+heal_per_second = 5
+heal_duration = 5.0

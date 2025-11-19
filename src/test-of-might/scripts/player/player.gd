@@ -329,6 +329,17 @@ func heal(amount: int):
 	current_health += amount
 	current_health = clamp(current_health, 0, max_health)
 	health_changed.emit(current_health, max_health)
+	
+func heal_over_time(amount_per_second: int, duration: float) -> void:
+	if current_state == State.DEATH or current_health == max_health:
+		return
+	var seconds_passed := 0
+	while seconds_passed < int(ceil(duration)):
+		if current_state == State.DEATH:
+			return
+		heal(amount_per_second)
+		seconds_passed += 1
+		await get_tree().create_timer(1.0).timeout
 
 func die():
 	if current_state == State.DEATH:
