@@ -52,9 +52,12 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	var tmp = item
 	item = data.item
 	data.item = tmp
-	var tmp_quantity = quantity
-	quantity = data.quantity
-	data.quantity = tmp_quantity
+	if "quantity" in data:
+		var tmp_quantity = quantity
+		quantity = data.quantity
+		data.quantity = tmp_quantity
+	else:
+		quantity = 1
 	icon.show()
 	data.icon.show()
 	update_ui()
