@@ -26,6 +26,7 @@ enum AttackMode { MELEE, RANGED }
 @export var settings_scene_path: String = "res://scenes/menu/settings.tscn"
 #@export var combat_style_mouse_based: bool = true
 
+
 var attack_locked_direction: String = ""
 var attack_locked_direction_mouse: String = ""
 var can_attack: bool = true
@@ -305,8 +306,12 @@ func _on_animation_finished():
 func take_damage(amount: int):
 	if current_state == State.DEATH:
 		return
+		
+	var def = UpdateStats.get_total_defense()
 
-	current_health -= amount
+	var final_damage = max(0, amount - def)
+
+	current_health -= final_damage
 	current_health = clamp(current_health, 0, max_health)
 	
 	print("Otrzymano obrażenia, aktualne ZD: ", current_health)
@@ -359,9 +364,14 @@ func perform_attack(is_heavy := false):
 		return
 	can_attack = false
 
-	var radius = heavy_attack_radius if is_heavy else attack_radius
-	var dmg_base = heavy_attack_damage if is_heavy else attack_damage
-	var cooldown = heavy_attack_cooldown if is_heavy else attack_cooldown
+	var dmg_base = UpdateStats.get_total_damage()
+	var radius = UpdateStats.get_total_range()
+	var cooldown = UpdateStats.get_total_cooldown(attack_cooldown)
+	
+	if is_heavy:
+		radius = heavy_attack_radius 
+		dmg_base = dmg_base * 1.5 # Or dmg_base * 2
+		cooldown = heavy_attack_cooldown
 
 	var dir_to_target: Vector2
 
@@ -435,15 +445,12 @@ func _on_frame_changed():
 		$sfxWalk.pitch_scale = rng.randf_range(0.7, 1.3)
 		$sfxWalk.play(0.0)
 
-# NOWA FUNKCJA: Wykonuje obrażenia po opóźnieniu
-# (To jest twój kod z 'perform_attack', przeniesiony tutaj)
+
 func _apply_attack_damage(args: Dictionary):
-	# Rozpakowujemy zmienne, które przekazaliśmy
 	var radius = args["radius"]
 	var dmg_base = args["dmg_base"]
 	var attack_pos = args["attack_pos"]
 
-	# hitbox (TWÓJ KOD - BEZ ZMIAN)
 	var shape = CircleShape2D.new()
 	shape.radius = radius
 
@@ -459,7 +466,6 @@ func _apply_attack_damage(args: Dictionary):
 		if collider == self:
 			continue
 		if collider and collider.has_method("take_damage"):
-			# oblicz obrażenia z krytykiem (TWÓJ KOD - BEZ ZMIAN)
 			var damage = dmg_base
 			if rng.randf() < crit_chance:
 				damage = int(damage * crit_multiplier)

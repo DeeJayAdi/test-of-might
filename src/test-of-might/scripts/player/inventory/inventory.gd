@@ -15,7 +15,7 @@ func _ready():
 func set_player_node(player: CharacterBody2D):
 	player_node = player
 
-func _unhandled_input(event):
+func _input(event): #changed from _unhandled_input if any input errors arise it might be this
 	if event.is_action_pressed("inventory"):
 		if player_node and is_instance_valid(player_node) and player_node.current_state != player_node.State.DEATH:
 			toggle()
@@ -32,14 +32,14 @@ func open():
 		return
 	
 	is_open = true
-	inventory_canvas.visible = true # <-- FIX: Show the canvas
+	inventory_canvas.visible = true 
 	
 	if player_node.ui_layer:
 		player_node.ui_layer.visible = false
 		
 	if dark_overlay == null:
 		dark_overlay = ColorRect.new()
-		dark_overlay.color = Color(0, 0, 0, 0.5) # Semi-transparent black
+		dark_overlay.color = Color(0, 0, 0, 0.5) 
 		dark_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		dark_overlay.size = get_viewport_rect().size
 		get_tree().get_root().add_child(dark_overlay)
@@ -51,12 +51,11 @@ func close():
 		return
 
 	is_open = false
-	inventory_canvas.visible = false # <-- FIX: Hide the canvas
+	inventory_canvas.visible = false 
 	
 	if player_node and is_instance_valid(player_node) and player_node.ui_layer:
 		player_node.ui_layer.visible = true
 		
-	# Remove overlay
 	if dark_overlay:
 		dark_overlay.queue_free()
 		dark_overlay = null

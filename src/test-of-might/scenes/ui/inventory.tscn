@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b1bi3gmoehto8"]
+[gd_scene load_steps=21 format=3 uid="uid://b1bi3gmoehto8"]
 
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
 [ext_resource type="Script" uid="uid://wkj8t6se6tm8" path="res://scripts/player/inventory/inventory.gd" id="1_xeaml"]
@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/boots.tres" id="11_8poyu"]
 [ext_resource type="Texture2D" uid="uid://dso0h3r4j7wdu" path="res://assets/sprites/items/armor/boots/Icon222.png" id="12_2u8xl"]
 [ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="14_map31"]
+[ext_resource type="Script" uid="uid://ckvmteoxvidlq" path="res://scripts/player/inventory/stat_box.gd" id="19_2u8xl"]
+[ext_resource type="Texture2D" uid="uid://m4pduouhhspf" path="res://assets/ui/plus.jpg" id="20_gvlpm"]
 
 [node name="Inventory" type="Control"]
 visible = false
@@ -36,7 +38,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -330.0
+offset_left = -373.0
 offset_top = -255.0
 offset_right = 330.0
 offset_bottom = 255.0
@@ -50,9 +52,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -325.0
+offset_left = -348.5
 offset_top = -250.0
-offset_right = 325.0
+offset_right = 348.5
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -447,8 +449,8 @@ stretch_mode = 5
 layout_mode = 0
 offset_left = 21.0
 offset_top = 15.0
-offset_right = 285.0
-offset_bottom = 347.8
+offset_right = 378.0
+offset_bottom = 471.0
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet"]
 layout_mode = 2
@@ -526,10 +528,10 @@ stretch_mode = 5
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect/Inventory"]
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 0
-offset_left = 109.5
-offset_top = 15.0
-offset_right = 329.5
-offset_bottom = 235.0
+offset_left = 95.0
+offset_top = 17.0
+offset_right = 378.0
+offset_bottom = 300.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/ColorRect"]
 custom_minimum_size = Vector2(128, 128)
@@ -539,12 +541,100 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -107.0
-offset_top = -112.0
-offset_right = 107.0
-offset_bottom = 112.0
+offset_left = -134.5
+offset_top = -139.5
+offset_right = 135.5
+offset_bottom = 137.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_map31")
 expand_mode = 1
+stretch_mode = 5
+
+[node name="Stats" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 345.0
+offset_right = 235.0
+offset_bottom = 456.0
+script = ExtResource("19_2u8xl")
+
+[node name="Row_MaxHP" type="HBoxContainer" parent="CanvasLayer/ColorRect/Inventory/Stats"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_MaxHP"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Maxp HP:"
+
+[node name="Value" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_MaxHP"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "100"
+
+[node name="Increase" type="TextureButton" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_MaxHP"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("20_gvlpm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Row_Attack" type="HBoxContainer" parent="CanvasLayer/ColorRect/Inventory/Stats"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Attack"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Attack Damage:"
+
+[node name="Value" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Attack"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "25"
+
+[node name="Increase" type="TextureButton" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Attack"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("20_gvlpm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Row_Defense" type="HBoxContainer" parent="CanvasLayer/ColorRect/Inventory/Stats"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Defense"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Defense:"
+
+[node name="Value" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Defense"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+
+[node name="Increase" type="TextureButton" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Defense"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("20_gvlpm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Row_Cooldown" type="HBoxContainer" parent="CanvasLayer/ColorRect/Inventory/Stats"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Cooldown"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Cooldown: "
+
+[node name="Value" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Cooldown"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "1"
+
+[node name="Increase" type="TextureButton" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_Cooldown"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("20_gvlpm")
+ignore_texture_size = true
 stretch_mode = 5
