@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=3 uid="uid://bpfvkxa3jtv3w"]
+[gd_scene load_steps=155 format=3 uid="uid://bpfvkxa3jtv3w"]
 
 [ext_resource type="Texture2D" uid="uid://cwd7bvcuqtkgm" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - attack1.png" id="1_6fgxj"]
 [ext_resource type="Script" uid="uid://c8vm0d0t5y7sk" path="res://scripts/enemies/bosses/caveboss/cave_boss.gd" id="1_oreq0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ufilk0akebl" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - idle.png" id="4_pplqm"]
 [ext_resource type="Texture2D" uid="uid://dtgcpwvuagouj" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - hide.png" id="5_wqvcn"]
 [ext_resource type="Texture2D" uid="uid://ddumemdla5kv4" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - hit.png" id="6_25rym"]
+[ext_resource type="Script" uid="uid://t744q72vbyl3" path="res://scripts/enemies/bosses/caveboss/health_component.gd" id="8_yerkl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6fgxj"]
 radius = 14.0
@@ -1195,6 +1196,15 @@ one_shot = true
 one_shot = true
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]
+
+[node name="StateManager" type="Node" parent="."]
+
+[node name="InputHandler" type="Node" parent="."]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("8_yerkl")
+
+[node name="CombatComponent" type="Node" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_animation_finished"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_player_detection_area_body_entered"]
