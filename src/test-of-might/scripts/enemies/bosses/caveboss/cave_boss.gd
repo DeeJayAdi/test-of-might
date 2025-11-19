@@ -9,6 +9,7 @@ class_name CaveBoss extends CharacterBody2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var roam_timer: Timer = $RoamTimer
 @onready var hide_timer: Timer = $HideTimer
+@onready var projectile_spawn: Marker2D = $ProjectileSpawn
 
 @export var attack_cooldown: float = 2
 @export var roam_cooldown: float = 10.5

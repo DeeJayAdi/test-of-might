@@ -69,6 +69,7 @@ texture_filter = 1
 collision_layer = 8
 motion_mode = 1
 script = ExtResource("1_k3s4m")
+damage = 250
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 0)

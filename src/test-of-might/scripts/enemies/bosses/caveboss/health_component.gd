@@ -7,7 +7,7 @@ signal died
 var current_health: int
 var is_invincible: bool = false
 
-func ready():
+func _ready() -> void:
 	current_health = max_health
 
 

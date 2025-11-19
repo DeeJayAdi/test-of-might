@@ -15,9 +15,11 @@ func enter():
 
 func _on_animation_finished():
 	var current_anim = boss.anim_player.animation
-	if "attack" in current_anim:
-		shoot(boss.target)
-		state_machine.change_state("idle")
+	if "attack1" in current_anim:
+		boss.combat_component.attack_melee(boss.target)
+	if "attack2" in current_anim:
+		boss.combat_component.shoot(boss.target)
+	state_machine.change_state("idle")
 
 
 func shoot(target: Node):
