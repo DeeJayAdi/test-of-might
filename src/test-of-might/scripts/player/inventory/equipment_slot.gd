@@ -1,62 +1,79 @@
 extends Panel
+
 @onready var icon: TextureRect = $icon
-@export var item: ItemData
 @export var slot_type: String = ""  
 
-var current_placeholder: Texture2D #= icon.texture
+var current_placeholder: Texture2D 
 
-signal item_equipped(item: ItemData)
-signal item_unequipped(item: ItemData)
+@export var item: ItemData:
+	set(value):
+		item = value
+		if is_node_ready():
+			update_ui() 
+			_update_global_stats()
 
 func _ready() -> void:
 	current_placeholder = icon.texture
 	update_ui()
+	_update_global_stats()
+
+func _exit_tree():
+	UpdateStats.update_equipment_slot(get_instance_id(), null)
+
+# --- 2. LOGIC ---
 
 func update_ui() -> void:
+	if not icon: return
+	
 	if not item:
-		#icon.texture = null
 		icon.texture = current_placeholder
 		tooltip_text = ""
 	else:
 		icon.texture = item.icon
-		current_placeholder = item.placeholder
+		if item.placeholder:
+			current_placeholder = item.placeholder
 		tooltip_text = item.item_name
 
+func _update_global_stats():
+	UpdateStats.update_equipment_slot(get_instance_id(), item)
+
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if not item:
-		return
-	var preview = duplicate()
+	if not item: return null
+	
+	#duplicate() used to cause issues - in case some more arise review if it wasn't removed wrongfully
+	
+	var preview = TextureRect.new()
+	preview.texture = icon.texture
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	preview.size = Vector2(50, 50)
+	
 	var c = Control.new()
 	c.add_child(preview)
-	preview.position -= Vector2(25, 25)
-	preview.self_modulate = Color.TRANSPARENT
-	c.modulate = Color(c.modulate, 0.5)
+	preview.position = -preview.size / 2 
+	preview.self_modulate = Color(1, 1, 1, 0.8) 
 	set_drag_preview(c)
-	icon.hide()
-	return self
 	
+	icon.hide()
+
+	return self
+
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	if not data or not data.item:
-		return false
+	if not data or not "item" in data: return false
+	if data.item == null: return false 
 	return data.item.type == slot_type
 	
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	if not _can_drop_data(_at_position, data):
-		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_FORBIDDEN)
-		return
+	if not _can_drop_data(_at_position, data): return
 	
-	# Swap items
-	var tmp = item
-	item = data.item
-	data.item = tmp
+	var my_old_item = item
+	var incoming_item = data.item
+	
+	item = incoming_item
+	
+	data.item = my_old_item
 	
 	icon.show()
-	data.icon.show()
-	update_ui()
-	data.update_ui()
-	# Emit signals to update stats
-	if item:
-		emit_signal("item_equipped", item)
-	if tmp:
-		emit_signal("item_unequipped", tmp)
+	if data.has_method("update_ui"):
+		data.update_ui()
+		data.icon.show()
 		
