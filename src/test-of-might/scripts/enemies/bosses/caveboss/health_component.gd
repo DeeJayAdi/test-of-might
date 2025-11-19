@@ -5,13 +5,14 @@ signal died
 
 @export var max_health: int = 1000
 var current_health: int
+var is_invincible: bool = false
 
 func ready():
 	current_health = max_health
 
 
 func take_damage(damage: int):
-	if current_health <= 0:
+	if current_health <= 0 or is_invincible:
 		return
 	current_health = clamp(current_health - damage, 0, max_health)
 	on_health_changed.emit(current_health, max_health)
