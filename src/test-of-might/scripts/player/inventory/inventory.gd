@@ -14,6 +14,11 @@ func _ready():
 
 func set_player_node(player: CharacterBody2D):
 	player_node = player
+	var slots = find_children("*", "Panel", true, false)
+	
+	for slot in slots:
+		if slot.has_method("set_player"):
+			slot.set_player(player)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("inventory"):
