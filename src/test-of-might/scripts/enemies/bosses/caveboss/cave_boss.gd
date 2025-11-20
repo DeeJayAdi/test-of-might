@@ -12,6 +12,7 @@ class_name CaveBoss extends CharacterBody2D
 @onready var projectile_spawn: Marker2D = $ProjectileSpawn
 @onready var sound_effects_component: Node = $SoundEffectsComponent
 
+@export var boss_navigation_region: NavigationRegion2D
 @export var attack_cooldown: float = 2
 @export var roam_cooldown: float = 10.5
 @export var hide_time: float = 3
@@ -66,10 +67,38 @@ func take_damage(damage: int):
 	health_component.take_damage(damage)
 
 func get_random_roam_position() -> Vector2:
-	if target:
-		var random_offset = Vector2(randf_range(-100, 100), randf_range(-100, 100))
-		return target.global_position + random_offset
-	return global_position
+	if not boss_navigation_region:
+		push_warning("BRAK NavigationRegion2D przypisanego do Bossa!")
+		return global_position
+
+	var nav_poly = boss_navigation_region.navigation_polygon
+	if not nav_poly:
+		return global_position
+
+	var rect = _get_polygon_bounding_box(nav_poly)
+	var random_x = randf_range(rect.position.x, rect.end.x)
+	var random_y = randf_range(rect.position.y, rect.end.y)
+	var random_point_local = Vector2(random_x, random_y)
+	var random_point_global = boss_navigation_region.to_global(random_point_local)
+	var map_rid = get_world_2d().navigation_map
+	var safe_point = NavigationServer2D.map_get_closest_point(map_rid, random_point_global)
+	
+	return safe_point
+
+func _get_polygon_bounding_box(poly: NavigationPolygon) -> Rect2:
+	var min_vec = Vector2(INF, INF)
+	var max_vec = Vector2(-INF, -INF)
+	# Sprawdzamy wszystkie wierzchołki zewnętrznego obrysu (outline 0)
+	for i in range(poly.get_outline_count()):
+		var outline = poly.get_outline(i)
+		for point in outline:
+			min_vec.x = min(min_vec.x, point.x)
+			min_vec.y = min(min_vec.y, point.y)
+			max_vec.x = max(max_vec.x, point.x)
+			max_vec.y = max(max_vec.y, point.y)
+			
+	return Rect2(min_vec, max_vec - min_vec)
+		
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
