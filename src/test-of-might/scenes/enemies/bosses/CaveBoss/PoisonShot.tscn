@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://btm16lerp5a1c"]
+[gd_scene load_steps=13 format=3 uid="uid://btm16lerp5a1c"]
 
 [ext_resource type="Script" uid="uid://c6u2pwpm0n4i8" path="res://scripts/enemies/bosses/caveboss/poison_shot.gd" id="1_davpr"]
 [ext_resource type="Texture2D" uid="uid://b10shfw311yy7" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - ending.png" id="1_hpx58"]
@@ -62,14 +62,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_davpr"]
+
 [node name="PoisonShot" type="CharacterBody2D"]
 texture_filter = 1
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_davpr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 0)
 shape = SubResource("CircleShape2D_jjhjg")
-script = ExtResource("1_davpr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g1jnk")
-animation = &"loop"
+animation = &"hit"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_davpr")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]

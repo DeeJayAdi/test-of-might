@@ -35,6 +35,7 @@ player=""
 music_settigns=""
 ui_controls=""
 Persist=""
+enemies=""
 
 [input]
 
