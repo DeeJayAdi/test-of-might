@@ -13,7 +13,6 @@ func _ready() -> void:
 func play_sound_effect(effect: String):
 	var effect_to_play: AudioStreamPlayer2D = effects.get("sfx" + effect.to_lower())
 	if effect_to_play:
-		print("playing sound")
-		effect_to_play.volume_db = rng.randf_range(-10.0, 0.0)
-		effect_to_play.pitch_scale = rng.randf_range(0.9, 1.1)
+		effect_to_play.volume_db = rng.randf_range(-10.0, 5.0)
+		effect_to_play.pitch_scale = rng.randf_range(0.8, 1.2)
 		effect_to_play.play()

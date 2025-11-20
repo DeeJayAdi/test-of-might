@@ -11,6 +11,7 @@ func enter():
 	boss.set_collision_mask_value(1, false)
 	
 	boss.play_anim("death")
+	boss.sound_effects_component.play_sound_effect("death")
 
 	await boss.anim_player.animation_finished
 	

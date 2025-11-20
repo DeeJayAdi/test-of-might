@@ -1327,37 +1327,31 @@ script = ExtResource("8_yerkl")
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("16_8mqon")
 
-[node name="SoundEffectsComponent" type="Node" parent="."]
+[node name="SoundEffectsComponent" type="Node2D" parent="."]
 script = ExtResource("17_ldi0l")
 
 [node name="sfxAttack1" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
 stream = ExtResource("18_tqpfj")
-max_distance = 4096.0
 bus = &"SFX"
 
 [node name="sfxAttack2" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
 stream = ExtResource("19_jckdi")
-max_distance = 4096.0
 bus = &"SFX"
 
 [node name="sfxSpit" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
 stream = ExtResource("20_qci7i")
-max_distance = 4096.0
 bus = &"SFX"
 
 [node name="sfxHurt" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
 stream = ExtResource("21_lvbpl")
-max_distance = 4096.0
 bus = &"SFX"
 
 [node name="sfxDeath" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
 stream = ExtResource("22_mc0w2")
-max_distance = 4096.0
 bus = &"SFX"
 
 [node name="sfxDig" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
 stream = ExtResource("23_mv8xy")
-max_distance = 4096.0
 bus = &"SFX"
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

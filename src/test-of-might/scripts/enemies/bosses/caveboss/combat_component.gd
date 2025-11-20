@@ -23,7 +23,7 @@ func attack_melee(_target: Node2D):
 func shoot(target: Node2D):
 	if not target or not projectile_scene:
 		return
-
+	boss.sound_effects_component.play_sound_effect("Spit")
 	var projectile = projectile_scene.instantiate()
 	
 	if boss.projectile_spawn:

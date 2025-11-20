@@ -3,6 +3,7 @@ extends BossState
 
 func enter():
 	boss.play_anim("hurt")
+	boss.sound_effects_component.play_sound_effect("Hurt")
 
 	await boss.anim_player.animation_finished
 	

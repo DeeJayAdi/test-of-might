@@ -8,6 +8,7 @@ func enter():
 func perform_roam_sequence():
 	boss.health_component.is_invincible = true
 	boss.play_anim("hide")
+	boss.sound_effects_component.play_sound_effect("Dig")
 	
 	await boss.anim_player.animation_finished
 	
@@ -21,6 +22,7 @@ func perform_roam_sequence():
 	
 	boss.visible = true
 	boss.play_anim("comeout")
+	boss.sound_effects_component.play_sound_effect("Dig")
 	
 	await boss.anim_player.animation_finished
 	
