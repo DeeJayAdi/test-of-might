@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bwhv4imv7g8vd"]
+
+[ext_resource type="Texture2D" uid="uid://dw7ao0p2ovx3c" path="res://assets/sprites/items/Potions/Vital/Big Vial - GOLD - 0000.png" id="1_0jes5"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_diu03"]
+
+[resource]
+script = ExtResource("2_diu03")
+item_name = "Big Vital Potion"
+type = "potion"
+subtype = "Healing"
+icon = ExtResource("1_0jes5")
+heal_instant = 75
+heal_per_second = 10
+heal_duration = 10.0

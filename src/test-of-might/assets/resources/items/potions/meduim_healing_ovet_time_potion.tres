@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://eaxnf6kuea80"]
+
+[ext_resource type="Texture2D" uid="uid://b8yh7xoe05cg8" path="res://assets/sprites/items/Potions/Healing_Overtime/Bubbly Brew Bottle - PINK - 0000.png" id="1_0qht0"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_0ckqg"]
+
+[resource]
+script = ExtResource("2_0ckqg")
+item_name = "Medium Healing Potion(time)"
+type = "potion"
+subtype = "healing"
+icon = ExtResource("1_0qht0")
+stack_size = 5
+heal_per_second = 5
+heal_duration = 7.5
