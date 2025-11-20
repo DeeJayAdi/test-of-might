@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cj3r2x7wss1dd"]
+
+[ext_resource type="Texture2D" uid="uid://ch1prixnwnsl7" path="res://assets/sprites/items/Potions/Healing_Instant/Big Vial - RED - 0000.png" id="1_uvoqy"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_fllfy"]
+
+[resource]
+script = ExtResource("2_fllfy")
+item_name = "Big Healing Potion"
+type = "potion"
+subtype = "healing"
+icon = ExtResource("1_uvoqy")
+stack_size = 3
+heal_instant = 100

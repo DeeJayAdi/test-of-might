@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://2dhh0a1gycp6"]
+
+[ext_resource type="Texture2D" uid="uid://c0qn7prxjqqrs" path="res://assets/sprites/items/Potions/Vital/Small Vial - GOLD - 0000.png" id="1_fsgrh"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_jak2b"]
+
+[resource]
+script = ExtResource("2_jak2b")
+item_name = "Small Vital Potion"
+type = "potion"
+subtype = "Healing"
+icon = ExtResource("1_fsgrh")
+stack_size = 3
+heal_instant = 15
+heal_per_second = 4
+heal_duration = 7.0
