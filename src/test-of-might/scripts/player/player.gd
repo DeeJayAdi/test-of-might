@@ -305,7 +305,9 @@ func _on_animation_finished():
 func take_damage(amount: int):
 	if current_state == State.DEATH:
 		return
-
+	$sfxHurt.volume_db = rng.randf_range(-10.0, 5.0)
+	$sfxHurt.pitch_scale = rng.randf_range(0.8, 1.2)
+	$sfxHurt.play()
 	current_health -= amount
 	current_health = clamp(current_health, 0, max_health)
 	
