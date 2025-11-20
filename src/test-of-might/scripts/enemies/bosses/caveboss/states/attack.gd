@@ -8,8 +8,10 @@ func enter():
 	boss.can_attack = false
 	if boss.is_player_in_melee_range:
 		boss.play_anim("attack1")
+		boss.sound_effects_component.play_sound_effect("attack1")
 	else:
 		boss.play_anim("attack2")
+		boss.sound_effects_component.play_sound_effect("attack2")
 	boss.attack_timer.start(boss.attack_cooldown)
 
 

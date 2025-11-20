@@ -19,7 +19,6 @@ func attack_melee(_target: Node2D):
 				body.take_damage(melee_damage)
 			elif body.has_node("HealthComponent"):
 				body.get_node("HealthComponent").take_damage(melee_damage)
-			print("Uderzono gracza wręcz!")
 
 func shoot(target: Node2D):
 	if not target or not projectile_scene:
