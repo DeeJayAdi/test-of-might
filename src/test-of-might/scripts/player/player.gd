@@ -8,9 +8,20 @@ var inventory_instance: Control = null
 
 signal health_changed(current_health, max_health)
 signal died
+signal xp_changed(current_xp, xp_to_next_level)
+signal level_up(new_level)
 
 enum State { IDLE, WALK, RUN, ATTACK, HURT, DEATH }
 enum AttackMode { MELEE, RANGED }
+
+# -- System Poziomów i Umiejętności --
+@export var character_class: String = "swordsman"
+@export var active_skill: Resource
+var level: int = 1
+var current_xp: int = 0
+var xp_to_next_level: int = 100
+var damage_multiplier: float = 1.0 # Mnożnik obrażeń dla umiejętności
+# ------------------------------------
 
 @export var max_health: int = 100
 @export var speed: float = 200.0
@@ -64,13 +75,25 @@ func _ready():
 	var data = SaveManager.get_data_for_node(self)
 	if data:
 		print("Wczytuję dane gracza...")
-		current_health = data["current_health"]
+		current_health = data.get("current_health", max_health)
+		level = data.get("level", 1)
+		current_xp = data.get("current_xp", 0)
+		xp_to_next_level = data.get("xp_to_next_level", 100)
+		character_class = data.get("character_class", "swordsman")
 		
 		_teleport_to_position = Vector2(data["global_pos_x"], data["global_pos_y"])
-		_is_teleport_pending = true 
+		_is_teleport_pending = true
+		
+		# Zaktualizuj UI po wczytaniu
+		call_deferred("level_up.emit", level)
+		call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
 		
 	else:
 		current_health = max_health
+		level = 1
+		current_xp = 0
+		xp_to_next_level = 100
+
 
 	health_bar.max_value = max_health
 	health_bar.value = current_health
@@ -352,7 +375,37 @@ func die():
 	print("Gracz umarł!")
 	current_state = State.DEATH
 	died.emit()
-	
+
+# --- System Poziomów ---
+func add_xp(amount: int):
+	if current_state == State.DEATH:
+		return
+	current_xp += amount
+	print("Zdobyto %s XP. Aktualne XP: %s/%s" % [amount, current_xp, xp_to_next_level])
+	xp_changed.emit(current_xp, xp_to_next_level)
+	_check_for_level_up()
+
+func _check_for_level_up():
+	while current_xp >= xp_to_next_level:
+		level += 1
+		current_xp -= xp_to_next_level
+		xp_to_next_level = _calculate_xp_for_next_level()
+		
+		# --- Zwiększ statystyki przy awansie ---
+		max_health += 10
+		current_health = max_health # Pełne uleczenie przy awansie
+		attack_damage += 2
+		# ------------------------------------
+		
+		print("AWANS! Osiągnięto poziom %s!" % level)
+		level_up.emit(level)
+		health_changed.emit(current_health, max_health)
+		xp_changed.emit(current_xp, xp_to_next_level)
+
+func _calculate_xp_for_next_level() -> int:
+	# Prosty wzór na potrzebne XP, można go skomplikować
+	return int(100 * pow(1.2, level - 1))
+# -------------------------
 
 
 # --- Prosta detekcja trafienia przeciwników podczas ataku ---
@@ -485,6 +538,10 @@ func _apply_attack_damage(args: Dictionary):
 			if rng.randf() < crit_chance:
 				damage = int(damage * crit_multiplier)
 				print("Trafienie krytyczne! Obrazenia:", damage)
+			
+			# Zastosuj mnożnik obrażeń z umiejętności
+			damage = int(damage * damage_multiplier)
+			
 			collider.take_damage(damage)
 
 func _reset_attack_cooldown():
@@ -492,6 +549,18 @@ func _reset_attack_cooldown():
 
 #INTERAKJE
 func _unhandled_input(_event):
+	# --- Logika Umiejętności ---
+	if _event.is_action_pressed("use_skill"):
+		# Sprawdź, czy gra jest zapauzowana lub czy UI jest aktywne
+		if get_tree().paused or (inventory_instance and inventory_instance.visible):
+			return
+
+		if active_skill:
+			active_skill.activate(self)
+		else:
+			print("Brak przypisanej umiejętności!")
+	# --------------------------
+
 	if Input.is_action_just_pressed("ui_cancel"):
 		# Odwróć stan pauzy
 		var is_paused = not get_tree().paused
@@ -590,5 +659,9 @@ func save():
 	return {
 		"global_pos_x": global_position.x,
 		"global_pos_y": global_position.y,
-		"current_health": current_health
+		"current_health": current_health,
+		"level": level,
+		"current_xp": current_xp,
+		"xp_to_next_level": xp_to_next_level,
+		"character_class": character_class
 	}

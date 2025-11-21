@@ -12,6 +12,7 @@ var can_attack: bool = true
 @export var crit_chance: float = 0.1  
 @export var crit_multiplier: float = 2.0
 @export var attack_damage: int = 10
+@export var xp_reward: int = 50
 var current_health: int
 var rng = RandomNumberGenerator.new()
 var current_attack_animation: String = "attack1"
@@ -191,6 +192,9 @@ func _on_animation_finished():
 			current_state = State.IDLE
 
 	elif current_state == State.DEATH:
+		# Przyznaj XP graczowi, jeśli istnieje
+		if player and player.has_method("add_xp"):
+			player.add_xp(xp_reward)
 		queue_free()
 
 
