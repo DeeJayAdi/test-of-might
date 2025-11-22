@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SwordsmanDamageBoost" load_steps=2 format=3 uid="uid://m8c2jw1gjv6h"]
+
+[ext_resource type="Script" uid="uid://cbjei1uws3i6r" path="res://scripts/skills/SwordsmanDamageBoost.gd" id="1_4molc"]
+
+[resource]
+script = ExtResource("1_4molc")
