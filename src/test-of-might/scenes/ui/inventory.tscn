@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://b1bi3gmoehto8"]
+[gd_scene load_steps=28 format=3 uid="uid://b1bi3gmoehto8"]
 
+[ext_resource type="Script" uid="uid://dx5bdc2t3vbnt" path="res://scripts/player/inventory/inventory_interface.gd" id="1_0mi16"]
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
 [ext_resource type="Script" uid="uid://wkj8t6se6tm8" path="res://scripts/player/inventory/inventory.gd" id="1_xeaml"]
 [ext_resource type="Resource" uid="uid://ck27msfqrytrw" path="res://assets/resources/items/sword.tres" id="3_5yy05"]
@@ -35,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0mi16")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
