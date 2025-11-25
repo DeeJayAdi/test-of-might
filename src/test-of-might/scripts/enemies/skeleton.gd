@@ -13,6 +13,8 @@ var can_attack: bool = true
 @export var crit_multiplier: float = 2.0
 @export var attack_damage: int = 10
 @export var xp_reward: int = 50
+@export var pickable_item_scene: PackedScene 
+@export var item_to_drop: ItemData
 var current_health: int
 var rng = RandomNumberGenerator.new()
 var current_attack_animation: String = "attack1"
@@ -132,8 +134,6 @@ func _on_AttackRange_body_entered(body):
 
 
 
-
-
 func take_damage(amount: int):
 	if current_state == State.DEATH:
 		return
@@ -195,6 +195,7 @@ func _on_animation_finished():
 		# Przyznaj XP graczowi, jeśli istnieje
 		if player and player.has_method("add_xp"):
 			player.add_xp(xp_reward)
+		spawn_drop()
 		queue_free()
 
 
@@ -211,3 +212,13 @@ func _on_frame_changed():
 			$sfxWalk.stop()
 		State.DEATH:
 			$sfxWalk.stop()
+			
+func spawn_drop():
+	if pickable_item_scene == null or item_to_drop == null:
+		return
+	var pickable = pickable_item_scene.instantiate() as PickableItem
+	pickable.setup(item_to_drop)
+	pickable.global_position = global_position
+	
+	#dodanie itemu do mapy
+	get_parent().call_deferred("add_child", pickable)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=37 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -7,8 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="4_up3r0"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="6_2jint"]
 [ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="7_hy0pv"]
+[ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="8_baql6"]
 [ext_resource type="PackedScene" uid="uid://bpfvkxa3jtv3w" path="res://scenes/enemies/bosses/CaveBoss/CaveBoss.tscn" id="8_grrjv"]
+[ext_resource type="Resource" uid="uid://dalgyo5o3vfyx" path="res://assets/resources/items/poison-touched-bow.tres" id="9_0738o"]
 [ext_resource type="PackedScene" uid="uid://73xfdxnq8gmv" path="res://scenes/NPC/old_man/Old_man.tscn" id="9_k8do1"]
+[ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="9_nssaw"]
+[ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="10_1futb"]
+[ext_resource type="PackedScene" uid="uid://cr5gqujjukpxq" path="res://scenes/objects/PickableItem.tscn" id="10_760gm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqe3u"]
 texture = ExtResource("1_v23if")
@@ -7795,19 +7800,24 @@ position = Vector2(116, 232)
 
 [node name="Skeleton" parent="YSort" instance=ExtResource("6_2jint")]
 position = Vector2(1084, 375)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("8_baql6")
 
 [node name="Skeleton2" parent="YSort" instance=ExtResource("6_2jint")]
 position = Vector2(1084, -143)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("9_nssaw")
 
 [node name="Skeleton3" parent="YSort" instance=ExtResource("6_2jint")]
 position = Vector2(753, 295)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("10_1futb")
 
 [node name="CaveBoss" parent="YSort" node_paths=PackedStringArray("boss_navigation_region") instance=ExtResource("8_grrjv")]
 position = Vector2(3784, 381)
 boss_navigation_region = NodePath("../../BossNavigationRegion2D")
-attack_cooldown = 2.0
-roam_cooldown = 10.5
-hide_time = 3.0
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("9_0738o")
 
 [node name="MapCollisions" type="StaticBody2D" parent="."]
 

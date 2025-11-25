@@ -1252,9 +1252,6 @@ texture_filter = 1
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_oreq0")
-attack_cooldown = null
-roam_cooldown = null
-hide_time = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)

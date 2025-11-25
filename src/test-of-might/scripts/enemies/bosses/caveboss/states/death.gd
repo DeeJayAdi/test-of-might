@@ -17,6 +17,7 @@ func enter():
 	
 	await get_tree().create_timer(2.0).timeout
 	
+	spawn_drop()
 	boss.queue_free()
 
 func update(_delta):
@@ -24,3 +25,14 @@ func update(_delta):
 
 func exit():
 	pass
+	
+func spawn_drop():
+	#logika dropu itemu z bossa
+	if boss.pickable_item_scene == null or boss.item_to_drop == null:
+		return
+	var pickable = boss.pickable_item_scene.instantiate() as PickableItem
+	pickable.setup(boss.item_to_drop)
+	pickable.global_position = boss.global_position
+	
+	#dodanie itemu do mapy
+	boss.get_parent().call_deferred("add_child", pickable)
