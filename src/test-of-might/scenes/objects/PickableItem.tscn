@@ -1,17 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr5gqujjukpxq"]
+[gd_scene load_steps=3 format=3 uid="uid://cr5gqujjukpxq"]
 
 [ext_resource type="Script" uid="uid://cx7yhbbw7b4xl" path="res://scripts/objects/pickable_item.gd" id="1_v3qfq"]
-[ext_resource type="Texture2D" uid="uid://cs2f28rtauwod" path="res://assets/sprites/items/bows/Bow1.png" id="2_86rkc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v3qfq"]
-radius = 17.0
+radius = 22.090721
 
-[node name="PickableItem" type="Area2D"]
+[node name="PickableItem" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_v3qfq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+y_sort_enabled = true
 shape = SubResource("CircleShape2D_v3qfq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_86rkc")
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

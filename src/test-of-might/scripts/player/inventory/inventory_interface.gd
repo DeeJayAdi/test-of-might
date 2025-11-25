@@ -5,7 +5,8 @@ func add_item(item: ItemData) -> bool:
 	for child in backpack.get_children():
 		if child.name.begins_with("ItemSlot"):
 			var slot: Panel = child
-			if slot.item_data == null:
-				slot.set_item(item)
+			if slot.item == null:
+				slot.item = item
+				slot.update_ui()
 				return true
 	return false
