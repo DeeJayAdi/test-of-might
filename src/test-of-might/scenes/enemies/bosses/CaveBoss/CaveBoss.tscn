@@ -1,12 +1,28 @@
-[gd_scene load_steps=154 format=3 uid="uid://bpfvkxa3jtv3w"]
+[gd_scene load_steps=182 format=3 uid="uid://bpfvkxa3jtv3w"]
 
 [ext_resource type="Texture2D" uid="uid://cwd7bvcuqtkgm" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - attack1.png" id="1_6fgxj"]
 [ext_resource type="Script" uid="uid://c8vm0d0t5y7sk" path="res://scripts/enemies/bosses/caveboss/cave_boss.gd" id="1_oreq0"]
 [ext_resource type="Texture2D" uid="uid://vvx840a3dje6" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - attack2.png" id="2_oreq0"]
 [ext_resource type="Texture2D" uid="uid://tpsetcih5meo" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - come out.png" id="3_yerkl"]
 [ext_resource type="Texture2D" uid="uid://b2ufilk0akebl" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - idle.png" id="4_pplqm"]
+[ext_resource type="Texture2D" uid="uid://2ouwplsaqtqh" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - death.png" id="5_tf18p"]
 [ext_resource type="Texture2D" uid="uid://dtgcpwvuagouj" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - hide.png" id="5_wqvcn"]
 [ext_resource type="Texture2D" uid="uid://ddumemdla5kv4" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - hit.png" id="6_25rym"]
+[ext_resource type="Script" uid="uid://dy3lafhumra7t" path="res://scripts/enemies/bosses/caveboss/states/idle.gd" id="8_pplqm"]
+[ext_resource type="Script" uid="uid://bulw8bxelqr2r" path="res://scripts/enemies/bosses/caveboss/state_manager.gd" id="8_wqvcn"]
+[ext_resource type="Script" uid="uid://t744q72vbyl3" path="res://scripts/enemies/bosses/caveboss/health_component.gd" id="8_yerkl"]
+[ext_resource type="Script" uid="uid://cyawxbj6ggu58" path="res://scripts/enemies/bosses/caveboss/states/attack.gd" id="10_25rym"]
+[ext_resource type="Script" uid="uid://cthylc085843h" path="res://scripts/enemies/bosses/caveboss/states/death.gd" id="10_r60hh"]
+[ext_resource type="Script" uid="uid://dvf3be2odgasr" path="res://scripts/enemies/bosses/caveboss/states/roam.gd" id="11_4uqyn"]
+[ext_resource type="Script" uid="uid://baksx3ajt0q1d" path="res://scripts/enemies/bosses/caveboss/states/hurt.gd" id="12_exyjx"]
+[ext_resource type="Script" uid="uid://usugopvjlyt6" path="res://scripts/enemies/bosses/caveboss/combat_component.gd" id="16_8mqon"]
+[ext_resource type="Script" uid="uid://x4w5fh5ifgtf" path="res://scripts/enemies/bosses/caveboss/sound_effects_component.gd" id="17_ldi0l"]
+[ext_resource type="AudioStream" uid="uid://dbec40mko7u0g" path="res://assets/audio/effects/caveboss/attack1.wav" id="18_tqpfj"]
+[ext_resource type="AudioStream" uid="uid://b0k11iqc2se0y" path="res://assets/audio/effects/caveboss/spit0.wav" id="19_jckdi"]
+[ext_resource type="AudioStream" uid="uid://d1v0o6tppx4y" path="res://assets/audio/effects/caveboss/spit1.wav" id="20_qci7i"]
+[ext_resource type="AudioStream" uid="uid://cggulknoukk3i" path="res://assets/audio/effects/caveboss/hurt.wav" id="21_lvbpl"]
+[ext_resource type="AudioStream" uid="uid://dt7yus1q8sw2i" path="res://assets/audio/effects/caveboss/death.wav" id="22_mc0w2"]
+[ext_resource type="AudioStream" uid="uid://dh5xh6ym7g1t3" path="res://assets/audio/effects/caveboss/dig.wav" id="23_mv8xy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6fgxj"]
 radius = 14.0
@@ -285,68 +301,116 @@ atlas = ExtResource("3_yerkl")
 region = Rect2(480, 480, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfa5m"]
-atlas = ExtResource("4_pplqm")
+atlas = ExtResource("5_tf18p")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7huc2"]
-atlas = ExtResource("4_pplqm")
+atlas = ExtResource("5_tf18p")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kouox"]
-atlas = ExtResource("4_pplqm")
+atlas = ExtResource("5_tf18p")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_udern"]
-atlas = ExtResource("4_pplqm")
+atlas = ExtResource("5_tf18p")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h60w2"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(0, 320, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r84st"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(160, 320, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jykeu"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(320, 320, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(960, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqtk0"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(480, 320, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(0, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpuck"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(0, 160, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(160, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_la54d"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(160, 160, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(320, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hn05v"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(320, 160, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(480, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cma4k"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(480, 160, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(640, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmt7y"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(0, 480, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(800, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7g23q"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(160, 480, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(960, 320, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4y3s"]
-atlas = ExtResource("4_pplqm")
-region = Rect2(320, 480, 160, 160)
+atlas = ExtResource("5_tf18p")
+region = Rect2(0, 160, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_34q7o"]
-atlas = ExtResource("4_pplqm")
+atlas = ExtResource("5_tf18p")
+region = Rect2(160, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xwyv"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(320, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av85e"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(480, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vwfc"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(640, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqaut"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(800, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs4um"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(960, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oab1h"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(0, 480, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7bn1"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(160, 480, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwhmx"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(320, 480, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmwtm"]
+atlas = ExtResource("5_tf18p")
 region = Rect2(480, 480, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hmkk"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(640, 480, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30qct"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(800, 480, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esj1y"]
+atlas = ExtResource("5_tf18p")
+region = Rect2(960, 480, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1w1ud"]
 atlas = ExtResource("5_wqvcn")
@@ -850,12 +914,7 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_udern")
-}],
-"loop": false,
-"name": &"death_down",
-"speed": 5.0
 }, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h60w2")
 }, {
@@ -864,15 +923,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jykeu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hqtk0")
 }],
 "loop": false,
-"name": &"death_left",
+"name": &"death_down",
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtk0")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dpuck")
 }, {
@@ -884,6 +943,38 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cma4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmt7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g23q")
+}],
+"loop": false,
+"name": &"death_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4y3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34q7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xwyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av85e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vwfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqaut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs4um")
 }],
 "loop": false,
 "name": &"death_right",
@@ -891,16 +982,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vmt7y")
+"texture": SubResource("AtlasTexture_oab1h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7g23q")
+"texture": SubResource("AtlasTexture_p7bn1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i4y3s")
+"texture": SubResource("AtlasTexture_rwhmx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_34q7o")
+"texture": SubResource("AtlasTexture_pmwtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hmkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30qct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esj1y")
 }],
 "loop": false,
 "name": &"death_up",
@@ -1147,8 +1247,9 @@ radius = 1000.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_yerkl"]
 radius = 95.0
 
-[node name="CaveBoss" type="CharacterBody2D"]
+[node name="CaveBoss" type="CharacterBody2D" groups=["enemies"]]
 texture_filter = 1
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_oreq0")
 
@@ -1158,7 +1259,7 @@ shape = SubResource("CapsuleShape2D_6fgxj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_x7x6y")
-animation = &"idle_up"
+animation = &"attack2_up"
 offset = Vector2(0, -48)
 
 [node name="HpBar" type="ProgressBar" parent="."]
@@ -1172,12 +1273,16 @@ value = 50.0
 show_percentage = false
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(0, -42)
 shape = SubResource("CircleShape2D_oreq0")
 
 [node name="MeleeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
 position = Vector2(0, -42)
@@ -1191,14 +1296,67 @@ one_shot = true
 [node name="HideTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="HideCooldownTimer" type="Timer" parent="."]
+[node name="RoamTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]
+position = Vector2(0, -82)
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_animation_finished"]
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_player_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_player_detection_area_body_exited"]
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_wqvcn")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("8_pplqm")
+
+[node name="Death" type="Node" parent="StateManager"]
+script = ExtResource("10_r60hh")
+
+[node name="Attack" type="Node" parent="StateManager"]
+script = ExtResource("10_25rym")
+
+[node name="Roam" type="Node" parent="StateManager"]
+script = ExtResource("11_4uqyn")
+
+[node name="Hurt" type="Node" parent="StateManager"]
+script = ExtResource("12_exyjx")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("8_yerkl")
+
+[node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("16_8mqon")
+
+[node name="SoundEffectsComponent" type="Node2D" parent="."]
+script = ExtResource("17_ldi0l")
+
+[node name="sfxAttack1" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
+stream = ExtResource("18_tqpfj")
+bus = &"SFX"
+
+[node name="sfxAttack2" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
+stream = ExtResource("19_jckdi")
+bus = &"SFX"
+
+[node name="sfxSpit" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
+stream = ExtResource("20_qci7i")
+bus = &"SFX"
+
+[node name="sfxHurt" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
+stream = ExtResource("21_lvbpl")
+bus = &"SFX"
+
+[node name="sfxDeath" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
+stream = ExtResource("22_mc0w2")
+bus = &"SFX"
+
+[node name="sfxDig" type="AudioStreamPlayer2D" parent="SoundEffectsComponent"]
+stream = ExtResource("23_mv8xy")
+bus = &"SFX"
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exit"]
+[connection signal="body_entered" from="MeleeArea" to="." method="_on_meele_area_body_entered"]
+[connection signal="body_exited" from="MeleeArea" to="." method="_on_meele_area_body_exit"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
-[connection signal="timeout" from="HideCooldownTimer" to="." method="_on_hide_cooldown_timer_timeout"]
+[connection signal="timeout" from="RoamTimer" to="." method="_on_roam_timer_timeout"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=249 format=3 uid="uid://b60ho6btoc5of"]
+[gd_scene load_steps=251 format=3 uid="uid://b60ho6btoc5of"]
 
 [ext_resource type="Script" uid="uid://df8qyfrdo37ja" path="res://scripts/player/player.gd" id="1_dovo2"]
+[ext_resource type="Resource" uid="uid://m8c2jw1gjv6h" path="res://scripts/skills/swordsman_boost.tres" id="2_b6nen"]
 [ext_resource type="Texture2D" uid="uid://bofuavksyecrl" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_attack_with_shadow.png" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://dg51buq6xkj3t" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Run_Attack_with_shadow.png" id="4_h17s1"]
 [ext_resource type="Texture2D" uid="uid://biccpc87607u5" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Death_with_shadow.png" id="4_p47bc"]
@@ -12,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://cfu1xsv6tnoka" path="res://assets/audio/effects/player/footstep.wav" id="10_je7p5"]
 [ext_resource type="AudioStream" uid="uid://cbj1px7pe6stn" path="res://assets/audio/effects/player/sword-slide-44167.mp3" id="11_fm80t"]
 [ext_resource type="PackedScene" uid="uid://det5vlnlsyq2e" path="res://scenes/ui/ui.tscn" id="12_fm80t"]
+[ext_resource type="AudioStream" uid="uid://lbjujyncuyyn" path="res://assets/audio/effects/player/player_hurt.wav" id="12_it67h"]
 [ext_resource type="PackedScene" uid="uid://bocavr57qlppm" path="res://scenes/menu/Pause_Menu.tscn" id="13_3a1h8"]
 [ext_resource type="Texture2D" uid="uid://co158uuocfq2x" path="res://assets/sprites/items/bows/Bow5.png" id="13_qk5yd"]
 
@@ -1807,8 +1809,10 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D" groups=["Persist", "player"]]
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_dovo2")
+active_skill = ExtResource("2_b6nen")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -12)
@@ -1833,6 +1837,10 @@ playback_type = 1
 
 [node name="sfxAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_fm80t")
+bus = &"SFX"
+
+[node name="sfxHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_it67h")
 bus = &"SFX"
 
 [node name="UI" parent="." instance=ExtResource("12_fm80t")]
