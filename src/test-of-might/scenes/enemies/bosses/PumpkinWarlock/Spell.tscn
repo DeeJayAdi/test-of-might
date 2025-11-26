@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://chantk7nwyxut"]
+
+[ext_resource type="Texture2D" uid="uid://bycdugp6qosw6" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/spell/spell - impact.png" id="1_wcrae"]
+[ext_resource type="Texture2D" uid="uid://joi75hyuay4i" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/spell/spell.png" id="2_vgptc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px0qw"]
+atlas = ExtResource("1_wcrae")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27eqo"]
+atlas = ExtResource("1_wcrae")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6keki"]
+atlas = ExtResource("1_wcrae")
+region = Rect2(72, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcsom"]
+atlas = ExtResource("2_vgptc")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g60ff"]
+atlas = ExtResource("2_vgptc")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7dre"]
+atlas = ExtResource("2_vgptc")
+region = Rect2(72, 0, 36, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kk3a0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px0qw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27eqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6keki")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcsom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g60ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7dre")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3dji6"]
+radius = 7.0
+
+[node name="Spell" type="CharacterBody2D"]
+texture_filter = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kk3a0")
+animation = &"loop"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, 0)
+shape = SubResource("CircleShape2D_3dji6")

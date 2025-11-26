@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://b1bi3gmoehto8"]
+[gd_scene load_steps=28 format=3 uid="uid://b1bi3gmoehto8"]
 
+[ext_resource type="Script" uid="uid://dx5bdc2t3vbnt" path="res://scripts/player/inventory/inventory_interface.gd" id="1_0mi16"]
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
 [ext_resource type="Script" uid="uid://wkj8t6se6tm8" path="res://scripts/player/inventory/inventory.gd" id="1_xeaml"]
 [ext_resource type="Resource" uid="uid://ck27msfqrytrw" path="res://assets/resources/items/sword.tres" id="3_5yy05"]
@@ -9,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="5_i8fht"]
 [ext_resource type="Script" uid="uid://bwqtfua0mo0gm" path="res://scripts/player/inventory/equipment_slot.gd" id="5_ulvp7"]
 [ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="6_5suo7"]
-[ext_resource type="Texture2D" uid="uid://co158uuocfq2x" path="res://assets/sprites/items/bows/Bow5.png" id="6_6qj3p"]
+[ext_resource type="Texture2D" uid="uid://cs2f28rtauwod" path="res://assets/sprites/items/bows/Bow1.png" id="7_0mi16"]
 [ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="7_q8qhs"]
 [ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="7_u3v1c"]
 [ext_resource type="Texture2D" uid="uid://b8yxgce6omspk" path="res://assets/sprites/items/armor/helm/Icon162.png" id="8_45kyb"]
@@ -29,16 +30,19 @@
 
 [node name="Inventory" type="Control"]
 visible = false
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0mi16")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -52,6 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Inventory" type="Panel" parent="CanvasLayer/ColorRect"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,6 +72,7 @@ grow_vertical = 2
 script = ExtResource("1_xeaml")
 
 [node name="Backpack" type="MarginContainer" parent="CanvasLayer/ColorRect/Inventory"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -84,12 +90,14 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 15
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory/Backpack"]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="ItemSlot" type="Panel" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer"]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("1_avmd0")
@@ -127,6 +135,7 @@ script = ExtResource("1_avmd0")
 item = ExtResource("5_bfvro")
 
 [node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/Backpack/GridContainer/ItemSlot2"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,7 +143,7 @@ anchor_bottom = 1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_6qj3p")
+texture = ExtResource("7_0mi16")
 expand_mode = 1
 stretch_mode = 5
 
