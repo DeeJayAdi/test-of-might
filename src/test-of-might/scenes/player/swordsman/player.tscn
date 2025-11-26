@@ -1,4 +1,4 @@
-[gd_scene load_steps=251 format=3 uid="uid://b60ho6btoc5of"]
+[gd_scene load_steps=256 format=3 uid="uid://b60ho6btoc5of"]
 
 [ext_resource type="Script" uid="uid://df8qyfrdo37ja" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Resource" uid="uid://m8c2jw1gjv6h" path="res://scripts/skills/swordsman_boost.tres" id="2_b6nen"]
@@ -16,6 +16,11 @@
 [ext_resource type="AudioStream" uid="uid://lbjujyncuyyn" path="res://assets/audio/effects/player/player_hurt.wav" id="12_it67h"]
 [ext_resource type="PackedScene" uid="uid://bocavr57qlppm" path="res://scenes/menu/Pause_Menu.tscn" id="13_3a1h8"]
 [ext_resource type="Texture2D" uid="uid://co158uuocfq2x" path="res://assets/sprites/items/bows/Bow5.png" id="13_qk5yd"]
+[ext_resource type="PackedScene" uid="uid://df1jngepqt0fk" path="res://scenes/NPC/Shop_Man/Shop.tscn" id="15_rfj42"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="16_jx7tb"]
+[ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="17_6hsrg"]
+[ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="18_435ou"]
+[ext_resource type="Resource" uid="uid://cdxpvw5qoy378" path="res://assets/resources/items/potions/small Healing Potion.tres" id="19_gtu6p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
 radius = 11.000001
@@ -1809,6 +1814,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D" groups=["Persist", "player"]]
+process_mode = 1
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_dovo2")
@@ -1844,6 +1850,11 @@ stream = ExtResource("12_it67h")
 bus = &"SFX"
 
 [node name="UI" parent="." instance=ExtResource("12_fm80t")]
+
+[node name="Shop" parent="UI" instance=ExtResource("15_rfj42")]
+process_mode = 3
+visible = false
+items_for_sale = Array[ExtResource("16_jx7tb")]([ExtResource("17_6hsrg"), ExtResource("18_435ou"), ExtResource("19_gtu6p")])
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_3a1h8")]
 visible = false

@@ -64,3 +64,23 @@ func close():
 	if dark_overlay:
 		dark_overlay.queue_free()
 		dark_overlay = null
+
+
+func add_item(new_item: ItemData, quantity: int = 1) -> bool:
+	var slots = find_children("*", "Panel", true, false)
+	
+	if new_item.stack_size > 1:
+		for slot in slots:
+			if slot.get("item") == new_item and slot.quantity < new_item.stack_size:
+				slot.quantity += quantity
+				slot.update_ui()
+				return true 
+	for slot in slots:
+		if slot.get("item") == null:
+			slot.item = new_item
+			slot.quantity = quantity
+			slot.update_ui()
+			return true 
+
+	print("Ekwipunek pełny!")
+	return false 
