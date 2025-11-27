@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SwordsmanDamageBoost" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/skills/SwordsmanDamageBoost.gd" id="1_damage_boost"]
+
+[resource]
+script = ExtResource("1_damage_boost")
+skill_name = "Wzmocnienie Obrażeń"
+required_level = 8
+cooldown = 30.0
+damage_multiplier = 2.0
+duration = 10.0
