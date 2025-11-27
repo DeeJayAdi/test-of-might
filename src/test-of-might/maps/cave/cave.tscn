@@ -7820,6 +7820,16 @@ boss_navigation_region = NodePath("../../BossNavigationRegion2D")
 pickable_item_scene = ExtResource("10_760gm")
 item_to_drop = ExtResource("9_0738o")
 
+[node name="Shopkeeper" parent="YSort" groups=["player"] instance=ExtResource("15_nssaw")]
+y_sort_enabled = true
+position = Vector2(2413, 701)
+scale = Vector2(0.5, 0.5)
+
+[node name="OldMan" parent="YSort" groups=["player"] instance=ExtResource("9_k8do1")]
+y_sort_enabled = true
+position = Vector2(192, 192)
+scale = Vector2(0.25, 0.25)
+
 [node name="MapCollisions" type="StaticBody2D" parent="."]
 
 [node name="WallCollisions" type="CollisionPolygon2D" parent="MapCollisions"]
@@ -7858,11 +7868,3 @@ bus = &"Music"
 
 [node name="BossNavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_k8do1")
-
-[node name="Shopkeeper" parent="." groups=["player"] instance=ExtResource("15_nssaw")]
-position = Vector2(2413, 701)
-scale = Vector2(0.5, 0.5)
-
-[node name="OldMan" parent="." groups=["player"] instance=ExtResource("9_k8do1")]
-position = Vector2(192, 192)
-scale = Vector2(0.25, 0.25)
