@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://5qpk7xhqxi6u"]
+
+[ext_resource type="Texture2D" uid="uid://fd85j8kbfoad" path="res://assets/sprites/items/armor/chest/Icon181.png" id="1_1dqr5"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="2_fhttt"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_6ct18"]
+
+[resource]
+script = ExtResource("3_6ct18")
+item_name = "Armor"
+rarity = "common"
+type = "armor"
+icon = ExtResource("1_1dqr5")
+placeholder = ExtResource("2_fhttt")
+defense = 10
+description = "It's filled with love and care of your parents, which you disrespect by going down the dungeon"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

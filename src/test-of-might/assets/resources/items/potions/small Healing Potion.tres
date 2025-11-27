@@ -10,6 +10,7 @@ rarity = "common"
 type = "potion"
 subtype = "healing"
 icon = ExtResource("1_r5tr5")
+description = "A small potion that immediately restores a certain amount of HP"
 stack_size = 5
 default_quantity = 5
 heal_instant = 25
