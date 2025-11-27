@@ -21,6 +21,10 @@
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="17_6hsrg"]
 [ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="18_435ou"]
 [ext_resource type="Resource" uid="uid://cdxpvw5qoy378" path="res://assets/resources/items/potions/small Healing Potion.tres" id="19_gtu6p"]
+[ext_resource type="Resource" path="res://assets/skills/fast_slash.tres" id="20_aaaaa"]
+[ext_resource type="Resource" path="res://assets/skills/spin_attack.tres" id="21_bbbbb"]
+[ext_resource type="Resource" path="res://assets/skills/piercing_strike.tres" id="22_ccccc"]
+[ext_resource type="Resource" path="res://assets/skills/damage_boost.tres" id="23_ddddd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
 radius = 11.000001
@@ -1818,7 +1822,10 @@ process_mode = 1
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_dovo2")
-active_skill = ExtResource("2_b6nen")
+skill_1 = ExtResource("20_aaaaa")
+skill_2 = ExtResource("21_bbbbb")
+skill_3 = ExtResource("22_ccccc")
+skill_4 = ExtResource("23_ddddd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -12)

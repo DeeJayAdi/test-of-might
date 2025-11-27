@@ -16,7 +16,12 @@ enum AttackMode { MELEE, RANGED }
 
 # -- System Poziomów i Umiejętności --
 @export var character_class: String = "swordsman"
-@export var active_skill: Resource
+@export var skill_1: Resource
+@export var skill_2: Resource
+@export var skill_3: Resource
+@export var skill_4: Resource
+
+var skills: Dictionary = {}
 var level: int = 1
 var current_xp: int = 0
 var xp_to_next_level: int = 100
@@ -59,6 +64,13 @@ var settings_open: bool = false
 var walls_map: Node = null
 
 func _ready():
+	skills = {
+		"skill_1": skill_1,
+		"skill_2": skill_2,
+		"skill_3": skill_3,
+		"skill_4": skill_4
+	}
+
 	if inventory_instance == null:
 		inventory_instance = inventory_scene.instantiate()	
 		var inventory_script_node = inventory_instance.get_node_or_null("CanvasLayer/ColorRect/Inventory") 
@@ -551,15 +563,21 @@ func _reset_attack_cooldown():
 #INTERAKJE
 func _unhandled_input(_event):
 	# --- Logika Umiejętności ---
-	if _event.is_action_pressed("use_skill"):
-		# Sprawdź, czy gra jest zapauzowana lub czy UI jest aktywne
-		if get_tree().paused or (inventory_instance and inventory_instance.visible):
-			return
+	if get_tree().paused or (inventory_instance and inventory_instance.visible):
+		return
 
-		if active_skill:
-			active_skill.activate(self)
-		else:
-			print("Brak przypisanej umiejętności!")
+	if _event.is_action_pressed("skill_1") and skills.skill_1:
+		print("Umiejętność 1 użyta")
+		skills.skill_1.activate(self)
+	if _event.is_action_pressed("skill_2") and skills.skill_2:
+		print("Umiejętność 2 użyta")
+		skills.skill_2.activate(self)
+	if _event.is_action_pressed("skill_3") and skills.skill_3:
+		print("Umiejętność 3 użyta")
+		skills.skill_3.activate(self)
+	if _event.is_action_pressed("skill_4") and skills.skill_4:
+		print("Umiejętność 4 użyta")
+		skills.skill_4.activate(self)
 	# --------------------------
 
 	if Input.is_action_just_pressed("ui_cancel"):

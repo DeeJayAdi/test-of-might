@@ -29,9 +29,9 @@ func _ready() -> void:
 	_evaluate_scene(get_tree().current_scene)
 
 
-func _on_scene_changed(new_scene: Node) -> void:
+func _on_scene_changed() -> void:
 	# Called when root changes; evaluate
-	_evaluate_scene(new_scene)
+	_evaluate_scene(get_tree().current_scene)
 
 
 func _evaluate_scene(scene: Node) -> void:
