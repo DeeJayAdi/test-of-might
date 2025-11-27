@@ -15,4 +15,5 @@ placeholder = ExtResource("2_bmujp")
 damage = 80
 attack_range = 10.0
 attack_speed = 1.0
+description = "Made of the carpace of the cave worm - the apex predator of the underground - it can easliy dispatch weaker foes"
 metadata/_custom_type_script = "uid://elca6sp6br8g"
