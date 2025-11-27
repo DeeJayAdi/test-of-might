@@ -89,6 +89,7 @@ func use_item():
 		if quantity <= 0:
 			item = null		
 		update_ui()
+		
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		use_item()
