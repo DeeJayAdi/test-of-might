@@ -2,6 +2,7 @@ extends Resource
 class_name ItemData
 
 @export var item_name: String = ""
+@export var price: int = 10
 @export var rarity: String = ""
 @export var type: String = ""
 @export var subtype: String = ""
