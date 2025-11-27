@@ -35,7 +35,8 @@ var damage_multiplier: float = 1.0 # Mnożnik obrażeń dla umiejętności
 @export var heavy_attack_radius: float = 45.0
 @export var heavy_attack_cooldown: float = 1.2
 @export var settings_scene_path: String = "res://scenes/menu/settings.tscn"
-#@export var combat_style_mouse_based: bool = true
+@export var gold: int = 100 
+signal gold_changed(current_gold)
 
 
 var attack_locked_direction: String = ""
@@ -665,3 +666,8 @@ func save():
 		"xp_to_next_level": xp_to_next_level,
 		"character_class": character_class
 	}
+#sklep
+func update_gold(amount: int):
+	gold += amount
+	gold_changed.emit(gold)
+	print("Złoto: ", gold)
