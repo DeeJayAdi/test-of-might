@@ -11,13 +11,15 @@ func activate(player):
 
 	print("Aktywowano '%s'!" % skill_name)
 
+	# TODO: Add animation player.animated_sprite.play("SpinAttack_anim")
+
 	var shape = CircleShape2D.new()
 	shape.radius = attack_radius
 
 	var params = PhysicsShapeQueryParameters2D.new()
 	params.shape_rid = shape.get_rid()
 	params.transform = Transform2D(0, player.global_position)
-	params.collision_mask = player.get_collision_layer() # Check against the same layer as the player
+	params.collision_mask = 4 # Warstwa 3 dla wrogów
 
 	var space = player.get_world_2d().direct_space_state
 	var results = space.intersect_shape(params, 32)

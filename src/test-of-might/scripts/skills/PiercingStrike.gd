@@ -12,6 +12,8 @@ func activate(player):
 
 	print("Aktywowano '%s'!" % skill_name)
 
+	# TODO: Add animation player.animated_sprite.play("PiercingStrike_anim")
+
 	var dir = player.get_global_mouse_position() - player.global_position
 	if dir.length() == 0:
 		dir = Vector2.DOWN # Domyślny kierunek, jeśli myszka jest na graczu
@@ -24,7 +26,7 @@ func activate(player):
 	var params = PhysicsShapeQueryParameters2D.new()
 	params.shape_rid = shape.get_rid()
 	params.transform = transform
-	params.collision_mask = player.get_collision_layer()
+	params.collision_mask = 4 # Warstwa 3 dla wrogów
 
 	var space = player.get_world_2d().direct_space_state
 	var results = space.intersect_shape(params, 32)
