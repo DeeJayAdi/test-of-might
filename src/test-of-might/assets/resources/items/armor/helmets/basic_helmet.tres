@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c0tv0so3t7tgu"]
+
+[ext_resource type="Texture2D" uid="uid://b8yxgce6omspk" path="res://assets/sprites/items/armor/helm/Icon162.png" id="1_lbl8o"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="2_pp16o"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_y6glg"]
+
+[resource]
+script = ExtResource("3_y6glg")
+item_name = "Helmet"
+rarity = "common"
+type = "helmet"
+icon = ExtResource("1_lbl8o")
+placeholder = ExtResource("2_pp16o")
+defense = 5
+description = "A simple leather cap worn by pesants like you"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

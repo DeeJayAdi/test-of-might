@@ -11,6 +11,7 @@ var dark_overlay: ColorRect = null
 func _ready():
 	if not is_open:
 		inventory_canvas.visible = false
+	ProjectSettings.set_setting("gui/timers/tooltip_delay_sec", 0)
 
 func set_player_node(player: CharacterBody2D):
 	player_node = player
@@ -84,3 +85,6 @@ func add_item(new_item: ItemData, quantity: int = 1) -> bool:
 
 	print("Ekwipunek pełny!")
 	return false 
+
+func _exit_tree():
+	ProjectSettings.set_setting("gui/timers/tooltip_delay_sec", 0.5)

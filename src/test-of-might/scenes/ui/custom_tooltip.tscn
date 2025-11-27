@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bndvdgbd23kk"]
+
+[ext_resource type="Script" uid="uid://c3jm1ef14l61k" path="res://scripts/objects/tooltips.gd" id="1_o71qm"]
+
+[node name="CustomTooltip" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o71qm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SeparatingLine" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="SeparatingLine2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+autowrap_mode = 3
