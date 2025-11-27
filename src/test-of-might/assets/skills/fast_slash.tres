@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FastSlash" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/skills/FastSlash.gd" id="1_fast_slash"]
+
+[resource]
+script = ExtResource("1_fast_slash")
+skill_name = "Szybkie Cięcie"
+required_level = 1
+cooldown = 5.0
+damage_multiplier = 0.7
+attack_radius = 35.0
