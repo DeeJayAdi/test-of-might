@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=38 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="9_nssaw"]
 [ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="10_1futb"]
 [ext_resource type="PackedScene" uid="uid://cr5gqujjukpxq" path="res://scenes/objects/PickableItem.tscn" id="10_760gm"]
+[ext_resource type="PackedScene" uid="uid://rubaexyfn1of" path="res://scenes/NPC/Shop_Man/ShopKeeper.tscn" id="15_nssaw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqe3u"]
 texture = ExtResource("1_v23if")
@@ -7819,6 +7820,16 @@ boss_navigation_region = NodePath("../../BossNavigationRegion2D")
 pickable_item_scene = ExtResource("10_760gm")
 item_to_drop = ExtResource("9_0738o")
 
+[node name="Shopkeeper" parent="YSort" groups=["player"] instance=ExtResource("15_nssaw")]
+y_sort_enabled = true
+position = Vector2(2413, 701)
+scale = Vector2(0.5, 0.5)
+
+[node name="OldMan" parent="YSort" groups=["player"] instance=ExtResource("9_k8do1")]
+y_sort_enabled = true
+position = Vector2(192, 192)
+scale = Vector2(0.25, 0.25)
+
 [node name="MapCollisions" type="StaticBody2D" parent="."]
 
 [node name="WallCollisions" type="CollisionPolygon2D" parent="MapCollisions"]
@@ -7854,10 +7865,6 @@ navigation_polygon = SubResource("NavigationPolygon_up3r0")
 stream = ExtResource("7_hy0pv")
 autoplay = true
 bus = &"Music"
-
-[node name="OldMan" parent="." instance=ExtResource("9_k8do1")]
-position = Vector2(192, 192)
-scale = Vector2(0.25, 0.25)
 
 [node name="BossNavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_k8do1")
