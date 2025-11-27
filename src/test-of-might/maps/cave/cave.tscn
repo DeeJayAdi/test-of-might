@@ -9,10 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="7_hy0pv"]
 [ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="8_baql6"]
 [ext_resource type="PackedScene" uid="uid://bpfvkxa3jtv3w" path="res://scenes/enemies/bosses/CaveBoss/CaveBoss.tscn" id="8_grrjv"]
-[ext_resource type="Resource" uid="uid://dalgyo5o3vfyx" path="res://assets/resources/items/poison-touched-bow.tres" id="9_0738o"]
+[ext_resource type="Resource" uid="uid://dalgyo5o3vfyx" path="res://assets/resources/items/ranged/poison-touched-bow.tres" id="9_0738o"]
 [ext_resource type="PackedScene" uid="uid://73xfdxnq8gmv" path="res://scenes/NPC/old_man/Old_man.tscn" id="9_k8do1"]
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="9_nssaw"]
-[ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="10_1futb"]
+[ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/armor/helmets/basic_helmet.tres" id="10_1futb"]
 [ext_resource type="PackedScene" uid="uid://cr5gqujjukpxq" path="res://scenes/objects/PickableItem.tscn" id="10_760gm"]
 [ext_resource type="PackedScene" uid="uid://rubaexyfn1of" path="res://scenes/NPC/Shop_Man/ShopKeeper.tscn" id="15_nssaw"]
 

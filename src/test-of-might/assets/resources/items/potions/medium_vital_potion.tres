@@ -9,6 +9,7 @@ item_name = "Medium Vital Potion"
 type = "potion"
 subtype = "Healing"
 icon = ExtResource("1_4rnh2")
+description = "A potion that provides some HP restoration over time and immediately restores a certain amount of HP"
 stack_size = 3
 heal_instant = 30
 heal_per_second = 5
