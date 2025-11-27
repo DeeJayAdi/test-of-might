@@ -64,6 +64,7 @@ var settings_open: bool = false
 var walls_map: Node = null
 
 func _ready():
+	level_up.connect(_on_level_up)
 	skills = {
 		"skill_1": skill_1,
 		"skill_2": skill_2,
@@ -98,8 +99,8 @@ func _ready():
 		_is_teleport_pending = true
 		
 		# Zaktualizuj UI po wczytaniu
-		call_deferred("level_up.emit", level)
-		call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
+		level_up.emit.call_deferred(level)
+		xp_changed.emit.call_deferred(current_xp, xp_to_next_level)
 		
 	else:
 		current_health = max_health
@@ -120,6 +121,9 @@ func _ready():
 		walls_map = get_tree().get_root().get_node("Walls_Floors")
 		
 	health_changed.connect(_on_health_changed)
+		
+func _on_level_up(new_level):
+	$UI.get_node("LvL/LVL+Pasek/TEXT_LVL").text = str(new_level)
 		
 func _on_health_changed(new_health, max_health_value):
 	health_bar.value = new_health
@@ -209,34 +213,26 @@ func get_input_and_update_state():
 	else:
 		is_moving = false
 
-	if Input.is_action_just_pressed("attack") and can_attack:
-		if attack_mode == AttackMode.RANGED:
-			perform_ranged_attack()
-			return
-		current_state = State.ATTACK
-		perform_attack()
-		
-	if Input.is_action_just_pressed("heavy_attack") and can_attack:
-		current_state = State.ATTACK
-		perform_attack(true)
+	if current_state not in [State.HURT, State.DEATH]:
+		if Input.is_action_just_pressed("attack") and can_attack:
+			if attack_mode == AttackMode.RANGED:
+				perform_ranged_attack()
+				return
+			current_state = State.ATTACK
+			perform_attack()
+		elif Input.is_action_just_pressed("heavy_attack") and can_attack:
+			current_state = State.ATTACK
+			perform_attack(true)
 	
 	if Input.is_action_just_pressed("swap_weapon"):
 		switch_attack_mode()
+
 	if PreviousScene.combat_style_mouse_based and current_state != State.ATTACK:
 		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		if abs(mouse_dir.x) > abs(mouse_dir.y):
 			facing_direction = "Right" if mouse_dir.x > 0 else "Left"
 		else:
 			facing_direction = "Down" if mouse_dir.y > 0 else "Up"
-
-	if current_state not in [State.HURT, State.DEATH]:
-		if Input.is_action_just_pressed("attack") and can_attack:
-			current_state = State.ATTACK
-			perform_attack()
-			
-		if Input.is_action_just_pressed("heavy_attack") and can_attack:
-			current_state = State.ATTACK
-			perform_attack(true)
 
 	if current_state != State.ATTACK:
 		if is_moving:
