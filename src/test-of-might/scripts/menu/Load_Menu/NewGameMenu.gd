@@ -24,8 +24,14 @@ func _on_slot_selected(slot_id: int):
 	SaveManager.current_slot = slot_id
 	
 	SaveManager.loaded_data = {} 
+
+	SaveManager.reset_cutscenes() 
+
+	var save_path = "user://save_slot_%d.json" % slot_id
+	if FileAccess.file_exists(save_path):
+		DirAccess.remove_absolute(save_path)
 	
-	get_tree().change_scene_to_file(map_menu_scene) 
+	get_tree().change_scene_to_file(map_menu_scene)
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file(main_menu_scene)
