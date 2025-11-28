@@ -31,6 +31,8 @@ func start_cooldown():
 	var timer = Engine.get_main_loop().create_timer(cooldown)
 	timer.timeout.connect(_on_cooldown_finished)
 	print("Umiejętność '%s' wchodzi na %.1fs cooldownu." % [skill_name, cooldown])
+	NotificationManager.start_cooldown_notification(skill_name, cooldown)
+
 
 func _on_cooldown_finished():
 	is_on_cooldown = false
