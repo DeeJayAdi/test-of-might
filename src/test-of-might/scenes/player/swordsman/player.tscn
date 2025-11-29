@@ -1,7 +1,6 @@
-[gd_scene load_steps=256 format=3 uid="uid://b60ho6btoc5of"]
+[gd_scene load_steps=261 format=3 uid="uid://b60ho6btoc5of"]
 
-[ext_resource type="Script" uid="uid://df8qyfrdo37ja" path="res://scripts/player/player.gd" id="1_dovo2"]
-[ext_resource type="Resource" uid="uid://m8c2jw1gjv6h" path="res://scripts/skills/swordsman_boost.tres" id="2_b6nen"]
+[ext_resource type="Script" uid="uid://bou2qobuiaw3g" path="res://scripts/player/player_refactored.gd" id="1_4kngq"]
 [ext_resource type="Texture2D" uid="uid://bofuavksyecrl" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_attack_with_shadow.png" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://dg51buq6xkj3t" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Run_Attack_with_shadow.png" id="4_h17s1"]
 [ext_resource type="Texture2D" uid="uid://biccpc87607u5" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Death_with_shadow.png" id="4_p47bc"]
@@ -11,20 +10,21 @@
 [ext_resource type="Texture2D" uid="uid://c8jjirx6vmkvu" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Walk_with_shadow.png" id="8_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://ko60i8i5g4l3" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Run_with_shadow.png" id="9_je7p5"]
 [ext_resource type="AudioStream" uid="uid://cfu1xsv6tnoka" path="res://assets/audio/effects/player/footstep.wav" id="10_je7p5"]
+[ext_resource type="Script" uid="uid://c32abefrbcdfb" path="res://scripts/player/stats_component.gd" id="10_jx7tb"]
+[ext_resource type="Script" uid="uid://bc3r7ydsivs3f" path="res://scripts/player/combat_component.gd" id="11_6hsrg"]
 [ext_resource type="AudioStream" uid="uid://cbj1px7pe6stn" path="res://assets/audio/effects/player/sword-slide-44167.mp3" id="11_fm80t"]
+[ext_resource type="Script" uid="uid://cehdwsgdi7agg" path="res://scripts/player/equipment_component.gd" id="12_435ou"]
 [ext_resource type="PackedScene" uid="uid://det5vlnlsyq2e" path="res://scenes/ui/ui.tscn" id="12_fm80t"]
 [ext_resource type="AudioStream" uid="uid://lbjujyncuyyn" path="res://assets/audio/effects/player/player_hurt.wav" id="12_it67h"]
 [ext_resource type="PackedScene" uid="uid://bocavr57qlppm" path="res://scenes/menu/Pause_Menu.tscn" id="13_3a1h8"]
-[ext_resource type="Texture2D" uid="uid://co158uuocfq2x" path="res://assets/sprites/items/bows/Bow5.png" id="13_qk5yd"]
+[ext_resource type="Script" uid="uid://dq4l7jri1caos" path="res://scripts/player/interaction_component.gd" id="13_gtu6p"]
 [ext_resource type="PackedScene" uid="uid://df1jngepqt0fk" path="res://scenes/NPC/Shop_Man/Shop.tscn" id="15_rfj42"]
 [ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="16_jx7tb"]
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="17_6hsrg"]
+[ext_resource type="Script" uid="uid://b3oqsidjfkotx" path="res://scripts/player/ui_manager.gd" id="17_ip3ds"]
 [ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="18_435ou"]
 [ext_resource type="Resource" uid="uid://cdxpvw5qoy378" path="res://assets/resources/items/potions/small Healing Potion.tres" id="19_gtu6p"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
-radius = 11.000001
-height = 22.000002
+[ext_resource type="PackedScene" uid="uid://b1bi3gmoehto8" path="res://scenes/ui/inventory.tscn" id="19_jx7tb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
 atlas = ExtResource("3_lvxji")
@@ -1813,12 +1813,27 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
+radius = 11.000001
+height = 22.000002
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4kngq"]
+radius = 39.0
+
 [node name="player" type="CharacterBody2D" groups=["Persist", "player"]]
 process_mode = 1
 collision_layer = 2
 motion_mode = 1
-script = ExtResource("1_dovo2")
-active_skill = ExtResource("2_b6nen")
+script = ExtResource("1_4kngq")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+texture_filter = 1
+scale = Vector2(1.8749999, 1.875)
+sprite_frames = SubResource("SpriteFrames_fm80t")
+animation = &"Attack_Down"
+offset = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -12)
@@ -1829,44 +1844,75 @@ shape = SubResource("CapsuleShape2D_5gtgg")
 offset = Vector2(0, -12)
 zoom = Vector2(1.5, 1.5)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-scale = Vector2(1.8749999, 1.875)
-sprite_frames = SubResource("SpriteFrames_fm80t")
-animation = &"Attack_Down"
-offset = Vector2(0, -12)
+[node name="StateManager" type="Node" parent="."]
 
-[node name="sfxWalk" type="AudioStreamPlayer2D" parent="."]
+[node name="Idle" type="Node" parent="StateManager"]
+
+[node name="Walk" type="Node" parent="StateManager"]
+
+[node name="Run" type="Node" parent="StateManager"]
+
+[node name="Attack" type="Node" parent="StateManager"]
+
+[node name="Death" type="Node" parent="StateManager"]
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("10_jx7tb")
+
+[node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("11_6hsrg")
+
+[node name="Marker2D" type="Marker2D" parent="CombatComponent"]
+
+[node name="EquipmentComponent" type="Node" parent="."]
+script = ExtResource("12_435ou")
+
+[node name="InteractionComponent" type="Area2D" parent="."]
+script = ExtResource("13_gtu6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+position = Vector2(0, -19)
+shape = SubResource("CircleShape2D_4kngq")
+
+[node name="SfxComponent" type="Node2D" parent="."]
+
+[node name="sfxWalk" type="AudioStreamPlayer2D" parent="SfxComponent"]
 stream = ExtResource("10_je7p5")
 bus = &"SFX"
 playback_type = 1
 
-[node name="sfxAttack" type="AudioStreamPlayer2D" parent="."]
+[node name="sfxAttack" type="AudioStreamPlayer2D" parent="SfxComponent"]
 stream = ExtResource("11_fm80t")
 bus = &"SFX"
 
-[node name="sfxHurt" type="AudioStreamPlayer2D" parent="."]
+[node name="sfxHurt" type="AudioStreamPlayer2D" parent="SfxComponent"]
 stream = ExtResource("12_it67h")
 bus = &"SFX"
 
-[node name="UI" parent="." instance=ExtResource("12_fm80t")]
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("17_ip3ds")
 
-[node name="Shop" parent="UI" instance=ExtResource("15_rfj42")]
+[node name="HUD" parent="UI" instance=ExtResource("12_fm80t")]
+
+[node name="Windows" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Shop" parent="UI/Windows" instance=ExtResource("15_rfj42")]
 process_mode = 3
 visible = false
+layout_mode = 1
 items_for_sale = Array[ExtResource("16_jx7tb")]([ExtResource("17_6hsrg"), ExtResource("18_435ou"), ExtResource("19_gtu6p")])
 
-[node name="PauseMenu" parent="." instance=ExtResource("13_3a1h8")]
+[node name="Inventory" parent="UI/Windows" instance=ExtResource("19_jx7tb")]
+layout_mode = 1
+
+[node name="PauseMenu" parent="UI/Windows" instance=ExtResource("13_3a1h8")]
 visible = false
+z_index = 999
+layout_mode = 1
 
-[node name="RangedWeapon" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-position = Vector2(17, -12)
-texture = ExtResource("13_qk5yd")
-
-[node name="Marker2D" type="Marker2D" parent="RangedWeapon"]
-position = Vector2(4.242641, 4.242641)
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
+[connection signal="animation_finished" from="Visuals/AnimatedSprite2D" to="." method="_on_animation_finished"]
+[connection signal="frame_changed" from="Visuals/AnimatedSprite2D" to="." method="_on_frame_changed"]
