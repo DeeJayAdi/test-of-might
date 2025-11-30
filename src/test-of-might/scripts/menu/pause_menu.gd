@@ -80,3 +80,9 @@ func _on_save_then_quit(success: bool) -> void:
 		get_tree().change_scene_to_file(main_menu_path)
 	else:
 		print("Zapis nie powiódł się — nie wychodzę z gry.")
+
+
+func toggle():
+	var is_paused = not get_tree().paused
+	get_tree().paused = is_paused
+	visible = is_paused # Pokaż/ukryj menu
