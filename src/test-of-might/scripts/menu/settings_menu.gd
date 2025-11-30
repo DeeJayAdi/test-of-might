@@ -1,5 +1,8 @@
 extends Control
 
+var is_opened_from_pause_menu: bool = false
+@export var main_menu_path: String = "res://scenes/menu/Main_Menu.tscn"
+
 func change_scene_to_node(node):
 	var tree = get_tree()
 	var cur_scene = tree.get_current_scene()
@@ -31,5 +34,9 @@ func _on_advanced_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_close_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/Main_Menu.tscn")
+func _on_close_settings_pressed():
+
+	if is_opened_from_pause_menu:
+		queue_free() 
+	else:
+		get_tree().change_scene_to_file(main_menu_path)

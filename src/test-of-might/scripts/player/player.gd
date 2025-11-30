@@ -564,9 +564,19 @@ func _unhandled_input(_event):
 
 	if Input.is_action_just_pressed("ui_cancel"):
 		# Odwróć stan pauzy
+		if inventory_instance and inventory_instance.visible:
+			inventory_instance.visible = false
+			return
+		
 		var is_paused = not get_tree().paused
 		get_tree().paused = is_paused
 		pause_menu.visible = is_paused # Pokaż/ukryj menu
+		
+		if pause_menu.has_node("CanvasLayer"):
+			pause_menu.get_node("CanvasLayer").visible = is_paused
+		
+		if ui_layer:
+			ui_layer.visible = not is_paused
 		
 		# Zakończ funkcję, aby nie sprawdzać 'Interaction' w tej samej klatce
 		return
@@ -576,6 +586,7 @@ func _unhandled_input(_event):
 		var closest = get_closest_interactable()
 		if closest:
 			closest.interact()
+			
 func get_closest_interactable():
 	var closest_obj = null
 	var min_dist_sq = INF 

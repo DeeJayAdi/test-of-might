@@ -4,19 +4,27 @@ extends Control
 @export var main_menu_path: String = "res://scenes/menu/Main_Menu.tscn"
 var settings_instance = null
 
+
 func _ready():
-	$VBoxContainer/ResumeButton.pressed.connect(_on_resume_button_pressed)
-	$VBoxContainer/SaveButton.pressed.connect(_on_save_button_pressed)
-	$VBoxContainer/LoadButton.pressed.connect(_on_load_button_pressed)
-	$VBoxContainer/OptionsButton.pressed.connect(_on_options_button_pressed)
-	$VBoxContainer/QuitButton.pressed.connect(_on_quit_button_pressed)
+	$CanvasLayer/VBoxContainer/ResumeButton.pressed.connect(_on_resume_button_pressed)
+	$CanvasLayer/VBoxContainer/SaveButton.pressed.connect(_on_save_button_pressed)
+	$CanvasLayer/VBoxContainer/LoadButton.pressed.connect(_on_load_button_pressed)
+	$CanvasLayer/VBoxContainer/OptionsButton.pressed.connect(_on_options_button_pressed)
+	$CanvasLayer/VBoxContainer/QuitButton.pressed.connect(_on_quit_button_pressed)
 
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	
+	$CanvasLayer.visible = false
 
 
 func _on_resume_button_pressed():
 	get_tree().paused = false
 	self.visible = false
+	$CanvasLayer.visible = false
+	
+	var player_ui = get_node_or_null("../UI")
+	if player_ui:
+		player_ui.visible = true
 
 
 func _on_save_button_pressed():
@@ -35,9 +43,13 @@ func _on_options_button_pressed():
 		if scene:
 			settings_instance = scene.instantiate()
 			settings_instance.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+			
+			if "is_opened_from_pause_menu" in settings_instance:
+				settings_instance.is_opened_from_pause_menu = true
+			
 			add_child(settings_instance)
 			
-			var close_button = settings_instance.get_node_or_null("Panel/Close_Button") 
+			var close_button = settings_instance.get_node_or_null("CanvasLayer/Panel/Close_Settings") 
 			if close_button:
 				close_button.pressed.connect(_on_settings_closed)
 			else:
@@ -47,7 +59,8 @@ func _on_options_button_pressed():
 
 	if settings_instance:
 		settings_instance.visible = true
-		self.visible = false 
+		self.visible = false
+		$CanvasLayer.visible = false
 
 
 func _on_settings_closed():
@@ -55,6 +68,7 @@ func _on_settings_closed():
 		settings_instance.queue_free()
 		settings_instance = null
 	self.visible = true 
+	$CanvasLayer.visible = true
 
 func _on_quit_button_pressed():
 	get_tree().paused = false
@@ -65,14 +79,14 @@ func _on_quit_button_pressed():
 
 	SaveManager.save_game()
 
-	$VBoxContainer/QuitButton.disabled = true
+	$CanvasLayer/VBoxContainer/QuitButton.disabled = true
 	
 func _on_save_then_quit(success: bool) -> void:
 	var callable = Callable(self, "_on_save_then_quit")
 	if SaveManager.is_connected("save_completed", callable):
 		SaveManager.disconnect("save_completed", callable)
 
-	$VBoxContainer/QuitButton.disabled = false
+	$CanvasLayer/VBoxContainer/QuitButton.disabled = false
 
 	if success:
 		if is_instance_valid(PersistentMusic) and PersistentMusic.has_method("stop"):
@@ -80,3 +94,4 @@ func _on_save_then_quit(success: bool) -> void:
 		get_tree().change_scene_to_file(main_menu_path)
 	else:
 		print("Zapis nie powiódł się — nie wychodzę z gry.")
+		

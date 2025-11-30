@@ -21,6 +21,12 @@ func set_player_node(player: CharacterBody2D):
 			slot.set_player(player)
 
 func _input(event): #changed from _unhandled_input if any input errors arise it might be this
+	if event.is_action_pressed("ui_cancel"):
+		if is_open:
+			close()
+			get_viewport().set_input_as_handled()
+			return
+			
 	if event.is_action_pressed("inventory"):
 		if player_node and is_instance_valid(player_node) and player_node.current_state != player_node.State.DEATH:
 			toggle()
@@ -51,6 +57,7 @@ func open():
 		dark_overlay.move_to_front()
 	
 	scene_root.move_to_front() 
+	
 func close():
 	if not is_open:
 		return
