@@ -1,97 +1,149 @@
-extends Node
-class_name StatsComponent
+#klasa obsługująca życie xp i złoto
+class_name StatsComponent extends Node
 
-signal health_changed(current, max)
+signal health_changed(current_health, max_health)
 signal died
-signal xp_changed(current, next_lvl)
-signal level_up(new_lvl)
+signal xp_changed(current_xp, xp_to_next_level)
+signal level_up(new_level)
 signal gold_changed(current_gold)
 
-@export_group("Konfiguracja")
-@export var character_class: String = "swordsman"
-@export var max_health: int = 100
-@export var gold: int = 100 
+var current_health: int = max_health
+@onready var player: CharacterBody2D = get_parent()
+@onready var state_manager: StateManager = player.get_node("StateManager") as StateManager
+@onready var sfx_comp: SFXComponent = player.get_node("SfxComponent") as SFXComponent
 
-# System XP
+
+@export var max_health: int = 100
+@export var gold: int = 100
+@export var attack_radius: float = 30.0
+@export var attack_damage: int = 25
+@export var attack_cooldown: float = 0.9
+@export var crit_chance: float = 0.15  # 15% szansy
+@export var crit_multiplier: float = 2.0
+@export var heavy_attack_damage: int = 75
+@export var heavy_attack_radius: float = 45.0
+@export var heavy_attack_cooldown: float = 1.2
+@export var speed: float = 200.0
+@export var run_multiplier: float = 1.5
+@export var character_class: String = "swordsman"
+@export var active_skill: Resource
+
+
 var level: int = 1
 var current_xp: int = 0
 var xp_to_next_level: int = 100
+var damage_multiplier: float = 1.0
 
-# Zmienne wewnętrzne
-var current_health: int
 
-func _ready():
+func _ready() -> void:
+	await owner.ready
 	current_health = max_health
-	# Inicjalizacja przy starcie
-	call_deferred("emit_all_signals")
+	var data = SaveManager.get_data_for_node(self)
+	if data:
+		level = data.get("level", 1)
+		current_xp = data.get("current_xp", 0)
+		xp_to_next_level = data.get("xp_to_next_level", 100)
+		current_health = data.get("current_health", max_health)
+		call_deferred("level_up.emit", level)
+		call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
+	else:
+		current_health = max_health
+		level = 1
+		current_xp = 0
+		xp_to_next_level = 100
+	player.health_bar.max_value = max_health
+	player.health_bar.value = current_health
+	emit_signal("health_changed", current_health, max_health)
+	health_changed.connect(_on_health_changed)
 
-func emit_all_signals():
-	health_changed.emit(current_health, max_health)
-	xp_changed.emit(current_xp, xp_to_next_level)
+
+
+func update_gold(amount: int):
+	gold += amount
 	gold_changed.emit(gold)
-	level_up.emit(level)
+	print("Złoto: ", gold)
+	
+func save():
+	return{
+		
+	}
+
+
+
+func _on_health_changed(new_health, max_health_value):
+	player.health_bar.value = new_health
+	player.health_bar.max_value = max_health_value
 
 func take_damage(amount: int):
+	if state_manager.get_current_state_name() == "death":
+		return
+	sfx_comp.play_hurt()
+	current_health -= amount
+		
 	var def = UpdateStats.get_total_defense()
+
 	var final_damage = max(0, amount - def)
-	#var final_damage = amount
-	
+
 	current_health -= final_damage
 	current_health = clamp(current_health, 0, max_health)
 	
-	print("Otrzymano obrażenia, HP: ", current_health)
+	print("Otrzymano obrażenia, aktualne ZD: ", current_health)
 	health_changed.emit(current_health, max_health)
-	
+
 	if current_health <= 0:
-		died.emit()
+		die()
+	else:
+		state_manager.change_state("hurt")
+
+func die():
+	print("Gracz umarł.")
+	state_manager.change_state("death")
+	emit_signal("died")
 
 func heal(amount: int):
-	if current_health == max_health: return
+	if state_manager.get_current_state_name() == "death" or current_health == max_health:
+		return
+		
 	current_health += amount
 	current_health = clamp(current_health, 0, max_health)
 	health_changed.emit(current_health, max_health)
 
+func heal_over_time(amount_per_second: int, duration: float) -> void:
+	if state_manager.get_current_state_name() == "death" or current_health == max_health:
+		return
+	var seconds_passed := 0
+	while seconds_passed < int(ceil(duration)):
+		if state_manager.get_current_state_name() == "death":
+			return
+		heal(amount_per_second)
+		seconds_passed += 1
+		await get_tree().create_timer(1.0).timeout
+
 func add_xp(amount: int):
+	if state_manager.get_current_state_name() == "death":
+		return
 	current_xp += amount
-	print("Zdobyto %s XP. Stan: %s/%s" % [amount, current_xp, xp_to_next_level])
+	print("Zdobyto %s XP. Aktualne XP: %s/%s" % [amount, current_xp, xp_to_next_level])
 	xp_changed.emit(current_xp, xp_to_next_level)
-	_check_level_up()
+	_check_for_level_up()
 
-func add_gold(amount: int):
-	gold += amount
-	gold_changed.emit(gold)
-
-func _check_level_up():
+func _check_for_level_up():
 	while current_xp >= xp_to_next_level:
 		level += 1
 		current_xp -= xp_to_next_level
-		xp_to_next_level = int(100 * pow(1.2, level - 1))
+		xp_to_next_level = _calculate_xp_for_next_level()
 		
+		# --- Zwiększ statystyki przy awansie ---
 		max_health += 10
-		current_health = max_health
-		# attack_damage += 2 <- To teraz powinno być w CombatComponent lub modyfikatorach
+		current_health = max_health # Pełne uleczenie przy awansie
+		player.attack_damage += 2
+		# ------------------------------------
 		
-		print("AWANS! Poziom: ", level)
+		print("AWANS! Osiągnięto poziom %s!" % level)
 		level_up.emit(level)
 		health_changed.emit(current_health, max_health)
 		xp_changed.emit(current_xp, xp_to_next_level)
 
-# Funkcja dla Save Systemu
-func get_save_data() -> Dictionary:
-	return {
-		"current_health": current_health,
-		"level": level,
-		"current_xp": current_xp,
-		"xp_to_next_level": xp_to_next_level,
-		"gold": gold,
-		"character_class": character_class
-	}
-
-func load_save_data(data: Dictionary):
-	current_health = data.get("current_health", max_health)
-	level = data.get("level", 1)
-	current_xp = data.get("current_xp", 0)
-	xp_to_next_level = data.get("xp_to_next_level", 100)
-	gold = data.get("gold", 100)
-	character_class = data.get("character_class", "swordsman")
-	emit_all_signals()
+func _calculate_xp_for_next_level() -> int:
+	# Prosty wzór na potrzebne XP, można go skomplikować
+	return int(100 * pow(1.2, level - 1))
