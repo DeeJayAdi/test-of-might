@@ -39,7 +39,7 @@ func _on_close_button_pressed():
 func update_gold_ui():
 	if player_ref:
 		# Upewnij się, że w player.gd masz zmienną "gold"
-		gold_label.text = "YourGold: " + str(player_ref.gold)
+		gold_label.text = "YourGold: " + str(player_ref.stats_comp.gold)
 
 # --- ZAKŁADKA BUY ---
 func populate_buy_tab():
@@ -65,12 +65,12 @@ func populate_buy_tab():
 		buy_grid.add_child(btn)
 
 func _on_buy_item_pressed(item: ItemData):
-	if player_ref.gold >= item.price:
+	if player_ref.stats_comp.gold >= item.price:
 		# Wywołujemy funkcję add_item z inventory.gd (którą dodałeś wcześniej)
 		var added = inventory_ref.add_item(item, 1)
 		
 		if added:
-			player_ref.update_gold(-item.price)
+			player_ref.stats_comp.update_gold(-item.price)
 			update_gold_ui()
 			print("Kupiono: ", item.item_name)
 		else:
@@ -115,7 +115,7 @@ func _on_sell_item_pressed(slot_ref, item, value):
 		slot_ref.quantity = 0
 		slot_ref.update_ui()
 	
-	player_ref.update_gold(value)
+	player_ref.stats_comp.update_gold(value)
 	update_gold_ui()
 	
 	# Odświeżamy listę sprzedaży, bo właśnie sprzedaliśmy przedmiot
