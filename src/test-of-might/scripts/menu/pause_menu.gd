@@ -15,8 +15,9 @@ func _ready():
 
 
 func _on_resume_button_pressed():
-	get_tree().paused = false
-	self.visible = false
+	var ui_manager = get_node("../..")	
+	if ui_manager.has_method("handle_escape"):
+		ui_manager.handle_escape()
 
 
 func _on_save_button_pressed():
@@ -34,16 +35,19 @@ func _on_options_button_pressed():
 		var scene = load(settings_scene_path)
 		if scene:
 			settings_instance = scene.instantiate()
-			settings_instance.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+			settings_instance.process_mode = Node.PROCESS_MODE_ALWAYS 
+			
+			if "is_opened_from_pause_menu" in settings_instance:
+				settings_instance.is_opened_from_pause_menu = true
+			# ---------------------
+
 			add_child(settings_instance)
 			
-			var close_button = settings_instance.get_node_or_null("Panel/Close_Button") 
+			var close_button = settings_instance.get_node_or_null("CanvasLayer/Panel/Close_Settings") 
 			if close_button:
 				close_button.pressed.connect(_on_settings_closed)
 			else:
-				print("OSTRZEŻENIE: Nie znaleziono przycisku 'Panel/Close_Button' w scenie ustawień.")
-		else:
-			print("BŁĄD: Nie można wczytać sceny ustawień ze ścieżki: %s" % settings_scene_path)
+				print("OSTRZEŻENIE: Nie znaleziono przycisku...")
 
 	if settings_instance:
 		settings_instance.visible = true

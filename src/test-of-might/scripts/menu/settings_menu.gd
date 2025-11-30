@@ -1,5 +1,8 @@
 extends Control
 
+var is_opened_from_pause_menu: bool = false
+@export var main_menu_path: String = "res://scenes/menu/Main_Menu.tscn"
+
 func change_scene_to_node(node):
 	var tree = get_tree()
 	var cur_scene = tree.get_current_scene()
@@ -12,15 +15,18 @@ func _on_video_pressed() -> void:
 
 
 func _on_audio_pressed() -> void:
-	var simultaneous_scene = preload("res://scenes/menu/Audio_Settings.tscn").instantiate()
-	change_scene_to_node(simultaneous_scene)
-	queue_free()
-	return
+	var audio_scene = load("res://scenes/menu/audio_settings.tscn").instantiate()	
+	if "is_opened_from_pause_menu" in self and self.is_opened_from_pause_menu:
+		audio_scene.is_opened_from_pause_menu = true
+		
+	add_child(audio_scene)
 
 func _on_gameplay_pressed() -> void:
-	var simultaneous_scene = preload("res://scenes/menu/Gameplay_Settings.tscn").instantiate()
-	change_scene_to_node(simultaneous_scene)
-	queue_free()
+	var gameplay_scene = load("res://scenes/menu/Gameplay_Settings.tscn").instantiate()	
+	if "is_opened_from_pause_menu" in self and self.is_opened_from_pause_menu:
+		gameplay_scene.is_opened_from_pause_menu = true
+		
+	add_child(gameplay_scene)
 
 
 func _on_accessibility_pressed() -> void:
@@ -31,5 +37,8 @@ func _on_advanced_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_close_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/Main_Menu.tscn")
+func _on_close_settings_pressed():
+	if is_opened_from_pause_menu:
+		queue_free() 
+	else:
+		get_tree().change_scene_to_file(main_menu_path)

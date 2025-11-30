@@ -1,6 +1,7 @@
 extends Control
 
-@onready var check_button: CheckButton = $CheckButton
+@onready var check_button: CheckButton = $CanvasLayer/CheckButton
+var is_opened_from_pause_menu: bool = false
 
 func _ready() -> void:
 	# Make the toggle reflect the current global setting
@@ -13,4 +14,7 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 	print("Combat style (mouse-based):", toggled_on)
 
 func _on_close_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/settings.tscn")
+	if is_opened_from_pause_menu:
+		queue_free()
+	else:
+		get_tree().change_scene_to_file("res://scenes/menu/settings.tscn")
