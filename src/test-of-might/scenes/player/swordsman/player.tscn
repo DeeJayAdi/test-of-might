@@ -1,6 +1,6 @@
 [gd_scene load_steps=269 format=3 uid="uid://b60ho6btoc5of"]
 
-[ext_resource type="Script" uid="uid://bou2qobuiaw3g" path="res://scripts/player/player_refactored.gd" id="1_4kngq"]
+[ext_resource type="Script" uid="uid://bou2qobuiaw3g" path="res://scripts/player/player.gd" id="1_4kngq"]
 [ext_resource type="Script" uid="uid://dly8vdriwerne" path="res://scripts/player/animation_manager.gd" id="2_68g6v"]
 [ext_resource type="Texture2D" uid="uid://bofuavksyecrl" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_attack_with_shadow.png" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://dg51buq6xkj3t" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Run_Attack_with_shadow.png" id="4_h17s1"]
