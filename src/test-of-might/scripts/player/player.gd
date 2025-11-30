@@ -126,6 +126,9 @@ func take_damage(amount: int):
 
 func heal(amount: int):
 	stats_comp.heal(amount)
+	
+func heal_over_time(amount_per_second: int, duration: float) -> void:
+	stats_comp.heal_over_time(amount_per_second,duration)
 
 func swap_weapons() -> void:
 	if inventory and inventory.has_method("swap_weapon"):
