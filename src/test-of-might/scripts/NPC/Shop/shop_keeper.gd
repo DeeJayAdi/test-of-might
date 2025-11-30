@@ -43,8 +43,8 @@ func interact():
 			$AnimatedSprite2D.flip_h = false
 			
 		# LOGIKA SKLEPU
-		var shop_ui = player.get_node_or_null("UI/Shop")
-		var inventory_instance = player.inventory_instance
+		var shop_ui = player.get_node_or_null("UI/Windows/Shop")
+		var inventory_instance = player.inventory
 		
 		if inventory_instance:
 			var inventory_script = inventory_instance.get_node("CanvasLayer/ColorRect/Inventory")

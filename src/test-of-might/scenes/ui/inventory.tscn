@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b1bi3gmoehto8"]
+[gd_scene load_steps=29 format=3 uid="uid://b1bi3gmoehto8"]
 
 [ext_resource type="Script" uid="uid://dx5bdc2t3vbnt" path="res://scripts/player/inventory/inventory_interface.gd" id="1_0mi16"]
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://c0qn7prxjqqrs" path="res://assets/sprites/items/Potions/Vital/Small Vial - GOLD - 0000.png" id="18_ouhig"]
 [ext_resource type="Script" uid="uid://ckvmteoxvidlq" path="res://scripts/player/inventory/stat_box.gd" id="19_2u8xl"]
 [ext_resource type="Texture2D" uid="uid://m4pduouhhspf" path="res://assets/ui/plus.jpg" id="20_gvlpm"]
+[ext_resource type="Texture2D" uid="uid://dmaaap4uostei" path="res://assets/sprites/items/icons/swap.png" id="25_j4iir"]
 
 [node name="Inventory" type="Control"]
 visible = false
@@ -760,6 +761,7 @@ offset_right = 378.0
 offset_bottom = 471.0
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet"]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
@@ -832,6 +834,23 @@ texture = ExtResource("4_ulvp7")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="SwapSlot" type="Panel" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("5_ulvp7")
+slot_type = "weapon"
+
+[node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer/SwapSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_j4iir")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect/Inventory"]
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 0
@@ -860,10 +879,10 @@ stretch_mode = 5
 
 [node name="Stats" type="GridContainer" parent="CanvasLayer/ColorRect/Inventory"]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 345.0
-offset_right = 235.0
-offset_bottom = 456.0
+offset_left = 102.0
+offset_top = 311.0
+offset_right = 326.0
+offset_bottom = 422.0
 script = ExtResource("19_2u8xl")
 
 [node name="Row_MaxHP" type="HBoxContainer" parent="CanvasLayer/ColorRect/Inventory/Stats"]
@@ -872,7 +891,7 @@ layout_mode = 2
 [node name="Name" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_MaxHP"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Maxp HP:"
+text = "Max HP:"
 
 [node name="Value" type="Label" parent="CanvasLayer/ColorRect/Inventory/Stats/Row_MaxHP"]
 custom_minimum_size = Vector2(50, 0)

@@ -36,10 +36,10 @@ func _on_body_entered(body):
 		return
 		
 	if body.is_in_group("player"):
-		if body.get("inventory_instance") == null: 
+		if body.get("inventory") == null: 
 			return
 			
-		var success = body.inventory_instance.add_item(item_resource)
+		var success = body.inventory.add_item(item_resource)
 		
 		if success:
 			collect_animation()
