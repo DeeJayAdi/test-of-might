@@ -1,5 +1,6 @@
 class_name UIManager extends CanvasLayer
 
+@onready var hud: CanvasLayer = $HUD
 @onready var health_bar: TextureProgressBar = $HUD/HP/Zdrowie/TextureProgressBar
 @onready var game_over_screen: Control = $Windows/PauseMenu 
 @onready var inventory: Control = $Windows/Inventory
@@ -40,8 +41,12 @@ func handle_escape() -> void:
 		shop.visible = false
 		get_tree().paused = false
 	else:
-		pause_menu.visible = not pause_menu.visible
-		get_tree().paused = pause_menu.visible
+		var should_pause = not pause_menu.visible
+		
+		pause_menu.visible = should_pause
+		get_tree().paused = should_pause
+		
+		hud.visible = not should_pause
 
 func toggle_inventory() -> void:
 	if pause_menu.visible:
