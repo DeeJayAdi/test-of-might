@@ -11,6 +11,7 @@ var dark_overlay: ColorRect = null
 func _ready():
 	if not is_open:
 		inventory_canvas.visible = false
+	ProjectSettings.set_setting("gui/timers/tooltip_delay_sec", 0)
 
 func set_player_node(player: CharacterBody2D):
 	player_node = player
@@ -20,11 +21,7 @@ func set_player_node(player: CharacterBody2D):
 		if slot.has_method("set_player"):
 			slot.set_player(player)
 
-func _input(event): #changed from _unhandled_input if any input errors arise it might be this
-	if event.is_action_pressed("inventory"):
-		if player_node and is_instance_valid(player_node) and player_node.current_state != player_node.State.DEATH:
-			toggle()
-			get_viewport().set_input_as_handled()
+
 
 func toggle():
 	if is_open:
@@ -38,6 +35,7 @@ func open():
 	
 	is_open = true
 	inventory_canvas.visible = true 
+	get_tree().paused = true
 	
 	if player_node.ui_layer:
 		player_node.ui_layer.visible = false
@@ -57,6 +55,7 @@ func close():
 
 	is_open = false
 	inventory_canvas.visible = false 
+	get_tree().paused = false
 	
 	if player_node and is_instance_valid(player_node) and player_node.ui_layer:
 		player_node.ui_layer.visible = true
@@ -84,3 +83,6 @@ func add_item(new_item: ItemData, quantity: int = 1) -> bool:
 
 	print("Ekwipunek pełny!")
 	return false 
+
+func _exit_tree():
+	ProjectSettings.set_setting("gui/timers/tooltip_delay_sec", 0.5)

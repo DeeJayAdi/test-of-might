@@ -9,6 +9,7 @@ item_name = "Small Vital Potion"
 type = "potion"
 subtype = "Healing"
 icon = ExtResource("1_fsgrh")
+description = "A small potion that provides some HP restoration over time and immediately restores a certain amount of HP"
 stack_size = 3
 heal_instant = 15
 heal_per_second = 4

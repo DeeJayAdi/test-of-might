@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=52 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -9,12 +9,26 @@
 [ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="7_hy0pv"]
 [ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="8_baql6"]
 [ext_resource type="PackedScene" uid="uid://bpfvkxa3jtv3w" path="res://scenes/enemies/bosses/CaveBoss/CaveBoss.tscn" id="8_grrjv"]
-[ext_resource type="Resource" uid="uid://dalgyo5o3vfyx" path="res://assets/resources/items/poison-touched-bow.tres" id="9_0738o"]
+[ext_resource type="Resource" uid="uid://dalgyo5o3vfyx" path="res://assets/resources/items/ranged/poison-touched-bow.tres" id="9_0738o"]
 [ext_resource type="PackedScene" uid="uid://73xfdxnq8gmv" path="res://scenes/NPC/old_man/Old_man.tscn" id="9_k8do1"]
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="9_nssaw"]
-[ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/helmet.tres" id="10_1futb"]
+[ext_resource type="Resource" uid="uid://c0tv0so3t7tgu" path="res://assets/resources/items/armor/helmets/basic_helmet.tres" id="10_1futb"]
 [ext_resource type="PackedScene" uid="uid://cr5gqujjukpxq" path="res://scenes/objects/PickableItem.tscn" id="10_760gm"]
 [ext_resource type="PackedScene" uid="uid://rubaexyfn1of" path="res://scenes/NPC/Shop_Man/ShopKeeper.tscn" id="15_nssaw"]
+[ext_resource type="PackedScene" uid="uid://dvci74lq57btl" path="res://scenes/Cutscenes/CutsceneTrigger.tscn" id="16_1futb"]
+[ext_resource type="Texture2D" uid="uid://omnmkje24sy1" path="res://assets/Cutscene/Cave/Boss/1.png" id="17_drbrp"]
+[ext_resource type="Texture2D" uid="uid://caceqpyo448ko" path="res://assets/Cutscene/Cave/Start/1.png" id="17_ux28t"]
+[ext_resource type="Texture2D" uid="uid://dpklo6a8er04r" path="res://assets/Cutscene/Cave/Start/2.png" id="18_23oef"]
+[ext_resource type="Texture2D" uid="uid://bcug8ktfepcvn" path="res://assets/Cutscene/Cave/Boss/2.png" id="18_u50nb"]
+[ext_resource type="Texture2D" uid="uid://bd3jeq5otmqew" path="res://assets/Cutscene/Cave/Boss/3.png" id="19_b7bfk"]
+[ext_resource type="Texture2D" uid="uid://dbma5op75cnj3" path="res://assets/Cutscene/Cave/Start/3.png" id="19_ynpja"]
+[ext_resource type="Texture2D" uid="uid://28ftwi5hneho" path="res://assets/Cutscene/Cave/Start/4.png" id="20_dmj82"]
+[ext_resource type="Texture2D" uid="uid://o3thj5hu0emm" path="res://assets/Cutscene/Cave/Boss/4.png" id="20_xpgc1"]
+[ext_resource type="Texture2D" uid="uid://ber6bi58xe0ch" path="res://assets/Cutscene/Cave/Boss/5.png" id="21_ux28t"]
+[ext_resource type="AudioStream" uid="uid://b3fqaetm2c4qf" path="res://assets/audio/Cutscenes/Cave/Boss/walking-on-dirt-363354.mp3" id="26_w02pj"]
+[ext_resource type="AudioStream" uid="uid://8rkmtcbmii7p" path="res://assets/audio/Cutscenes/Cave/Boss/Walking.mp3" id="27_6ppbf"]
+[ext_resource type="AudioStream" uid="uid://caklnwq3017eh" path="res://assets/audio/Cutscenes/Cave/Boss/earth-rumble-6953.mp3" id="28_13cra"]
+[ext_resource type="AudioStream" uid="uid://mth7lapkcj3e" path="res://assets/audio/Cutscenes/Cave/Boss/monster-3-278258.mp3" id="29_eyyqa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqe3u"]
 texture = ExtResource("1_v23if")
@@ -7868,3 +7882,20 @@ bus = &"Music"
 
 [node name="BossNavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_k8do1")
+
+[node name="CutsceneTrigger_START" parent="." instance=ExtResource("16_1futb")]
+position = Vector2(-512, 195)
+scale = Vector2(4, 4)
+images = Array[Texture2D]([ExtResource("17_ux28t"), ExtResource("18_23oef"), ExtResource("19_ynpja"), ExtResource("20_dmj82")])
+play_on_start = true
+cutscene_id = "START_CAVE"
+
+[node name="CutsceneTrigger_BOSS" parent="." instance=ExtResource("16_1futb")]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(3115, 279)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 2
+images = Array[Texture2D]([ExtResource("17_drbrp"), ExtResource("18_u50nb"), ExtResource("19_b7bfk"), ExtResource("20_xpgc1"), ExtResource("21_ux28t")])
+sound_effects = Array[AudioStream]([ExtResource("26_w02pj"), ExtResource("27_6ppbf"), null, ExtResource("28_13cra"), ExtResource("29_eyyqa")])

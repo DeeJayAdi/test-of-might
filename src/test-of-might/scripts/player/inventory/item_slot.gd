@@ -8,7 +8,7 @@ var player_node: CharacterBody2D = null
 
 
 
-func _read() -> void:
+func _ready() -> void:
 	if item:
 		quantity = item.default_quantity
 	update_ui()
@@ -18,9 +18,10 @@ func update_ui() -> void:
 		icon.texture = null
 		if quantity_label: quantity_label.visible = false
 		quantity = 0 
+		tooltip_text = "placeholder"
 		return
 		
-	if quantity <= 0:
+	if quantity == 1:
 		quantity = max(1, item.default_quantity)
 	icon.texture = item.icon
 	tooltip_text = item.item_name
@@ -29,6 +30,13 @@ func update_ui() -> void:
 		quantity_label.visible = true
 	else:
 		quantity_label.visible = false 
+	
+	tooltip_text = item.item_name
+
+func _make_custom_tooltip(for_text: String) -> Object:
+	var tooltip_scene = preload("res://scenes/ui/custom_tooltip.tscn").instantiate()
+	tooltip_scene.set_data(self.item)
+	return tooltip_scene
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not item:
@@ -81,6 +89,7 @@ func use_item():
 		if quantity <= 0:
 			item = null		
 		update_ui()
+		
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		use_item()
