@@ -40,14 +40,6 @@ func _ready():
 		var pos_x = data.get("global_pos_x", 0)
 		var pos_y = data.get("global_pos_y", 0)
 		global_position = Vector2(pos_x, pos_y)
-		stats_comp.character_class = data.get("character_class", "swordsman")
-		stats_comp.level = data.get("level", 1)
-		stats_comp.current_xp = data.get("current_xp", 0)
-		stats_comp.xp_to_next_level = data.get("xp_to_next_level", 100)
-		stats_comp.current_health = data.get("current_health", stats_comp.max_health)
-		call_deferred("stats_comp.level_up.emit", stats_comp.level)
-		call_deferred("stats_comp.xp_changed.emit", stats_comp.current_xp, stats_comp.xp_to_next_level)
-
 
 	rng.randomize()
 	process_mode = Node.PROCESS_MODE_INHERIT

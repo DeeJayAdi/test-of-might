@@ -1,22 +1,41 @@
 extends Control 
 
 signal slot_selected(slot_id)
+signal delete_selected(slot_id)
+
 @onready var slot_name_label = $VBoxContainer/SlotName
 @onready var icon = $VBoxContainer/Icon
 @onready var class_label = $VBoxContainer/MarginContainer/VBoxContainer/Class
 @onready var level_label = $VBoxContainer/MarginContainer/VBoxContainer/Level
 @onready var map_label = $VBoxContainer/MarginContainer/VBoxContainer/Map
 @onready var last_saved_label = $VBoxContainer/MarginContainer/VBoxContainer/Last_Saved
-@onready var load_button = $VBoxContainer/Load 
 
 var slot_id: int = 0
+var load_button: Button
+var delete_button: Button
 
 func _ready():
-	load_button.pressed.connect(_on_load_button_pressed)
+	# Wyszukaj przyciski w bardziej elastyczny sposób
+	load_button = get_node_or_null("VBoxContainer/Buttons/Load")
+	if !load_button:
+		load_button = get_node_or_null("VBoxContainer/Load")
+
+	delete_button = get_node_or_null("VBoxContainer/Buttons/DeleteButton")
+
+	if load_button:
+		load_button.pressed.connect(_on_load_button_pressed)
+	if delete_button:
+		delete_button.pressed.connect(_on_delete_button_pressed)
+
+
 func update_info(id: int, is_load_mode: bool):
 	slot_id = id
 	slot_name_label.text = "Save %s" % slot_id
-	load_button.disabled = false
+	
+	if load_button:
+		load_button.disabled = false
+	if delete_button:
+		delete_button.disabled = false
 
 	var slot_data_preview = SaveManager.get_slot_preview_data(slot_id)
 
@@ -25,11 +44,16 @@ func update_info(id: int, is_load_mode: bool):
 		level_label.text = "Level: --"
 		map_label.text = "Map: --"
 		last_saved_label.text = "Last Saved: --"
-		load_button.text = "Nowa Gra" 
+		if load_button:
+			load_button.text = "Nowa Gra" 
 		icon.texture = null
+		if delete_button:
+			delete_button.disabled = true
+		
 		if is_load_mode:
-			load_button.disabled = true
-			load_button.text = "None"
+			if load_button:
+				load_button.disabled = true
+				load_button.text = "None"
 		
 	else:
 		var player_class = slot_data_preview.get("player_class", "Null")
@@ -37,10 +61,12 @@ func update_info(id: int, is_load_mode: bool):
 		level_label.text = "Level: %s" % slot_data_preview.get("player_level", 1)
 		map_label.text = "Map: %s" % slot_data_preview.get("scene_name", "Null")
 		last_saved_label.text = "Last Saved: %s" % slot_data_preview.get("save_date", "Null")
-		if is_load_mode:
-			load_button.text = "Load"
-		else:
-			load_button.text = "New Game" 
+		
+		if load_button:
+			if is_load_mode:
+				load_button.text = "Load"
+			else:
+				load_button.text = "New Game" 
 
 		var class_icon_map = {
 			"Mage": "MageMan.png",
@@ -57,3 +83,6 @@ func update_info(id: int, is_load_mode: bool):
 
 func _on_load_button_pressed():
 	emit_signal("slot_selected", slot_id)
+
+func _on_delete_button_pressed():
+	emit_signal("delete_selected", slot_id)

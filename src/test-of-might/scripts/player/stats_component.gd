@@ -43,12 +43,13 @@ func _ready() -> void:
 	await owner.ready
 	current_health = max_health
 	level_up.connect(_on_level_up)
-	var data = SaveManager.get_data_for_node(self)
+	var data = SaveManager.get_data_for_node(owner)
 	if data:
 		level = data.get("level", 1)
 		current_xp = data.get("current_xp", 0)
 		xp_to_next_level = data.get("xp_to_next_level", 100)
 		current_health = data.get("current_health", max_health)
+		character_class = data.get("character_class", "swordsman")
 		call_deferred("level_up.emit", level)
 		call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
 	else:
