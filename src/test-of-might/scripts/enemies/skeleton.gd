@@ -193,8 +193,8 @@ func _on_animation_finished():
 
 	elif current_state == State.DEATH:
 		# Przyznaj XP graczowi, jeśli istnieje
-		if player and player.has_method("add_xp"):
-			player.add_xp(xp_reward)
+		if player and player.stats_comp.has_method("add_xp"):
+			player.stats_comp.add_xp(xp_reward)
 		spawn_drop()
 		queue_free()
 

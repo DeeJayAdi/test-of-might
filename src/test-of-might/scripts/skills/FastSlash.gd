@@ -38,7 +38,7 @@ func activate(player):
 				closest_enemy = collider
 	
 	if closest_enemy:
-		var damage = int(player.attack_damage * damage_multiplier)
+		var damage = int(player.stats_comp.attack_damage * damage_multiplier)
 		closest_enemy.take_damage(damage)
 		print("Zadano %s obrażeń wrogowi %s" % [damage, closest_enemy.name])
 
