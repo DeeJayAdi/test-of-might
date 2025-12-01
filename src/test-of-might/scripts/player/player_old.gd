@@ -16,12 +16,7 @@ enum AttackMode { MELEE, RANGED }
 
 # -- System Poziomów i Umiejętności --
 @export var character_class: String = "swordsman"
-@export var skill_1: Resource
-@export var skill_2: Resource
-@export var skill_3: Resource
-@export var skill_4: Resource
 
-var skills: Dictionary = {}
 var level: int = 1
 var current_xp: int = 0
 var xp_to_next_level: int = 100
@@ -64,13 +59,8 @@ var settings_open: bool = false
 var walls_map: Node = null
 
 func _ready():
-	level_up.connect(_on_level_up)
-	skills = {
-		"skill_1": skill_1,
-		"skill_2": skill_2,
-		"skill_3": skill_3,
-		"skill_4": skill_4
-	}
+	
+	
 
 	if inventory_instance == null:
 		inventory_instance = inventory_scene.instantiate()	
@@ -122,8 +112,6 @@ func _ready():
 		
 	health_changed.connect(_on_health_changed)
 		
-func _on_level_up(new_level):
-	$UI.get_node("LvL/LVL+Pasek/TEXT_LVL").text = str(new_level)
 		
 func _on_health_changed(new_health, max_health_value):
 	health_bar.value = new_health
@@ -406,15 +394,6 @@ func _check_for_level_up():
 		attack_damage += 2
 		# ------------------------------------
 		
-		print("AWANS! Osiągnięto poziom %s!" % level)
-		NotificationManager.show_notification("Level up! Reached level %s" % level, 4.0)
-		if level == 2 and skill_2:
-			NotificationManager.show_notification("New skill unlocked: %s" % skill_2.skill_name, 4.0)
-		if level == 3 and skill_3:
-			NotificationManager.show_notification("New skill unlocked: %s" % skill_3.skill_name, 4.0)
-		if level == 4 and skill_4:
-			NotificationManager.show_notification("New skill unlocked: %s" % skill_4.skill_name, 4.0)
-
 		level_up.emit(level)
 		health_changed.emit(current_health, max_health)
 		xp_changed.emit(current_xp, xp_to_next_level)
@@ -570,22 +549,7 @@ func _unhandled_input(_event):
 	if get_tree().paused or (inventory_instance and inventory_instance.visible):
 		return
 
-	if _event.is_action_pressed("skill_1") and skills.skill_1:
-		if skills.skill_1.can_use(self):
-			NotificationManager.show_notification("Used skill: %s" % skills.skill_1.skill_name, 2.0)
-			skills.skill_1.activate(self)
-	if _event.is_action_pressed("skill_2") and skills.skill_2:
-		if skills.skill_2.can_use(self):
-			NotificationManager.show_notification("Used skill: %s" % skills.skill_2.skill_name, 2.0)
-			skills.skill_2.activate(self)
-	if _event.is_action_pressed("skill_3") and skills.skill_3:
-		if skills.skill_3.can_use(self):
-			NotificationManager.show_notification("Used skill: %s" % skills.skill_3.skill_name, 2.0)
-			skills.skill_3.activate(self)
-	if _event.is_action_pressed("skill_4") and skills.skill_4:
-		if skills.skill_4.can_use(self):
-			NotificationManager.show_notification("Used skill: %s" % skills.skill_4.skill_name, 2.0)
-			skills.skill_4.activate(self)
+	
 	# --------------------------
 
 	if Input.is_action_just_pressed("ui_cancel"):

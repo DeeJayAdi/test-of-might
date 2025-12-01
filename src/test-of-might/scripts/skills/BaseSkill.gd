@@ -13,7 +13,7 @@ func can_use(player) -> bool:
 	if is_on_cooldown:
 		print("Umiejętność '%s' jest na cooldownie." % skill_name)
 		return false
-	if player.level < required_level:
+	if player.stats_comp.level < required_level:
 		print("Nie masz wymaganego poziomu (%s) dla umiejętności '%s'." % [required_level, skill_name])
 		return false
 	return true
