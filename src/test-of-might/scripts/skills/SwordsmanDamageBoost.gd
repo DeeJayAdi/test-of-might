@@ -11,6 +11,8 @@ func activate(player):
 
 	print("Aktywowano '%s'! Obrażenia x%.1f na %.1fs." % [skill_name, damage_multiplier, duration])
 	
+	# TODO: Add visual effect for the boost
+	
 	# Ustaw mnożnik na graczu
 	player.damage_multiplier = damage_multiplier
 	

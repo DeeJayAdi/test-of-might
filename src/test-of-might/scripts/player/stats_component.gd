@@ -27,8 +27,12 @@ var current_health: int = max_health
 @export var run_multiplier: float = 1.5
 @export var character_class: String = "swordsman"
 @export var active_skill: Resource
+@export var skill_1: Resource
+@export var skill_2: Resource
+@export var skill_3: Resource
+@export var skill_4: Resource
 
-
+var skills: Dictionary = {}
 var level: int = 1
 var current_xp: int = 0
 var xp_to_next_level: int = 100
@@ -38,6 +42,7 @@ var damage_multiplier: float = 1.0
 func _ready() -> void:
 	await owner.ready
 	current_health = max_health
+	level_up.connect(_on_level_up)
 	var data = SaveManager.get_data_for_node(self)
 	if data:
 		level = data.get("level", 1)
@@ -55,6 +60,14 @@ func _ready() -> void:
 	player.health_bar.value = current_health
 	emit_signal("health_changed", current_health, max_health)
 	health_changed.connect(_on_health_changed)
+
+	skills = {
+		"skill_1": skill_1,
+		"skill_2": skill_2,
+		"skill_3": skill_3,
+		"skill_4": skill_4
+	}
+
 
 
 
@@ -136,10 +149,18 @@ func _check_for_level_up():
 		# --- Zwiększ statystyki przy awansie ---
 		max_health += 10
 		current_health = max_health # Pełne uleczenie przy awansie
-		player.attack_damage += 2
+		attack_damage += 2
 		# ------------------------------------
 		
 		print("AWANS! Osiągnięto poziom %s!" % level)
+		NotificationManager.show_notification("Level up! Reached level %s" % level, 4.0)
+		if level == skill_2.required_level and skill_2:
+			NotificationManager.show_notification("New skill unlocked: %s" % skill_2.skill_name, 4.0)
+		if level == skill_3.required_level and skill_3:
+			NotificationManager.show_notification("New skill unlocked: %s" % skill_3.skill_name, 4.0)
+		if level == skill_4.required_level and skill_4:
+			NotificationManager.show_notification("New skill unlocked: %s" % skill_4.skill_name, 4.0)
+
 		level_up.emit(level)
 		health_changed.emit(current_health, max_health)
 		xp_changed.emit(current_xp, xp_to_next_level)
@@ -147,3 +168,7 @@ func _check_for_level_up():
 func _calculate_xp_for_next_level() -> int:
 	# Prosty wzór na potrzebne XP, można go skomplikować
 	return int(100 * pow(1.2, level - 1))
+
+
+func _on_level_up(new_level):
+	player.get_node("UI/HUD/LvL/LVL+Pasek/TEXT_LVL").text = str(new_level)

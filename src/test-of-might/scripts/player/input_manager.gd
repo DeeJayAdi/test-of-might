@@ -36,10 +36,26 @@ func process_input(delta: float) -> void:
 
 	if Input.is_action_pressed("use_skill"):
 		if player.stats_comp.active_skill:
-			player.stats_comp.active_skill.activate(self)
+			player.stats_comp.active_skill.activate(player)
 		else:
 			print("Brak przypisanej umiejętności!")
 
 	if Input.is_action_just_pressed("swap_weapon"):
 		player.swap_weapons()
+	if Input.is_action_pressed("skill_1") and player.stats_comp.skills.skill_1:
+		if player.stats_comp.skills.skill_1.can_use(player):
+			NotificationManager.show_notification("Used skill: %s" % player.stats_comp.skills.skill_1.skill_name, 2.0)
+			player.stats_comp.skills.skill_1.activate(player)
+	if Input.is_action_pressed("skill_2") and player.stats_comp.skills.skill_2:
+		if player.stats_comp.skills.skill_2.can_use(player):
+			NotificationManager.show_notification("Used skill: %s" % player.stats_comp.skills.skill_2.skill_name, 2.0)
+			player.stats_comp.skills.skill_2.activate(player)
+	if Input.is_action_pressed("skill_3") and player.stats_comp.skills.skill_3:
+		if player.stats_comp.skills.skill_3.can_use(player):
+			NotificationManager.show_notification("Used skill: %s" % player.stats_comp.skills.skill_3.skill_name, 2.0)
+			player.stats_comp.skills.skill_3.activate(player)
+	if Input.is_action_pressed("skill_4") and player.stats_comp.skills.skill_4:
+		if player.stats_comp.skills.skill_4.can_use(player):
+			NotificationManager.show_notification("Used skill: %s" % player.stats_comp.skills.skill_4.skill_name, 2.0)
+			player.stats_comp.skills.skill_4.activate(player)
 		
