@@ -1,7 +1,6 @@
-[gd_scene load_steps=256 format=3 uid="uid://b60ho6btoc5of"]
+[gd_scene load_steps=255 format=3 uid="uid://b60ho6btoc5of"]
 
-[ext_resource type="Script" uid="uid://df8qyfrdo37ja" path="res://scripts/player/player.gd" id="1_dovo2"]
-[ext_resource type="Resource" uid="uid://m8c2jw1gjv6h" path="res://scripts/skills/swordsman_boost.tres" id="2_b6nen"]
+[ext_resource type="Script" uid="uid://dg55mcb76ssgv" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://bofuavksyecrl" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_attack_with_shadow.png" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://dg51buq6xkj3t" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Run_Attack_with_shadow.png" id="4_h17s1"]
 [ext_resource type="Texture2D" uid="uid://biccpc87607u5" path="res://assets/sprites/player/swordsman/Swordsman_lvl2_Death_with_shadow.png" id="4_p47bc"]
@@ -21,10 +20,6 @@
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="17_6hsrg"]
 [ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="18_435ou"]
 [ext_resource type="Resource" uid="uid://cdxpvw5qoy378" path="res://assets/resources/items/potions/small Healing Potion.tres" id="19_gtu6p"]
-[ext_resource type="Resource" path="res://assets/skills/fast_slash.tres" id="20_aaaaa"]
-[ext_resource type="Resource" path="res://assets/skills/spin_attack.tres" id="21_bbbbb"]
-[ext_resource type="Resource" path="res://assets/skills/piercing_strike.tres" id="22_ccccc"]
-[ext_resource type="Resource" path="res://assets/skills/damage_boost.tres" id="23_ddddd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
 radius = 11.000001
@@ -1822,10 +1817,6 @@ process_mode = 1
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_dovo2")
-skill_1 = ExtResource("20_aaaaa")
-skill_2 = ExtResource("21_bbbbb")
-skill_3 = ExtResource("22_ccccc")
-skill_4 = ExtResource("23_ddddd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -12)
