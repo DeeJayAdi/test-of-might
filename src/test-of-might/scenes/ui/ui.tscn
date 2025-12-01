@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://det5vlnlsyq2e"]
+[gd_scene load_steps=11 format=3 uid="uid://det5vlnlsyq2e"]
 
 [ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://assets/ui/pasek.png" id="1_m6e0p"]
 [ext_resource type="Texture2D" uid="uid://7pjywbdogoxw" path="res://assets/ui/itemy_slot.png" id="2_27fn8"]
@@ -9,8 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://ijd5xt6su0mc" path="res://assets/ui/LVL.png" id="7_y4yjw"]
 [ext_resource type="Texture2D" uid="uid://dgnfr6rsm1k5n" path="res://assets/ui/lvl_pasek.png" id="8_waa4j"]
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="9_ok7cu"]
+[ext_resource type="Script" uid="uid://bg403blrbumay" path="res://scripts/ui/UI.gd" id="10_abcde"]
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("10_abcde")
 
 [node name="HP" type="VBoxContainer" parent="."]
 offset_right = 413.0
@@ -109,5 +111,21 @@ theme_override_font_sizes/font_size = 62
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Notifications" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("9_ok7cu")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="pressed" from="Menu_lewo/Ekwipunek" to="." method="_on_ekwipunek_pressed"]
