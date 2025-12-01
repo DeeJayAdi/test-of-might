@@ -409,11 +409,11 @@ func _check_for_level_up():
 		print("AWANS! Osiągnięto poziom %s!" % level)
 		NotificationManager.show_notification("Level up! Reached level %s" % level, 4.0)
 		if level == 2 and skill_2:
-			NotificationManager.show_notification("New skill unlocked: %s" % skill_2.name, 4.0)
+			NotificationManager.show_notification("New skill unlocked: %s" % skill_2.skill_name, 4.0)
 		if level == 3 and skill_3:
-			NotificationManager.show_notification("New skill unlocked: %s" % skill_3.name, 4.0)
+			NotificationManager.show_notification("New skill unlocked: %s" % skill_3.skill_name, 4.0)
 		if level == 4 and skill_4:
-			NotificationManager.show_notification("New skill unlocked: %s" % skill_4.name, 4.0)
+			NotificationManager.show_notification("New skill unlocked: %s" % skill_4.skill_name, 4.0)
 
 		level_up.emit(level)
 		health_changed.emit(current_health, max_health)
