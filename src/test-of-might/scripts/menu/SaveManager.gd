@@ -6,6 +6,17 @@ var current_slot: int = 1
 
 var loaded_data : Dictionary = {}
 var saved_scene_path : String = ""
+var played_cutscenes: Array = []
+
+func is_cutscene_played(id: String) -> bool:
+	return id in played_cutscenes
+	
+func mark_cutscene_as_played(id: String):
+	if id not in played_cutscenes:
+		played_cutscenes.append(id)
+
+func reset_cutscenes():
+	played_cutscenes = []
 
 func get_save_path() -> String:
 	return SAVE_PATH % current_slot
@@ -21,8 +32,10 @@ func save_game():
 
 	var save_data = {
 		"scene_path": scene.scene_file_path,
+		"played_cutscenes": played_cutscenes,
 		"nodes": {}
-	}
+		}
+		
 	var nodes_to_save = get_tree().get_nodes_in_group("Persist")
 	print("Znaleziono %s obiektów do zapisu." % nodes_to_save.size())
 
@@ -80,8 +93,11 @@ func load_game():
 	saved_scene_path = data["scene_path"]
 	loaded_data = data["nodes"]
 
-	#print("Wczytuję scenę: %s (slot %d)" % [data["scene_path"], current_slot])
-	#get_tree().change_scene_to_file(data["scene_path"])
+	if data.has("played_cutscenes"):
+		played_cutscenes = data["played_cutscenes"]
+	else:
+		played_cutscenes = [] # Jeśli stary save, to lista pusta
+
 	Global.SwitchScene(data["scene_path"])
 
 

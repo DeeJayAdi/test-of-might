@@ -2,13 +2,16 @@ extends Control
 
 @onready var music_bus_id: int = AudioServer.get_bus_index("Music")
 @onready var sfx_bus_id: int = AudioServer.get_bus_index("SFX")
+var is_opened_from_pause_menu: bool = false
 
-@onready var music_slider: HSlider = $MarginContainer/VBoxContainer/GridContainer/Music_HSlider
-@onready var sfx_slider: HSlider = $MarginContainer/VBoxContainer/GridContainer/SFX_HSlider
+@onready var music_slider: HSlider = $CanvasLayer/MarginContainer/VBoxContainer/GridContainer/Music_HSlider
+@onready var sfx_slider: HSlider = $CanvasLayer/MarginContainer/VBoxContainer/GridContainer/SFX_HSlider
 
 func _ready() -> void:
 	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus_id))
 	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_id))
+	
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	# Optional: restore saved volume levels
 	if FileAccess.file_exists("user://audio_settings.save"):
@@ -37,7 +40,10 @@ func _on_sfx_h_slider_value_changed(value: float) -> void:
 
 
 func _on_close_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/settings.tscn")
+	if is_opened_from_pause_menu:
+		queue_free()
+	else:
+		get_tree().change_scene_to_file("res://scenes/menu/settings.tscn")
 
 
 # --- Optional helpers for persistence ---
