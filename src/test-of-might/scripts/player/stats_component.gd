@@ -41,25 +41,17 @@ var damage_multiplier: float = 1.0
 
 func _ready() -> void:
 	await owner.ready
-	current_health = max_health
 	level_up.connect(_on_level_up)
-	var data = SaveManager.get_data_for_node(self)
-	if data:
-		level = data.get("level", 1)
-		current_xp = data.get("current_xp", 0)
-		xp_to_next_level = data.get("xp_to_next_level", 100)
-		current_health = data.get("current_health", max_health)
-		call_deferred("level_up.emit", level)
-		call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
-	else:
-		current_health = max_health
-		level = 1
-		current_xp = 0
-		xp_to_next_level = 100
+	health_changed.connect(_on_health_changed)
+
+	# The owner (player) has already loaded the data from the save file onto this component's properties.
+	# Now, we just need to make sure the rest of the game knows about these values.
+	call_deferred("level_up.emit", level)
+	call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
+	
 	player.health_bar.max_value = max_health
 	player.health_bar.value = current_health
-	emit_signal("health_changed", current_health, max_health)
-	health_changed.connect(_on_health_changed)
+	call_deferred("health_changed.emit", current_health, max_health)
 
 	skills = {
 		"skill_1": skill_1,
@@ -75,13 +67,6 @@ func update_gold(amount: int):
 	gold += amount
 	gold_changed.emit(gold)
 	print("Złoto: ", gold)
-	
-func save():
-	return{
-		
-	}
-
-
 
 func _on_health_changed(new_health, max_health_value):
 	player.health_bar.value = new_health
