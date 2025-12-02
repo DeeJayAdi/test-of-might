@@ -35,7 +35,13 @@ var _teleport_to_position: Vector2 = Vector2.ZERO
 var walls_map: Node = null
 
 func _ready():
-	var data = SaveManager.get_data_for_node(self)
+	# Temporary robust loading: Since the player is the only persisted object,
+	# we can just grab the first data entry available. This bypasses potential
+	# node path issues in the SaveManager.
+	var data = null
+	if SaveManager.loaded_data.size() > 0:
+		data = SaveManager.loaded_data.values()[0]
+
 	if data:
 		var pos_x = data.get("global_pos_x", 0)
 		var pos_y = data.get("global_pos_y", 0)
@@ -45,9 +51,6 @@ func _ready():
 		stats_comp.current_xp = data.get("current_xp", 0)
 		stats_comp.xp_to_next_level = data.get("xp_to_next_level", 100)
 		stats_comp.current_health = data.get("current_health", stats_comp.max_health)
-		call_deferred("stats_comp.level_up.emit", stats_comp.level)
-		call_deferred("stats_comp.xp_changed.emit", stats_comp.current_xp, stats_comp.xp_to_next_level)
-
 
 	rng.randomize()
 	process_mode = Node.PROCESS_MODE_INHERIT
