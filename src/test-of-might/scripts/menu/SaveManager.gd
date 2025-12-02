@@ -189,3 +189,14 @@ func get_slot_preview_data(slot_id: int) -> Dictionary:
 	preview_data["save_date"] = "%02d-%02d-%s %02d:%02d" % [time.day, time.month, time.year, time.hour, time.minute]
 
 	return preview_data
+
+func delete_save(slot_id: int):
+	var path = SAVE_PATH % slot_id
+	if FileAccess.file_exists(path):
+		var err = DirAccess.remove_absolute(path)
+		if err == OK:
+			print("Usunięto zapis dla slotu %d" % slot_id)
+		else:
+			print("Błąd podczas usuwania zapisu dla slotu %d. Kod błędu: %s" % [slot_id, err])
+	else:
+		print("Brak pliku zapisu dla slotu %d do usunięcia." % slot_id)

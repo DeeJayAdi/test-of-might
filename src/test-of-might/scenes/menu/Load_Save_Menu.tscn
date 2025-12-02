@@ -84,10 +84,17 @@ layout_mode = 2
 text = "Last Saved:
 "
 
-[node name="Load" type="Button" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+alignment = 1
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot1/VBoxContainer/Buttons"]
+layout_mode = 2
 text = "Load"
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer/SaveSlot1/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Delete"
 
 [node name="SaveSlot2" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -134,10 +141,17 @@ layout_mode = 2
 text = "Last Saved:
 "
 
-[node name="Load" type="Button" parent="HBoxContainer/SaveSlot2/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/SaveSlot2/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+alignment = 1
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot2/VBoxContainer/Buttons"]
+layout_mode = 2
 text = "Load"
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer/SaveSlot2/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Delete"
 
 [node name="SaveSlot3" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -184,11 +198,17 @@ layout_mode = 2
 text = "Last Saved:
 "
 
-[node name="Load" type="Button" parent="HBoxContainer/SaveSlot3/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/SaveSlot3/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
+alignment = 1
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot3/VBoxContainer/Buttons"]
+layout_mode = 2
 text = "Load"
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer/SaveSlot3/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Delete"
 
 [node name="SaveSlot4" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -235,10 +255,17 @@ layout_mode = 2
 text = "Last Saved:
 "
 
-[node name="Load" type="Button" parent="HBoxContainer/SaveSlot4/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/SaveSlot4/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+alignment = 1
+
+[node name="Load" type="Button" parent="HBoxContainer/SaveSlot4/VBoxContainer/Buttons"]
+layout_mode = 2
 text = "Load"
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer/SaveSlot4/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Delete"
 
 [node name="SaveSlot1" type="PanelContainer" parent="."]
 visible = false
