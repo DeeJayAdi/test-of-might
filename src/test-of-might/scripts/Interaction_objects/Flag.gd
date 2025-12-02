@@ -25,6 +25,7 @@ func interact():
 	if not global.is_level_unlocked("level1"):
 		global.unlock_level("level1")
 		global.save_unlocked_levels()
+		NotificationManager.show_notification("New level unlocked: Level 1", 5.0)
 
 	if is_animated:
 		animated_sprite.stop()

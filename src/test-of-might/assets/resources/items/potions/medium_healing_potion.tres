@@ -9,5 +9,6 @@ item_name = "Medium Healing Potion"
 type = "potion"
 subtype = "Healing"
 icon = ExtResource("1_xg65s")
+description = "A potion that immediately restores a certain amount of HP"
 stack_size = 5
 heal_instant = 50

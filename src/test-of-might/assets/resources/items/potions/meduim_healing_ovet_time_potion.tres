@@ -9,6 +9,7 @@ item_name = "Medium Healing Potion(time)"
 type = "potion"
 subtype = "healing"
 icon = ExtResource("1_0qht0")
+description = "A  potion that immediately restores a certain amount of HP"
 stack_size = 5
 heal_per_second = 5
 heal_duration = 7.5

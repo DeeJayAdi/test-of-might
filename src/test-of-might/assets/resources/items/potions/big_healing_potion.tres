@@ -9,5 +9,6 @@ item_name = "Big Healing Potion"
 type = "potion"
 subtype = "healing"
 icon = ExtResource("1_uvoqy")
+description = "A big potion that immediately restores a certain amount of HP"
 stack_size = 3
 heal_instant = 100

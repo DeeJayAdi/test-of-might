@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4r4ukslcin57"]
+
+[ext_resource type="Script" uid="uid://jol5q71dt0hb" path="res://scripts/Cutscene/cutscene.gd" id="1_qgc4t"]
+
+[node name="Cutscene" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_qgc4t")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ImageDisplay" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Press ,,SPACE\" to continue..."
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
