@@ -16,8 +16,6 @@ func _ready():
 		print("BŁĄD: Nie można wczytać pliku dialogu: %s" % dialog_file)
 	
 	prompt_label.visible = false
-	interaction_area.body_entered.connect(_on_body_entered)
-	interaction_area.body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
@@ -40,7 +38,3 @@ func interact():
 			$AnimatedSprite2D.flip_h = true
 		else:
 			$AnimatedSprite2D.flip_h = false
-
-
-func _on_interaction_area_body_entered(body: Node2D) -> void:
-	pass

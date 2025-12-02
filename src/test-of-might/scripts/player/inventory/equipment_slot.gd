@@ -27,20 +27,31 @@ func update_ui() -> void:
 	
 	if not item:
 		icon.texture = current_placeholder
-		tooltip_text = ""
+		tooltip_text = "" # Keeps tooltip hidden if empty
 	else:
 		icon.texture = item.icon
 		if item.placeholder:
 			current_placeholder = item.placeholder
-		tooltip_text = item.item_name
+			
+		# CHANGED: We set this to any string to tell Godot "Yes, I have a tooltip".
+		# The text itself doesn't matter because _make_custom_tooltip overrides it.
+		tooltip_text = "Info" 
+
+# ADDED: This function creates the visual box
+func _make_custom_tooltip(_for_text: String) -> Object:
+	# 1. Load your Tooltip Scene
+	var tooltip_scene = preload("res://scenes/ui/custom_tooltip.tscn").instantiate()
+	
+	# 2. Pass the ItemData resource directly to the tooltip
+	tooltip_scene.set_data(item)
+	
+	return tooltip_scene
 
 func _update_global_stats():
 	UpdateStats.update_equipment_slot(get_instance_id(), item)
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not item: return null
-	
-	#duplicate() used to cause issues - in case some more arise review if it wasn't removed wrongfully
 	
 	var preview = TextureRect.new()
 	preview.texture = icon.texture

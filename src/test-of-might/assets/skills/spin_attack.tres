@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpinAttack" load_steps=2 format=3 uid="uid://c831hewj3inba"]
+
+[ext_resource type="Script" uid="uid://1dpqofpqlls5" path="res://scripts/skills/SpinAttack.gd" id="1_spin_attack"]
+
+[resource]
+script = ExtResource("1_spin_attack")
+skill_name = "Atak Obrotowy"
+required_level = 3
+cooldown = 12.0
