@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b1bi3gmoehto8"]
+[gd_scene load_steps=30 format=3 uid="uid://b1bi3gmoehto8"]
 
 [ext_resource type="Script" uid="uid://dx5bdc2t3vbnt" path="res://scripts/player/inventory/inventory_interface.gd" id="1_0mi16"]
 [ext_resource type="Script" uid="uid://dyehxf3t0jj7k" path="res://scripts/player/inventory/item_slot.gd" id="1_avmd0"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://ckvmteoxvidlq" path="res://scripts/player/inventory/stat_box.gd" id="19_2u8xl"]
 [ext_resource type="Texture2D" uid="uid://m4pduouhhspf" path="res://assets/ui/plus.jpg" id="20_gvlpm"]
 [ext_resource type="Texture2D" uid="uid://dmaaap4uostei" path="res://assets/sprites/items/icons/swap.png" id="25_j4iir"]
+[ext_resource type="Script" uid="uid://cidixdrhlc6ek" path="res://scripts/player/inventory/swap_slot.gd" id="25_yskik"]
 
 [node name="Inventory" type="Control"]
 visible = false
@@ -837,7 +838,7 @@ stretch_mode = 5
 [node name="SwapSlot" type="Panel" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-script = ExtResource("5_ulvp7")
+script = ExtResource("25_yskik")
 slot_type = "weapon"
 
 [node name="icon" type="TextureRect" parent="CanvasLayer/ColorRect/Inventory/CharacterSheet/GridContainer/SwapSlot"]
