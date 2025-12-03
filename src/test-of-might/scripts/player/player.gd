@@ -29,19 +29,11 @@ var _teleport_to_position: Vector2 = Vector2.ZERO
 var walls_map: Node = null
 
 func _ready():
-	var data = null
-	if SaveManager.loaded_data.size() > 0:
-		data = SaveManager.loaded_data.values()[0]
-
+	var data = SaveManager.get_data_for_node(self)
 	if data:
 		var pos_x = data.get("global_pos_x", 0)
 		var pos_y = data.get("global_pos_y", 0)
 		global_position = Vector2(pos_x, pos_y)
-		stats_comp.character_class = data.get("character_class", "swordsman")
-		stats_comp.level = data.get("level", 1)
-		stats_comp.current_xp = data.get("current_xp", 0)
-		stats_comp.xp_to_next_level = data.get("xp_to_next_level", 100)
-		stats_comp.current_health = data.get("current_health", stats_comp.max_health)
 
 	rng.randomize()
 	process_mode = Node.PROCESS_MODE_INHERIT
