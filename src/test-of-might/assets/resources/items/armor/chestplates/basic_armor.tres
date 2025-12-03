@@ -11,6 +11,6 @@ rarity = "common"
 type = "armor"
 icon = ExtResource("1_1dqr5")
 placeholder = ExtResource("2_fhttt")
-defense = 10
+defense = 5
 description = "It's filled with love and care of your parents, which you disrespect by going down the dungeon"
 metadata/_custom_type_script = "uid://elca6sp6br8g"
