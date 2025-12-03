@@ -7828,6 +7828,31 @@ position = Vector2(753, 295)
 pickable_item_scene = ExtResource("10_760gm")
 item_to_drop = ExtResource("10_1futb")
 
+[node name="Skeleton4" parent="YSort" instance=ExtResource("6_2jint")]
+position = Vector2(654, 243)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("10_1futb")
+
+[node name="Skeleton7" parent="YSort" instance=ExtResource("6_2jint")]
+position = Vector2(1261, 785)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("10_1futb")
+
+[node name="Skeleton8" parent="YSort" instance=ExtResource("6_2jint")]
+position = Vector2(2420, 251)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("10_1futb")
+
+[node name="Skeleton5" parent="YSort" instance=ExtResource("6_2jint")]
+position = Vector2(1101, 171)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("10_1futb")
+
+[node name="Skeleton6" parent="YSort" instance=ExtResource("6_2jint")]
+position = Vector2(1755, 313)
+pickable_item_scene = ExtResource("10_760gm")
+item_to_drop = ExtResource("10_1futb")
+
 [node name="CaveBoss" parent="YSort" node_paths=PackedStringArray("boss_navigation_region") instance=ExtResource("8_grrjv")]
 position = Vector2(3784, 381)
 boss_navigation_region = NodePath("../../BossNavigationRegion2D")
