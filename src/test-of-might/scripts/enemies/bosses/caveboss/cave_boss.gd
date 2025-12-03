@@ -59,6 +59,10 @@ func _on_health_changed(_current, _max_hp):
 	var current_state = state_manager.current_state.name.to_lower()
 
 	if current_state != "roam" and current_state != "death" and current_state != "hurt":
+		if state_manager.current_state.name.to_lower() == "attack":
+			#reset attack cooldown to allow interrupting attack
+			attack_timer.stop()
+			can_attack = true
 		state_manager.change_state("hurt")
 
 

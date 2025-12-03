@@ -1131,7 +1131,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_down",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1142,7 +1142,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_left",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1153,7 +1153,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_right",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1164,7 +1164,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_up",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1252,6 +1252,7 @@ texture_filter = 1
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_oreq0")
+attack_cooldown = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)
@@ -1259,7 +1260,7 @@ shape = SubResource("CapsuleShape2D_6fgxj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_x7x6y")
-animation = &"attack2_up"
+animation = &"hurt_up"
 offset = Vector2(0, -48)
 
 [node name="HpBar" type="ProgressBar" parent="."]
