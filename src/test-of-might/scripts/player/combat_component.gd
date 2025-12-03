@@ -10,7 +10,6 @@ var attack_locked_direction: String = ""
 var attack_locked_direction_mouse: String = ""
 var upgrades : Array[BaseBulletStrategy] = []
 
-
 func _ready() -> void:
 	pass
 
@@ -41,8 +40,6 @@ func rotate_weapon_towards_mouse():
 
 	var visual_angle = dir_to_mouse.angle() - PI / 4
 	player.ranged_weapon.global_rotation = visual_angle
-
-
 
 func perform_attack(is_heavy: bool = false):
 	if not can_attack:
@@ -121,7 +118,6 @@ func perform_ranged_attack():
 		return
 	can_attack = false
 	
-
 	var bullet = preload("res://scenes/objects/bullet.tscn").instantiate() as Bullet
 	for upgrade in upgrades:
 		upgrade.apply_upgrade(bullet)
@@ -129,7 +125,7 @@ func perform_ranged_attack():
 	bullet.global_position = muzzle.global_position
 
 	bullet.rotation = muzzle.global_rotation + PI / 4
-
+	bullet.damage = calculate_attack_damage()
 	get_tree().get_root().add_child(bullet)
 
 	var cooldown = stats_comp.attack_cooldown
@@ -138,6 +134,14 @@ func perform_ranged_attack():
 func perform_heavy_attack():
 	perform_attack(true)
 
+
+func calculate_attack_damage():
+	var damage = stats_comp.attack_damage
+	if player.rng.randf() < stats_comp.crit_chance:
+		damage = int(damage * stats_comp.crit_multiplier)
+	damage = int(damage * stats_comp.damage_multiplier)
+			
+	return damage
 
 func _apply_attack_damage(args: Dictionary):
 	var radius = args["radius"]
