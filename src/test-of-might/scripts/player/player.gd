@@ -16,9 +16,7 @@ class_name Player
 @onready var ranged_weapon: Node2D = $RangedWeapon
 @onready var animated_sprite: AnimatedSprite2D = $AnimationManager/AnimatedSprite2D
 
-
 @export var settings_scene_path: String = "res://scenes/menu/settings.tscn"
-
 
 var attack_locked_direction: String = ""
 var attack_locked_direction_mouse: String = ""
@@ -28,16 +26,9 @@ var rng = RandomNumberGenerator.new()
 var interactables_in_range = []
 var _is_teleport_pending: bool = false
 var _teleport_to_position: Vector2 = Vector2.ZERO
-
-
-
-
 var walls_map: Node = null
 
 func _ready():
-	# Temporary robust loading: Since the player is the only persisted object,
-	# we can just grab the first data entry available. This bypasses potential
-	# node path issues in the SaveManager.
 	var data = null
 	if SaveManager.loaded_data.size() > 0:
 		data = SaveManager.loaded_data.values()[0]

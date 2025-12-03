@@ -61,8 +61,6 @@ func _ready() -> void:
 	}
 
 
-
-
 func update_gold(amount: int):
 	gold += amount
 	gold_changed.emit(gold)
@@ -76,8 +74,6 @@ func take_damage(amount: int):
 	if state_manager.get_current_state_name() == "death":
 		return
 	sfx_comp.play_hurt()
-	current_health -= amount
-		
 	var def = UpdateStats.get_total_defense()
 
 	var final_damage = max(0, amount - def)
