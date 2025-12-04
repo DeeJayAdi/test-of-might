@@ -13,9 +13,9 @@
 [ext_resource type="Script" uid="uid://bw1a5lcswt2c2" path="res://scripts/player/input_manager.gd" id="10_dges0"]
 [ext_resource type="AudioStream" uid="uid://cfu1xsv6tnoka" path="res://assets/audio/effects/player/footstep.wav" id="10_je7p5"]
 [ext_resource type="Script" uid="uid://c32abefrbcdfb" path="res://scripts/player/stats_component.gd" id="10_jx7tb"]
-[ext_resource type="Script" path="res://scripts/player/combat_component.gd" id="11_6hsrg"]
+[ext_resource type="Script" uid="uid://bc3r7ydsivs3f" path="res://scripts/player/combat_component.gd" id="11_6hsrg"]
 [ext_resource type="AudioStream" uid="uid://cbj1px7pe6stn" path="res://assets/audio/effects/player/sword-slide-44167.mp3" id="11_fm80t"]
-[ext_resource type="Script" path="res://scripts/player/state_manager.gd" id="11_puxuo"]
+[ext_resource type="Script" uid="uid://pnv7sy0x51qt" path="res://scripts/player/state_manager.gd" id="11_puxuo"]
 [ext_resource type="Script" uid="uid://dgkkt8egnlcjf" path="res://scripts/player/states/idle.gd" id="12_b1gvf"]
 [ext_resource type="PackedScene" uid="uid://det5vlnlsyq2e" path="res://scenes/ui/ui.tscn" id="12_fm80t"]
 [ext_resource type="AudioStream" uid="uid://lbjujyncuyyn" path="res://assets/audio/effects/player/player_hurt.wav" id="12_it67h"]
@@ -27,10 +27,10 @@
 [ext_resource type="Script" uid="uid://vfkuandwg275" path="res://scripts/player/states/death.gd" id="15_ysk3m"]
 [ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="16_jx7tb"]
 [ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="17_6hsrg"]
-[ext_resource type="Script" path="res://scripts/player/ui_manager.gd" id="17_ip3ds"]
+[ext_resource type="Script" uid="uid://b3oqsidjfkotx" path="res://scripts/player/ui_manager.gd" id="17_ip3ds"]
 [ext_resource type="Script" uid="uid://7eaq1q52k2v3" path="res://scripts/player/states/hurt.gd" id="17_v01qi"]
 [ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="18_435ou"]
-[ext_resource type="Script" path="res://scripts/player/sfx_component.gd" id="19_dkijv"]
+[ext_resource type="Script" uid="uid://clfg64udajnto" path="res://scripts/player/sfx_component.gd" id="19_dkijv"]
 [ext_resource type="Resource" uid="uid://cdxpvw5qoy378" path="res://assets/resources/items/potions/small Healing Potion.tres" id="19_gtu6p"]
 [ext_resource type="PackedScene" uid="uid://b1bi3gmoehto8" path="res://scenes/ui/inventory.tscn" id="19_jx7tb"]
 [ext_resource type="Resource" path="res://assets/skills/fast_slash.tres" id="20_aaaaa"]
@@ -996,7 +996,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Down",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1025,7 +1025,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Left",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1054,7 +1054,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Right",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1083,7 +1083,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Run_Down",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1112,7 +1112,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Run_Left",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1141,7 +1141,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Run_Right",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1170,7 +1170,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Run_Up",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1199,7 +1199,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Up",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1222,7 +1222,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Walk_Down",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1245,7 +1245,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Walk_Left",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1268,7 +1268,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Walk_Right",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1291,7 +1291,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack_Walk_Up",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1644,7 +1644,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run_Down",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1673,7 +1673,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run_Left",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1702,7 +1702,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run_Right",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1731,7 +1731,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run_Up",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1754,7 +1754,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk_Down",
-"speed": 8.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1777,7 +1777,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk_Left",
-"speed": 8.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1800,7 +1800,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk_Right",
-"speed": 8.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1823,7 +1823,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk_Up",
-"speed": 8.0
+"speed": 11.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gtgg"]
@@ -1843,7 +1843,7 @@ script = ExtResource("2_68g6v")
 texture_filter = 1
 scale = Vector2(1.8749999, 1.875)
 sprite_frames = SubResource("SpriteFrames_fm80t")
-animation = &"Attack_Walk_Down"
+animation = &"Walk_Up"
 offset = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
@@ -1882,6 +1882,12 @@ script = ExtResource("17_v01qi")
 
 [node name="StatsComponent" type="Node" parent="."]
 script = ExtResource("10_jx7tb")
+attack_damage = 50
+crit_chance = 0.2
+heavy_attack_damage = 100
+heavy_attack_cooldown = 1.5
+speed = 140.0
+run_multiplier = 1.4
 skill_1 = ExtResource("20_aaaaa")
 skill_2 = ExtResource("21_bbbbb")
 skill_3 = ExtResource("22_ccccc")

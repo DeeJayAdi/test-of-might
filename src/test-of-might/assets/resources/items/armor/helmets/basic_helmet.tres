@@ -11,6 +11,6 @@ rarity = "common"
 type = "helmet"
 icon = ExtResource("1_lbl8o")
 placeholder = ExtResource("2_pp16o")
-defense = 5
+defense = 2
 description = "A simple leather cap worn by pesants like you"
 metadata/_custom_type_script = "uid://elca6sp6br8g"

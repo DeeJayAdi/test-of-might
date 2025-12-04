@@ -43,9 +43,18 @@ func _ready() -> void:
 	await owner.ready
 	level_up.connect(_on_level_up)
 	health_changed.connect(_on_health_changed)
+	
+	var data = SaveManager.get_data_for_node(owner)
+	
+	if data:
+		character_class = data.get("character_class", "swordsman")
+		level = data.get("level", 1)
+		current_xp = data.get("current_xp", 0)
+		xp_to_next_level = data.get("xp_to_next_level", 100)
+		current_health = data.get("current_health", max_health)
+	if current_health <= 0:
+		current_health = max_health
 
-	# The owner (player) has already loaded the data from the save file onto this component's properties.
-	# Now, we just need to make sure the rest of the game knows about these values.
 	call_deferred("level_up.emit", level)
 	call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
 	
@@ -61,8 +70,6 @@ func _ready() -> void:
 	}
 
 
-
-
 func update_gold(amount: int):
 	gold += amount
 	gold_changed.emit(gold)
@@ -76,8 +83,6 @@ func take_damage(amount: int):
 	if state_manager.get_current_state_name() == "death":
 		return
 	sfx_comp.play_hurt()
-	current_health -= amount
-		
 	var def = UpdateStats.get_total_defense()
 
 	var final_damage = max(0, amount - def)
