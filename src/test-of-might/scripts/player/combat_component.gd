@@ -10,6 +10,7 @@ var attack_locked_direction: String = ""
 var attack_locked_direction_mouse: String = ""
 var upgrades : Array[BaseBulletStrategy] = []
 
+var default_bullet_scene = preload("res://scenes/objects/bullet.tscn")
 
 func _ready() -> void:
 	pass
@@ -50,7 +51,7 @@ func perform_attack(is_heavy: bool = false):
 	
 	var weapon = player.inventory.get_current_weapon()
 	if weapon and weapon.subtype == "ranged":
-		perform_ranged_attack()
+		perform_ranged_attack(weapon)
 		return
 
 	can_attack = false
@@ -116,15 +117,23 @@ func perform_attack(is_heavy: bool = false):
 	get_tree().create_timer(cooldown).timeout.connect(_reset_attack_cooldown)
 
 
-func perform_ranged_attack():
+func perform_ranged_attack(weapon):
 	if not can_attack:
 		return
 	can_attack = false
 	
-
-	var bullet = preload("res://scenes/objects/bullet.tscn").instantiate() as Bullet
+	var bullet_scene_to_spawn = default_bullet_scene
+	# This assumes your Weapon Resource has a variable: @export var projectile_scene: PackedScene
+	if weapon.get("animation") != null:
+		bullet_scene_to_spawn = weapon.animation
+	
+	# 2. Instantiate the specific bullet
+	var bullet = bullet_scene_to_spawn.instantiate() as Bullet
+	
+	# Apply upgrades (Multishot, fire rate, etc)
 	for upgrade in upgrades:
 		upgrade.apply_upgrade(bullet)
+		
 	var muzzle = player.ranged_weapon.get_node("Marker2D") as Marker2D
 	bullet.global_position = muzzle.global_position
 
