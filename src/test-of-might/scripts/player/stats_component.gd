@@ -11,7 +11,7 @@ var current_health: int = max_health
 @onready var player: CharacterBody2D = get_parent()
 @onready var state_manager: StateManager = player.get_node("StateManager") as StateManager
 @onready var sfx_comp: SFXComponent = player.get_node("SfxComponent") as SFXComponent
-
+@onready var xp_bar = get_node("../UI/HUD/LvL/LVL+Pasek/Pasek_EXPA")
 
 @export var max_health: int = 100
 @export var gold: int = 100
@@ -43,6 +43,8 @@ func _ready() -> void:
 	await owner.ready
 	level_up.connect(_on_level_up)
 	health_changed.connect(_on_health_changed)
+	
+	xp_changed.connect(_on_xp_changed)
 	
 	var data = SaveManager.get_data_for_node(owner)
 	
@@ -122,6 +124,7 @@ func heal_over_time(amount_per_second: int, duration: float) -> void:
 		seconds_passed += 1
 		await get_tree().create_timer(1.0).timeout
 
+#tu je experience
 func add_xp(amount: int):
 	if state_manager.get_current_state_name() == "death":
 		return
@@ -162,3 +165,8 @@ func _calculate_xp_for_next_level() -> int:
 
 func _on_level_up(new_level):
 	player.get_node("UI/HUD/LvL/LVL+Pasek/TEXT_LVL").text = str(new_level)
+	
+func _on_xp_changed(curr_xp, max_xp):
+	if xp_bar:
+		xp_bar.max_value = max_xp
+		xp_bar.value = curr_xp
