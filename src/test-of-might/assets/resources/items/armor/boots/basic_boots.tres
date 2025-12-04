@@ -11,6 +11,6 @@ rarity = "common"
 type = "boots"
 icon = ExtResource("1_ytgqp")
 placeholder = ExtResource("2_iuikf")
-defense = 5
+defense = 1
 description = "Tough old and worn still beats being barefoot"
 metadata/_custom_type_script = "uid://elca6sp6br8g"

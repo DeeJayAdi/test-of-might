@@ -4,7 +4,7 @@ signal stats_updated(stats_package: Dictionary)
 
 var base_stats = {
 	"max_health": 100,
-	"damage": 25,
+	"damage": 50,
 	"defense": 0,
 	"attack_range": 30.0,
 	"attack_speed": 1.0
@@ -17,6 +17,7 @@ func update_equipment_slot(slot_id: int, item: ItemData):
 		equipped_items.erase(slot_id)
 	else:
 		equipped_items[slot_id] = item
+		
 	
 	recalculate_stats()
 

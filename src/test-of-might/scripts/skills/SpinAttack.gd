@@ -27,7 +27,7 @@ func activate(player):
 	for r in results:
 		var collider = r.collider
 		if collider and collider != player and collider.is_in_group("enemies") and collider.has_method("take_damage"):
-			var damage = int(player.attack_damage * damage_multiplier)
+			var damage = int(player.stats_comp.attack_damage * damage_multiplier)
 			collider.take_damage(damage)
 			print("Zadano %s obrażeń wrogowi %s" % [damage, collider.name])
 

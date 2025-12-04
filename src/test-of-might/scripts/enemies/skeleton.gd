@@ -67,12 +67,16 @@ func _physics_process(delta: float):
 				else:
 					# --- Jest poza zasięgiem -> GOŃ ---
 					$NavigationAgent2D.target_position = player.global_position
-					var direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-					velocity = direction * speed
-					if direction.x > 0:
-						$AnimatedSprite2D.flip_h = false
-					elif direction.x < 0:
-						$AnimatedSprite2D.flip_h = true
+					if $NavigationAgent2D.is_target_reachable():
+						var direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
+						velocity = direction * speed
+						if direction.x > 0:
+							$AnimatedSprite2D.flip_h = false
+						elif direction.x < 0:
+							$AnimatedSprite2D.flip_h = true
+					else:
+						velocity = Vector2.ZERO
+						current_state = State.IDLE
 			else:
 				current_state = State.IDLE
 
@@ -87,8 +91,6 @@ func _physics_process(delta: float):
 			velocity = Vector2.ZERO
 	play_animation()
 	move_and_slide()
-
-
 
 
 

@@ -365,7 +365,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -446,8 +446,15 @@ bg_color = Color(0.75686276, 0, 0.09411765, 1)
 
 [node name="Skeleton" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_6ucyf")
+detect_radius = 350
+speed = 165
+attack_cooldown = 0.7
+crit_chance = 0.15
+attack_damage = 15
+xp_reward = 80
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
@@ -458,8 +465,6 @@ texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_umco3")
 animation = &"hurt"
-frame = 4
-frame_progress = 1.0
 offset = Vector2(2.465, -31.195)
 
 [node name="DetectionArea" type="Area2D" parent="."]
