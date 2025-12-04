@@ -49,3 +49,7 @@ func _on_slot_delete_selected(slot_id: int):
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file(main_menu_scene)
+
+func _on_reset_unlocked_levels_pressed():
+	get_node("/root/Global").reset_unlocked_levels()
+	print("Postęp odblokowanych poziomów został zresetowany.")
