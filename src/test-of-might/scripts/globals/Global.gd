@@ -31,6 +31,14 @@ func load_unlocked_levels():
 			unlocked_levels = arr
 		file.close()
 
+func reset_unlocked_levels():
+	unlocked_levels = ["level_tutorial"]
+	var file_path = "user://unlocked_levels.save"
+	if FileAccess.file_exists(file_path):
+		var err = DirAccess.remove_absolute(file_path)
+		if err != OK:
+			print("Błąd podczas usuwania pliku odblokowanych poziomów. Kod błędu: %s" % err)
+
 func _ready():
 	load_unlocked_levels()
 

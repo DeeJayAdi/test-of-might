@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuavi21g6u2aw" path="res://scripts/menu/Load_Menu/load_save_menu.gd" id="1_dajgj"]
 [ext_resource type="Texture2D" uid="uid://7vbjvh67kyte" path="res://assets/menu/Background.png" id="1_ugrym"]
-[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/Dialog/Avatars/portrait_player/PalMan.png" id="2_hsng0"]
+[ext_resource type="Texture2D" uid="uid://ckwyeexubot71" path="res://assets/sprites/player/portrait/PalMan.png" id="2_hsng0"]
 [ext_resource type="Script" uid="uid://divrnlmr3iao7" path="res://scripts/menu/Load_Menu/SaveSlotCard.gd" id="3_52ccd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ugrym"]
@@ -24,6 +24,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ugrym")
+
+[node name="ResetUnlockedLevels" type="Button" parent="."]
+layout_mode = 0
+offset_left = 957.0
+offset_top = 603.0
+offset_right = 1131.0
+offset_bottom = 634.0
+text = "Reset unlocked levels"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -321,3 +329,5 @@ offset_top = 603.0
 offset_right = 166.0
 offset_bottom = 634.0
 text = "Back to main menu"
+
+[connection signal="pressed" from="ResetUnlockedLevels" to="." method="_on_reset_unlocked_levels_pressed"]
