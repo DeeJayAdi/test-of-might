@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://b4572aksntm4n"]
+
+[ext_resource type="Script" uid="uid://c5uy7ubnqus2v" path="res://scripts/objects/bullet.gd" id="1_3iyxl"]
+[ext_resource type="Texture2D" uid="uid://b10shfw311yy7" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - ending.png" id="2_culm1"]
+[ext_resource type="Texture2D" uid="uid://dy42dy8phntdh" path="res://assets/sprites/enemies/bosses/caveboss/poison shot - loop.png" id="3_7at76"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gcv5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cxov"]
+atlas = ExtResource("2_culm1")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg1el"]
+atlas = ExtResource("2_culm1")
+region = Rect2(40, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsfsr"]
+atlas = ExtResource("2_culm1")
+region = Rect2(80, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8afij"]
+atlas = ExtResource("3_7at76")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5727x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cxov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg1el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsfsr")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8afij")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3s4m"]
+radius = 16.03122
+
+[node name="Bullet" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_3iyxl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_gcv5w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5727x")
+animation = &"loop"
+frame_progress = 0.5226058
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_k3s4m")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]

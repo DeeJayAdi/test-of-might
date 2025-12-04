@@ -23,6 +23,8 @@ class_name ItemData
 @export var heal_per_second: int = 0   
 @export var heal_duration: float = 0.0 
 
+@export var animation: PackedScene
+
 func get_stat_text() -> String:
 	var text = ""
 	match type:
