@@ -57,12 +57,12 @@ func _ready() -> void:
 	if current_health <= 0:
 		current_health = max_health
 
-	call_deferred("level_up.emit", level)
-	call_deferred("xp_changed.emit", current_xp, xp_to_next_level)
+	level_up.emit.call_deferred(level)
+	xp_changed.emit.call_deferred(current_xp, xp_to_next_level)
 	
 	player.health_bar.max_value = max_health
 	player.health_bar.value = current_health
-	call_deferred("health_changed.emit", current_health, max_health)
+	health_changed.emit.call_deferred(current_health, max_health)
 
 	skills = {
 		"skill_1": skill_1,
