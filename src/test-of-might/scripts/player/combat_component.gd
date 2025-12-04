@@ -13,6 +13,8 @@ var upgrades : Array[BaseBulletStrategy] = []
 func _ready() -> void:
 	pass
 
+var default_bullet_scene = preload("res://scenes/objects/bullet.tscn")
+
 func _physics_process(delta: float) -> void:
 	var weapon = player.inventory.get_current_weapon()
 	if weapon and weapon.subtype == "ranged":
@@ -47,7 +49,7 @@ func perform_attack(is_heavy: bool = false):
 	
 	var weapon = player.inventory.get_current_weapon()
 	if weapon and weapon.subtype == "ranged":
-		perform_ranged_attack()
+		perform_ranged_attack(weapon)
 		return
 
 	can_attack = false
@@ -113,23 +115,30 @@ func perform_attack(is_heavy: bool = false):
 	get_tree().create_timer(cooldown).timeout.connect(_reset_attack_cooldown)
 
 
-func perform_ranged_attack():
+func perform_ranged_attack(weapon = null):
 	if not can_attack:
 		return
 	can_attack = false
+	var bullet_scene_to_spawn = default_bullet_scene
 	
-	var bullet = preload("res://scenes/objects/bullet.tscn").instantiate() as Bullet
+	if weapon and weapon.get("animation") != null:
+		bullet_scene_to_spawn = weapon.animation
+	
+	var bullet = bullet_scene_to_spawn.instantiate() as Bullet
 	for upgrade in upgrades:
 		upgrade.apply_upgrade(bullet)
+		
 	var muzzle = player.ranged_weapon.get_node("Marker2D") as Marker2D
 	bullet.global_position = muzzle.global_position
 
 	bullet.rotation = muzzle.global_rotation + PI / 4
 	bullet.damage = calculate_attack_damage()
+	
 	get_tree().get_root().add_child(bullet)
 
 	var cooldown = stats_comp.attack_cooldown
 	get_tree().create_timer(cooldown).timeout.connect(_reset_attack_cooldown)
+	
 
 func perform_heavy_attack():
 	perform_attack(true)
