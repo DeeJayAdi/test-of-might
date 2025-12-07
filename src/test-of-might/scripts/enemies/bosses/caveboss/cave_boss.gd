@@ -18,8 +18,8 @@ signal died
 @export var attack_cooldown: float = 2
 @export var roam_cooldown: float = 10.5
 @export var hide_time: float = 3
-@export var pickable_item_scene: PackedScene 
-@export var item_to_drop: ItemData
+
+@export var loot_table: LootTable 
 
 
 var is_player_detected: bool = false
@@ -73,6 +73,7 @@ func _on_death():
 	state_manager.change_state("death")
 	if has_node("/root/PersistentMusic"):
 		PersistentMusic.switch_to_exploration()
+
 	print("Zabito bossa! Odblokowano poziom 2.")
 	var global = get_node("/root/Global")
 	if not global.is_level_unlocked("level2"):
@@ -82,8 +83,9 @@ func _on_death():
 		
 		SaveManager.save_game()
 		# Po 3 sekundach przenieś do menu map
-		await get_tree().create_timer(3.0).timeout
+		await get_tree().create_timer(7.0).timeout
 		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
+
 
 func take_damage(damage: int):
 	health_component.take_damage(damage)
