@@ -48,7 +48,8 @@ func open():
 		get_tree().get_root().add_child(dark_overlay)
 		dark_overlay.move_to_front()
 	
-	scene_root.move_to_front() 
+	scene_root.move_to_front()
+	 
 func close():
 	if not is_open:
 		return
