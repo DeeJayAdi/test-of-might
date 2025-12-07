@@ -13,11 +13,12 @@ var can_attack: bool = true
 @export var crit_multiplier: float = 2.0
 @export var attack_damage: int = 10
 @export var xp_reward: int = 50
-@export var pickable_item_scene: PackedScene 
-@export var item_to_drop: ItemData
 var current_health: int
-var rng = RandomNumberGenerator.new()
 var current_attack_animation: String = "attack1"
+
+@export var loot_table: LootTable 
+
+var rng = RandomNumberGenerator.new()
 
 
 func _ready():
@@ -203,9 +204,10 @@ func _on_animation_finished():
 		# Przyznaj XP graczowi, jeśli istnieje
 		if player and player.stats_comp.has_method("add_xp"):
 			player.stats_comp.add_xp(xp_reward)
+
 		if has_node("/root/PersistentMusic"):
 			PersistentMusic.switch_to_exploration()
-		spawn_drop()
+		DropSpawner.spawn_loot(loot_table, global_position)
 		queue_free()
 
 
@@ -223,12 +225,3 @@ func _on_frame_changed():
 		State.DEATH:
 			$sfxWalk.stop()
 			
-func spawn_drop():
-	if pickable_item_scene == null or item_to_drop == null:
-		return
-	var pickable = pickable_item_scene.instantiate() as PickableItem
-	pickable.setup(item_to_drop)
-	pickable.global_position = global_position
-	
-	#dodanie itemu do mapy
-	get_parent().call_deferred("add_child", pickable)
