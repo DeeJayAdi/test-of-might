@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://bkqrfhelxnrc3"]
+[gd_scene load_steps=41 format=4 uid="uid://bkqrfhelxnrc3"]
 
 [ext_resource type="Texture2D" uid="uid://bynoa7gwbkt8a" path="res://assets/maps/dungeon/walls_floor.png" id="1_3b7po"]
 [ext_resource type="Texture2D" uid="uid://cny3j7msoxlw0" path="res://assets/maps/dungeon/doors_lever_chest_animation.png" id="2_g7mha"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://e7bat4s8rr5a" path="res://assets/maps/dungeon/Water_coasts_animation.png" id="11_vshwi"]
 [ext_resource type="Texture2D" uid="uid://b50sbo7gi36la" path="res://assets/maps/dungeon/water_details_animation.png" id="12_ahea2"]
 [ext_resource type="Texture2D" uid="uid://2sggyck5a2yq" path="res://assets/maps/dungeon/Bridges.png" id="13_28ti2"]
-[ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="14_f6rsi"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="15_6fqx2"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="16_3m3hp"]
 [ext_resource type="PackedScene" uid="uid://cidua0lrk7lmc" path="res://scenes/Interaction_Objects/Flag.tscn" id="17_g7mha"]
@@ -6107,7 +6106,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 outlines = Array[PackedVector2Array]([PackedVector2Array(591.99994, -190.4, 20.8, -188.79999, 18.399998, -16, 594.39996, -14.399994), PackedVector2Array(443.99997, -171.19998, 444.8, -148, 420.8, -148.79999, 420.8, -172.79999), PackedVector2Array(445.59998, -60.799988, 445.59998, -36, 419.19998, -37.600006, 420.8, -61.600006), PackedVector2Array(331.99997, -62.399994, 331.99997, -36.799988, 307.19998, -36.799988, 307.99997, -60.799988), PackedVector2Array(265.59998, -122.399994, 265.59998, -88, 230.39998, -87.19998, 230.39998, -121.599976), PackedVector2Array(187.19998, -59.19998, 187.19998, -36, 163.2, -36.799988, 163.99998, -60), PackedVector2Array(75.99999, -59.19998, 75.2, -36.799988, 51.199997, -36, 52.799995, -60), PackedVector2Array(75.2, -172, 75.99999, -148.79999, 51.199997, -148.79999, 51.999996, -171.19998), PackedVector2Array(186.4, -170.4, 187.99998, -148, 163.99998, -148.79999, 163.99998, -172), PackedVector2Array(331.19998, -170.4, 331.99997, -150.4, 307.19998, -148.79999, 307.99997, -171.19998)])
 agent_radius = 8.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["music_settigns"]]
 modulate = Color(0.82606, 0.82606006, 0.82606, 1)
 light_mask = 3
 visibility_layer = 3
@@ -6205,11 +6204,6 @@ polygon = PackedVector2Array(19.2, -188.80002, 225.60002, -192, 225.60002, -208.
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Water_Floors_Walls/StaticBody2D2"]
 visible = false
 polygon = PackedVector2Array(91.20001, -300, 93.600006, -352.00003, 404.00003, -352.80002, 400.80005, -208.00002, 575.2001, -208.00002, 593.60004, -208.00002, 593.60004, -191.20001, 269.60004, -190.4, 269.60004, -207.20001, 368.00003, -208.8, 367.20004, -320, 131.20001, -318.40002, 131.20001, -300)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("14_f6rsi")
-autoplay = true
-bus = &"Music"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 scale = Vector2(1.5, 1.5)

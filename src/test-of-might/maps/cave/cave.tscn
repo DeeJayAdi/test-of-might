@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=51 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bjyiis05qu5qa" path="res://assets/maps/cave/anim/light1A.png" id="3_jqe3u"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="4_up3r0"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="6_2jint"]
-[ext_resource type="AudioStream" uid="uid://cdvgrh0nsovwx" path="res://assets/audio/maps/dawnforest_chill-215553.mp3" id="7_hy0pv"]
 [ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="8_baql6"]
 [ext_resource type="PackedScene" uid="uid://bpfvkxa3jtv3w" path="res://scenes/enemies/bosses/CaveBoss/CaveBoss.tscn" id="8_grrjv"]
 [ext_resource type="Resource" uid="uid://dalgyo5o3vfyx" path="res://assets/resources/items/ranged/poison-touched-bow.tres" id="9_0738o"]
@@ -7727,7 +7726,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 outlines = Array[PackedVector2Array]([PackedVector2Array(3473, 91, 3582, 60, 4013, 55, 4073, 96, 4075, 221, 4131, 309, 4149, 629, 4061, 716, 3562, 720, 3558, 525, 3338, 395, 3246, 372, 3171, 271, 3184, 243, 3314, 158, 3411, 150)])
 agent_radius = 50.0
 
-[node name="Cave" type="Node2D"]
+[node name="Cave" type="Node2D" groups=["music_settigns"]]
 texture_filter = 1
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -7899,11 +7898,6 @@ polygon = PackedVector2Array(1835, 884, 1845, 885, 1848, 882, 1844, 872, 1838, 8
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_up3r0")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_hy0pv")
-autoplay = true
-bus = &"Music"
 
 [node name="BossNavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_k8do1")
