@@ -119,6 +119,9 @@ func _on_DetectionArea_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		current_state = State.CHASE
+		
+		if has_node("/root/PersistentMusic"):
+			PersistentMusic.switch_to_battle()
 
 
 func _on_DetectionArea_body_exited(body):
@@ -127,6 +130,9 @@ func _on_DetectionArea_body_exited(body):
 	if body.is_in_group("player"):
 		player = null
 		current_state = State.IDLE
+		
+		if has_node("/root/PersistentMusic"):
+			PersistentMusic.switch_to_exploration()
 
 
 func _on_AttackRange_body_entered(body):
@@ -198,6 +204,9 @@ func _on_animation_finished():
 		# Przyznaj XP graczowi, jeśli istnieje
 		if player and player.stats_comp.has_method("add_xp"):
 			player.stats_comp.add_xp(xp_reward)
+
+		if has_node("/root/PersistentMusic"):
+			PersistentMusic.switch_to_exploration()
 		DropSpawner.spawn_loot(loot_table, global_position)
 		queue_free()
 

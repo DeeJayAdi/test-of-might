@@ -187,7 +187,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "New Game"
 
-[node name="SaveSlot4" type="PanelContainer" parent="HBoxContainer"]
+[node name="SaveSlot4" type="PanelContainer" parent="HBoxContainer" groups=["main_menu"]]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_2mnui")

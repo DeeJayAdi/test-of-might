@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="14_l25p1"]
 [ext_resource type="AudioStream" uid="uid://dhbo2bbe7qlvb" path="res://assets/audio/effects/ui/ui-click-43196.mp3" id="15_8wfm2"]
 
-[node name="MapMenu" type="Control" groups=["music_settigns", "music_settings"]]
+[node name="MapMenu" type="Control" groups=["main_menu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

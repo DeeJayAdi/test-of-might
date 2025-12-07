@@ -71,6 +71,8 @@ func _on_health_changed(_current, _max_hp):
 func _on_death():
 	died.emit()
 	state_manager.change_state("death")
+	if has_node("/root/PersistentMusic"):
+		PersistentMusic.switch_to_exploration()
 
 	print("Zabito bossa! Odblokowano poziom 2.")
 	var global = get_node("/root/Global")
@@ -126,6 +128,8 @@ func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
 		target = body
 		is_player_detected = true
+		if has_node("/root/PersistentMusic"):
+			PersistentMusic.switch_to_battle()
 		
 func _on_meele_area_body_entered(body):
 	if body.is_in_group("player"):
@@ -135,6 +139,8 @@ func _on_detection_area_body_exit(body):
 	if body.is_in_group("player"):
 		target = null
 		is_player_detected = false
+		if has_node("/root/PersistentMusic"):
+			PersistentMusic.switch_to_exploration()
 		
 func _on_meele_area_body_exit(body):
 	if body.is_in_group("player"):
