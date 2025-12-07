@@ -63,7 +63,7 @@ text = "Save 1"
 label_settings = SubResource("LabelSettings_ugrym")
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer/SaveSlot1/VBoxContainer"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer/SaveSlot1/VBoxContainer" groups=["main_menu"]]
 layout_mode = 2
 stretch_mode = 3
 

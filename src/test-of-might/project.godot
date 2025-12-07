@@ -37,6 +37,7 @@ music_settigns=""
 ui_controls=""
 Persist=""
 enemies=""
+main_menu="Muzyka Menu główne"
 
 [input]
 
