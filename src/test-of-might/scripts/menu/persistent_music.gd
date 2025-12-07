@@ -24,6 +24,7 @@ var persistent_names := [
 ]
 
 func _ready() -> void:
+	_load_saved_volume()
 	music_player.bus = "Music"
 	# Ładujemy domyślnie Dawnforest (tak jak było)
 	var stream: AudioStream = load(game_music_path)
@@ -131,3 +132,18 @@ func _on_music_finished() -> void:
 
 func _debug(msg: String) -> void:
 	print(msg)
+func _load_saved_volume():
+	if FileAccess.file_exists("user://audio_settings.save"):
+		var file = FileAccess.open("user://audio_settings.save", FileAccess.READ)
+		var data = file.get_var() # Wczytujemy słownik zapisany przez Twój skrypt ustawień
+		file.close()
+		
+		# Ustawiamy głośność szyny Music
+		if data.has("music"):
+			var bus_idx = AudioServer.get_bus_index("Music")
+			AudioServer.set_bus_volume_db(bus_idx, linear_to_db(data["music"]))
+			
+		# Ustawiamy głośność szyny SFX (przy okazji)
+		if data.has("sfx"):
+			var bus_idx = AudioServer.get_bus_index("SFX")
+			AudioServer.set_bus_volume_db(bus_idx, linear_to_db(data["sfx"]))

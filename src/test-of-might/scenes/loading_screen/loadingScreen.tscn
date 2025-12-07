@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://7vbjvh67kyte" path="res://assets/menu/Background.png" id="2_5tms7"]
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="3_y13s8"]
 
-[node name="LoadingScreen" type="Control"]
+[node name="LoadingScreen" type="Control" groups=["main_menu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
