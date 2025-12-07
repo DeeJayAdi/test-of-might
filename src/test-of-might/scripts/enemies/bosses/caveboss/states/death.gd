@@ -28,11 +28,7 @@ func exit():
 	
 func spawn_drop():
 	#logika dropu itemu z bossa
-	if boss.pickable_item_scene == null or boss.item_to_drop == null:
-		return
-	var pickable = boss.pickable_item_scene.instantiate() as PickableItem
-	pickable.setup(boss.item_to_drop)
-	pickable.global_position = boss.global_position
-	
-	#dodanie itemu do mapy
-	boss.get_parent().call_deferred("add_child", pickable)
+	if boss.get("loot_table"):
+		DropSpawner.spawn_loot(boss.loot_table, boss.global_position)
+	else:
+		print_debug("Warning: Boss has no loot_table assigned!")
