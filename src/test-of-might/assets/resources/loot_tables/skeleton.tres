@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=7 format=3 uid="uid://duqgduy5fwj3c"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_lw7d0"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_j0mj4"]
+[ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/armor/boots/basic_boots.tres" id="2_o8bbp"]
+[ext_resource type="Resource" uid="uid://2dhh0a1gycp6" path="res://assets/resources/items/potions/small_vital.tres" id="3_kta1l"]
+[ext_resource type="Resource" uid="uid://ck27msfqrytrw" path="res://assets/resources/items/melee/old_iron_sword.tres" id="4_0ptd0"]
+[ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="5_kta1l"]
+
+[resource]
+script = ExtResource("2_j0mj4")
+items = Dictionary[ExtResource("1_lw7d0"), float]({
+ExtResource("4_0ptd0"): 0.25,
+ExtResource("2_o8bbp"): 0.1,
+ExtResource("3_kta1l"): 0.5,
+ExtResource("5_kta1l"): 0.5
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"
