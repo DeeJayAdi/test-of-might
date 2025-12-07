@@ -26,7 +26,7 @@ func _on_level_1_btn_pressed() -> void:
 	sceneLink = "res://maps/cave/cave.tscn"
 
 func _on_level_2_btn_pressed() -> void:
-	sceneLink = "noLevel"
+	sceneLink = "res://maps/village/village.tscn"
 
 func _on_level_3_btn_pressed() -> void:
 	sceneLink = "noLevel"
@@ -46,6 +46,9 @@ func _on_start_game_btn_pressed() -> void:
 func _play_Sound():
 	$sfxHover.play()
 
+func reset_unlocked_levels():
+	print("Usunięto postęp w odblokowywaniu poziomow")
+	
 
 func _on_back_to_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu/Main_Menu.tscn")

@@ -1,6 +1,8 @@
 #main boss script
 class_name CaveBoss extends CharacterBody2D
 
+signal died
+
 @onready var state_manager: Node = $StateManager
 @onready var combat_component: Node = $CombatComponent
 @onready var health_component: Node = $HealthComponent
@@ -67,8 +69,21 @@ func _on_health_changed(_current, _max_hp):
 
 
 func _on_death():
+	died.emit()
 	state_manager.change_state("death")
-	
+
+	print("Zabito bossa! Odblokowano poziom 2.")
+	var global = get_node("/root/Global")
+	if not global.is_level_unlocked("level2"):
+		global.unlock_level("level2")
+		global.save_unlocked_levels()
+		NotificationManager.show_notification("New level unlocked: Level 2", 5.0)
+		
+		SaveManager.save_game()
+		# Po 3 sekundach przenieś do menu map
+		await get_tree().create_timer(7.0).timeout
+		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
+
 
 func take_damage(damage: int):
 	health_component.take_damage(damage)
