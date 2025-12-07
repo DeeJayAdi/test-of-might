@@ -16,8 +16,8 @@ class_name CaveBoss extends CharacterBody2D
 @export var attack_cooldown: float = 2
 @export var roam_cooldown: float = 10.5
 @export var hide_time: float = 3
-@export var pickable_item_scene: PackedScene 
-@export var item_to_drop: ItemData
+
+@export var loot_table: LootTable 
 
 
 var is_player_detected: bool = false
@@ -68,6 +68,7 @@ func _on_health_changed(_current, _max_hp):
 
 func _on_death():
 	state_manager.change_state("death")
+	
 
 func take_damage(damage: int):
 	health_component.take_damage(damage)

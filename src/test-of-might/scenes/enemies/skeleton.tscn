@@ -1,8 +1,9 @@
-[gd_scene load_steps=72 format=3 uid="uid://c1t3jqtd5ecfb"]
+[gd_scene load_steps=73 format=3 uid="uid://c1t3jqtd5ecfb"]
 
 [ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_6ucyf"]
 [ext_resource type="Texture2D" uid="uid://uej46ytxa1tp" path="res://assets/sprites/enemies/skeleton/Skeleton_01_White_Attack1.png" id="1_s0h66"]
 [ext_resource type="Texture2D" uid="uid://ccsfjyl62rxxq" path="res://assets/sprites/enemies/skeleton/Skeleton_01_White_Attack2.png" id="2_6ucyf"]
+[ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="2_pxfki"]
 [ext_resource type="Texture2D" uid="uid://dcssyu3w6858e" path="res://assets/sprites/enemies/skeleton/Skeleton_01_White_Die.png" id="3_vncds"]
 [ext_resource type="Texture2D" uid="uid://bd3jerni7kubb" path="res://assets/sprites/enemies/skeleton/Skeleton_01_White_Hurt.png" id="4_bmy85"]
 [ext_resource type="Texture2D" uid="uid://u6n6lbba81u7" path="res://assets/sprites/enemies/skeleton/Skeleton_01_White_Idle.png" id="5_2t5sy"]
@@ -455,6 +456,7 @@ attack_cooldown = 0.7
 crit_chance = 0.15
 attack_damage = 15
 xp_reward = 80
+loot_table = ExtResource("2_pxfki")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)

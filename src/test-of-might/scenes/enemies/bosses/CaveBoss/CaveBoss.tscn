@@ -1,7 +1,8 @@
-[gd_scene load_steps=182 format=3 uid="uid://bpfvkxa3jtv3w"]
+[gd_scene load_steps=183 format=3 uid="uid://bpfvkxa3jtv3w"]
 
 [ext_resource type="Texture2D" uid="uid://cwd7bvcuqtkgm" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - attack1.png" id="1_6fgxj"]
 [ext_resource type="Script" uid="uid://c8vm0d0t5y7sk" path="res://scripts/enemies/bosses/caveboss/cave_boss.gd" id="1_oreq0"]
+[ext_resource type="Resource" uid="uid://clpcsvs7smbwy" path="res://assets/resources/loot_tables/cave_boss.tres" id="2_jckdi"]
 [ext_resource type="Texture2D" uid="uid://vvx840a3dje6" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - attack2.png" id="2_oreq0"]
 [ext_resource type="Texture2D" uid="uid://tpsetcih5meo" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - come out.png" id="3_yerkl"]
 [ext_resource type="Texture2D" uid="uid://b2ufilk0akebl" path="res://assets/sprites/enemies/bosses/caveboss/sand worm - idle.png" id="4_pplqm"]
@@ -1253,6 +1254,7 @@ collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_oreq0")
 attack_cooldown = 3.0
+loot_table = ExtResource("2_jckdi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)
