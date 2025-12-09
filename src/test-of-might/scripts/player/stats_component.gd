@@ -26,11 +26,11 @@ var current_health: int = max_health
 @export var speed: float = 200.0
 @export var run_multiplier: float = 1.5
 @export var character_class: String = "swordsman"
-@export var active_skill: Resource
-@export var skill_1: Resource
-@export var skill_2: Resource
-@export var skill_3: Resource
-@export var skill_4: Resource
+@export var active_skill: BaseSkill
+@export var skill_1: BaseSkill
+@export var skill_2: BaseSkill
+@export var skill_3: BaseSkill
+@export var skill_4: BaseSkill
 
 var skills: Dictionary = {}
 var level: int = 1
@@ -70,6 +70,14 @@ func _ready() -> void:
 		"skill_3": skill_3,
 		"skill_4": skill_4
 	}
+	if skill_1:
+		skill_1.skill_slot = 1
+	if skill_2:
+		skill_2.skill_slot = 2
+	if skill_3:
+		skill_3.skill_slot = 3
+	if skill_4:
+		skill_4.skill_slot = 4
 
 
 func update_gold(amount: int):
