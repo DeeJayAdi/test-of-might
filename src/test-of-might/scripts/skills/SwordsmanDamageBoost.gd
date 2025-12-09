@@ -21,7 +21,7 @@ func activate(player):
 	timer.timeout.connect(Callable(self, "_on_duration_finished").bind(player))
 	
 	# Uruchom cooldown z bazowej klasy
-	super.start_cooldown()
+	super.start_cooldown(player)
 
 func _on_duration_finished(player):
 	# Sprawdź czy gracz wciąż istnieje
