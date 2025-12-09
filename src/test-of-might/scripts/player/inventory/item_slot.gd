@@ -21,8 +21,6 @@ func update_ui() -> void:
 		tooltip_text = "placeholder"
 		return
 		
-	if quantity == 1:
-		quantity = max(1, item.default_quantity)
 	icon.texture = item.icon
 	tooltip_text = item.item_name
 	if quantity > 1:

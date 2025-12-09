@@ -27,6 +27,7 @@ func _on_save_button_pressed():
 
 func _on_load_button_pressed():
 	get_tree().paused = false
+	SaveManager.respawn_enemies_on_load = false
 	SaveManager.load_game()
 
 

@@ -7,6 +7,8 @@ var current_slot: int = 1
 var loaded_data : Dictionary = {}
 var saved_scene_path : String = ""
 var played_cutscenes: Array = []
+var dead_enemies: Array = []  
+var respawn_enemies_on_load: bool = false
 
 func is_cutscene_played(id: String) -> bool:
 	return id in played_cutscenes
@@ -33,6 +35,7 @@ func save_game():
 	var save_data = {
 		"scene_path": scene.scene_file_path,
 		"played_cutscenes": played_cutscenes,
+		"dead_enemies": dead_enemies,
 		"nodes": {}
 		}
 		
@@ -41,13 +44,23 @@ func save_game():
 
 	for node in nodes_to_save:
 		if is_instance_valid(node) and node.has_method("save"):
-			var rel_path = str(scene.get_path_to(node))
-			if rel_path == "":
-				rel_path = str(node.get_path())
-			print("ZAPISUJĘ: %s (rel: %s)" % [node.get_path(), rel_path])
-			save_data["nodes"][rel_path] = node.save()
+			
+			# --- ZMIANA: Sprawdzamy, czy to Gracz ---
+			var key_name = ""
+			if node.is_in_group("player") or node.name == "Player": # Sprawdź grupę!
+				key_name = "Player_Fixed_Data" # Stała nazwa niezależna od mapy
+			else:
+				# Dla skrzyń i wrogów używamy starej metody (ścieżki)
+				var rel_path = str(scene.get_path_to(node))
+				if rel_path == "":
+					rel_path = str(node.get_path())
+				key_name = rel_path
+			# ----------------------------------------
+
+			print("ZAPISUJĘ: %s jako klucz: %s" % [node.name, key_name])
+			save_data["nodes"][key_name] = node.save()
 		else:
-			print("BŁĄD: Obiekt %s jest w grupie 'Persist', ale nie ma funkcji save()!" % node.name)
+			print("BŁĄD: Obiekt %s nie ma funkcji save()!" % node.name)
 
 	# Zapisz plik synchronicznie do ścieżki slota
 	var file = FileAccess.open(get_save_path(), FileAccess.WRITE)
@@ -55,13 +68,26 @@ func save_game():
 		file.store_string(JSON.stringify(save_data, "\t"))
 		file.close()
 		print("Gra zapisana pomyślnie w: %s" % get_save_path())
-
+		loaded_data = save_data["nodes"]
+		saved_scene_path = save_data["scene_path"]
 		# Emituj sygnał w deferred, żeby dać czas na flush IO
 		call_deferred("_emit_save_completed_safe", true)
 	else:
 		print("BŁĄD ZAPISU: Nie można otworzyć pliku %s" % get_save_path())
 		call_deferred("_emit_save_completed_safe", false)
+		
+#funkcje by czy enemy dead
+func register_enemy_death(enemy_node: Node):
+	var path = str(enemy_node.get_path())
+	if path not in dead_enemies:
+		dead_enemies.append(path)
 
+func is_enemy_dead(enemy_node: Node) -> bool:
+	if respawn_enemies_on_load:
+		return false
+		
+	var path = str(enemy_node.get_path())
+	return path in dead_enemies
 
 func _emit_save_completed_safe(success: bool):
 	emit_signal("save_completed", success)
@@ -97,13 +123,24 @@ func load_game():
 		played_cutscenes = data["played_cutscenes"]
 	else:
 		played_cutscenes = [] # Jeśli stary save, to lista pusta
-
+	if data.has("dead_enemies"):
+		if respawn_enemies_on_load:
+			dead_enemies = []
+		else:
+			dead_enemies = data["dead_enemies"]
+	else:
+		dead_enemies = []
 	Global.SwitchScene(data["scene_path"])
 
 
 func get_data_for_node(node_or_path):
 	if loaded_data.size() == 0:
 		return null
+	if node_or_path is Node:
+		if node_or_path.is_in_group("player") or node_or_path.name == "Player":
+			if loaded_data.has("Player_Fixed_Data"):
+				print("Znaleziono dane gracza niezależne od mapy!")
+				return loaded_data["Player_Fixed_Data"]
 
 	if saved_scene_path != "" and get_tree().current_scene:
 		var cur = get_tree().current_scene.scene_file_path
@@ -151,41 +188,55 @@ func get_slot_preview_data(slot_id: int) -> Dictionary:
 		return {}
 
 	var path = SAVE_PATH % slot_id
-	
 	var file = FileAccess.open(path, FileAccess.READ)
-	if not file:
-		return {}
+	if not file: return {}
 		
 	var content = file.get_as_text()
 	file.close()
 	
 	var parsed = JSON.parse_string(content)
-	if not parsed or typeof(parsed) == TYPE_NIL:
-		return {}
+	if not parsed or typeof(parsed) == TYPE_NIL: return {}
 
 	var data = parsed.result if parsed.has("result") else parsed
 	
 	var player_data = null
-	for key in data["nodes"]:
-		if key.ends_with("/player") or key == "player":
-			player_data = data["nodes"][key]
-			break
+	if data["nodes"].has("Player_Fixed_Data"):
+		player_data = data["nodes"]["Player_Fixed_Data"]
+	else:
+		for key in data["nodes"]:
+			if key.ends_with("/player") or key.ends_with("/Player"):
+				player_data = data["nodes"][key]
+				break
 	
 	var preview_data = {}
-	
 	preview_data["scene_name"] = data.get("scene_path", "Nieznana").get_file().get_basename()
 	
 	if player_data:
-		preview_data["player_level"] = player_data.get("level", 1)
-		preview_data["player_class"] = player_data.get("class", "Warrior")
+		if player_data.has("stats"):
+			var stats = player_data["stats"]
+			preview_data["player_level"] = stats.get("level", 1)
+			
+			# --- NAPRAWA NAZWY KLASY ---
+			var c_class = stats.get("character_class", "Warrior")
+			
+			# Jeśli w pliku jest "swordsman", zamień go na "Warrior"
+			if c_class == "swordsman":
+				preview_data["player_class"] = "Warrior"
+			else:
+				preview_data["player_class"] = c_class
+			# ---------------------------
+			
+		else:
+			# Stary system
+			preview_data["player_level"] = player_data.get("level", 1)
+			var c_class = player_data.get("character_class", "Warrior")
+			if c_class == "swordsman":
+				preview_data["player_class"] = "Warrior"
+			else:
+				preview_data["player_class"] = c_class
 	
-	var local_time_dict = Time.get_datetime_dict_from_system(false)
-	var local_timestamp = Time.get_unix_time_from_datetime_dict(local_time_dict)
-	var utc_timestamp = Time.get_unix_time_from_system()
-	var offset_seconds = local_timestamp - utc_timestamp
-	var file_timestamp_utc = FileAccess.get_modified_time(path)
-	var file_timestamp_local = file_timestamp_utc + offset_seconds
-	var time = Time.get_datetime_dict_from_unix_time(file_timestamp_local)
+	var file_time = FileAccess.get_modified_time(path)
+	var time = Time.get_datetime_dict_from_unix_time(file_time)
 	preview_data["save_date"] = "%02d-%02d-%s %02d:%02d" % [time.day, time.month, time.year, time.hour, time.minute]
 
 	return preview_data

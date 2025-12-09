@@ -82,6 +82,7 @@ func update_info(id: int, is_load_mode: bool):
 			icon.texture = null
 
 func _on_load_button_pressed():
+	SaveManager.respawn_enemies_on_load = true
 	emit_signal("slot_selected", slot_id)
 
 func _on_delete_button_pressed():

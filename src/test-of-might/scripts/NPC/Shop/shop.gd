@@ -83,30 +83,38 @@ func populate_sell_tab():
 	for child in sell_grid.get_children():
 		child.queue_free()
 	
-	# Szukamy slotów w ekwipunku gracza
 	var slots = inventory_ref.find_children("*", "Panel", true, false)
 	
 	for slot in slots:
-		# Jeśli w slocie jest przedmiot
+		# --- NOWE ZABEZPIECZENIE ---
+		# Sprawdzamy, czy slot ma w ogóle zmienną 'quantity'.
+		# Jeśli to swap_slot lub equipment_slot, to jej nie ma -> POMIŃ GO.
+		if not "quantity" in slot:
+			continue
+		# ---------------------------
+
 		if slot.get("item") != null:
 			var item = slot.item
 			var btn = Button.new()
-			var sell_price = int(item.price * 0.5) # Sprzedaż za 50% ceny
+			var sell_price = int(item.price * 0.5)
 			
-			btn.text = item.item_name + "\nSell: " + str(sell_price)
+			var qty_text = ""
+			if slot.quantity > 1:
+				qty_text = " (x" + str(slot.quantity) + ")"
+
+			btn.text = item.item_name + qty_text + "\nSell: " + str(sell_price)
 			btn.icon = item.icon
 			btn.custom_minimum_size = Vector2(100, 100)
 			btn.expand_icon = true
-			btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 			
-			# Kliknięcie sprzedaje
 			btn.pressed.connect(func(): _on_sell_item_pressed(slot, item, sell_price))
 			
 			sell_grid.add_child(btn)
 
 func _on_sell_item_pressed(slot_ref, item, value):
-	# Usuwanie przedmiotu ze slotu
+	if slot_ref.item != item:
+		populate_sell_tab() # Odśwież widok, bo coś się nie zgadza
+		return
 	if slot_ref.quantity > 1:
 		slot_ref.quantity -= 1
 		slot_ref.update_ui()
@@ -114,11 +122,10 @@ func _on_sell_item_pressed(slot_ref, item, value):
 		slot_ref.item = null
 		slot_ref.quantity = 0
 		slot_ref.update_ui()
-	
-	player_ref.stats_comp.update_gold(value)
+
+	player_ref.update_gold(value)
 	update_gold_ui()
-	
-	# Odświeżamy listę sprzedaży, bo właśnie sprzedaliśmy przedmiot
+
 	populate_sell_tab()
 
 
