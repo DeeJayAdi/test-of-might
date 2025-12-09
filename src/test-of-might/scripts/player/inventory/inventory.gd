@@ -87,3 +87,48 @@ func add_item(new_item: ItemData, quantity: int = 1) -> bool:
 
 func _exit_tree():
 	ProjectSettings.set_setting("gui/timers/tooltip_delay_sec", 0.5)
+
+func save() -> Dictionary:
+	var items_data = []
+	var slots = find_children("*", "Panel", true, false)
+	
+	for slot in slots:
+		# Sprawdzamy czy slot ma skrypt item_slot.gd i czy ma przedmiot
+		if slot.get("item") != null:
+			items_data.append({
+				"item_path": slot.item.resource_path, # Ścieżka do pliku .tres
+				"quantity": slot.quantity,
+				"slot_index": slot.get_index() # Zapamiętujemy pozycję w siatce
+			})
+	
+	return {
+		"items": items_data
+	}
+
+func load_data(data: Dictionary):
+	# 1. Wyczyść obecny ekwipunek
+	var slots = find_children("*", "Panel", true, false)
+	for slot in slots:
+		slot.item = null
+		slot.quantity = 0
+		slot.update_ui()
+		
+	# 2. Wczytaj zapisane przedmioty
+	if data.has("items"):
+		for item_entry in data["items"]:
+			var path = item_entry["item_path"]
+			var qty = item_entry["quantity"]
+			var idx = item_entry.get("slot_index", -1)
+			
+			if ResourceLoader.exists(path):
+				var item_res = load(path)
+				# Jeśli mamy indeks slotu, wstawiamy w konkretne miejsce
+				if idx != -1 and idx < slots.size():
+					slots[idx].item = item_res
+					slots[idx].quantity = qty
+					slots[idx].update_ui()
+				else:
+					# Fallback: dodaj gdziekolwiek, jeśli indeks się nie zgadza
+					add_item(item_res, qty)
+			else:
+				print("BŁĄD: Nie znaleziono pliku przedmiotu: ", path)

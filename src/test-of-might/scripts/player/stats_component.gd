@@ -41,35 +41,35 @@ var damage_multiplier: float = 1.0
 
 func _ready() -> void:
 	await owner.ready
+	
+	# Podłączamy sygnały
 	level_up.connect(_on_level_up)
 	health_changed.connect(_on_health_changed)
-	
 	xp_changed.connect(_on_xp_changed)
 	
-	var data = SaveManager.get_data_for_node(owner)
-	
-	if data:
-		character_class = data.get("character_class", "swordsman")
-		level = data.get("level", 1)
-		current_xp = data.get("current_xp", 0)
-		xp_to_next_level = data.get("xp_to_next_level", 100)
-		current_health = data.get("current_health", max_health)
-	if current_health <= 0:
-		current_health = max_health
-
-	level_up.emit.call_deferred(level)
-	xp_changed.emit.call_deferred(current_xp, xp_to_next_level)
-	
-	player.health_bar.max_value = max_health
-	player.health_bar.value = current_health
-	health_changed.emit.call_deferred(current_health, max_health)
-
+	# Inicjalizacja słownika skilli
 	skills = {
 		"skill_1": skill_1,
 		"skill_2": skill_2,
 		"skill_3": skill_3,
 		"skill_4": skill_4
 	}
+	
+	# --- NAPRAWA: Zabezpieczenie dla Nowej Gry ---
+	if current_health <= 0:
+		current_health = max_health
+	
+	# --- NAPRAWA: Wymuszenie aktualizacji paska UI ---
+	# Najpierw ustawiamy wartości "na sztywno", żeby pasek nie animował się od zera
+	if player.health_bar:
+		player.health_bar.max_value = max_health
+		player.health_bar.value = current_health
+	
+	# Potem emitujemy sygnały dla pewności
+	health_changed.emit(current_health, max_health)
+	level_up.emit(level)
+	xp_changed.emit(current_xp, xp_to_next_level)
+	if gold_changed: gold_changed.emit(gold)
 
 
 func update_gold(amount: int):
@@ -170,3 +170,31 @@ func _on_xp_changed(curr_xp, max_xp):
 	if xp_bar:
 		xp_bar.max_value = max_xp
 		xp_bar.value = curr_xp
+		
+# --- WKLEJ TO NA SAMYM DOLE PLIKU stats_component.gd ---
+
+func save() -> Dictionary:
+	return {
+		"level": level,
+		"current_xp": current_xp,
+		"xp_to_next_level": xp_to_next_level,
+		"current_health": current_health,
+		"gold": gold,
+		"character_class": character_class
+	}
+
+func load_data(data: Dictionary):
+	level = data.get("level", 1)
+	current_xp = data.get("current_xp", 0)
+	xp_to_next_level = data.get("xp_to_next_level", 100)
+	current_health = data.get("current_health", max_health)
+	gold = data.get("gold", 0)
+	character_class = data.get("character_class", "swordsman")
+	if current_health <= 0:
+		current_health = max_health
+	
+	# Odśwież UI po wczytaniu
+	if owner.has_signal("level_up"): owner.level_up.emit.call_deferred(level)
+	if owner.has_signal("xp_changed"): owner.xp_changed.emit.call_deferred(current_xp, xp_to_next_level)
+	if owner.has_signal("health_changed"): owner.health_changed.emit.call_deferred(current_health, max_health)
+	if owner.has_signal("gold_changed"): owner.gold_changed.emit.call_deferred(gold)

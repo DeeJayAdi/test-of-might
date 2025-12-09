@@ -84,6 +84,9 @@ func _on_death():
 		SaveManager.save_game()
 		# Po 3 sekundach przenieś do menu map
 		await get_tree().create_timer(7.0).timeout
+		print("Zapisuję stan gry...")
+		SaveManager.save_game()
+		await get_tree().process_frame 
 		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 
 

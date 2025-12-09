@@ -22,6 +22,9 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready():
+	if SaveManager.is_enemy_dead(self):
+		queue_free()
+		return
 	$DetectionArea/CollisionShape2D.shape.radius = detect_radius
 	# Dodajemy do grupy 'enemies' aby ułatwić selekcję
 	add_to_group("enemies")
@@ -208,6 +211,7 @@ func _on_animation_finished():
 		if has_node("/root/PersistentMusic"):
 			PersistentMusic.switch_to_exploration()
 		DropSpawner.spawn_loot(loot_table, global_position)
+		SaveManager.register_enemy_death(self)
 		queue_free()
 
 
