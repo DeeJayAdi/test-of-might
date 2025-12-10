@@ -178,15 +178,22 @@ func _on_xp_changed(curr_xp, max_xp):
 # --- WKLEJ TO NA SAMYM DOLE PLIKU stats_component.gd ---
 
 func save() -> Dictionary:
+	var skills_data = {}
+	for key in skills:
+		var skill_res = skills[key]
+		if skill_res and skill_res.has_method("save"):
+			skills_data[key] = skill_res.save()
+
 	return {
 		"level": level,
 		"current_xp": current_xp,
 		"xp_to_next_level": xp_to_next_level,
 		"current_health": current_health,
 		"gold": gold,
-		"character_class": character_class
+		"character_class": character_class,
+		"skills_cooldowns": skills_data 
 	}
-
+	
 func load_data(data: Dictionary):
 	level = data.get("level", 1)
 	current_xp = data.get("current_xp", 0)
@@ -194,10 +201,22 @@ func load_data(data: Dictionary):
 	current_health = data.get("current_health", max_health)
 	gold = data.get("gold", 0)
 	character_class = data.get("character_class", "swordsman")
+	
 	if current_health <= 0:
 		current_health = max_health
+	var skills_data = data.get("skills_cooldowns", {})
 	
-	# Odśwież UI po wczytaniu
+	for s in skills.values():
+		if s: s.is_on_cooldown = false
+
+	for key in skills_data:
+		if skills.has(key):
+			var skill_res = skills[key]
+			var saved_skill_info = skills_data[key]
+			
+			if skill_res and skill_res.has_method("load_data"):
+				skill_res.load_data(saved_skill_info, player)
+
 	if owner.has_signal("level_up"): owner.level_up.emit.call_deferred(level)
 	if owner.has_signal("xp_changed"): owner.xp_changed.emit.call_deferred(current_xp, xp_to_next_level)
 	if owner.has_signal("health_changed"): owner.health_changed.emit.call_deferred(current_health, max_health)

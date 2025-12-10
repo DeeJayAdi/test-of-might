@@ -8,9 +8,10 @@ extends Area2D
 var cutscene_scene = preload("res://scenes/Cutscenes/Cutscene.tscn")
 
 func _ready():
-	if cutscene_id != "" and SaveManager.is_cutscene_played(cutscene_id):
-		queue_free()
-		return
+	if not SaveManager.reset_position_on_load:
+		if cutscene_id != "" and SaveManager.is_cutscene_played(cutscene_id):
+			queue_free()
+			return
 
 	if play_on_start:
 		call_deferred("play_cutscene")

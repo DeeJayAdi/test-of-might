@@ -40,6 +40,8 @@ func _on_start_game_btn_pressed() -> void:
 		return
 	SaveManager.reset_position_on_load = true
 	SaveManager.respawn_enemies_on_load = true
+	SaveManager.played_cutscenes = []
+	SaveManager.dead_enemies = []
 	$VBoxContainer2/ErrorLabel.text = ""
 	get_node("/root/Global").SwitchScene(sceneLink)
 	Global.SwitchScene(sceneLink)
