@@ -1238,14 +1238,13 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xafn1"]
 radius = 7.0
-height = 39.75
 
 [node name="Banshee" type="CharacterBody2D"]
 texture_filter = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cqqot")
-animation = &"attack_down"
+animation = &"death_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_xafn1")
