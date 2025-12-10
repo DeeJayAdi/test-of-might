@@ -66,7 +66,7 @@ func update_info(id: int, is_load_mode: bool):
 			if is_load_mode:
 				load_button.text = "Load"
 			else:
-				load_button.text = "New Game" 
+				load_button.text = "Choose level" 
 
 		var class_icon_map = {
 			"Mage": "MageMan.png",
@@ -82,7 +82,7 @@ func update_info(id: int, is_load_mode: bool):
 			icon.texture = null
 
 func _on_load_button_pressed():
-	SaveManager.respawn_enemies_on_load = true
+	SaveManager.respawn_enemies_on_load = false
 	emit_signal("slot_selected", slot_id)
 
 func _on_delete_button_pressed():

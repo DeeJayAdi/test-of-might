@@ -36,14 +36,14 @@ func _ready():
 		print("--- DEBUG POZYCJI ---")
 		print("Zapisana mapa (z pliku): '", SaveManager.saved_scene_path, "'")
 		print("Aktualna mapa (gra):     '", current_map_path, "'")
-		if SaveManager.saved_scene_path == current_map_path: 
+		if SaveManager.saved_scene_path == current_map_path and not SaveManager.reset_position_on_load:
 			var pos_x = data.get("global_pos_x", global_position.x)
 			var pos_y = data.get("global_pos_y", global_position.y)
 			global_position = Vector2(pos_x, pos_y)
 			print("Pozycje zgodne - wczytuję koordynaty.")
 		else:
 			print("Nowa mapa (lub brak zapisu pozycji dla tej mapy) - używam pozycji startowej.")
-			
+		SaveManager.reset_position_on_load = false
 		if data.has("stats"):
 			stats_comp.load_data(data["stats"])
 			

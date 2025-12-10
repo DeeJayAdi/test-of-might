@@ -55,17 +55,13 @@ func _ready() -> void:
 		"skill_4": skill_4
 	}
 	
-	# --- NAPRAWA: Zabezpieczenie dla Nowej Gry ---
 	if current_health <= 0:
 		current_health = max_health
 	
-	# --- NAPRAWA: Wymuszenie aktualizacji paska UI ---
-	# Najpierw ustawiamy wartości "na sztywno", żeby pasek nie animował się od zera
 	if player.health_bar:
 		player.health_bar.max_value = max_health
 		player.health_bar.value = current_health
 	
-	# Potem emitujemy sygnały dla pewności
 	health_changed.emit(current_health, max_health)
 	level_up.emit(level)
 	xp_changed.emit(current_xp, xp_to_next_level)
