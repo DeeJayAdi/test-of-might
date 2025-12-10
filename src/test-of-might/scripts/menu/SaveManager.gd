@@ -9,6 +9,7 @@ var saved_scene_path : String = ""
 var played_cutscenes: Array = []
 var dead_enemies: Array = []  
 var respawn_enemies_on_load: bool = false
+var reset_position_on_load: bool = false
 
 func is_cutscene_played(id: String) -> bool:
 	return id in played_cutscenes
@@ -122,7 +123,7 @@ func load_game():
 	if data.has("played_cutscenes"):
 		played_cutscenes = data["played_cutscenes"]
 	else:
-		played_cutscenes = [] # Jeśli stary save, to lista pusta
+		played_cutscenes = [] 
 	if data.has("dead_enemies"):
 		if respawn_enemies_on_load:
 			dead_enemies = []
@@ -216,10 +217,8 @@ func get_slot_preview_data(slot_id: int) -> Dictionary:
 			var stats = player_data["stats"]
 			preview_data["player_level"] = stats.get("level", 1)
 			
-			# --- NAPRAWA NAZWY KLASY ---
 			var c_class = stats.get("character_class", "Warrior")
-			
-			# Jeśli w pliku jest "swordsman", zamień go na "Warrior"
+
 			if c_class == "swordsman":
 				preview_data["player_class"] = "Warrior"
 			else:
@@ -227,7 +226,6 @@ func get_slot_preview_data(slot_id: int) -> Dictionary:
 			# ---------------------------
 			
 		else:
-			# Stary system
 			preview_data["player_level"] = player_data.get("level", 1)
 			var c_class = player_data.get("character_class", "Warrior")
 			if c_class == "swordsman":
