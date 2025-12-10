@@ -38,4 +38,4 @@ func activate(player):
 			collider.take_damage(damage)
 			print("Zadano %s obrażeń wrogowi %s" % [damage, collider.name])
 
-	super.start_cooldown()
+	super.start_cooldown(player)
