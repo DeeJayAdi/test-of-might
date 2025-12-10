@@ -143,7 +143,7 @@ func _on_AttackRange_body_entered(body):
 
 
 
-func take_damage(amount: int):
+func take_damage(amount: int, stagger: bool = true):
 	if current_state == State.DEATH:
 		return
 		
