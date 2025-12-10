@@ -42,4 +42,4 @@ func activate(player):
 		closest_enemy.take_damage(damage)
 		print("Zadano %s obrażeń wrogowi %s" % [damage, closest_enemy.name])
 
-	super.start_cooldown()
+	super.start_cooldown(player)

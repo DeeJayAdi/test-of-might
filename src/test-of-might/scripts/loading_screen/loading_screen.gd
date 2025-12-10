@@ -2,7 +2,7 @@ extends Control
 
 const LOADING_STATES = ["Loading", "Loading.", "Loading..", "Loading..."]
 const TIME_PER_UPDATE = 0.5
-const MIN_LOADING_TIME = 5.0
+const MIN_LOADING_TIME = 2.0
 
 @onready var loading_label: Label = $Label
 
