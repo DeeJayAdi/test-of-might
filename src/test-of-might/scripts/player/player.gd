@@ -31,9 +31,24 @@ var walls_map: Node = null
 func _ready():
 	var data = SaveManager.get_data_for_node(self)
 	if data:
-		var pos_x = data.get("global_pos_x", 0)
-		var pos_y = data.get("global_pos_y", 0)
-		global_position = Vector2(pos_x, pos_y)
+		var current_map_path = get_tree().current_scene.scene_file_path
+		
+		print("--- DEBUG POZYCJI ---")
+		print("Zapisana mapa (z pliku): '", SaveManager.saved_scene_path, "'")
+		print("Aktualna mapa (gra):     '", current_map_path, "'")
+		if SaveManager.saved_scene_path == current_map_path and not SaveManager.reset_position_on_load:
+			var pos_x = data.get("global_pos_x", global_position.x)
+			var pos_y = data.get("global_pos_y", global_position.y)
+			global_position = Vector2(pos_x, pos_y)
+			print("Pozycje zgodne - wczytuję koordynaty.")
+		else:
+			print("Nowa mapa (lub brak zapisu pozycji dla tej mapy) - używam pozycji startowej.")
+		SaveManager.reset_position_on_load = false
+		if data.has("stats"):
+			stats_comp.load_data(data["stats"])
+			
+		if data.has("inventory") and inventory:
+			inventory.load_data(data["inventory"])
 
 	rng.randomize()
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -151,13 +166,23 @@ func get_closest_interactable():
 	return closest_obj
 
 
-func save():
-	return {
+func save() -> Dictionary:
+	var save_dict = {
 		"global_pos_x": global_position.x,
 		"global_pos_y": global_position.y,
-		"character_class": stats_comp.character_class,
-		"level": stats_comp.level,
-		"current_xp": stats_comp.current_xp,
-		"xp_to_next_level": stats_comp.xp_to_next_level,
-		"current_health": stats_comp.current_health
+		
+		# Delegujemy zapis do komponentów
+		"stats": stats_comp.save(),
+		"inventory": {}, # Domyślnie puste, zaraz wypełnimy
 	}
+
+	
+	# Pobieramy dane z inventory (które jest w UI)
+	if inventory and inventory.has_method("save"):
+		save_dict["inventory"] = inventory.save()
+		
+	return save_dict
+	
+func update_gold(amount: int):
+	if stats_comp and stats_comp.has_method("update_gold"):
+		stats_comp.update_gold(amount)

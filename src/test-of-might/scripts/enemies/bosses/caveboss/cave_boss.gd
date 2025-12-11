@@ -30,6 +30,9 @@ var target: Node = null
 var stagger: bool = false
 
 func _ready() -> void:
+	if SaveManager.is_enemy_dead(self):
+		queue_free()
+		return
 	if health_bar:
 		health_bar.max_value = health_component.max_health
 		health_bar.value = health_component.max_health
@@ -73,6 +76,7 @@ func _on_health_changed(_current, _max_hp):
 func _on_death():
 	died.emit()
 	state_manager.change_state("death")
+	SaveManager.register_enemy_death(self)
 	if has_node("/root/PersistentMusic"):
 		PersistentMusic.switch_to_exploration()
 
@@ -84,9 +88,12 @@ func _on_death():
 		NotificationManager.show_notification("New level unlocked: Level 2", 5.0)
 		
 		SaveManager.save_game()
-		# Po 3 sekundach przenieś do menu map
-		await get_tree().create_timer(7.0).timeout
-		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
+		# Po 7 sekundach przenieś do menu map
+	await get_tree().create_timer(7.0).timeout
+	print("Zapisuję stan gry...")
+	SaveManager.save_game()
+	await get_tree().process_frame 
+	get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 
 
 func take_damage(damage: int, p_stagger: bool = true):

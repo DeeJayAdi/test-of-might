@@ -19,22 +19,34 @@ func _on_interaction_area_body_exited(body):
 		if body.has_method("get_closest_interactable"):
 			body.interactables_in_range.erase(self)
 func interact():
-	# Odblokuj kolejny poziom po interakcji z flagą
+	# 1. ODBLOKOWANIE POZIOMU (Używamy Global, tak jak chciałeś)
 	var global = get_node("/root/Global")
-	# Dodaj kolejne poziomy wg uznania
+	
+	# Tutaj wpisz nazwę poziomu, który chcesz odblokować (np. "level2" jeśli kończysz 1)
 	if not global.is_level_unlocked("level1"):
 		global.unlock_level("level1")
-		global.save_unlocked_levels()
+		global.save_unlocked_levels() # To zapisuje plik unlocked_levels.save
 		NotificationManager.show_notification("New level unlocked: Level 1", 5.0)
 
+	# 2. ANIMACJA
 	if is_animated:
 		animated_sprite.stop()
-		print("interakcja_flaga")
+		print("Flaga zdobyta - animacja stop")
 		is_animated = false
-		await get_tree().create_timer(5).timeout
-		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 	else:
 		animated_sprite.play(default_animation_name)
 		is_animated = true
-		await get_tree().create_timer(5).timeout
-		get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
+
+	# 3. CZEKAMY 5 SEKUND
+	await get_tree().create_timer(5).timeout
+
+	# 4. ZAPISUJEMY BOHATERA (HP, EXP, EQ)
+	# SaveManager zapisze wszystko co jest w grupie "Persist" (czyli gracza)
+	print("Zapisuję statystyki bohatera...")
+	SaveManager.save_game()
+	
+	# Czekamy jedną klatkę, żeby plik zdążył się zapisać przed zmianą sceny
+	await get_tree().process_frame 
+	
+	# 5. WYJŚCIE DO MAPY
+	get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
