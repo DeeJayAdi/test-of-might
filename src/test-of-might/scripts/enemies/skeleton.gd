@@ -159,11 +159,12 @@ func take_damage(amount: int, stagger: bool = true):
 			$sfxDie.pitch_scale = rng.randf_range(0.9, 1.1)
 			$sfxDie.play()
 	else:
-		current_state = State.HURT
-		if not $sfxHurt.playing:
-			$sfxHurt.volume_db = rng.randf_range(-10.0, 0.0)
-			$sfxHurt.pitch_scale = rng.randf_range(0.9, 1.1)
-			$sfxHurt.play()
+		if stagger:
+			current_state = State.HURT
+			if not $sfxHurt.playing:
+				$sfxHurt.volume_db = rng.randf_range(-10.0, 0.0)
+				$sfxHurt.pitch_scale = rng.randf_range(0.9, 1.1)
+				$sfxHurt.play()
 	$HpBar.value = current_health
 
 func _on_animation_finished():

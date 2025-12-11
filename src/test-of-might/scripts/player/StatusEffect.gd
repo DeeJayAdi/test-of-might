@@ -6,6 +6,8 @@ var power: float
 var duration: float
 var timer: float = 0.0
 
+var damage_accumulator: float = 0.0
+
 #for effects like slow or weaken so that the enemies are not perma-debuffed
 var original_val: float
 
@@ -27,16 +29,20 @@ func _process(delta: float) -> void:
 	
 	match effect_type:
 		"burn":
-			if parent.has_method("take_damage"):
-				parent.take_damage(power * delta) # 
+			damage_accumulator += power * delta
+			
+			if damage_accumulator >= 1.0:
+				var damage_to_apply = int(damage_accumulator)
+				damage_accumulator -= damage_to_apply 
+				
+				if parent.has_method("take_damage"):
+					parent.take_damage(damage_to_apply, false)
 	
-	# 3. HANDLE TIMER
 	timer += delta
 	if timer >= duration:
 		queue_free()
 
 func _exit_tree() -> void:
-	# 4. CLEANUP (Restore stats)
 	match effect_type:
 		"slow":
 			var parent = get_parent()
