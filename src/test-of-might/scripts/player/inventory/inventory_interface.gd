@@ -67,3 +67,66 @@ func is_open() -> bool:
 	if inventory:
 		return inventory.is_open
 	return false
+
+func save() -> Dictionary:
+	var items_data = []
+	var slots = find_children("*", "Panel", true, false)
+	
+	print("--- ROZPOCZYNAM ZAPIS EKWIPUNKU ---")
+	
+	# Używamy pętli z indeksem 'i', żeby wiedzieć, który to numer na liście globalnej
+	for i in range(slots.size()):
+		var slot = slots[i]
+		
+		# Sprawdzamy czy slot ma przedmiot
+		if "item" in slot and slot.item != null:
+			var path = slot.item.resource_path
+			
+			if path == "":
+				print("Błąd: Przedmiot bez ścieżki w slocie ", i)
+				continue
+				
+			items_data.append({
+				"item_path": path,
+				"quantity": slot.quantity if "quantity" in slot else 1,
+				"saved_index": i # <--- ZMIANA: Zapisujemy ten konkretny numer z listy
+			})
+			print("Zapisano: ", slot.item.resource_name, " pod indeksem globalnym: ", i)
+	
+	return { "items": items_data }
+
+func load_data(data: Dictionary):
+	print("--- ROZPOCZYNAM WCZYTYWANIE EKWIPUNKU ---")
+	
+	# 1. Pobieramy tę samą listę slotów co przy zapisie
+	var slots = find_children("*", "Panel", true, false)
+	
+	# 2. Czyścimy wszystko
+	for slot in slots:
+		if "item" in slot:
+			slot.item = null
+			if "quantity" in slot: slot.quantity = 0
+			if slot.has_method("update_ui"): slot.update_ui()
+		
+	# 3. Wczytujemy
+	if data.has("items"):
+		for item_entry in data["items"]:
+			var path = item_entry["item_path"]
+			var qty = item_entry["quantity"]
+			var idx = item_entry["saved_index"] # <--- ZMIANA: Używamy indeksu globalnego
+			
+			if ResourceLoader.exists(path):
+				var item_res = load(path)
+				
+				# Celujemy idealnie w ten sam slot
+				if idx >= 0 and idx < slots.size():
+					var s = slots[idx]
+					if "item" in s:
+						s.item = item_res
+						if "quantity" in s: s.quantity = qty
+						if s.has_method("update_ui"): s.update_ui()
+						print("SUKCES: Wczytano ", item_res.resource_name, " do slotu #", idx)
+				else:
+					print("Błąd: Indeks poza zakresem: ", idx)
+			else:
+				print("Błąd: Plik nie istnieje: ", path)

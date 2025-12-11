@@ -38,7 +38,10 @@ func _on_start_game_btn_pressed() -> void:
 	if sceneLink == "noLevel":
 		$VBoxContainer2/ErrorLabel.text = "Choose level to continue"
 		return
-		
+	SaveManager.reset_position_on_load = true
+	SaveManager.respawn_enemies_on_load = true
+	SaveManager.played_cutscenes = []
+	SaveManager.dead_enemies = []
 	$VBoxContainer2/ErrorLabel.text = ""
 	get_node("/root/Global").SwitchScene(sceneLink)
 	Global.SwitchScene(sceneLink)
