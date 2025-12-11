@@ -205,7 +205,8 @@ func _apply_attack_damage(args: Dictionary):
 			
 			if eff_name != "":
 				EffectManager.apply_effect(collider, eff_name, eff_power, eff_duration)
-
+	
+	
 func _reset_attack_cooldown():
 	can_attack = true
 
