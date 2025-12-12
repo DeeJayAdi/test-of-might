@@ -1,11 +1,15 @@
-extends Node
+# hurt.gd
+extends BossState
 
+func enter():
+	if boss.stagger:
+		boss.play_anim("hurt")
+		boss.sfx_comp.play_sound_effect("Hurt")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+		await boss.anim_player.animation_finished
+	
+	if state_machine.current_state == self:
+		state_machine.change_state("idle")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func exit():
 	pass

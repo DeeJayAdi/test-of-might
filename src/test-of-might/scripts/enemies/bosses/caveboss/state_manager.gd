@@ -19,6 +19,7 @@ func _ready() -> void:
 
 func change_state(state: String):
 	#obsługa nazwy stanu
+	print("zmiana stanu na " + state)
 	var new_state_node = states.get(state.to_lower())
 	if !new_state_node:
 		push_error("Nie znaleziono takiego stanu:" + state)

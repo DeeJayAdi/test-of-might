@@ -1,11 +1,28 @@
-extends Node
+#attack
+extends BossState
+
+func enter():
+	if not boss.anim_sprite.animation_finished.is_connected(_on_animation_finished):
+		boss.anim_sprite.animation_finished.connect(_on_animation_finished)
+	boss.can_attack = false
+	if boss.is_player_in_melee_range:
+		boss.play_anim("melee")
+		boss.sfx_comp.play_sound_effect("melee")
+	else:
+		boss.play_anim("cast")
+		boss.sfx_comp.play_sound_effect("cast")
+	boss.attack_timer.start(boss.attack_cooldown)
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _on_animation_finished():
+	var current_anim = boss.anim_sprite.animation
+	if "melee" in current_anim:
+		boss.combat_comp.attack_melee(boss.target)
+	if "cast" in current_anim:
+		boss.combat_comp.shoot(boss.target)
+	state_machine.change_state("idle")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+func exit():
+	if boss.anim_sprite.animation_finished.is_connected(_on_animation_finished):
+		boss.anim_sprite.animation_finished.disconnect(_on_animation_finished)
