@@ -27,6 +27,7 @@ var is_player_in_melee_range: bool = false
 var can_attack: bool = true
 var can_roam: bool = true
 var target: Node = null
+var stagger: bool = false
 
 func _ready() -> void:
 	if SaveManager.is_enemy_dead(self):
@@ -68,7 +69,8 @@ func _on_health_changed(_current, _max_hp):
 			#reset attack cooldown to allow interrupting attack
 			attack_timer.stop()
 			can_attack = true
-		state_manager.change_state("hurt")
+		if self.stagger:
+			state_manager.change_state("hurt")
 
 
 func _on_death():
@@ -94,7 +96,9 @@ func _on_death():
 	get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 
 
-func take_damage(damage: int):
+func take_damage(damage: int, p_stagger: bool = true):
+	self.stagger = p_stagger
+	
 	health_component.take_damage(damage)
 
 func get_random_roam_position() -> Vector2:

@@ -58,6 +58,16 @@ func perform_attack(is_heavy: bool = false):
 	var cooldown = UpdateStats.get_total_cooldown(stats_comp.attack_cooldown)
 	var facing_direction = player.facing_direction
 	
+	#get effects
+	var eff_name = ""
+	var eff_power = 0.0
+	var eff_duration = 0.0
+	
+	if weapon:
+		eff_name = weapon.get("effect_name") if "effect_name" in weapon else ""
+		eff_power = weapon.get("effect_power") if "effect_power" in weapon else 0.0
+		eff_duration = weapon.get("effect_duration") if "effect_duration" in weapon else 0.0
+		
 	if is_heavy:
 		radius = stats_comp.heavy_attack_radius 
 		dmg_base = dmg_base * 1.5 # Or dmg_base * 2
@@ -75,7 +85,6 @@ func perform_attack(is_heavy: bool = false):
 		else:
 			facing_direction = "Down" if dir_to_target.y > 0 else "Up"
 
-		# --- NEW: Lock attack direction so it doesn’t change mid-animation ---
 		attack_locked_direction_mouse = facing_direction
 
 	else:
@@ -97,7 +106,7 @@ func perform_attack(is_heavy: bool = false):
 	
 	state_manager.change_state("Attack")
 
-	# Set animation speed (heavy attacks play slower)
+	# Heavy attack is slower
 	player.animation_manager.set_animation_speed_scale(anim_speed_scale)
 
 	# Compute attack hit position
@@ -106,7 +115,10 @@ func perform_attack(is_heavy: bool = false):
 	var attack_args = {
 		"radius": radius,
 		"dmg_base": dmg_base,
-		"attack_pos": attack_pos
+		"attack_pos": attack_pos,
+		"effect_name": eff_name,
+		"effect_power": eff_power,
+		"effect_duration": eff_duration
 	}
 	get_tree().create_timer(0.1).timeout.connect(_apply_attack_damage.bind(attack_args))
 
@@ -134,6 +146,11 @@ func perform_ranged_attack(weapon = null):
 	bullet.rotation = muzzle.global_rotation + PI / 4
 	bullet.damage = calculate_attack_damage()
 	
+	if weapon:
+		if "effect_name" in weapon: bullet.effect_name = weapon.effect_name
+		if "effect_power" in weapon: bullet.effect_power = weapon.effect_power
+		if "effect_duration" in weapon: bullet.effect_duration = weapon.effect_duration
+	
 	get_tree().get_root().add_child(bullet)
 
 	var cooldown = stats_comp.attack_cooldown
@@ -156,6 +173,10 @@ func _apply_attack_damage(args: Dictionary):
 	var radius = args["radius"]
 	var dmg_base = args["dmg_base"]
 	var attack_pos = args["attack_pos"]
+	
+	var eff_name = args["effect_name"]
+	var eff_power = args["effect_power"]
+	var eff_duration = args["effect_duration"]
 
 	var shape = CircleShape2D.new()
 	shape.radius = radius
@@ -181,7 +202,11 @@ func _apply_attack_damage(args: Dictionary):
 			damage = int(damage * stats_comp.damage_multiplier)
 			
 			collider.take_damage(damage)
-
+			
+			if eff_name != "":
+				EffectManager.apply_effect(collider, eff_name, eff_power, eff_duration)
+	
+	
 func _reset_attack_cooldown():
 	can_attack = true
 
