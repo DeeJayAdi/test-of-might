@@ -1,11 +1,17 @@
-extends Node
+#idle
+extends BossState
 
+func enter():
+	boss.velocity = Vector2.ZERO
+	boss.play_anim("idle")
+	
+func update(delta: float):
+	if boss.is_player_detected and boss.can_attack:
+		state_machine.change_state("Attack")
+	if boss.is_player_detected and boss.can_summon:
+		state_machine.change_state("Summon")
+	elif boss.is_player_detected:
+		state_machine.change_state("Walk")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func exit():
+	pass;
