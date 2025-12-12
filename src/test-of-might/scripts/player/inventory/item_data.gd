@@ -13,7 +13,10 @@ class_name ItemData
 @export var defense: int
 @export var attack_range: float
 @export var attack_speed: float
-@export var effect: String = ""
+
+@export var effect_name: String = ""
+@export var effect_power: float
+@export var effect_duration: float
 
 @export_multiline var description: String = ""
 #potki
@@ -24,6 +27,7 @@ class_name ItemData
 @export var heal_duration: float = 0.0 
 
 @export var animation: PackedScene
+
 
 func get_stat_text() -> String:
 	var text = ""
