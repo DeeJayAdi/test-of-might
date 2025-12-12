@@ -1,5 +1,6 @@
-[gd_scene load_steps=174 format=3 uid="uid://bq61iiewjpell"]
+[gd_scene load_steps=185 format=3 uid="uid://bq61iiewjpell"]
 
+[ext_resource type="Script" uid="uid://dwqsluwqmf8hm" path="res://scripts/enemies/bosses/pumpkin_warlock/pumpkin_warlock.gd" id="1_1n0ik"]
 [ext_resource type="Texture2D" uid="uid://byb0711brisyf" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - idle.png" id="1_3dji6"]
 [ext_resource type="Texture2D" uid="uid://dg8ciccr0514d" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - cast.png" id="1_d0hc8"]
 [ext_resource type="Texture2D" uid="uid://b0vrwvnxc1byf" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - hit.png" id="1_sme8k"]
@@ -7,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://8w38x4g3vrf1" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - summon bat.png" id="2_nxqle"]
 [ext_resource type="Texture2D" uid="uid://bulm5wetfke5m" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - walk.png" id="3_occ5u"]
 [ext_resource type="Texture2D" uid="uid://b86k5lrww3oly" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - attack.png" id="5_m5u3c"]
+[ext_resource type="Script" uid="uid://dfvnaedvg4qyj" path="res://scripts/enemies/bosses/pumpkin_warlock/state_manager.gd" id="9_1o5x8"]
+[ext_resource type="Script" uid="uid://b6n5kg7ptdtjn" path="res://scripts/enemies/bosses/pumpkin_warlock/health_component.gd" id="9_xl5tm"]
+[ext_resource type="Script" uid="uid://cptd6eroghn2d" path="res://scripts/enemies/bosses/pumpkin_warlock/states/idle.gd" id="10_r6vs3"]
+[ext_resource type="Script" uid="uid://c7i2cs6o5qjqr" path="res://scripts/enemies/bosses/pumpkin_warlock/states/death.gd" id="11_utnt3"]
+[ext_resource type="Script" uid="uid://c1snmk3soq47l" path="res://scripts/enemies/bosses/pumpkin_warlock/states/attack.gd" id="12_r6vs3"]
+[ext_resource type="Script" uid="uid://y251iafuc50" path="res://scenes/enemies/bosses/PumpkinWarlock/hurt.gd" id="13_r6vs3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gedfv"]
 atlas = ExtResource("1_d0hc8")
@@ -1301,12 +1308,83 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3dji6"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5u3c"]
+bg_color = Color(0, 0, 0, 0.18431373)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1n0ik"]
+bg_color = Color(0.75686276, 0, 0.09411765, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m5u3c"]
+radius = 1024.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1n0ik"]
+radius = 100.005
+
 [node name="PumpkinWarlock" type="CharacterBody2D"]
 texture_filter = 1
+script = ExtResource("1_1n0ik")
+attack_cooldown = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u5hag")
-animation = &"melee_up"
+animation = &"melee_right"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_3dji6")
+
+[node name="HpBar" type="ProgressBar" parent="."]
+offset_left = -27.0
+offset_top = -80.0
+offset_right = 27.0
+offset_bottom = -74.0
+theme_override_styles/background = SubResource("StyleBoxFlat_m5u3c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1n0ik")
+value = 50.0
+show_percentage = false
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+visible = false
+shape = SubResource("CircleShape2D_m5u3c")
+
+[node name="MeleeArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
+visible = false
+shape = SubResource("CircleShape2D_1n0ik")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource("9_1o5x8")
+
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("10_r6vs3")
+
+[node name="Death" type="Node" parent="StateManager"]
+script = ExtResource("11_utnt3")
+
+[node name="Attack" type="Node" parent="StateManager"]
+script = ExtResource("12_r6vs3")
+
+[node name="Hurt" type="Node" parent="StateManager"]
+script = ExtResource("13_r6vs3")
+
+[node name="Walk" type="Node" parent="StateManager"]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("9_xl5tm")
+
+[node name="CombatComponent" type="Node" parent="."]
+
+[node name="SfxComponent" type="Node2D" parent="."]
