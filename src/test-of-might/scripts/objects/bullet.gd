@@ -7,6 +7,10 @@ extends CharacterBody2D
 
 var current_pierce = 0
 
+var effect_name: String = ""
+var effect_power: float = 0.0
+var effect_duration: float = 0.0
+
 func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
 	$AnimatedSprite2D.play("loop")
@@ -25,6 +29,9 @@ func _on_body_entered(body: Node) -> void:
 	if body != self:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
+			if effect_name != "":
+				EffectManager.apply_effect(body, effect_name, effect_power, effect_duration)
+				
 		current_pierce += 1
 		if current_pierce >= pierce:
 			$AnimatedSprite2D.play("hit")
@@ -34,3 +41,4 @@ func _on_body_entered(body: Node) -> void:
 func _on_AnimatedSprite2D_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "hit":
 		queue_free()
+		
