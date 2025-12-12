@@ -1,0 +1,283 @@
+[gd_scene load_steps=33 format=3 uid="uid://ctptfwh2u5t48"]
+
+[ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_ayf5i"]
+[ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="2_vw5xf"]
+[ext_resource type="Texture2D" uid="uid://cp8jqr168ljgb" path="res://assets/sprites/enemies/crow_terror/crow_terror.png" id="3_ayf5i"]
+[ext_resource type="AudioStream" uid="uid://ceoio15wnxqhn" path="res://assets/audio/effects/skeleton/rattling-bones-105394.mp3" id="4_hgwo7"]
+[ext_resource type="AudioStream" uid="uid://c60oxhfgugsd1" path="res://assets/audio/effects/skeleton/bone-break-sound-269658.mp3" id="5_djfcq"]
+[ext_resource type="AudioStream" uid="uid://dh0bftdlksrim" path="res://assets/audio/effects/skeleton/falling-bones-87568.mp3" id="6_11cgo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s0h66"]
+height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayf5i"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(155, 570, 155, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw5xf"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(0, 570, 155, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5yiu"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(310, 570, 155, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgwo7"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(1240, 0, 155, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djfcq"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(930, 570, 155, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11cgo"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(1085, 570, 155, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3igdh"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(142, 570, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ec7ur"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(284, 570, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ele0k"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(0, 570, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4itcf"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(142, 380, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmnp1"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(142, 380, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0f5o"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(0, 0, 135, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je3fq"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(135, 0, 135, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr65e"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(270, 0, 135, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2plry"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(0, 380, 135, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mis8"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(135, 380, 135, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po0dt"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(270, 380, 135, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lffdc"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(0, 0, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp4lf"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(142, 0, 142, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox4do"]
+atlas = ExtResource("3_ayf5i")
+region = Rect2(284, 0, 142, 190)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_umco3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayf5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw5xf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5yiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgwo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djfcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11cgo")
+}],
+"loop": false,
+"name": &"attack1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayf5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw5xf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5yiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgwo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djfcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11cgo")
+}],
+"loop": false,
+"name": &"attack2",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3igdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ec7ur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ele0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4itcf")
+}],
+"loop": false,
+"name": &"die",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmnp1")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0f5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_je3fq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr65e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2plry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mis8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po0dt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lffdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp4lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox4do")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ucyf"]
+radius = 300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vncds"]
+radius = 50.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t5sy"]
+bg_color = Color(0, 0, 0, 0.18431373)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxfki"]
+bg_color = Color(0.75686276, 0, 0.09411765, 1)
+
+[node name="Skeleton" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_ayf5i")
+detect_radius = 350
+speed = 165
+attack_cooldown = 0.7
+crit_chance = 0.15
+attack_damage = 15
+xp_reward = 80
+loot_table = ExtResource("2_vw5xf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_s0h66")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_umco3")
+animation = &"attack1"
+offset = Vector2(2.465, -31.195)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_6ucyf")
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, -24.285)
+shape = SubResource("CircleShape2D_vncds")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 4.0
+path_max_distance = 10.0
+simplify_path = true
+
+[node name="sfxWalk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hgwo7")
+
+[node name="sfxHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_djfcq")
+
+[node name="sfxDie" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_11cgo")
+
+[node name="HpBar" type="ProgressBar" parent="."]
+offset_left = -27.0
+offset_top = -58.0
+offset_right = 27.0
+offset_bottom = -52.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2t5sy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pxfki")
+value = 50.0
+show_percentage = false
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_AttackRange_body_entered"]
