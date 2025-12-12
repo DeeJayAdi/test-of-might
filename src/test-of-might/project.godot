@@ -26,6 +26,7 @@ DialogBox="*res://scenes/ui/DialogBox.tscn"
 UpdateStats="*res://scripts/player/update_stats.gd"
 NotificationManager="*res://scripts/globals/NotificationManager.gd"
 DropSpawner="*res://scripts/globals/DropSpawner.gd"
+EffectManager="*res://scripts/globals/EffectManager.gd"
 
 [display]
 
