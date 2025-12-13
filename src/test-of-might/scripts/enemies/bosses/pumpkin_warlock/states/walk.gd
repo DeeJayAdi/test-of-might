@@ -18,9 +18,16 @@ func update(delta: float):
 			state_machine.change_state("Idle")
 		return
 
-	var dir = (boss.target.global_position - boss.global_position).normalized()
-	boss.velocity = dir * boss.walk_speed
+	# var dir = (boss.target.global_position - boss.global_position).normalized()
+	# boss.velocity = dir * boss.walk_speed
+	# boss.move_and_slide()
+	#use nav agent to move towards player
+	var nav_agent = boss.get_node("NavigationAgent2D")
+	nav_agent.target_position = boss.target.position
+	boss.velocity = nav_agent.get_next_path_position() - boss.position
+	boss.velocity = boss.velocity.normalized() * boss.walk_speed
 	boss.move_and_slide()
+	
 	
 	if boss.can_attack and boss.is_player_detected:
 		state_machine.change_state("Attack")
