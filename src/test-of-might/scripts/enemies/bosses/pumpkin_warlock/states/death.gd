@@ -8,7 +8,7 @@ func enter():
 	boss.set_collision_layer_value(1, false)
 	boss.set_collision_mask_value(1, false)
 	boss.play_anim("death")
-	boss.sfx_comp.play_sound_effect("death")
+	boss.sfx_comp.play_sound_effect("Hurt")
 	await boss.anim_sprite.animation_finished
 	await get_tree().create_timer(2.0).timeout
 	

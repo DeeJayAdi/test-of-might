@@ -16,10 +16,9 @@ func enter():
 			locked_target_pos = boss.global_position + Vector2.RIGHT.rotated(boss.rotation) * 50
 		
 		boss.play_anim("melee")
-		boss.sfx_comp.play_sound_effect("melee")
+		boss.sfx_comp.play_sound_effect("Melee")
 	else:
 		boss.play_anim("cast")
-		boss.sfx_comp.play_sound_effect("cast")
 	
 	boss.attack_timer.start(boss.attack_cooldown)
 

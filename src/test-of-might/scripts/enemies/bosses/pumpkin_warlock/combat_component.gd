@@ -96,4 +96,3 @@ func summon():
 		get_tree().current_scene.add_child(summon)
 		boss.sfx_comp.play_sound_effect("Summon")
 		await get_tree().create_timer(0.2).timeout
-
