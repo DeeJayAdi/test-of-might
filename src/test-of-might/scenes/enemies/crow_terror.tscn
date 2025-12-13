@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ctptfwh2u5t48"]
+[gd_scene load_steps=33 format=3 uid="uid://ehfc7ktqw2o0"]
 
 [ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_ayf5i"]
 [ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="2_vw5xf"]
@@ -214,6 +214,7 @@ bg_color = Color(0, 0, 0, 0.18431373)
 bg_color = Color(0.75686276, 0, 0.09411765, 1)
 
 [node name="Skeleton" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1
