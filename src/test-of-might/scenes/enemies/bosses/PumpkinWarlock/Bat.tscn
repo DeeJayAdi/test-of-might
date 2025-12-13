@@ -412,3 +412,5 @@ animation = &"hit_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3dji6")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

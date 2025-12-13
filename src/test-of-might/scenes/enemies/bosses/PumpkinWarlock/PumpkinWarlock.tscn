@@ -1333,8 +1333,9 @@ script = ExtResource("1_1n0ik")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u5hag")
-animation = &"idle_down"
-frame_progress = 0.8009751
+animation = &"death_down"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1367,6 +1368,7 @@ visible = false
 shape = SubResource("CircleShape2D_1n0ik")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 2
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]
 
