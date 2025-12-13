@@ -1,5 +1,6 @@
-[gd_scene load_steps=51 format=3 uid="uid://cjh1rnenbuy8x"]
+[gd_scene load_steps=52 format=3 uid="uid://cjh1rnenbuy8x"]
 
+[ext_resource type="Script" uid="uid://dnoivq30o6n2c" path="res://scripts/enemies/bosses/pumpkin_warlock/bat.gd" id="1_gayb7"]
 [ext_resource type="Texture2D" uid="uid://bvyh05vkcgiii" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/bat_and_pumpkin/bat - appear.png" id="1_ln6qb"]
 [ext_resource type="Texture2D" uid="uid://nnrx01o5ukb" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/bat_and_pumpkin/bat - death.png" id="2_h46w0"]
 [ext_resource type="Texture2D" uid="uid://iws1fs5aopfo" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/bat_and_pumpkin/bat - hit.png" id="3_40gof"]
@@ -399,13 +400,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3dji6"]
 radius = 4.0
 
-[node name="Bat" type="CharacterBody2D"]
+[node name="Bat" type="CharacterBody2D" groups=["Bats", "enemies"]]
 texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_gayb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uqam3")
-animation = &"fly_right"
-frame_progress = 0.34415638
+animation = &"hit_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3dji6")
