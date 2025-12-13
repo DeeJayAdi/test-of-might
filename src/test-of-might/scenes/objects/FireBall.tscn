@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://jnplu5iv2lhc"]
+
+[ext_resource type="Script" uid="uid://c5uy7ubnqus2v" path="res://scripts/objects/bullet.gd" id="1_cp1ap"]
+[ext_resource type="Texture2D" uid="uid://bycdugp6qosw6" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/spell/spell - impact.png" id="2_cp1ap"]
+[ext_resource type="Texture2D" uid="uid://joi75hyuay4i" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/spell/spell.png" id="3_5jsp4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gcv5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqywj"]
+atlas = ExtResource("2_cp1ap")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5vhy"]
+atlas = ExtResource("2_cp1ap")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yays"]
+atlas = ExtResource("2_cp1ap")
+region = Rect2(72, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20fv3"]
+atlas = ExtResource("3_5jsp4")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtmno"]
+atlas = ExtResource("3_5jsp4")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oda8"]
+atlas = ExtResource("3_5jsp4")
+region = Rect2(72, 0, 36, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5727x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqywj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5vhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yays")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20fv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtmno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oda8")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3s4m"]
+radius = 14.0
+
+[node name="Bullet" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_cp1ap")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 0)
+shape = SubResource("CircleShape2D_gcv5w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5727x")
+animation = &"loop"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(7, 0)
+shape = SubResource("CircleShape2D_k3s4m")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]
