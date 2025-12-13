@@ -1,7 +1,7 @@
 extends Node
 class_name BossState
 
-var boss: CaveBoss
+var boss: CharacterBody2D
 var state_machine: BossStateManager
 
 func enter():

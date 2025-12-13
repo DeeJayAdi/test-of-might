@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://1g0h8qyjscqn"]
+
+[ext_resource type="PackedScene" uid="uid://jnplu5iv2lhc" path="res://scenes/objects/FireBall.tscn" id="1_cwjny"]
+[ext_resource type="Texture2D" uid="uid://bsc21tkexahiq" path="res://assets/sprites/items/wands/wand_3.png" id="2_cwjny"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="3_xjaq6"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="4_1eh7i"]
+
+[resource]
+script = ExtResource("4_1eh7i")
+item_name = "Wałek Teściowej"
+price = 100
+rarity = "uncommon"
+type = "weapon"
+subtype = "ranged"
+icon = ExtResource("2_cwjny")
+placeholder = ExtResource("3_xjaq6")
+damage = 130
+attack_range = 10.0
+attack_speed = 1.0
+description = "Został skradziony przez niewinną dynie, który potem miał na nią zły wpływ i zamienił ją w czarnoksiężnika."
+animation = ExtResource("1_cwjny")
+metadata/_custom_type_script = "uid://elca6sp6br8g"
