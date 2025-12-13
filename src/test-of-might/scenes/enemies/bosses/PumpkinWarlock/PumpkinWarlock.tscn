@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=3 uid="uid://bq61iiewjpell"]
+[gd_scene load_steps=189 format=3 uid="uid://bq61iiewjpell"]
 
 [ext_resource type="Script" uid="uid://dwqsluwqmf8hm" path="res://scripts/enemies/bosses/pumpkin_warlock/pumpkin_warlock.gd" id="1_1n0ik"]
 [ext_resource type="Texture2D" uid="uid://byb0711brisyf" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/pumpkin warlock - idle.png" id="1_3dji6"]
@@ -13,9 +13,11 @@
 [ext_resource type="Script" uid="uid://cptd6eroghn2d" path="res://scripts/enemies/bosses/pumpkin_warlock/states/idle.gd" id="10_r6vs3"]
 [ext_resource type="Script" uid="uid://c7i2cs6o5qjqr" path="res://scripts/enemies/bosses/pumpkin_warlock/states/death.gd" id="11_utnt3"]
 [ext_resource type="Script" uid="uid://c1snmk3soq47l" path="res://scripts/enemies/bosses/pumpkin_warlock/states/attack.gd" id="12_r6vs3"]
-[ext_resource type="Script" uid="uid://y251iafuc50" path="res://scenes/enemies/bosses/PumpkinWarlock/hurt.gd" id="13_r6vs3"]
+[ext_resource type="Script" uid="uid://y251iafuc50" path="res://scripts/enemies/bosses/pumpkin_warlock/states/hurt.gd" id="13_r6vs3"]
 [ext_resource type="Script" uid="uid://do620jo0bogqj" path="res://scripts/enemies/bosses/pumpkin_warlock/states/walk.gd" id="14_utnt3"]
+[ext_resource type="Script" uid="uid://ftyw3o1r2to5" path="res://scripts/enemies/bosses/pumpkin_warlock/states/summon.gd" id="15_w4ikq"]
 [ext_resource type="Script" uid="uid://bmpp8rnoxii7b" path="res://scripts/enemies/bosses/pumpkin_warlock/sfx_component.gd" id="16_llhr6"]
+[ext_resource type="Script" uid="uid://io2jqft1gbr4" path="res://scripts/enemies/bosses/pumpkin_warlock/combat_component.gd" id="16_xf7u1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gedfv"]
 atlas = ExtResource("1_d0hc8")
@@ -1322,13 +1324,17 @@ radius = 1024.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1n0ik"]
 radius = 100.005
 
-[node name="PumpkinWarlock" type="CharacterBody2D"]
+[node name="PumpkinWarlock" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
 texture_filter = 1
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_1n0ik")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u5hag")
-animation = &"walk_up"
+animation = &"idle_down"
+frame_progress = 0.8009751
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1383,10 +1389,14 @@ script = ExtResource("13_r6vs3")
 [node name="Walk" type="Node" parent="StateManager"]
 script = ExtResource("14_utnt3")
 
+[node name="Summon" type="Node" parent="StateManager"]
+script = ExtResource("15_w4ikq")
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("9_xl5tm")
 
 [node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("16_xf7u1")
 
 [node name="SfxComponent" type="Node2D" parent="."]
 script = ExtResource("16_llhr6")
@@ -1394,8 +1404,6 @@ script = ExtResource("16_llhr6")
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="SumonTimer" type="Timer" parent="."]
-
-[node name="Timer3" type="Timer" parent="."]
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exit"]

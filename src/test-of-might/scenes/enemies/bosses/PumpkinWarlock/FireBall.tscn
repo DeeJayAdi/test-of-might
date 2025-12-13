@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://do2sb5bwghf51"]
+
+[ext_resource type="Script" uid="uid://dn6md2xqhneh7" path="res://scripts/enemies/bosses/pumpkin_warlock/fire_ball.gd" id="1_w7wiw"]
+[ext_resource type="Texture2D" uid="uid://bycdugp6qosw6" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/spell/spell - impact.png" id="2_w7wiw"]
+[ext_resource type="Texture2D" uid="uid://joi75hyuay4i" path="res://assets/sprites/enemies/bosses/pumpkin_warlock/spell/spell.png" id="3_0bpy5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjhjg"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnpn2"]
+atlas = ExtResource("2_w7wiw")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jme3l"]
+atlas = ExtResource("2_w7wiw")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1s3g"]
+atlas = ExtResource("2_w7wiw")
+region = Rect2(72, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2tqf"]
+atlas = ExtResource("3_0bpy5")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a83t4"]
+atlas = ExtResource("3_0bpy5")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ib2i"]
+atlas = ExtResource("3_0bpy5")
+region = Rect2(72, 0, 36, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1jnk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnpn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jme3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1s3g")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2tqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a83t4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ib2i")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_davpr"]
+
+[node name="FireBall" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_w7wiw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_jjhjg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g1jnk")
+animation = &"loop"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6, 0)
+shape = SubResource("CircleShape2D_davpr")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]

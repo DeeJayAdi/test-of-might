@@ -11,20 +11,22 @@ class_name pumpkin_warlock extends CharacterBody2D
 @onready var combat_comp: Node = $CombatComponent
 @onready var sfx_comp: Node2D = $SfxComponent
 @onready var attack_timer: Timer = $AttackTimer
+@onready var summon_timer: Timer = $SumonTimer
 
 @export var boss_navigation_region: NavigationRegion2D
-@export var attack_cooldown: float = 2
+@export var attack_cooldown: float = 1.5
+@export var summon_cooldown: float = 9
 @export var loot_table: LootTable 
-@export var walk_speed: float = 50
+@export var walk_speed: float = 30
 
 signal died
 
 var target: Node = null
 var is_player_detected: bool = false
 var is_player_in_melee_range: bool = false
-var can_attack = false
+var can_attack = true
 var stagger = false
-var can_summon = false
+var can_summon = true
 
 func _ready() -> void:
 	if SaveManager.is_enemy_dead(self):
