@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://bkqrfhelxnrc3"]
+[gd_scene load_steps=46 format=4 uid="uid://bkqrfhelxnrc3"]
 
 [ext_resource type="Texture2D" uid="uid://bynoa7gwbkt8a" path="res://assets/maps/dungeon/walls_floor.png" id="1_3b7po"]
 [ext_resource type="Texture2D" uid="uid://cny3j7msoxlw0" path="res://assets/maps/dungeon/doors_lever_chest_animation.png" id="2_g7mha"]
@@ -12,8 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://b50sbo7gi36la" path="res://assets/maps/dungeon/water_details_animation.png" id="12_ahea2"]
 [ext_resource type="Texture2D" uid="uid://2sggyck5a2yq" path="res://assets/maps/dungeon/Bridges.png" id="13_28ti2"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="15_6fqx2"]
+[ext_resource type="PackedScene" uid="uid://6kys46tgy5eo" path="res://scenes/enemies/Slime_Zombie.tscn" id="15_fhygi"]
+[ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="16_3b7po"]
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="16_3m3hp"]
 [ext_resource type="PackedScene" uid="uid://cidua0lrk7lmc" path="res://scenes/Interaction_Objects/Flag.tscn" id="17_g7mha"]
+[ext_resource type="PackedScene" uid="uid://cyopic4inmmus" path="res://scenes/enemies/Vampires/Vampire_lvl1.tscn" id="17_mrrld"]
+[ext_resource type="PackedScene" uid="uid://0pviyy6wdofy" path="res://scenes/enemies/Vampires/Vampire_lvl2.tscn" id="18_mrrld"]
+[ext_resource type="PackedScene" uid="uid://cbg0qmbawrgob" path="res://scenes/enemies/Vampires/Vampire_lvl3.tscn" id="19_t5f8b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u13pl"]
 texture = ExtResource("1_3b7po")
@@ -6219,3 +6224,21 @@ offset_top = -1216.0
 offset_right = 2657.0
 offset_bottom = 954.0
 color = Color(0, 0, 0, 1)
+
+[node name="VampireLvl3" parent="." instance=ExtResource("19_t5f8b")]
+position = Vector2(202, -43)
+
+[node name="VampireLvl1" parent="." instance=ExtResource("17_mrrld")]
+position = Vector2(712, -120)
+scale = Vector2(1, 1)
+
+[node name="SlimeZombie" parent="." instance=ExtResource("15_fhygi")]
+position = Vector2(210, -145)
+detect_radius = 300
+max_health = 125
+attack_damage = 8
+loot_table = ExtResource("16_3b7po")
+
+[node name="VampireLvl2" parent="." instance=ExtResource("18_mrrld")]
+position = Vector2(439, -168)
+max_health = 350
