@@ -8,6 +8,7 @@ var loaded_data : Dictionary = {}
 var saved_scene_path : String = ""
 var played_cutscenes: Array = []
 var dead_enemies: Array = []  
+var graveyard_vampires_defeat_notified: bool = false
 var respawn_enemies_on_load: bool = false
 var reset_position_on_load: bool = false
 
@@ -37,6 +38,7 @@ func save_game():
 		"scene_path": scene.scene_file_path,
 		"played_cutscenes": played_cutscenes,
 		"dead_enemies": dead_enemies,
+		"graveyard_vampires_defeat_notified": graveyard_vampires_defeat_notified,
 		"nodes": {}
 		}
 		
@@ -131,6 +133,12 @@ func load_game():
 			dead_enemies = data["dead_enemies"]
 	else:
 		dead_enemies = []
+	
+	if data.has("graveyard_vampires_defeat_notified"):
+		graveyard_vampires_defeat_notified = data["graveyard_vampires_defeat_notified"]
+	else:
+		graveyard_vampires_defeat_notified = false
+
 	Global.SwitchScene(data["scene_path"])
 
 
@@ -249,3 +257,16 @@ func delete_save(slot_id: int):
 			print("Błąd podczas usuwania zapisu dla slotu %d. Kod błędu: %s" % [slot_id, err])
 	else:
 		print("Brak pliku zapisu dla slotu %d do usunięcia." % slot_id)
+
+func are_graveyard_vampires_defeated() -> bool:
+	var graveyard_vampires = [
+		"/root/Graveyard/Vampires_Bosses/VampireLvl3",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl1-1",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl1-2",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl2-1",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl2-2"
+	]
+	for vampire_path in graveyard_vampires:
+		if not vampire_path in dead_enemies:
+			return false
+	return true
