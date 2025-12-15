@@ -164,7 +164,8 @@ func play_animation():
 			anim_name = "death" + anim_suffix
 	
 	if $AnimatedSprite2D.sprite_frames.has_animation(anim_name):
-		$AnimatedSprite2D.play(anim_name)
+		if $AnimatedSprite2D.animation != anim_name:
+			$AnimatedSprite2D.play(anim_name)
 
 # --- Reszta funkcji bez zmian ---
 func _on_animation_finished():
@@ -197,6 +198,21 @@ func finish_death():
 	if player and player.stats_comp.has_method("add_xp"): player.stats_comp.add_xp(xp_reward)
 	DropSpawner.spawn_loot(loot_table, global_position)
 	SaveManager.register_enemy_death(self)
+
+	var current_enemy_path = str(self.get_path())
+	var graveyard_vampires = [
+		"/root/Graveyard/Vampires_Bosses/VampireLvl3",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl1-1",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl1-2",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl2-1",
+		"/root/Graveyard/Vampires_Bosses/VampireLvl2-2"
+	]
+
+	if current_enemy_path in graveyard_vampires:
+		if SaveManager.are_graveyard_vampires_defeated() and not SaveManager.graveyard_vampires_defeat_notified:
+			SaveManager.graveyard_vampires_defeat_notified = true
+			NotificationManager.show_notification("New map unlocked: Level 4!")
+
 	if has_node("/root/PersistentMusic"): PersistentMusic.switch_to_exploration()
 	queue_free()
 

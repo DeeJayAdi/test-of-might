@@ -9,7 +9,7 @@ func _ready():
 		"Level1Btn": "level1",
 		"Level2Btn": "level2",
 		"Level3Btn": "level3",
-		"Level4Btn": "level4"
+		"Level4Btn": "level4",
 	}
 	var vbox = $VBoxContainer if has_node("VBoxContainer") else null
 	if vbox:
@@ -17,6 +17,10 @@ func _ready():
 			var btn = vbox.get_node_or_null(btn_name)
 			if btn:
 				btn.disabled = not global.is_level_unlocked(btns[btn_name])
+		
+		var level4_btn = vbox.get_node_or_null("Level4Btn")
+		if level4_btn:
+			level4_btn.disabled = not SaveManager.are_graveyard_vampires_defeated()
 
 func _on_tutorial_btn_pressed() -> void:
 	sceneLink = "res://maps/level1/Dungeon.tscn"
@@ -32,7 +36,10 @@ func _on_level_3_btn_pressed() -> void:
 	sceneLink = "res://maps/graveyard/graveyard.tscn"
 
 func _on_level_4_btn_pressed() -> void:
-	sceneLink = "noLevel"
+	if not $VBoxContainer/Level4Btn.disabled:
+		sceneLink = "noLevel" # there is no level 4 yet
+	else:
+		sceneLink = "noLevel"
 
 func _on_start_game_btn_pressed() -> void:
 	if sceneLink == "noLevel":
