@@ -77,7 +77,6 @@ shape = SubResource("CircleShape2D_gcv5w")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5727x")
 animation = &"loop"
-frame_progress = 0.5226058
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8ojy7cgmrd5i"]
+
+[ext_resource type="Texture2D" uid="uid://cknyidcsyknrg" path="res://assets/sprites/projectiles/Arrows_pack.png" id="1_b5xjy"]
+[ext_resource type="Script" uid="uid://c5uy7ubnqus2v" path="res://scripts/objects/bullet.gd" id="1_iolmn"]
+[ext_resource type="Texture2D" uid="uid://dh4wqe02hj5yu" path="res://assets/sprites/projectiles/Arrow_impact_pack.png" id="2_dyoyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iolmn"]
+size = Vector2(31, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkecq"]
+atlas = ExtResource("2_dyoyy")
+region = Rect2(2048, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o30rp"]
+atlas = ExtResource("2_dyoyy")
+region = Rect2(3072, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxycf"]
+atlas = ExtResource("2_dyoyy")
+region = Rect2(4096, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5xjy"]
+atlas = ExtResource("1_b5xjy")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyoyy"]
+atlas = ExtResource("1_b5xjy")
+region = Rect2(1024, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iolmn"]
+atlas = ExtResource("1_b5xjy")
+region = Rect2(2048, 0, 1024, 1024)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrqai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkecq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o30rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxycf")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5xjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyoyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iolmn")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkecq"]
+size = Vector2(31, 3)
+
+[node name="Arrow" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_iolmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.5, -0.5)
+shape = SubResource("RectangleShape2D_iolmn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-9.000001, 1.0000001)
+scale = Vector2(0.04046631, 0.028608736)
+sprite_frames = SubResource("SpriteFrames_rrqai")
+animation = &"loop"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-7.5, -0.5)
+shape = SubResource("RectangleShape2D_bkecq")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]

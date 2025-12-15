@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://b1hiis2km4r2g"]
 
 [ext_resource type="Texture2D" uid="uid://cs2f28rtauwod" path="res://assets/sprites/items/bows/Bow1.png" id="1_0p2qk"]
-[ext_resource type="PackedScene" uid="uid://b4572aksntm4n" path="res://scenes/objects/Bullet2.tscn" id="1_qy5jp"]
+[ext_resource type="PackedScene" uid="uid://b8ojy7cgmrd5i" path="res://scenes/objects/Arrow.tscn" id="1_qy5jp"]
 [ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="2_qy5jp"]
 [ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_fdj30"]
 
