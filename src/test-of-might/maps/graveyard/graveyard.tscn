@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=4 uid="uid://bwvr1qo6crdib"]
+[gd_scene load_steps=23 format=4 uid="uid://bwvr1qo6crdib"]
 
 [ext_resource type="Texture2D" uid="uid://bw7iryub4pke1" path="res://assets/maps/graveyard/KE_Ground_Tiles.png" id="1_575oa"]
 [ext_resource type="Texture2D" uid="uid://d6wjjr280pin" path="res://assets/maps/graveyard/KE_Graveyard.png" id="2_at5ts"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="3_5mijg"]
 [ext_resource type="PackedScene" uid="uid://6kys46tgy5eo" path="res://scenes/enemies/Slime_Zombie.tscn" id="4_21ohq"]
+[ext_resource type="PackedScene" uid="uid://cbg0qmbawrgob" path="res://scenes/enemies/Vampires/Vampire_lvl3.tscn" id="5_hc0au"]
+[ext_resource type="PackedScene" uid="uid://cyopic4inmmus" path="res://scenes/enemies/Vampires/Vampire_lvl1.tscn" id="6_75cv5"]
+[ext_resource type="PackedScene" uid="uid://0pviyy6wdofy" path="res://scenes/enemies/Vampires/Vampire_lvl2.tscn" id="7_b2i2j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at5ts"]
 texture = ExtResource("1_575oa")
@@ -504,3 +507,20 @@ navigation_polygon = SubResource("NavigationPolygon_5mijg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.66656864, 0.6665687, 0.66656864, 1)
+
+[node name="Vampires_Bosses" type="Node2D" parent="."]
+
+[node name="VampireLvl3" parent="Vampires_Bosses" instance=ExtResource("5_hc0au")]
+position = Vector2(4935, -1626)
+
+[node name="VampireLvl1-1" parent="Vampires_Bosses" instance=ExtResource("6_75cv5")]
+position = Vector2(2772, -200)
+
+[node name="VampireLvl1-2" parent="Vampires_Bosses" instance=ExtResource("6_75cv5")]
+position = Vector2(3065, -459)
+
+[node name="VampireLvl2-1" parent="Vampires_Bosses" instance=ExtResource("7_b2i2j")]
+position = Vector2(4600, -1516)
+
+[node name="VampireLvl2-2" parent="Vampires_Bosses" instance=ExtResource("7_b2i2j")]
+position = Vector2(4351, -1765)
