@@ -29,7 +29,7 @@ func _on_level_2_btn_pressed() -> void:
 	sceneLink = "res://maps/village/village.tscn"
 
 func _on_level_3_btn_pressed() -> void:
-	sceneLink = "noLevel"
+	sceneLink = "res://maps/graveyard/graveyard.tscn"
 
 func _on_level_4_btn_pressed() -> void:
 	sceneLink = "noLevel"
