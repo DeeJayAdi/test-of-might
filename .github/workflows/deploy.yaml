@@ -1,0 +1,52 @@
+name: "Publish Release"
+
+on:
+    push:
+        tags:
+            - "v*" # Triggers when you push a tag like v1.0, v0.5.2, etc.
+
+env:
+    GODOT_VERSION: 4.5 # Set your specific Godot version here
+    PROJECT_PATH: "src/test-of-might" # Path to project.godot (usually root ".")
+
+jobs:
+    export_game:
+        name: Export Game
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  lfs: true
+
+            # 1. Setup Godot and Export
+            # Uses the popular firebelley/godot-export action
+            - name: Export Game
+              id: export
+              uses: firebelley/godot-export@v5.2.1
+              with:
+                  godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
+                  godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
+                  relative_project_path: ${{ env.PROJECT_PATH }}
+                  archive_output: true
+                  cache: true
+                  export_debug: false
+
+                  # !! IMPORTANT !!
+                  # These must match the names of the presets in your export_presets.cfg
+                  # If your preset is named "Windows Desktop", put that here.
+                    presets_to_export: "Windows Desktop, Linux, macOS"
+
+            # 2. Create Release and Upload
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  files: ${{ steps.export.outputs.archive_directory }}/*
+                  generate_release_notes: true
+                  draft: false
+                  prerelease: false
