@@ -19,10 +19,13 @@ jobs:
                 include:
                     - preset: "Linux"
                       artifact_name: "linux"
+                      export_file: "Test_of_Might.x86_64"
                     - preset: "Windows Desktop"
                       artifact_name: "windows"
+                      export_file: "Test_of_Might.exe"
                     - preset: "macOS"
                       artifact_name: "macos"
+                      export_file: "Test_of_Might.zip"
 
         steps:
             - name: Checkout
@@ -48,7 +51,7 @@ jobs:
               run: |
                   cd ${{ env.PROJECT_PATH }}
                   mkdir -p builds/${{ matrix.artifact_name }}
-                  godot --headless --export-release "${{ matrix.preset }}" builds/${{ matrix.artifact_name }}/
+                  godot --headless --export-release "${{ matrix.preset }}" builds/${{ matrix.artifact_name }}/${{ matrix.export_file }}
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v4
