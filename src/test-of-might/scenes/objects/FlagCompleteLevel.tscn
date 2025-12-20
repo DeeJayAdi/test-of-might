@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjpss1bofa42y"]
+
+[ext_resource type="Texture2D" uid="uid://cvcp24ro1yvre" path="res://assets/maps/dungeon/flag animation.png" id="1_lmqoy"]
+[ext_resource type="Script" uid="uid://bt1npk0ni605n" path="res://scripts/Interaction_objects/FlagCompleteLevel.gd" id="2_g4x6y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41tjb"]
+atlas = ExtResource("1_lmqoy")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g56fj"]
+atlas = ExtResource("1_lmqoy")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eurj"]
+atlas = ExtResource("1_lmqoy")
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01ljs"]
+atlas = ExtResource("1_lmqoy")
+region = Rect2(180, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojlbx"]
+atlas = ExtResource("1_lmqoy")
+region = Rect2(240, 0, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ldllp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41tjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g56fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7eurj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01ljs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojlbx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbtbb"]
+radius = 53.002357
+
+[node name="FlagCompleteLevel" type="Node2D"]
+script = ExtResource("2_g4x6y")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ldllp")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -41.0
+offset_right = 46.0
+offset_bottom = -23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 11
+text = "[E] to Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(9, 1)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(-9, 2.5)
+shape = SubResource("CircleShape2D_hbtbb")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

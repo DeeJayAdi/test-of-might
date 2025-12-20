@@ -1,0 +1,93 @@
+name: "Build Godot Project"
+
+on:
+    push:
+        tags:
+            - "v*"
+
+env:
+    GODOT_VERSION: 4.5
+    PROJECT_PATH: "src/test-of-might"
+
+jobs:
+    build:
+        name: Build - ${{ matrix.preset }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                preset: ["Linux", "Windows Desktop", "macOS"]
+                include:
+                    - preset: "Linux"
+                      artifact_name: "linux"
+                      export_file: "Test_of_Might_Linux.x86_64"
+                    - preset: "Windows Desktop"
+                      artifact_name: "windows"
+                      export_file: "Test_of_Might_Windows.exe"
+                    - preset: "macOS"
+                      artifact_name: "macos"
+                      export_file: "Test_of_Might_MacOS.zip"
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  lfs: true
+
+            - name: Create Build Directories
+              run: mkdir -p ${{ env.PROJECT_PATH }}/builds/${{ matrix.artifact_name }}
+
+            - name: Setup Godot
+              uses: lihop/setup-godot@v2
+              with:
+                  version: ${{ env.GODOT_VERSION }}
+                  export-templates: true
+
+            - name: Import resources
+              run: |
+                  cd ${{ env.PROJECT_PATH }}
+                  godot --headless --editor --quit
+
+            - name: Build
+              run: |
+                  cd ${{ env.PROJECT_PATH }}
+                  mkdir -p builds/${{ matrix.artifact_name }}
+                  godot --headless --export-release "${{ matrix.preset }}" builds/${{ matrix.artifact_name }}/${{ matrix.export_file }}
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-of-might-${{ matrix.artifact_name }}
+                  path: ${{ env.PROJECT_PATH }}/builds/${{ matrix.artifact_name }}/**/*
+
+    release:
+        name: Create Release
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: Download All Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: artifacts
+
+            - name: Create Release Archives
+              run: |
+                  cd artifacts
+                  for dir in */; do
+                    platform=$(basename "$dir")
+                    cd "$dir"
+                    zip -r "../${platform}.zip" .
+                    cd ..
+                  done
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  files: artifacts/*.zip
+                  generate_release_notes: false
+                  draft: false
+                  prerelease: false
