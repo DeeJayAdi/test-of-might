@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died
+
 enum State {IDLE, WANDER, CHASE, ATTACK, HURT, DEATH}
 
 var current_state = State.IDLE
@@ -191,6 +193,7 @@ func take_damage(amount: int, stagger: bool = true):
 
 func die():
 	current_state = State.DEATH
+	died.emit()
 	$HpBar.visible = false
 	if $sfxDie: $sfxDie.play()
 
@@ -212,6 +215,9 @@ func finish_death():
 		if SaveManager.are_graveyard_vampires_defeated() and not SaveManager.graveyard_vampires_defeat_notified:
 			SaveManager.graveyard_vampires_defeat_notified = true
 			NotificationManager.show_notification("New map unlocked: Level 4!")
+			
+			var global = get_node("/root/Global")
+			global.boss_killed.emit()
 
 	if has_node("/root/PersistentMusic"): PersistentMusic.switch_to_exploration()
 	queue_free()
