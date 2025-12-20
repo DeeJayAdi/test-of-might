@@ -1,5 +1,7 @@
 extends Node
 
+signal boss_killed
+
 var next_scene_path: String
 
 # Lista odblokowanych poziomów (np. nazwy lub ścieżki)

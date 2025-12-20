@@ -36,7 +36,7 @@ var skills: Dictionary = {}
 var level: int = 1
 var current_xp: int = 0
 var xp_to_next_level: int = 100
-var damage_multiplier: float = 1.0
+var damage_multiplier: float = 1000.0 # Default 1
 
 
 func _ready() -> void:
