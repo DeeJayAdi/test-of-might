@@ -32,7 +32,7 @@ func _process(delta: float):
 		elapsed_time = 0.0
 		current_state_index = (current_state_index + 1) % LOADING_STATES.size()
 		loading_label.text = LOADING_STATES[current_state_index]
-
+   
 
 	if not scene_loaded:
 		var status = ResourceLoader.load_threaded_get_status(global_node.next_scene_path)

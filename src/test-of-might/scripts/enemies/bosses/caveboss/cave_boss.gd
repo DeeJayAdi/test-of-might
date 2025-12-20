@@ -81,7 +81,9 @@ func _on_death():
 		PersistentMusic.switch_to_exploration()
 
 	print("Zabito bossa! Odblokowano poziom 2.")
+		
 	var global = get_node("/root/Global")
+	global.boss_killed.emit()
 	if not global.is_level_unlocked("level2"):
 		global.unlock_level("level2")
 		global.save_unlocked_levels()
@@ -92,8 +94,6 @@ func _on_death():
 	await get_tree().create_timer(7.0).timeout
 	print("Zapisuję stan gry...")
 	SaveManager.save_game()
-	await get_tree().process_frame 
-	get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
 
 
 func take_damage(damage: int, p_stagger: bool = true):

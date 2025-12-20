@@ -63,7 +63,9 @@ func _on_death():
 		PersistentMusic.switch_to_exploration()
 
 	print("Zabito bossa! Odblokowano poziom 3.")
+	
 	var global = get_node("/root/Global")
+	global.boss_killed.emit()
 	if not global.is_level_unlocked("level3"):
 		global.unlock_level("level3")
 		global.save_unlocked_levels()
