@@ -1,0 +1,72 @@
+name: "Build Godot Project"
+
+on:
+    push:
+        tags:
+            - "v*"
+
+env:
+    GODOT_VERSION: 4.5
+    PROJECT_PATH: "src/test-of-might"
+
+jobs:
+    build:
+        name: Build - ${{ matrix.preset }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                preset: ["Linux", "Windows Desktop", "macOS"]
+                include:
+                    - preset: "Linux"
+                      artifact_name: "linux"
+                    - preset: "Windows Desktop"
+                      artifact_name: "windows"
+                    - preset: "macOS"
+                      artifact_name: "macos"
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  lfs: true
+
+            - name: Create Build Directories
+              run: mkdir -p ${{ env.PROJECT_PATH }}/builds/${{ matrix.platform }}
+
+            - name: Build
+              id: build
+              uses: manleydev/build-godot-action@v1.5.0
+              with:
+                  name: test-of-might
+                  preset: ${{ matrix.platform }}
+                  projectDir: ${{ env.PROJECT_PATH }}
+                  debugMode: "false"
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-of-might-${{ matrix.platform }}
+                  path: ${{ steps.build.outputs.build }}
+
+    release:
+        name: Create Release
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: Download All Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: artifacts
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  files: artifacts/**/*
+                  generate_release_notes: true
+                  draft: false
+                  prerelease: false
