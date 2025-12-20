@@ -19,13 +19,13 @@ jobs:
                 include:
                     - preset: "Linux"
                       artifact_name: "linux"
-                      export_file: "Test_of_Might.x86_64"
+                      export_file: "Test_of_Might_Linux.x86_64"
                     - preset: "Windows Desktop"
                       artifact_name: "windows"
-                      export_file: "Test_of_Might.exe"
+                      export_file: "Test_of_Might_Windows.exe"
                     - preset: "macOS"
                       artifact_name: "macos"
-                      export_file: "Test_of_Might.zip"
+                      export_file: "Test_of_Might_MacOS.zip"
 
         steps:
             - name: Checkout
@@ -72,12 +72,22 @@ jobs:
               with:
                   path: artifacts
 
+            - name: Create Release Archives
+              run: |
+                  cd artifacts
+                  for dir in */; do
+                    platform=$(basename "$dir")
+                    cd "$dir"
+                    zip -r "../${platform}.zip" .
+                    cd ..
+                  done
+
             - name: Create Release
               uses: softprops/action-gh-release@v1
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  files: artifacts/**/*
-                  generate_release_notes: true
+                  files: artifacts/*.zip
+                  generate_release_notes: false
                   draft: false
                   prerelease: false
