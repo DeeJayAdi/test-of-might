@@ -48,5 +48,5 @@ func interact():
 	# Czekamy jedną klatkę, żeby plik zdążył się zapisać przed zmianą sceny
 	await get_tree().process_frame 
 	
-	# 5. WYJŚCIE DO MAPY
-	get_tree().change_scene_to_file("res://scenes/map_menu/map_menu.tscn")
+	# 5. PRZEJŚCIE DO MAPY CAVE
+	Global.SwitchScene("res://maps/cave/cave.tscn")

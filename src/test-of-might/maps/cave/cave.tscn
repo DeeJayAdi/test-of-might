@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=47 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://8rkmtcbmii7p" path="res://assets/audio/Cutscenes/Cave/Boss/Walking.mp3" id="27_6ppbf"]
 [ext_resource type="AudioStream" uid="uid://caklnwq3017eh" path="res://assets/audio/Cutscenes/Cave/Boss/earth-rumble-6953.mp3" id="28_13cra"]
 [ext_resource type="AudioStream" uid="uid://mth7lapkcj3e" path="res://assets/audio/Cutscenes/Cave/Boss/monster-3-278258.mp3" id="29_eyyqa"]
+[ext_resource type="PackedScene" uid="uid://bjpss1bofa42y" path="res://scenes/objects/FlagCompleteLevel.tscn" id="30_fcl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqe3u"]
 texture = ExtResource("1_v23if")
@@ -7805,7 +7806,7 @@ tile_set = SubResource("TileSet_hy0pv")
 
 [node name="player" parent="YSort" instance=ExtResource("4_up3r0")]
 y_sort_enabled = true
-position = Vector2(116, 232)
+position = Vector2(66, 218)
 
 [node name="Skeleton" parent="YSort" instance=ExtResource("6_2jint")]
 position = Vector2(1084, 375)
@@ -7831,8 +7832,9 @@ position = Vector2(1101, 171)
 [node name="Skeleton6" parent="YSort" instance=ExtResource("6_2jint")]
 position = Vector2(1755, 313)
 
-[node name="CaveBoss" parent="YSort" node_paths=PackedStringArray("boss_navigation_region") instance=ExtResource("8_grrjv")]
+[node name="CaveBoss" parent="YSort" node_paths=PackedStringArray("flag_complete_level", "boss_navigation_region") instance=ExtResource("8_grrjv")]
 position = Vector2(3784, 381)
+flag_complete_level = NodePath("../FlagCompleteLevel")
 boss_navigation_region = NodePath("../../BossNavigationRegion2D")
 
 [node name="Shopkeeper" parent="YSort" groups=["player"] instance=ExtResource("15_nssaw")]
@@ -7844,6 +7846,9 @@ scale = Vector2(0.5, 0.5)
 y_sort_enabled = true
 position = Vector2(192, 192)
 scale = Vector2(0.25, 0.25)
+
+[node name="FlagCompleteLevel" parent="YSort" instance=ExtResource("30_fcl")]
+position = Vector2(3784, 381)
 
 [node name="MapCollisions" type="StaticBody2D" parent="."]
 
@@ -7896,3 +7901,5 @@ collision_mask = 2
 images = Array[Texture2D]([ExtResource("17_drbrp"), ExtResource("18_u50nb"), ExtResource("19_b7bfk"), ExtResource("20_xpgc1"), ExtResource("21_ux28t")])
 sound_effects = Array[AudioStream]([ExtResource("26_w02pj"), ExtResource("27_6ppbf"), null, ExtResource("28_13cra"), ExtResource("29_eyyqa")])
 cutscene_id = "Cave_Boss"
+
+[connection signal="died" from="YSort/CaveBoss" to="YSort/FlagCompleteLevel" method="show_flag"]

@@ -59,7 +59,16 @@ func _ready():
 		walls_map = get_tree().get_root().get_node("Walls_Floors")
 		
 
+func _exit_tree():
+	process_mode = PROCESS_MODE_DISABLED
+
+
 func _physics_process(_delta: float):
+	call_deferred("_deferred_physics_process", _delta)
+
+func _deferred_physics_process(_delta: float):
+	if not is_inside_tree():
+		return
 	if get_tree().paused:
 		return
 

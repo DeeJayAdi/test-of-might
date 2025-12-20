@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bwvr1qo6crdib"]
+[gd_scene load_steps=26 format=4 uid="uid://bwvr1qo6crdib"]
 
 [ext_resource type="Texture2D" uid="uid://bw7iryub4pke1" path="res://assets/maps/graveyard/KE_Ground_Tiles.png" id="1_575oa"]
 [ext_resource type="Texture2D" uid="uid://d6wjjr280pin" path="res://assets/maps/graveyard/KE_Graveyard.png" id="2_at5ts"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cbg0qmbawrgob" path="res://scenes/enemies/Vampires/Vampire_lvl3.tscn" id="5_hc0au"]
 [ext_resource type="PackedScene" uid="uid://cyopic4inmmus" path="res://scenes/enemies/Vampires/Vampire_lvl1.tscn" id="6_75cv5"]
 [ext_resource type="PackedScene" uid="uid://0pviyy6wdofy" path="res://scenes/enemies/Vampires/Vampire_lvl2.tscn" id="7_b2i2j"]
+[ext_resource type="PackedScene" path="res://scenes/objects/FlagCompleteLevel.tscn" id="8_flag"]
+[ext_resource type="Script" path="res://scripts/globals/GraveyardManager.gd" id="9_f2jql"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at5ts"]
 texture = ExtResource("1_575oa")
@@ -402,6 +404,11 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(4109, -1879, 4126, -190
 [node name="Graveyard" type="Node2D"]
 texture_filter = 1
 
+[node name="GraveyardManager" type="Node" parent="."]
+script = ExtResource("9_f2jql")
+flag_to_show = NodePath("Y-Sort/FlagCompleteLevel")
+enemies_node = NodePath("Vampires_Bosses")
+
 [node name="Floor" type="Node2D" parent="."]
 
 [node name="Grass" type="TileMapLayer" parent="Floor"]
@@ -449,6 +456,10 @@ physics_quadrant_size = 32
 [node name="player" parent="Y-Sort" instance=ExtResource("3_5mijg")]
 y_sort_enabled = true
 position = Vector2(1263, 661)
+
+[node name="FlagCompleteLevel" parent="Y-Sort" instance=ExtResource("8_flag")]
+position = Vector2(4201, -1645)
+next_level_scene = "res://scenes/menu/Main_Menu.tscn"
 
 [node name="SlimeZombie" parent="Y-Sort" instance=ExtResource("4_21ohq")]
 position = Vector2(552, -198)
