@@ -22,6 +22,9 @@ jobs:
               with:
                   lfs: true
 
+            - name: Create Build Directories
+              run: mkdir -p src/test-of-might/builds/{linux,macos,windows}
+
             # 1. Setup Godot and Export
             # Uses the popular firebelley/godot-export action
             - name: Export Game
