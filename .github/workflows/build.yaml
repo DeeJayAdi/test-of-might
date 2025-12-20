@@ -37,6 +37,7 @@ jobs:
               uses: lihop/setup-godot@v2
               with:
                   version: ${{ env.GODOT_VERSION }}
+                  export-templates: true
 
             - name: Import resources
               run: |
