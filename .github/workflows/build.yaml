@@ -31,22 +31,29 @@ jobs:
                   lfs: true
 
             - name: Create Build Directories
-              run: mkdir -p ${{ env.PROJECT_PATH }}/builds/${{ matrix.platform }}
+              run: mkdir -p ${{ env.PROJECT_PATH }}/builds/${{ matrix.artifact_name }}
+
+            - name: Setup Godot
+              uses: lihop/setup-godot@v2
+              with:
+                  version: ${{ env.GODOT_VERSION }}
+
+            - name: Import resources
+              run: |
+                  cd ${{ env.PROJECT_PATH }}
+                  godot --headless --editor --quit
 
             - name: Build
-              id: build
-              uses: manleydev/build-godot-action@v1.5.0
-              with:
-                  name: test-of-might
-                  preset: ${{ matrix.platform }}
-                  projectDir: ${{ env.PROJECT_PATH }}
-                  debugMode: "false"
+              run: |
+                  cd ${{ env.PROJECT_PATH }}
+                  mkdir -p builds/${{ matrix.artifact_name }}
+                  godot --headless --export-release "${{ matrix.preset }}" builds/${{ matrix.artifact_name }}/
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v4
               with:
-                  name: test-of-might-${{ matrix.platform }}
-                  path: ${{ steps.build.outputs.build }}
+                  name: test-of-might-${{ matrix.artifact_name }}
+                  path: ${{ env.PROJECT_PATH }}/builds/${{ matrix.artifact_name }}/**/*
 
     release:
         name: Create Release
