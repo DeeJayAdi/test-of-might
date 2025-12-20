@@ -37,11 +37,7 @@ jobs:
                   archive_output: true
                   cache: true
                   export_debug: false
-
-                  # !! IMPORTANT !!
-                  # These must match the names of the presets in your export_presets.cfg
-                  # If your preset is named "Windows Desktop", put that here.
-                    presets_to_export: "Windows Desktop, Linux, macOS"
+                  presets_to_export: "Windows Desktop, Linux, macOS"
 
             # 2. Create Release and Upload
             - name: Create Release
