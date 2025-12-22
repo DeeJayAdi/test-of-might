@@ -814,8 +814,10 @@ bg_color = Color(0, 0, 0, 0.18431373)
 bg_color = Color(0.75686276, 0, 0.09411765, 1)
 
 [node name="GoblinLv1" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_1t18s")
 speed = 170
 max_health = 300
