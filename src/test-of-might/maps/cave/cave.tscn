@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://bwb8ylt8tk4at"]
+[gd_scene load_steps=49 format=4 uid="uid://bwb8ylt8tk4at"]
 
 [ext_resource type="Texture2D" uid="uid://br6g7p31xmqkq" path="res://assets/maps/cave/MainLev.png" id="1_v23if"]
 [ext_resource type="Script" uid="uid://ous0gtd3lv6w" path="res://scripts/objects/torch.gd" id="2_3wcl8"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c1t3jqtd5ecfb" path="res://scenes/enemies/skeleton.tscn" id="6_2jint"]
 [ext_resource type="PackedScene" uid="uid://bpfvkxa3jtv3w" path="res://scenes/enemies/bosses/CaveBoss/CaveBoss.tscn" id="8_grrjv"]
 [ext_resource type="PackedScene" uid="uid://73xfdxnq8gmv" path="res://scenes/NPC/old_man/Old_man.tscn" id="9_k8do1"]
+[ext_resource type="PackedScene" uid="uid://bf8y6iv1knwuj" path="res://scenes/enemies/Plant/Plant_lvl1.tscn" id="11_ux28t"]
+[ext_resource type="PackedScene" uid="uid://cg0m04ve5g677" path="res://scenes/enemies/Plant/Plant_lvl2.tscn" id="12_23oef"]
 [ext_resource type="PackedScene" uid="uid://rubaexyfn1of" path="res://scenes/NPC/Shop_Man/ShopKeeper.tscn" id="15_nssaw"]
 [ext_resource type="PackedScene" uid="uid://dvci74lq57btl" path="res://scenes/Cutscenes/CutsceneTrigger.tscn" id="16_1futb"]
 [ext_resource type="Texture2D" uid="uid://omnmkje24sy1" path="res://assets/Cutscene/Cave/Boss/1.png" id="17_drbrp"]
@@ -7832,9 +7834,8 @@ position = Vector2(1101, 171)
 [node name="Skeleton6" parent="YSort" instance=ExtResource("6_2jint")]
 position = Vector2(1755, 313)
 
-[node name="CaveBoss" parent="YSort" node_paths=PackedStringArray("flag_complete_level", "boss_navigation_region") instance=ExtResource("8_grrjv")]
+[node name="CaveBoss" parent="YSort" node_paths=PackedStringArray("boss_navigation_region") instance=ExtResource("8_grrjv")]
 position = Vector2(3784, 381)
-flag_complete_level = NodePath("../FlagCompleteLevel")
 boss_navigation_region = NodePath("../../BossNavigationRegion2D")
 
 [node name="Shopkeeper" parent="YSort" groups=["player"] instance=ExtResource("15_nssaw")]
@@ -7849,6 +7850,24 @@ scale = Vector2(0.25, 0.25)
 
 [node name="FlagCompleteLevel" parent="YSort" instance=ExtResource("30_fcl")]
 position = Vector2(3784, 381)
+
+[node name="PlantLvl1" parent="YSort" instance=ExtResource("11_ux28t")]
+position = Vector2(1019, -367)
+
+[node name="PlantLvl1_2" parent="YSort" instance=ExtResource("11_ux28t")]
+position = Vector2(1231, -372)
+
+[node name="PlantLvl1_3" parent="YSort" instance=ExtResource("11_ux28t")]
+position = Vector2(1821, 843)
+
+[node name="PlantLvl1_4" parent="YSort" instance=ExtResource("11_ux28t")]
+position = Vector2(1733, 991)
+
+[node name="PlantLvl2" parent="YSort" instance=ExtResource("12_23oef")]
+position = Vector2(1101, -422)
+
+[node name="PlantLvl2_1" parent="YSort" instance=ExtResource("12_23oef")]
+position = Vector2(1957, 967)
 
 [node name="MapCollisions" type="StaticBody2D" parent="."]
 
