@@ -1,8 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://ohdjo0i1poiq"]
+[gd_scene load_steps=17 format=4 uid="uid://ohdjo0i1poiq"]
 
 [ext_resource type="Texture2D" uid="uid://1u17wg7t0yrw" path="res://assets/maps/castle/mainlevbuild.png" id="1_kvms3"]
 [ext_resource type="PackedScene" uid="uid://b60ho6btoc5of" path="res://scenes/player/swordsman/player.tscn" id="2_7nc8v"]
 [ext_resource type="PackedScene" uid="uid://b7c02ge0jmrne" path="res://scenes/enemies/bosses/Banshee/Banshee.tscn" id="3_8vaxf"]
+[ext_resource type="PackedScene" uid="uid://d04lhyirkppht" path="res://scenes/enemies/Orc/Orc_1.tscn" id="4_puttg"]
+[ext_resource type="PackedScene" uid="uid://b2c06o3sy2yul" path="res://scenes/enemies/Orc/orc_2.tscn" id="5_w5yem"]
+[ext_resource type="PackedScene" uid="uid://bxjbbynmlqcl2" path="res://scenes/enemies/Orc/Orc_lvl_3.tscn" id="6_607sa"]
+[ext_resource type="PackedScene" uid="uid://1hho0csf0k4i" path="res://scenes/enemies/Goblins/Goblin_lv1.tscn" id="7_jrs65"]
+[ext_resource type="PackedScene" uid="uid://c8hl803hm51hg" path="res://scenes/enemies/Goblins/Goblin_LvL2.tscn" id="8_f3ljt"]
+[ext_resource type="PackedScene" uid="uid://b82y5cn80bvqt" path="res://scenes/enemies/Goblins/Goblin_lvl3.tscn" id="9_6qrpl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7nc8v"]
 texture = ExtResource("1_kvms3")
@@ -1948,10 +1954,156 @@ tile_map_data = PackedByteArray("AAAEAPj/AAAPAAIAAAD7//j/AAAEAAIAAAASAPH/AAAlAAg
 tile_set = SubResource("TileSet_w5yem")
 
 [node name="player" parent="YSort" instance=ExtResource("2_7nc8v")]
+modulate = Color(0.5370113, 0.5370113, 0.5370113, 1)
 position = Vector2(-17, 964)
 
 [node name="Banshee" parent="YSort" instance=ExtResource("3_8vaxf")]
 position = Vector2(1, -4439)
+
+[node name="Orc1" parent="YSort" instance=ExtResource("4_puttg")]
+modulate = Color(0.46229059, 0.46229059, 0.46229059, 1)
+position = Vector2(1033, -615)
+
+[node name="Orc2" parent="YSort" instance=ExtResource("4_puttg")]
+modulate = Color(0.46229059, 0.46229059, 0.46229059, 1)
+position = Vector2(-1037, -615)
+
+[node name="Orc3" parent="YSort" instance=ExtResource("4_puttg")]
+modulate = Color(0.46229059, 0.46229059, 0.46229059, 1)
+position = Vector2(-626, -235)
+
+[node name="Orc4" parent="YSort" instance=ExtResource("4_puttg")]
+modulate = Color(0.46229059, 0.46229059, 0.46229059, 1)
+position = Vector2(290, -368)
+
+[node name="Orc5" parent="YSort" instance=ExtResource("4_puttg")]
+modulate = Color(0.46229059, 0.46229059, 0.46229059, 1)
+position = Vector2(-225, -319)
+
+[node name="Orc6" parent="YSort" instance=ExtResource("4_puttg")]
+modulate = Color(0.46229059, 0.46229059, 0.46229059, 1)
+position = Vector2(633, -265)
+
+[node name="Orc_lvl2_" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-29, -1292)
+
+[node name="Orc_lvl2" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(451, -1281)
+
+[node name="Orc_lvl2_1" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-654, -1274)
+
+[node name="Orc_lvl2_2" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(74, -380)
+
+[node name="Orc_lvl2_3" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-414, -354)
+
+[node name="Orc_lvl2_4" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(457, -299)
+
+[node name="Orc_lvl2_5" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(487, -135)
+
+[node name="Orc_lvl2_6" parent="YSort" instance=ExtResource("5_w5yem")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-332, -13)
+
+[node name="OrcLvl3" parent="YSort" instance=ExtResource("6_607sa")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-269, -449)
+speed = 150
+
+[node name="OrcLvl3_1" parent="YSort" instance=ExtResource("6_607sa")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(410, -442)
+speed = 150
+
+[node name="OrcLvl3_2" parent="YSort" instance=ExtResource("6_607sa")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-363, -1295)
+speed = 150
+
+[node name="OrcLvl3_3" parent="YSort" instance=ExtResource("6_607sa")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(287, -1298)
+speed = 150
+
+[node name="GoblinLv1" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-1048, -1583)
+
+[node name="GoblinLv1_1" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(1055, -1604)
+
+[node name="GoblinLv1_2" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-285, -2230)
+
+[node name="GoblinLv1_3" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(239, -2215)
+
+[node name="GoblinLv1_4" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(3, -2288)
+
+[node name="GoblinLv1_5" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-98, -2206)
+
+[node name="GoblinLv1_6" parent="YSort" instance=ExtResource("7_jrs65")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(166, -2302)
+detect_radius = 300
+
+[node name="GoblinLvL2" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-332, -251)
+
+[node name="GoblinLvL2_1" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(305, -223)
+
+[node name="GoblinLvL2_2" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-261, -2407)
+
+[node name="GoblinLvL2_3" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(316, -2418)
+
+[node name="GoblinLvL2_4" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-394, -2261)
+
+[node name="GoblinLvL2_5" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(511, -2190)
+
+[node name="GoblinLvL2_6" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(39, -2435)
+
+[node name="GoblinLvL2_7" parent="YSort" instance=ExtResource("8_f3ljt")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-64, -2461)
+
+[node name="GoblinLvl3" parent="YSort" instance=ExtResource("9_6qrpl")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(-397, -2450)
+
+[node name="GoblinLvl3_1" parent="YSort" instance=ExtResource("9_6qrpl")]
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 1)
+position = Vector2(504, -2429)
 
 [node name="MapCollisions" type="StaticBody2D" parent="."]
 

@@ -1114,12 +1114,15 @@ simplify_path = true
 [node name="sfxWalk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_e1f8s")
 max_distance = 507.0
+bus = &"SFX"
 
 [node name="sfxHurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_p0dd7")
+bus = &"SFX"
 
 [node name="sfxDie" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_ksphs")
+bus = &"SFX"
 
 [node name="HpBar" type="ProgressBar" parent="."]
 offset_left = -26.0
