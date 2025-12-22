@@ -961,8 +961,10 @@ bg_color = Color(0, 0, 0, 0.18431373)
 bg_color = Color(0.75686276, 0, 0.09411765, 1)
 
 [node name="Orc2" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_icw6q")
 speed = 150
 max_health = 425
@@ -979,8 +981,9 @@ texture_filter = 1
 position = Vector2(-0.6666667, -0.6666666)
 scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_eregq")
-animation = &"walk_up"
-frame_progress = 0.089412704
+animation = &"walk_side"
+frame = 1
+frame_progress = 0.7267047
 offset = Vector2(2.465, -31.195)
 
 [node name="DetectionArea" type="Area2D" parent="."]
@@ -1018,9 +1021,9 @@ bus = &"SFX"
 
 [node name="HpBar" type="ProgressBar" parent="."]
 offset_left = -26.0
-offset_top = -93.333336
+offset_top = -100.0
 offset_right = 28.0
-offset_bottom = -87.333336
+offset_bottom = -94.0
 theme_override_styles/background = SubResource("StyleBoxFlat_us2do")
 theme_override_styles/fill = SubResource("StyleBoxFlat_itfdj")
 value = 50.0

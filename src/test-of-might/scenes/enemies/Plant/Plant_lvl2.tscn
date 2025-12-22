@@ -961,8 +961,10 @@ bg_color = Color(0, 0, 0, 0.18431373)
 bg_color = Color(0.75686276, 0, 0.09411765, 1)
 
 [node name="PlantLvl2" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_pudky")
 speed = 120
 max_health = 180
@@ -1018,9 +1020,9 @@ bus = &"SFX"
 
 [node name="HpBar" type="ProgressBar" parent="."]
 offset_left = -26.0
-offset_top = -93.333336
+offset_top = -99.0
 offset_right = 28.0
-offset_bottom = -87.333336
+offset_bottom = -93.0
 theme_override_styles/background = SubResource("StyleBoxFlat_q6dg1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b3v17")
 value = 50.0
