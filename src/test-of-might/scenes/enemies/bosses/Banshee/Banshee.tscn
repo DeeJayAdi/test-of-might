@@ -1291,8 +1291,6 @@ loot_table = SubResource("Resource_6xhya")
 position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_cqqot")
 animation = &"scream_right"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -25)
