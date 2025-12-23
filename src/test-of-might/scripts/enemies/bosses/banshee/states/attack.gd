@@ -7,6 +7,7 @@ func enter():
 	if not boss.anim_sprite.animation_finished.is_connected(_on_animation_finished):
 		boss.anim_sprite.animation_finished.connect(_on_animation_finished)
 	boss.can_attack = false
+	#print("boss.can attack: ",  boss.can_attack)
 	
 	#wybieranie pozycji celu przed animacją dla melee
 	if boss.is_player_in_melee_range:
