@@ -36,10 +36,7 @@ func _on_level_3_btn_pressed() -> void:
 	sceneLink = "res://maps/graveyard/graveyard.tscn"
 
 func _on_level_4_btn_pressed() -> void:
-	if not $VBoxContainer/Level4Btn.disabled:
-		sceneLink = "noLevel" # there is no level 4 yet
-	else:
-		sceneLink = "noLevel"
+	sceneLink = "res://maps/castle/Castle.tscn"
 
 func _on_start_game_btn_pressed() -> void:
 	if sceneLink == "noLevel":
