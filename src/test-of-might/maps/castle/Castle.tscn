@@ -1955,7 +1955,7 @@ tile_set = SubResource("TileSet_w5yem")
 
 [node name="player" parent="YSort" instance=ExtResource("2_7nc8v")]
 modulate = Color(0.5370113, 0.5370113, 0.5370113, 1)
-position = Vector2(30, -3655)
+position = Vector2(-2, 929)
 
 [node name="Banshee" parent="YSort" instance=ExtResource("3_8vaxf")]
 position = Vector2(1, -4439)
