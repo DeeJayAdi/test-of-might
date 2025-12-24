@@ -13,5 +13,5 @@ icon = ExtResource("1_2vxi1")
 description = "A small potion that immediately restores a certain amount of HP"
 stack_size = 10
 default_quantity = 2
-heal_per_second = 5
+heal_per_second = 6
 heal_duration = 5.0

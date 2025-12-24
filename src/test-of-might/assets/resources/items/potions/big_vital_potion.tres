@@ -11,6 +11,6 @@ subtype = "Healing"
 icon = ExtResource("1_0jes5")
 description = "A big potion that provides some HP restoration over time and immediately restores a certain amount of HP"
 stack_size = 3
-heal_instant = 75
+heal_instant = 80
 heal_per_second = 10
 heal_duration = 10.0
