@@ -64,7 +64,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	preview.self_modulate = Color(1, 1, 1, 0.8) 
 	set_drag_preview(c)
 	
-	icon.hide()
+	#icon.hide()
 
 	return self
 
