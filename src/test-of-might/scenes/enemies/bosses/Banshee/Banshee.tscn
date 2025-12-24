@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://1g0h8qyjscqn" path="res://assets/resources/items/ranged/magic_wand.tres" id="4_nd4yk"]
 [ext_resource type="Texture2D" uid="uid://d12yp3n73brni" path="res://assets/sprites/enemies/bosses/banshee/banshee - hit.png" id="5_qonit"]
 [ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="5_yo47g"]
-[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="6_bspxy"]
+[ext_resource type="Script" path="res://scripts/globals/loot_table.gd" id="6_bspxy"]
 [ext_resource type="Texture2D" uid="uid://bq55vltee25c2" path="res://assets/sprites/enemies/bosses/banshee/banshee - idle.png" id="6_pvunx"]
 [ext_resource type="Texture2D" uid="uid://d3ph4w8mdl1em" path="res://assets/sprites/enemies/bosses/banshee/banshee - move.png" id="7_gnlmg"]
 [ext_resource type="Texture2D" uid="uid://c0avlm3fgqy2v" path="res://assets/sprites/enemies/bosses/banshee/banshee - scream.png" id="8_xafn1"]
