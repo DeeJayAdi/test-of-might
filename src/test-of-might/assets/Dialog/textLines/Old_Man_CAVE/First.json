@@ -1,47 +1,47 @@
 [
   {
-    "speaker": "???",
-    "avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
-    "text": "Turn back… this path is not meant for you."
+	"speaker": "???",
+	"avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
+	"text": "Turn back… this path is not meant for you."
   },
   {
-    "speaker": "Player",
-    "avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
-    "text": "Who are you? Why are you blocking the road?"
+	"speaker": "Player",
+	"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+	"text": "Who are you? Why are you blocking the road?"
   },
   {
-    "speaker": "Hector",
-    "avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
-    "text": "My name is Hector. I once walked the same road… and paid the price."
+	"speaker": "Hector",
+	"avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
+	"text": "My name is Hector. I once walked the same road… and paid the price."
   },
   {
-    "speaker": "Player",
-    "avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
-    "text": "What happened to you?"
+	"speaker": "Player",
+	"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+	"text": "What happened to you?"
   },
   {
-    "speaker": "Hector",
-    "avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
-    "text": "Beyond the woods lies something ancient—something that awakens tonight."
+	"speaker": "Hector",
+	"avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
+	"text": "Beyond the woods lies something ancient—something that awakens tonight."
   },
   {
-    "speaker": "Player",
-    "avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
-    "text": "I can't turn back. Someone I care about is out there."
+	"speaker": "Player",
+	"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+	"text": "I can't turn back. Someone I care about is out there."
   },
   {
-    "speaker": "Hector",
-    "avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
-    "text": "Then take this lantern. Its light may not save you… but it will help you see the truth."
+	"speaker": "Hector",
+	"avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
+	"text": "Then take this lantern. Its light may not save you… but it will help you see the truth."
   },
   {
-    "speaker": "Player",
-    "avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
-    "text": "Thanks… I guess. Wish me luck."
+	"speaker": "Player",
+	"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+	"text": "Thanks… I guess. Wish me luck."
   },
   {
-    "speaker": "Hector",
-    "avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
-    "text": "Luck won't help you where you're going. Only courage."
+	"speaker": "Hector",
+	"avatar": "res://assets/Dialog/Avatars/NPC/Old_Man/old_man_avata.png",
+	"text": "Luck won't help you where you're going. Only courage."
   }
 ]

@@ -81,15 +81,12 @@ func _input(event):
 	if not self.visible:
 		return
 		
-	var is_accept = event.is_action_pressed("ui_accept")
-	var is_lpm = event is InputEventMouseButton and \
-				 event.button_index == MOUSE_BUTTON_LEFT and \
-				 event.is_pressed()
-
-	if is_accept or is_lpm:
+	if event.is_action_pressed("ui_accept"):
 		if is_typing:
 			_skip_typing()
 		else:
 			_advance_dialog()
-			
+		get_viewport().set_input_as_handled()
+
+	elif event is InputEventKey:
 		get_viewport().set_input_as_handled()
