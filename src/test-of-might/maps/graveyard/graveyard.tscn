@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bwvr1qo6crdib"]
+[gd_scene load_steps=33 format=4 uid="uid://bwvr1qo6crdib"]
 
 [ext_resource type="Texture2D" uid="uid://bw7iryub4pke1" path="res://assets/maps/graveyard/KE_Ground_Tiles.png" id="1_575oa"]
 [ext_resource type="Texture2D" uid="uid://d6wjjr280pin" path="res://assets/maps/graveyard/KE_Graveyard.png" id="2_at5ts"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://0pviyy6wdofy" path="res://scenes/enemies/Vampires/Vampire_lvl2.tscn" id="7_b2i2j"]
 [ext_resource type="PackedScene" uid="uid://bjpss1bofa42y" path="res://scenes/objects/FlagCompleteLevel.tscn" id="8_flag"]
 [ext_resource type="Script" uid="uid://d00ei46gpqljy" path="res://scripts/globals/GraveyardManager.gd" id="9_f2jql"]
+[ext_resource type="PackedScene" uid="uid://c61rnyr13ceff" path="res://scenes/NPC/signs/sign.tscn" id="10_1rwbk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at5ts"]
 texture = ExtResource("1_575oa")
@@ -858,3 +859,9 @@ navigation_polygon = SubResource("NavigationPolygon_hc0au")
 
 [node name="NavigationRegion2D3" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_75cv5")
+
+[node name="Sign" parent="." instance=ExtResource("10_1rwbk")]
+y_sort_enabled = true
+position = Vector2(1265, 359)
+scale = Vector2(0.3, 0.3)
+dialog_file = "res://assets/Dialog/textLines/signs/graveyard_sign.json"
