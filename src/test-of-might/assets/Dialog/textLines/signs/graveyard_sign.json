@@ -1,0 +1,78 @@
+[
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Oi!"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "What is it?"
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Don't step on the flower, you rotting wretch!"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "That was rude."
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "I'm alive as one could be! Can't you see? A corpse could never look this handsome."
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "You're human alright. Only they are could be so vain and loud"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Ouch"
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Whatever. If ya gonna go to the graveyard, watch out, tough no necessarily the most powerful of the monster one can meet, they more than make that up with their numbers"
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "If ya want to avoid them, go next to the graves. It seems to be some kind of consecrated grounds, so the undead don't go there."
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "If so, why are there undead here in the first place?"
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Why should I know? And why should you care? All you're here for is to prove yourself anyway, no?"
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "And if that's the case, all you need to do is find 2 vampire underlings in a secluded area with a well and weeping willo, kill them and do the some with their bosses: two elder and a single true blood vampire in a clearing in the rightmost part of the graveyard."
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Then you can go to the castle, the last possible stop for a fool, such as yourself, who tries to prov their 'might' or whatever. "
+	},
+	{
+		"speaker": "Damp Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Now off you go. Don't linger or I won't be able to nap"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Thanks, but you seriously should work on your attitude. Bye!"
+	},
+	
+]
