@@ -1,6 +1,6 @@
 extends Control
 
-@export var settings_scene_path: String = "res://scenes/menu/settings.tscn"
+@export var settings_scene_path: String = "res://scenes/menu/new_settings.tscn"
 @export var main_menu_path: String = "res://scenes/menu/Main_Menu.tscn"
 var settings_instance = null
 
@@ -40,26 +40,18 @@ func _on_options_button_pressed():
 			
 			if "is_opened_from_pause_menu" in settings_instance:
 				settings_instance.is_opened_from_pause_menu = true
-			# ---------------------
-
-			add_child(settings_instance)
 			
-			var close_button = settings_instance.get_node_or_null("CanvasLayer/Panel/Close_Settings") 
-			if close_button:
-				close_button.pressed.connect(_on_settings_closed)
-			else:
-				print("OSTRZEŻENIE: Nie znaleziono przycisku...")
+			add_child(settings_instance)
+			settings_instance.tree_exiting.connect(_on_settings_closed)
 
 	if settings_instance:
 		settings_instance.visible = true
 		self.visible = false 
 
-
 func _on_settings_closed():
-	if settings_instance:
-		settings_instance.queue_free()
-		settings_instance = null
-	self.visible = true 
+	settings_instance = null
+	
+	self.visible = true
 
 func _on_quit_button_pressed():
 	get_tree().paused = false

@@ -1,0 +1,121 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhi37jeg1fhug"]
+
+[ext_resource type="Script" uid="uid://brjalldtrjsdf" path="res://scripts/menu/new_settings_menu.gd" id="1_h7660"]
+[ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="2_4fnfu"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_h7660")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -556.0
+offset_top = -304.0
+offset_right = 556.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3328807, 0.33288068, 0.33288068, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Categories" type="MarginContainer" parent="CanvasLayer/Panel/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Categories"]
+layout_mode = 2
+
+[node name="Gameplay" type="Button" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Categories/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_4fnfu")
+theme_override_font_sizes/font_size = 48
+text = "Gameplay"
+
+[node name="Audio" type="Button" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Categories/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_4fnfu")
+theme_override_font_sizes/font_size = 48
+text = "Audio"
+
+[node name="Controls" type="MarginContainer" parent="CanvasLayer/Panel/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="Audio" type="GridContainer" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="Music_Label" type="Label" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Audio"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4fnfu")
+theme_override_font_sizes/font_size = 32
+text = "Muzyka"
+
+[node name="Music_HSlider" type="HSlider" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFX_Label" type="Label" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Audio"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4fnfu")
+theme_override_font_sizes/font_size = 32
+text = "Efekty"
+
+[node name="SFX_HSlider" type="HSlider" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Gameplay" type="MarginContainer" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 200
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Gameplay"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4fnfu")
+theme_override_font_sizes/font_size = 32
+text = "Alternative combat style ON/OFF"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Gameplay"]
+layout_mode = 2
+
+[connection signal="pressed" from="CanvasLayer/Panel/ColorRect/VBoxContainer/Categories/Buttons/Gameplay" to="." method="_on_gameplay_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/ColorRect/VBoxContainer/Categories/Buttons/Audio" to="." method="_on_audio_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Audio/Music_HSlider" to="." method="_on_music_h_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Audio/SFX_HSlider" to="." method="_on_sfx_h_slider_value_changed"]
+[connection signal="toggled" from="CanvasLayer/Panel/ColorRect/VBoxContainer/Controls/Gameplay/CheckButton" to="." method="_on_check_button_toggled"]

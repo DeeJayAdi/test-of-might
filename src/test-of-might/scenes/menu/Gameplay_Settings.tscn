@@ -38,7 +38,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Alternative combat style ON/OFF"
 
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -52,4 +53,4 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [connection signal="pressed" from="CanvasLayer/Background/Close_Settings" to="." method="_on_close_settings_pressed"]
-[connection signal="toggled" from="CanvasLayer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/Background/CheckButton" to="." method="_on_check_button_toggled"]
