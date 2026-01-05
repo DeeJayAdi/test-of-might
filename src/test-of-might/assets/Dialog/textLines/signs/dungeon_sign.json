@@ -1,0 +1,142 @@
+[
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Hey you!"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "...What? Seems I might have gotten more banged up than I thought. I'm starting to hear things."
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "You're not but if that's what you wanna think, then fine by me"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Okay, so a sign is talking now, great. Nevermind that, let's assume you're not a figment of my imagination, what do you want?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Just give ya a hand."
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Okay... but what's the catch? You want my soul or bitcoin or some other weird thing for this 'bargain'?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Look, it's true I get something from helping you but it will be of no consequence to you."
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "So what is it?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "I get to be free, cause I used to be human, just like you. As to why I'm a sign, well I don't know at after so long neither do I care. All I want is to be myself again and go home!"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Alright, fine, I'm sorry that I asked about something so sensitive."
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "So..."
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "How can you help me?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "I will explain some basics to you"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "You probably already know how to move, but you can also try running to be, y'know, faster (hold SHIFT and W,A,S or D to run in a chosen direction)"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "You seem like a resourceful fell. You should know how to use a backpack right? If so then good, 'cause it will come real handy when scavenging monster remains (press I to open the iventorym where you can view your stats and equip items)"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "And why would I do that? Can't i just slice 'em in half or shoot them and be done with it?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "True, but you will miss out on the loot though. Still it's good to see you thinking somewhat logically, but remember to choose a right weapon for the right occasion (if you have two weapons equipped in the invetory, press F to switch between them)"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Okay, mom."
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Alright, Mr. Know-It-All, how about this..."
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "You can stop time, reverse it and even change some underlying rules of this world (press ESC to open the pause menu, where you can save, load and exit the game as well as open the settings menu)"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "...What?"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "What kinda metagaming rubbish is this? Isn't this world supposed to be, idk, immersive or something?"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "And what's with all those lines that sound like static!?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Well, the information in brackets just isn't for you."
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Then for whom is it?"
+	},
+	{
+		"speaker": "Helpful Sign",
+		"avatar": "res://assets/Dialog/Avatars/NPC/Sign_05.png",
+		"text": "Doesn't matter, and you shouldn't care either. Anyway thanks for the help, if you meet someone else like me, be sure to talk to them. OKay, love you, bye!!!"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Wait!!!"
+	},
+	{
+		"speaker": "Player",
+		"avatar": "res://assets/Dialog/Avatars/portrait_player/PalMan.png",
+		"text": "Useless sign, should have at least told me where the exit is. Oh well, guess I will have to find it myslef"
+	}
+]
