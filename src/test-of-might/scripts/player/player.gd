@@ -60,8 +60,8 @@ func _ready():
 		
 
 func _exit_tree():
-	#process_mode = PROCESS_MODE_DISABLED
-	pass
+	process_mode = PROCESS_MODE_DISABLED
+
 
 func _physics_process(_delta: float):
 	call_deferred("_deferred_physics_process", _delta)

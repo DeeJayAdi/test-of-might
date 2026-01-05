@@ -23,6 +23,8 @@ func _on_interaction_area_body_exited(body):
 
 func interact():
 	var currentScene = get_parent().get_parent()
+	#save players inventory and stats before changing scene
+	SaveManager.save_game()
 	
 	if currentScene.scene_file_path == "res://maps/level1/Dungeon.tscn":
 		print("Przechodze na mape cave.tscn")
