@@ -38,7 +38,7 @@ func interact():
 	
 	elif currentScene.scene_file_path == "res://maps/graveyard/graveyard.tscn":
 		print("Przechodze na menu glowne")
-		Global.SwitchScene("res://scenes/menu/Main_Menu.tscn")
+		Global.SwitchScene("res://maps/castle/Castle.tscn")
 	
 	else:
 		print("Next level scene is not set.")
