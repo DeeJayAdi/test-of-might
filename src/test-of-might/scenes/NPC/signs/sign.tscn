@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://c61rnyr13ceff"]
+
+[ext_resource type="Texture2D" uid="uid://b0y6c37s6lvjh" path="res://assets/sprites/NPC/Sign_05.png" id="1_6w5s4"]
+[ext_resource type="Script" uid="uid://cr476o10crgyc" path="res://scripts/NPC/sign.gd" id="1_gsjaj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6w5s4"]
+radius = 173.35873
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsjaj"]
+size = Vector2(120, 125)
+
+[node name="Sign" type="Node2D"]
+script = ExtResource("1_gsjaj")
+dialog_file = "res://assets/Dialog/textLines/signs/dungeon_sign.json"
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6w5s4")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(-4, 21.5)
+shape = SubResource("CircleShape2D_6w5s4")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_top = -165.0
+offset_bottom = -130.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+theme_override_font_sizes/font_size = 20
+text = "[E] to Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClossionArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClossionArea"]
+position = Vector2(-2, 0.5)
+shape = SubResource("RectangleShape2D_gsjaj")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]
