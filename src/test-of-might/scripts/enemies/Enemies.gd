@@ -217,6 +217,8 @@ func finish_death():
 			NotificationManager.show_notification("New map unlocked: Level 4!")
 			
 			var global = get_node("/root/Global")
+			global.unlock_level("level4")
+			global.save_unlocked_levels()
 			global.boss_killed.emit()
 
 	if has_node("/root/PersistentMusic"): PersistentMusic.switch_to_exploration()
