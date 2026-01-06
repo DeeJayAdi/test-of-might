@@ -17,10 +17,6 @@ func _ready():
 			var btn = vbox.get_node_or_null(btn_name)
 			if btn:
 				btn.disabled = not global.is_level_unlocked(btns[btn_name])
-		
-		var level4_btn = vbox.get_node_or_null("Level4Btn")
-		if level4_btn:
-			level4_btn.disabled = not SaveManager.are_graveyard_vampires_defeated()
 
 func _on_tutorial_btn_pressed() -> void:
 	sceneLink = "res://maps/level1/Dungeon.tscn"
