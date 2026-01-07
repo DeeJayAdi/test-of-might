@@ -1,6 +1,8 @@
 #klasa obsługująca życie xp i złoto
 class_name StatsComponent extends Node
 
+var death_screen_scene = preload("res://scenes/death_screen/death_screen.tscn")
+
 signal health_changed(current_health, max_health)
 signal died
 signal xp_changed(current_xp, xp_to_next_level)
@@ -106,8 +108,13 @@ func take_damage(amount: int):
 
 func die():
 	print("Gracz umarł.")
+	player.hide()
 	state_manager.change_state("death")
 	emit_signal("died")
+	
+	var death_screen = death_screen_scene.instantiate()
+	get_tree().root.add_child(death_screen)
+	get_tree().paused = true
 
 func heal(amount: int):
 	if state_manager.get_current_state_name() == "death" or current_health == max_health:
