@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=10 format=3 uid="uid://dd3hu046hle4f"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_368yu"]
+[ext_resource type="Resource" uid="uid://ctsvyvyuwvcuj" path="res://assets/resources/items/armor/boots/Basic_knight_boots.tres" id="2_g5b14"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_rwwys"]
+[ext_resource type="Resource" uid="uid://cab4bonwt8pi" path="res://assets/resources/items/armor/helmets/Basic_knight_helmet.tres" id="3_ic520"]
+[ext_resource type="Resource" uid="uid://cwnm5maf5mgxh" path="res://assets/resources/items/armor/chestplates/Basic_Knight armor.tres" id="4_hyvbp"]
+[ext_resource type="Resource" uid="uid://c8pdpuiqv4y1w" path="res://assets/resources/items/potions/medium_healing_potion.tres" id="5_gqqtw"]
+[ext_resource type="Resource" uid="uid://c5ayf2dtb2y3w" path="res://assets/resources/items/melee/Knight_Sword.tres" id="6_jt2le"]
+[ext_resource type="Resource" uid="uid://b7yto28kj5v61" path="res://assets/resources/items/melee/Rappier.tres" id="7_c55cl"]
+[ext_resource type="Resource" uid="uid://d2q0gkxw837m4" path="res://assets/resources/items/ranged/Crossbow.tres" id="8_ic520"]
+
+[resource]
+script = ExtResource("2_rwwys")
+items = Dictionary[ExtResource("1_368yu"), float]({
+ExtResource("2_g5b14"): 0.25,
+ExtResource("3_ic520"): 0.25,
+ExtResource("4_hyvbp"): 0.25,
+ExtResource("5_gqqtw"): 0.5,
+ExtResource("6_jt2le"): 0.25,
+ExtResource("7_c55cl"): 0.25,
+ExtResource("8_ic520"): 0.25
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

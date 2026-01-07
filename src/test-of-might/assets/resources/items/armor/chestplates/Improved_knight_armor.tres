@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cjqpy8g0arxrs"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_uhqq8"]
+[ext_resource type="Texture2D" uid="uid://ktosv0bg78us" path="res://assets/sprites/items/armor/chest/Icon190.png" id="1_xw6o3"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="2_e0jb6"]
+
+[resource]
+script = ExtResource("1_uhqq8")
+item_name = "Improved knight armor"
+price = 345
+rarity = "Legendary"
+type = "armor"
+icon = ExtResource("1_xw6o3")
+placeholder = ExtResource("2_e0jb6")
+damage = 40
+description = "Improvements to this armor have allowed for even higher resistance without increasing weight."
+metadata/_custom_type_script = "uid://elca6sp6br8g"

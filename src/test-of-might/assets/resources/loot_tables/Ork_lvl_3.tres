@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=12 format=3 uid="uid://b36bsqhsjewdt"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_lbxck"]
+[ext_resource type="Resource" uid="uid://b3p2twmu5cp0s" path="res://assets/resources/items/melee/Cactus.tres" id="2_d2akc"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_ep1bn"]
+[ext_resource type="Resource" uid="uid://bqxcakbfxqh3a" path="res://assets/resources/items/melee/Heavy_Sword.tres" id="3_ey2hq"]
+[ext_resource type="Resource" uid="uid://bwhv4imv7g8vd" path="res://assets/resources/items/potions/big_vital_potion.tres" id="4_th32q"]
+[ext_resource type="Resource" uid="uid://b3d31risfrf8" path="res://assets/resources/items/armor/chestplates/Heavy_knight_armor.tres" id="5_5rgs7"]
+[ext_resource type="Resource" uid="uid://ccm70alsnifay" path="res://assets/resources/items/armor/boots/Heavy_knight_boots.tres" id="6_naqml"]
+[ext_resource type="Resource" uid="uid://bfwecqspce8ja" path="res://assets/resources/items/armor/helmets/Heavy_knight_helmet.tres" id="7_cpwqy"]
+[ext_resource type="Resource" uid="uid://c81p5ed4k8g15" path="res://assets/resources/items/armor/boots/Improved_Knight_boots.tres" id="8_4dab6"]
+[ext_resource type="Resource" uid="uid://cdpjbfls7jvuu" path="res://assets/resources/items/armor/helmets/Improved_Knight_helmet.tres" id="9_gjf8w"]
+[ext_resource type="Resource" uid="uid://cjqpy8g0arxrs" path="res://assets/resources/items/armor/chestplates/Improved_knight_armor.tres" id="10_kff12"]
+
+[resource]
+script = ExtResource("2_ep1bn")
+items = Dictionary[ExtResource("1_lbxck"), float]({
+ExtResource("2_d2akc"): 0.1,
+ExtResource("3_ey2hq"): 0.1,
+ExtResource("4_th32q"): 0.4,
+ExtResource("5_5rgs7"): 0.1,
+ExtResource("6_naqml"): 0.1,
+ExtResource("7_cpwqy"): 0.1,
+ExtResource("8_4dab6"): 0.2,
+ExtResource("9_gjf8w"): 0.2,
+ExtResource("10_kff12"): 0.2
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

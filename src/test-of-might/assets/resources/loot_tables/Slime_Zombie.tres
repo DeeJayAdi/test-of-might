@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=9 format=3 uid="uid://ctjnxotp5net0"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_r17nu"]
+[ext_resource type="Resource" uid="uid://ctsvyvyuwvcuj" path="res://assets/resources/items/armor/boots/Basic_knight_boots.tres" id="2_6kfsi"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_rq62j"]
+[ext_resource type="Resource" uid="uid://cab4bonwt8pi" path="res://assets/resources/items/armor/helmets/Basic_knight_helmet.tres" id="3_wnr6b"]
+[ext_resource type="Resource" uid="uid://cwnm5maf5mgxh" path="res://assets/resources/items/armor/chestplates/Basic_Knight armor.tres" id="4_kfa38"]
+[ext_resource type="Resource" uid="uid://d2q0gkxw837m4" path="res://assets/resources/items/ranged/Crossbow.tres" id="5_o7puh"]
+[ext_resource type="Resource" uid="uid://b7yto28kj5v61" path="res://assets/resources/items/melee/Rappier.tres" id="6_ev3ml"]
+[ext_resource type="Resource" uid="uid://c5ayf2dtb2y3w" path="res://assets/resources/items/melee/Knight_Sword.tres" id="7_debja"]
+
+[resource]
+script = ExtResource("2_rq62j")
+items = Dictionary[ExtResource("1_r17nu"), float]({
+ExtResource("2_6kfsi"): 0.1,
+ExtResource("3_wnr6b"): 0.1,
+ExtResource("4_kfa38"): 0.1,
+ExtResource("5_o7puh"): 0.05,
+ExtResource("6_ev3ml"): 0.1,
+ExtResource("7_debja"): 0.1
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

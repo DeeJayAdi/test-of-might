@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://vky00vitukfj"]
+
+[ext_resource type="Texture2D" uid="uid://dbsc3iwg55snl" path="res://assets/sprites/items/armor/helm/Icon165.png" id="1_2fusv"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_ek7aw"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="2_esojv"]
+
+[resource]
+script = ExtResource("1_ek7aw")
+item_name = "Basic Steel Helmet"
+price = 120
+rarity = "rare"
+type = "helmet"
+icon = ExtResource("1_2fusv")
+placeholder = ExtResource("2_esojv")
+defense = 12
+description = "Lightweight, durable helmet ideal for blocking blows to the head"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

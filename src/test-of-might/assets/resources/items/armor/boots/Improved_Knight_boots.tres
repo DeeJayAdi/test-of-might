@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c81p5ed4k8g15"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_t7c7w"]
+[ext_resource type="Texture2D" uid="uid://b32y6r4actvjs" path="res://assets/sprites/items/armor/boots/Icon230.png" id="1_yp3an"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="2_4tomq"]
+
+[resource]
+script = ExtResource("1_t7c7w")
+item_name = "Improved Knight Boots"
+price = 200
+rarity = "Legendary"
+type = "boots"
+icon = ExtResource("1_yp3an")
+placeholder = ExtResource("2_4tomq")
+defense = 20
+description = "Comfortable, durable, perfect for fighting"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

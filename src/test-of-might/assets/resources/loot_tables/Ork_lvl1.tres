@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=8 format=3 uid="uid://dlq8bwlb17r2u"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_f6v5e"]
+[ext_resource type="Resource" uid="uid://eaxnf6kuea80" path="res://assets/resources/items/potions/meduim_healing_ovet_time_potion.tres" id="2_lob54"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_wymtr"]
+[ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="3_rlhkj"]
+[ext_resource type="Resource" uid="uid://cj3r2x7wss1dd" path="res://assets/resources/items/potions/big_healing_potion.tres" id="4_38j1m"]
+[ext_resource type="Resource" uid="uid://c8pdpuiqv4y1w" path="res://assets/resources/items/potions/medium_healing_potion.tres" id="5_3n6nr"]
+[ext_resource type="Resource" uid="uid://bj7nkjscoomrt" path="res://assets/resources/items/potions/medium_vital_potion.tres" id="6_akv38"]
+
+[resource]
+script = ExtResource("2_wymtr")
+items = Dictionary[ExtResource("1_f6v5e"), float]({
+ExtResource("2_lob54"): 0.3,
+ExtResource("3_rlhkj"): 0.2,
+ExtResource("4_38j1m"): 0.2,
+ExtResource("5_3n6nr"): 0.3,
+ExtResource("6_akv38"): 0.1
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

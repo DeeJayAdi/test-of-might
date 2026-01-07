@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dsxlhaw1mly8k"]
+
+[ext_resource type="Texture2D" uid="uid://cs4lrl60qh1w4" path="res://assets/sprites/items/swords/Icon1.png" id="1_7mbky"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_ou7ti"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="2_i0us3"]
+
+[resource]
+script = ExtResource("1_ou7ti")
+item_name = "Dagger"
+price = 20
+rarity = "common"
+type = "weapon"
+subtype = "melee"
+icon = ExtResource("1_7mbky")
+placeholder = ExtResource("2_i0us3")
+damage = 15
+attack_range = 0.5
+attack_speed = 2.0
+effect_name = "bleed"
+effect_power = 5.0
+effect_duration = 2.5
+description = "A small, neat knife is a friend to many a killer"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

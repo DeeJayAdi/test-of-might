@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://df6agep28ugxf"]
+
+[ext_resource type="Texture2D" uid="uid://crqe23trw38f0" path="res://assets/sprites/items/armor/helm/Icon171.png" id="1_rboyd"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="2_4nx1q"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_yy0ei"]
+
+[resource]
+script = ExtResource("3_yy0ei")
+item_name = "Cursed Helmet"
+price = 525
+rarity = "mythic"
+type = "helmet"
+icon = ExtResource("1_rboyd")
+placeholder = ExtResource("2_4nx1q")
+defense = 35
+description = "There is ancient magic enchanted in them"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

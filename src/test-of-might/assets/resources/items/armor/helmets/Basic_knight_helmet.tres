@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cab4bonwt8pi"]
+
+[ext_resource type="Texture2D" uid="uid://ditcsv7rf568k" path="res://assets/sprites/items/armor/helm/Icon168.png" id="1_b6gsn"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_sachf"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="2_bm7hi"]
+
+[resource]
+script = ExtResource("1_sachf")
+item_name = "Knight Helmet"
+price = 175
+rarity = "epic"
+type = "helmet"
+icon = ExtResource("1_b6gsn")
+placeholder = ExtResource("2_bm7hi")
+defense = 18
+description = "Good visibility, quite low weight, high durability - the perfect helmet"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

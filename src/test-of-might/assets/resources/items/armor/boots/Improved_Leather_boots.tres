@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://pg4o6osr7w5x"]
+
+[ext_resource type="Texture2D" uid="uid://dxwy2w2jh5xud" path="res://assets/sprites/items/armor/boots/Icon227.png" id="1_m4tf2"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_us6er"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="2_kj2n7"]
+
+[resource]
+script = ExtResource("1_us6er")
+item_name = "Improved Leather Boots"
+price = 40
+rarity = "uncommon"
+type = "boots"
+icon = ExtResource("1_m4tf2")
+placeholder = ExtResource("2_kj2n7")
+defense = 6
+description = "Very well-made stylish leather shoes"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

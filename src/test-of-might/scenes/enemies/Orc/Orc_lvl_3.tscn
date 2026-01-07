@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvnmgi7w83xqn" path="res://scripts/enemies/Enemies.gd" id="1_283bc"]
 [ext_resource type="Texture2D" uid="uid://bqchd3lalu28s" path="res://assets/sprites/enemies/Orc/orc_3/orc3_attack_with_shadow.png" id="1_wo8cf"]
-[ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="2_2nb3h"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/Ork_lvl_3.tres" id="2_2nb3h"]
 [ext_resource type="Texture2D" uid="uid://b5wydvpidmhua" path="res://assets/sprites/enemies/Orc/orc_3/orc3_death_with_shadow.png" id="2_flqq5"]
 [ext_resource type="Texture2D" uid="uid://dg6hhethgf4am" path="res://assets/sprites/enemies/Orc/orc_3/orc3_hurt_with_shadow.png" id="3_od414"]
 [ext_resource type="Texture2D" uid="uid://cppddbskt5j4x" path="res://assets/sprites/enemies/Orc/orc_3/orc3_idle_with_shadow.png" id="5_2nb3h"]
@@ -968,8 +968,8 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_283bc")
 speed = 160
-max_health = 630
-attack_damage = 35
+max_health = 1500
+attack_damage = 85
 attack_cooldown = 1.2
 xp_reward = 80
 crit_chance = 0.12

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://jkx7gsph8ojg"]
+
+[ext_resource type="Texture2D" uid="uid://bpoysa3ue2rs0" path="res://assets/sprites/items/armor/helm/Icon164.png" id="1_487wd"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="2_5c8li"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_q5qff"]
+
+[resource]
+script = ExtResource("3_q5qff")
+item_name = "Improved Leather Helmet"
+price = 55
+rarity = "uncommon"
+type = "helmet"
+icon = ExtResource("1_487wd")
+placeholder = ExtResource("2_5c8li")
+defense = 8
+description = "This durable leather cap, crafted from stylish leather, looks perfect for any trip."
+metadata/_custom_type_script = "uid://elca6sp6br8g"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=137 format=3 uid="uid://cg0m04ve5g677"]
+[gd_scene load_steps=138 format=3 uid="uid://cg0m04ve5g677"]
 
 [ext_resource type="Texture2D" uid="uid://bc3wunokn27w8" path="res://assets/sprites/enemies/Plant/Plant_2/Plant2_Attack_with_shadow.png" id="1_6h1k5"]
 [ext_resource type="Script" uid="uid://bvnmgi7w83xqn" path="res://scripts/enemies/Enemies.gd" id="1_pudky"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/plant_lvl_2.tres" id="2_bdtw4"]
 [ext_resource type="Texture2D" uid="uid://bj6uxs0w2rrjs" path="res://assets/sprites/enemies/Plant/Plant_2/Plant2_Death_with_shadow.png" id="2_pudky"]
 [ext_resource type="Texture2D" uid="uid://cvxr4il17yglb" path="res://assets/sprites/enemies/Plant/Plant_2/Plant2_Hurt_with_shadow.png" id="3_bdtw4"]
 [ext_resource type="Texture2D" uid="uid://dw6cfvckddb2i" path="res://assets/sprites/enemies/Plant/Plant_2/Plant2_Idle_with_shadow.png" id="4_wccvf"]
@@ -971,6 +972,7 @@ max_health = 180
 attack_damage = 12
 xp_reward = 65
 crit_chance = 0.07
+loot_table = ExtResource("2_bdtw4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -55)

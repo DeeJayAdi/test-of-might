@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=9 format=3 uid="uid://ctyf5yx3hauk"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_uxe6n"]
+[ext_resource type="Resource" uid="uid://dopnla1o5fxsc" path="res://assets/resources/items/melee/Cursed_Axe.tres" id="2_i5bpd"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_n6nnx"]
+[ext_resource type="Resource" uid="uid://btq1qqaak7otc" path="res://assets/resources/items/armor/boots/Cursed_boots.tres" id="3_mfvbo"]
+[ext_resource type="Resource" uid="uid://df6agep28ugxf" path="res://assets/resources/items/armor/helmets/Cursed_Helmet.tres" id="4_kju1o"]
+[ext_resource type="Resource" uid="uid://thhd2j5hbclu" path="res://assets/resources/items/armor/chestplates/Cursed_armor.tres" id="5_kvi8y"]
+[ext_resource type="Resource" uid="uid://1k3vre7n20vd" path="res://assets/resources/items/melee/Midas.tres" id="6_ays53"]
+[ext_resource type="Resource" uid="uid://d37q02i7r8fc6" path="res://assets/resources/items/ranged/Midas_Crossbow.tres" id="7_6p7e8"]
+
+[resource]
+script = ExtResource("2_n6nnx")
+items = Dictionary[ExtResource("1_uxe6n"), float]({
+ExtResource("2_i5bpd"): 0.15,
+ExtResource("3_mfvbo"): 0.15,
+ExtResource("4_kju1o"): 0.15,
+ExtResource("5_kvi8y"): 0.15,
+ExtResource("6_ays53"): 0.1,
+ExtResource("7_6p7e8"): 0.1
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

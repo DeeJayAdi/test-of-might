@@ -1,8 +1,9 @@
-[gd_scene load_steps=116 format=3 uid="uid://1hho0csf0k4i"]
+[gd_scene load_steps=117 format=3 uid="uid://1hho0csf0k4i"]
 
 [ext_resource type="Script" uid="uid://bvnmgi7w83xqn" path="res://scripts/enemies/Enemies.gd" id="1_1t18s"]
 [ext_resource type="Texture2D" uid="uid://bfdlx1ycvqkw4" path="res://assets/sprites/enemies/Goblin/Gob_1/Attack0_full.png" id="1_udkpp"]
 [ext_resource type="Texture2D" uid="uid://p67wej4f32u4" path="res://assets/sprites/enemies/Goblin/Gob_1/Death0_full.png" id="2_1t18s"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/Ork_lvl1.tres" id="2_iqeth"]
 [ext_resource type="Texture2D" uid="uid://behx8yoqoe2qa" path="res://assets/sprites/enemies/Goblin/Gob_1/Hurt0_full.png" id="3_0cmfj"]
 [ext_resource type="Texture2D" uid="uid://4wd4nm3cfewa" path="res://assets/sprites/enemies/Goblin/Gob_1/Idle0_full.png" id="4_wv5is"]
 [ext_resource type="Texture2D" uid="uid://bbk6ktwfmovwv" path="res://assets/sprites/enemies/Goblin/Gob_1/Run0_full.png" id="5_wnsq0"]
@@ -820,11 +821,12 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_1t18s")
 speed = 170
-max_health = 300
-attack_damage = 10
+max_health = 750
+attack_damage = 50
 attack_cooldown = 0.9
 xp_reward = 60
 crit_chance = 0.05
+loot_table = ExtResource("2_iqeth")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -57)

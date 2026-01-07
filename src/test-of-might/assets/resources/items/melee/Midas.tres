@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://1k3vre7n20vd"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_c674v"]
+[ext_resource type="Texture2D" uid="uid://pmn01bcf0vhl" path="res://assets/sprites/items/swords/Icon59.png" id="1_g6n0a"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="2_ox8fv"]
+
+[resource]
+script = ExtResource("1_c674v")
+item_name = "Midas Touch"
+price = 500
+rarity = "mythic"
+type = "weapon"
+subtype = "melee"
+icon = ExtResource("1_g6n0a")
+placeholder = ExtResource("2_ox8fv")
+damage = 235
+attack_range = 1.2
+attack_speed = 1.0
+effect_name = "golden"
+effect_power = 7.5
+effect_duration = 6.7
+description = "Everything I touch becomes gold..."
+metadata/_custom_type_script = "uid://elca6sp6br8g"

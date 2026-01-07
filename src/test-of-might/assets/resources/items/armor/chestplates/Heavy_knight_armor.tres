@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b3d31risfrf8"]
+
+[ext_resource type="Texture2D" uid="uid://dlk0m6ifu6cgf" path="res://assets/sprites/items/armor/chest/Icon193.png" id="1_2d5qh"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_vhnfl"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="2_rnwns"]
+
+[resource]
+script = ExtResource("1_vhnfl")
+item_name = "Heavy Knight Armor"
+price = 500
+rarity = "Legendary"
+type = "armor"
+icon = ExtResource("1_2d5qh")
+placeholder = ExtResource("2_rnwns")
+defense = 50
+description = "Heavy Knight Armor created exclusively for the elite by the finest craftsmen"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

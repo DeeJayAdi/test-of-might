@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b3p2twmu5cp0s"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_r2wuw"]
+[ext_resource type="Texture2D" uid="uid://du2env6888bqd" path="res://assets/sprites/items/swords/Icon12.png" id="1_vs6mt"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="2_f0uca"]
+
+[resource]
+script = ExtResource("1_r2wuw")
+item_name = "Cactus"
+price = 300
+rarity = "legendary"
+type = "weapon"
+subtype = "melee"
+icon = ExtResource("1_vs6mt")
+placeholder = ExtResource("2_f0uca")
+damage = 175
+attack_range = 1.0
+attack_speed = 1.0
+effect_name = "bleed"
+effect_power = 12.5
+effect_duration = 3.5
+description = "A sharp weapon with many additional blades"
+metadata/_custom_type_script = "uid://elca6sp6br8g"
