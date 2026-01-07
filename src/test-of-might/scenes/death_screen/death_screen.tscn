@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3brn5dyct1su"]
+
+[ext_resource type="Script" uid="uid://de5feye1mw5ta" path="res://scripts/ui/death_screen.gd" id="1_w8w2j"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w8w2j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.690196)
+
+[node name="CenterContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "You died"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CenterContainer"]
+layout_mode = 2
+text = "Load from previous save"
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer"]
+layout_mode = 2
+text = "Exit to Main Menu"
+
+[connection signal="pressed" from="CenterContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="CenterContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

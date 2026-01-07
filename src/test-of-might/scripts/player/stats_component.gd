@@ -1,6 +1,8 @@
 #klasa obsługująca życie xp i złoto
 class_name StatsComponent extends Node
 
+var death_screen_scene = preload("res://scenes/death_screen/death_screen.tscn")
+
 signal health_changed(current_health, max_health)
 signal died
 signal xp_changed(current_xp, xp_to_next_level)

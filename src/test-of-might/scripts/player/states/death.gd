@@ -1,6 +1,6 @@
 class_name StateDeath extends PlayerState
 
-
+var death_screen_scene = preload("res://scenes/death_screen/death_screen.tscn")
 
 func enter():
 	if not player.animation_manager.is_animation_finished_connected(self._on_animation_finished):
@@ -13,9 +13,12 @@ func update(_delta: float):
 
 func _on_animation_finished():
 	if player.animation_manager.animated_sprite.animation.begins_with("Death"):
-		if player.ui_manager and player.ui_manager.has_method("show_game_over_screen"):
-			player.ui_manager.show_game_over_screen()
-			
+		var death_screen = death_screen_scene.instantiate()
+		get_tree().root.add_child(death_screen)
+		get_tree().paused = true
+		
+		# Disable processing before queue_free to prevent the error
+		player.process_mode = Node.PROCESS_MODE_DISABLED
 		player.queue_free()
 
 func exit():
