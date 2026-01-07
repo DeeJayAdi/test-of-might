@@ -108,13 +108,8 @@ func take_damage(amount: int):
 
 func die():
 	print("Gracz umarł.")
-	player.hide()
 	state_manager.change_state("death")
 	emit_signal("died")
-	
-	var death_screen = death_screen_scene.instantiate()
-	get_tree().root.add_child(death_screen)
-	get_tree().paused = true
 
 func heal(amount: int):
 	if state_manager.get_current_state_name() == "death" or current_health == max_health:
