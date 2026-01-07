@@ -1,7 +1,3 @@
-# Przedmiot: Projekt zespołowy systemu informatycznego
+# Test of Might
 
-## Spis treści
-
-- [O projekcie](./docs/About.md)
-
-## "Daily meetings" w czwartki o 18:00/19:00
+Test of Might is a student-made 2D top down game developed as a coursework project.
