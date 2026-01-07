@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://ehfc7ktqw2o0"]
 
 [ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_ayf5i"]
-[ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="2_vw5xf"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/plant_lvl_2.tres" id="2_ayf5i"]
 [ext_resource type="Texture2D" uid="uid://cg5xs35dx4rry" path="res://assets/sprites/enemies/crow_terror/attack.png" id="3_f5yiu"]
 [ext_resource type="Texture2D" uid="uid://gfbg4xo2fpqw" path="res://assets/sprites/enemies/crow_terror/hurt.png" id="4_djfcq"]
 [ext_resource type="Texture2D" uid="uid://bpxdqfo6ahjr7" path="res://assets/sprites/enemies/crow_terror/walk.png" id="4_vw5xf"]
@@ -165,7 +165,7 @@ attack_cooldown = 0.7
 crit_chance = 0.15
 attack_damage = 15
 xp_reward = 80
-loot_table = ExtResource("2_vw5xf")
+loot_table = ExtResource("2_ayf5i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)

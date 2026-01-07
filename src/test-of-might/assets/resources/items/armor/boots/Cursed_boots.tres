@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://btq1qqaak7otc"]
+
+[ext_resource type="Texture2D" uid="uid://qxm7keli4sy2" path="res://assets/sprites/items/armor/boots/Icon231.png" id="1_7olw5"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="2_8u2sj"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_o5qcr"]
+
+[resource]
+script = ExtResource("3_o5qcr")
+item_name = "Cursed Boots"
+price = 450
+rarity = "mythic"
+type = "boots"
+icon = ExtResource("1_7olw5")
+placeholder = ExtResource("2_8u2sj")
+defense = 32
+description = "Legend has it that they were created using magic."
+metadata/_custom_type_script = "uid://elca6sp6br8g"

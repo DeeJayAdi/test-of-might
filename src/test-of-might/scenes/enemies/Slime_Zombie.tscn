@@ -1,8 +1,9 @@
-[gd_scene load_steps=161 format=3 uid="uid://6kys46tgy5eo"]
+[gd_scene load_steps=162 format=3 uid="uid://6kys46tgy5eo"]
 
 [ext_resource type="Script" uid="uid://bvnmgi7w83xqn" path="res://scripts/enemies/Enemies.gd" id="1_4jffo"]
 [ext_resource type="Texture2D" uid="uid://bogq0k8hy1bsm" path="res://assets/sprites/enemies/Slime/Slime2_Attack_full.png" id="1_s2smg"]
 [ext_resource type="Texture2D" uid="uid://dl2krmk4hmxpx" path="res://assets/sprites/enemies/Slime/Slime2_Death_full.png" id="2_4jffo"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/Slime_Zombie.tres" id="2_m2vnk"]
 [ext_resource type="Texture2D" uid="uid://bclpo40a0xf21" path="res://assets/sprites/enemies/Slime/Slime2_Hurt_full.png" id="3_m2vnk"]
 [ext_resource type="Texture2D" uid="uid://btgf8e827qmgu" path="res://assets/sprites/enemies/Slime/Slime2_Idle_full.png" id="4_guwna"]
 [ext_resource type="Texture2D" uid="uid://chgu4rys3fybl" path="res://assets/sprites/enemies/Slime/Slime2_Run_full.png" id="5_k0a8w"]
@@ -1133,7 +1134,9 @@ collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_4jffo")
-attack_damage = 8
+max_health = 600
+attack_damage = 40
+loot_table = ExtResource("2_m2vnk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -28)

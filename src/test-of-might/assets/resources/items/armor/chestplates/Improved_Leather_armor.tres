@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c6ipec7lsckby"]
+
+[ext_resource type="Texture2D" uid="uid://cmjodb3atainx" path="res://assets/sprites/items/armor/chest/Icon183.png" id="1_ecgig"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_gvcxd"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="2_vwsph"]
+
+[resource]
+script = ExtResource("1_gvcxd")
+item_name = "Leather_armor"
+price = 40
+rarity = "common"
+type = "armor"
+icon = ExtResource("1_ecgig")
+placeholder = ExtResource("2_vwsph")
+defense = 7
+description = "Made of high-quality wild boar leather"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

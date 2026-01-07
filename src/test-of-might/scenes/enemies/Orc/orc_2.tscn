@@ -1,7 +1,8 @@
-[gd_scene load_steps=137 format=3 uid="uid://b2c06o3sy2yul"]
+[gd_scene load_steps=138 format=3 uid="uid://b2c06o3sy2yul"]
 
 [ext_resource type="Script" uid="uid://bvnmgi7w83xqn" path="res://scripts/enemies/Enemies.gd" id="1_icw6q"]
 [ext_resource type="Texture2D" uid="uid://cvx14t4adg2oh" path="res://assets/sprites/enemies/Orc/orc_2/orc2_attack_with_shadow.png" id="2_7o68d"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/Ork_lvl_2.tres" id="2_c87ic"]
 [ext_resource type="Texture2D" uid="uid://b6rqsfrprusiu" path="res://assets/sprites/enemies/Orc/orc_2/orc2_death_with_shadow.png" id="3_c87ic"]
 [ext_resource type="Texture2D" uid="uid://cxth12f5sbrl4" path="res://assets/sprites/enemies/Orc/orc_2/orc2_hurt_with_shadow.png" id="4_4f7rf"]
 [ext_resource type="Texture2D" uid="uid://cago1u7sk3pns" path="res://assets/sprites/enemies/Orc/orc_2/orc2_idle_with_shadow.png" id="5_n73oi"]
@@ -967,10 +968,11 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_icw6q")
 speed = 150
-max_health = 425
-attack_damage = 25
+max_health = 1200
+attack_damage = 70
 xp_reward = 50
 crit_chance = 0.1
+loot_table = ExtResource("2_c87ic")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -57)

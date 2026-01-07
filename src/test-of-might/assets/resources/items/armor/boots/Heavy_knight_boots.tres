@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ccm70alsnifay"]
+
+[ext_resource type="Texture2D" uid="uid://bj5833sbod0xw" path="res://assets/sprites/items/armor/boots/Icon233.png" id="1_huo4s"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_vkiad"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="2_na8v1"]
+
+[resource]
+script = ExtResource("1_vkiad")
+item_name = "Heavy knight Boots"
+price = 300
+rarity = "legendary"
+type = "boots"
+icon = ExtResource("1_huo4s")
+placeholder = ExtResource("2_na8v1")
+defense = 25
+description = "There's nothing to be afraid of in this, but they are quite heavy"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

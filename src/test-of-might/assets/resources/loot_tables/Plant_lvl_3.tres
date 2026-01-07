@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=8 format=3 uid="uid://bpeeafainicr3"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_fia1t"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_1h4ef"]
+[ext_resource type="Resource" uid="uid://csqbule86wvfo" path="res://assets/resources/items/melee/Assasin_Dagger.tres" id="2_nah7w"]
+[ext_resource type="Resource" uid="uid://o2j85vs06u" path="res://assets/resources/items/melee/Katana.tres" id="3_s2prd"]
+[ext_resource type="Resource" uid="uid://cghch1tw8hlsv" path="res://assets/resources/items/armor/boots/Basic_steel_leather_boots.tres" id="4_20ou3"]
+[ext_resource type="Resource" uid="uid://vky00vitukfj" path="res://assets/resources/items/armor/helmets/Basic_steel_leather_helmet.tres" id="5_o3tih"]
+[ext_resource type="Resource" uid="uid://cpubikajoqc8i" path="res://assets/resources/items/armor/chestplates/Basic_steel_leather_armor.tres" id="6_wvgu3"]
+
+[resource]
+script = ExtResource("2_1h4ef")
+items = Dictionary[ExtResource("1_fia1t"), float]({
+ExtResource("2_nah7w"): 0.15,
+ExtResource("3_s2prd"): 0.15,
+ExtResource("4_20ou3"): 0.15,
+ExtResource("5_o3tih"): 0.15,
+ExtResource("6_wvgu3"): 0.15
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

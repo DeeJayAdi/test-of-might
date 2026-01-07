@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://disp0gmqig5gn"]
+
+[ext_resource type="Texture2D" uid="uid://cmqyyjujtuxf7" path="res://assets/sprites/items/armor/chest/Icon186.png" id="1_163xc"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_e2prm"]
+[ext_resource type="Texture2D" uid="uid://clheek481qw2u" path="res://assets/sprites/items/armor/chest/armor_1.png" id="2_cbhra"]
+
+[resource]
+script = ExtResource("1_e2prm")
+item_name = "Makeshift armor"
+price = 120
+rarity = "uncommon"
+type = "armor"
+icon = ExtResource("1_163xc")
+placeholder = ExtResource("2_cbhra")
+defense = 15
+description = "Armor made in a hurry by someone with no experience is still better than regular leather"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

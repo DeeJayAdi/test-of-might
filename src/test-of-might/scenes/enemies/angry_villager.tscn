@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://6vnkimp2qfyb"]
 
 [ext_resource type="Script" uid="uid://bc0cvjxuxmwp4" path="res://scripts/enemies/skeleton.gd" id="1_eju56"]
-[ext_resource type="Resource" uid="uid://duqgduy5fwj3c" path="res://assets/resources/loot_tables/skeleton.tres" id="2_j63m2"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/plant_lvl_2.tres" id="2_qreqj"]
 [ext_resource type="Texture2D" uid="uid://bbgukwcg1pm07" path="res://assets/sprites/enemies/angry_villager/attack.png" id="3_d08oh"]
 [ext_resource type="Texture2D" uid="uid://dncsvc4mxsfn8" path="res://assets/sprites/enemies/angry_villager/hurt.png" id="4_h7keb"]
 [ext_resource type="Texture2D" uid="uid://dhg08bdosnv0i" path="res://assets/sprites/enemies/angry_villager/villager_walk.png" id="5_3duyb"]
@@ -191,7 +191,7 @@ attack_cooldown = 0.7
 crit_chance = 0.15
 attack_damage = 15
 xp_reward = 80
-loot_table = ExtResource("2_j63m2")
+loot_table = ExtResource("2_qreqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)

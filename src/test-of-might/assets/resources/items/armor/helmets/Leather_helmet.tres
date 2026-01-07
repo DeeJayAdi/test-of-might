@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://d4l04ianlomdq"]
+
+[ext_resource type="Texture2D" uid="uid://dbcolg8ia245a" path="res://assets/sprites/items/armor/helm/Icon163.png" id="1_22fsd"]
+[ext_resource type="Texture2D" uid="uid://cp2vwwt1fnu7h" path="res://assets/sprites/items/armor/helm/helm.png" id="2_j0jtn"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="3_i5pd5"]
+
+[resource]
+script = ExtResource("3_i5pd5")
+item_name = "Leather Hat"
+price = 30
+rarity = "common"
+type = "helmet"
+icon = ExtResource("1_22fsd")
+placeholder = ExtResource("2_j0jtn")
+defense = 4
+description = "A comfortable leather cap that can cushion minor blows to the head."
+metadata/_custom_type_script = "uid://elca6sp6br8g"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ctsvyvyuwvcuj"]
+
+[ext_resource type="Texture2D" uid="uid://cvuc2eitorqyx" path="res://assets/sprites/items/armor/boots/Icon232.png" id="1_qc8sf"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_x8obc"]
+[ext_resource type="Texture2D" uid="uid://bvt08a06byqra" path="res://assets/sprites/items/armor/boots/boots.png" id="2_lv3s4"]
+
+[resource]
+script = ExtResource("1_x8obc")
+item_name = "Basic Knight Boots"
+price = 150
+rarity = "epic"
+type = "boots"
+icon = ExtResource("1_qc8sf")
+placeholder = ExtResource("2_lv3s4")
+defense = 15
+description = "In these shoes you will feel like a knight"
+metadata/_custom_type_script = "uid://elca6sp6br8g"

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://d37q02i7r8fc6"]
+
+[ext_resource type="PackedScene" uid="uid://b8ojy7cgmrd5i" path="res://scenes/objects/Arrow.tscn" id="1_3pmm0"]
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_sykrt"]
+[ext_resource type="Texture2D" uid="uid://nw1y1djl3psm" path="res://assets/sprites/items/bows/Icon126.png" id="2_cn2rc"]
+[ext_resource type="Texture2D" uid="uid://bo46s43vhe81f" path="res://assets/sprites/items/swords/sword.png" id="3_x8o1h"]
+
+[resource]
+script = ExtResource("1_sykrt")
+item_name = "Midas Crossbow"
+price = 650
+rarity = "mythic"
+type = "weapon"
+subtype = "ranged"
+icon = ExtResource("2_cn2rc")
+placeholder = ExtResource("3_x8o1h")
+damage = 200
+attack_range = 10.0
+attack_speed = 1.0
+effect_name = "golden"
+effect_power = 10.0
+effect_duration = 7.5
+description = "Everything I touch becomes gold..."
+animation = ExtResource("1_3pmm0")
+metadata/_custom_type_script = "uid://elca6sp6br8g"

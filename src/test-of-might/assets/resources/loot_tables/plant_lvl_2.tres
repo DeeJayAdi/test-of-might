@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=11 format=3 uid="uid://b4apuflanlnpt"]
+
+[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="1_wfn6x"]
+[ext_resource type="Script" uid="uid://dlonhehj2q7bd" path="res://scripts/globals/loot_table.gd" id="2_72gs6"]
+[ext_resource type="Resource" uid="uid://j0k6t4tsdno1" path="res://assets/resources/items/melee/Long_Sword.tres" id="2_qexdk"]
+[ext_resource type="Resource" uid="uid://er61yw43lo5r" path="res://assets/resources/items/melee/Sasumata.tres" id="3_m31g7"]
+[ext_resource type="Resource" uid="uid://pg4o6osr7w5x" path="res://assets/resources/items/armor/boots/Improved_Leather_boots.tres" id="4_pk65x"]
+[ext_resource type="Resource" uid="uid://jkx7gsph8ojg" path="res://assets/resources/items/armor/helmets/Improved_Leather_helmet.tres" id="5_0sp5y"]
+[ext_resource type="Resource" uid="uid://c6ipec7lsckby" path="res://assets/resources/items/armor/chestplates/Improved_Leather_armor.tres" id="6_vw7n5"]
+[ext_resource type="Resource" uid="uid://d4l04ianlomdq" path="res://assets/resources/items/armor/helmets/Leather_helmet.tres" id="7_ky7ye"]
+[ext_resource type="Resource" uid="uid://c2sa8stivnqph" path="res://assets/resources/items/armor/boots/Leather_Boots.tres" id="8_31pu6"]
+[ext_resource type="Resource" uid="uid://disp0gmqig5gn" path="res://assets/resources/items/armor/chestplates/Lether_and_Steel_armor.tres" id="9_qd7dj"]
+
+[resource]
+script = ExtResource("2_72gs6")
+items = Dictionary[ExtResource("1_wfn6x"), float]({
+ExtResource("2_qexdk"): 0.15,
+ExtResource("3_m31g7"): 0.15,
+ExtResource("4_pk65x"): 0.1,
+ExtResource("5_0sp5y"): 0.1,
+ExtResource("6_vw7n5"): 0.1,
+ExtResource("7_ky7ye"): 0.25,
+ExtResource("8_31pu6"): 0.25,
+ExtResource("9_qd7dj"): 0.25
+})
+metadata/_custom_type_script = "uid://dlonhehj2q7bd"

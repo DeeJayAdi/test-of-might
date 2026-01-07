@@ -1,16 +1,12 @@
-[gd_scene load_steps=186 format=3 uid="uid://b7c02ge0jmrne"]
+[gd_scene load_steps=181 format=3 uid="uid://b7c02ge0jmrne"]
 
 [ext_resource type="Script" uid="uid://chrh1qwmi3sao" path="res://scripts/enemies/bosses/banshee/banshee.gd" id="1_he1p6"]
 [ext_resource type="Texture2D" uid="uid://17p10npa5ui8" path="res://assets/sprites/enemies/bosses/banshee/banshee - appear.png" id="1_rvknh"]
-[ext_resource type="Script" uid="uid://elca6sp6br8g" path="res://scripts/player/inventory/item_data.gd" id="2_gjsir"]
+[ext_resource type="Resource" path="res://assets/resources/loot_tables/Banshee.tres" id="2_he1p6"]
 [ext_resource type="Texture2D" uid="uid://cmm8j28vxxoea" path="res://assets/sprites/enemies/bosses/banshee/banshee - attack.png" id="2_xafn1"]
 [ext_resource type="Texture2D" uid="uid://hr1fw42msjfc" path="res://assets/sprites/enemies/bosses/banshee/banshee - death.png" id="3_iy68p"]
-[ext_resource type="Resource" uid="uid://c2jejw7jrixao" path="res://assets/resources/items/armor/boots/basic_boots.tres" id="3_luw5q"]
 [ext_resource type="Texture2D" uid="uid://dqlbcjavl5u6g" path="res://assets/sprites/enemies/bosses/banshee/banshee - disappear.png" id="4_ceexi"]
-[ext_resource type="Resource" uid="uid://1g0h8qyjscqn" path="res://assets/resources/items/ranged/magic_wand.tres" id="4_nd4yk"]
 [ext_resource type="Texture2D" uid="uid://d12yp3n73brni" path="res://assets/sprites/enemies/bosses/banshee/banshee - hit.png" id="5_qonit"]
-[ext_resource type="Resource" uid="uid://bnavdllrapyro" path="res://assets/resources/items/potions/big_healing_over_time_potion.tres" id="5_yo47g"]
-[ext_resource type="Script" path="res://scripts/globals/loot_table.gd" id="6_bspxy"]
 [ext_resource type="Texture2D" uid="uid://bq55vltee25c2" path="res://assets/sprites/enemies/bosses/banshee/banshee - idle.png" id="6_pvunx"]
 [ext_resource type="Texture2D" uid="uid://d3ph4w8mdl1em" path="res://assets/sprites/enemies/bosses/banshee/banshee - move.png" id="7_gnlmg"]
 [ext_resource type="Texture2D" uid="uid://c0avlm3fgqy2v" path="res://assets/sprites/enemies/bosses/banshee/banshee - scream.png" id="8_xafn1"]
@@ -26,15 +22,6 @@
 [ext_resource type="AudioStream" uid="uid://c5idab838u5k8" path="res://assets/audio/effects/banshee/banshee_hurt.wav" id="19_jfiwv"]
 [ext_resource type="AudioStream" uid="uid://btdx2a2cxbg" path="res://assets/audio/effects/pumpkin_warlock/melee.wav" id="22_oxqyp"]
 [ext_resource type="AudioStream" uid="uid://c5fhtb46sfuga" path="res://assets/audio/effects/banshee/banshee_scream.wav" id="23_xyx0o"]
-
-[sub_resource type="Resource" id="Resource_6xhya"]
-script = ExtResource("6_bspxy")
-items = Dictionary[ExtResource("2_gjsir"), float]({
-ExtResource("3_luw5q"): 0.5,
-ExtResource("4_nd4yk"): 0.3,
-ExtResource("5_yo47g"): 0.7
-})
-metadata/_custom_type_script = "uid://dlonhehj2q7bd"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pnwiu"]
 atlas = ExtResource("1_rvknh")
@@ -1285,7 +1272,7 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_he1p6")
 attack_cooldown = 5.0
-loot_table = SubResource("Resource_6xhya")
+loot_table = ExtResource("2_he1p6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -25)
