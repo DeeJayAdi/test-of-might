@@ -4,6 +4,7 @@ class_name CombatComponent extends Node2D
 @onready var stats_comp: StatsComponent = player.get_node("StatsComponent") as StatsComponent
 @onready var state_manager: StateManager = player.get_node("StateManager") as StateManager
 @onready var sfx_comp: SFXComponent = player.get_node("SfxComponent") as SFXComponent
+@onready var default_bullet_scene = preload("res://scenes/objects/Bullet.tscn")
 
 var can_attack: bool = true
 var attack_locked_direction: String = ""
@@ -13,7 +14,6 @@ var upgrades : Array[BaseBulletStrategy] = []
 func _ready() -> void:
 	pass
 
-var default_bullet_scene = preload("res://scenes/objects/bullet.tscn")
 
 func _physics_process(delta: float) -> void:
 	var weapon = player.inventory.get_current_weapon()
