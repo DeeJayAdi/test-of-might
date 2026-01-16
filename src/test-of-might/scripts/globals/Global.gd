@@ -46,6 +46,8 @@ func _ready():
 
 func SwitchScene(scene_path: String):
 	next_scene_path = scene_path
+	if SaveManager:
+		SaveManager.save_game(scene_path)
 	get_tree().change_scene_to_file("res://scenes/loading_screen/loadingScreen.tscn")
 	
 	

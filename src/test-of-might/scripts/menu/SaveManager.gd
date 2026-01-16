@@ -25,7 +25,7 @@ func reset_cutscenes():
 func get_save_path() -> String:
 	return SAVE_PATH % current_slot
 
-func save_game():
+func save_game(scene_path_override: String = ""):
 	print("Rozpoczynam zapis gry (slot %d)..." % current_slot)
 
 	var scene = get_tree().current_scene
@@ -34,8 +34,10 @@ func save_game():
 		emit_signal("save_completed", false)
 		return
 
+	var scene_path_to_save = scene_path_override if scene_path_override != "" else scene.scene_file_path
+
 	var save_data = {
-		"scene_path": scene.scene_file_path,
+		"scene_path": scene_path_to_save,
 		"played_cutscenes": played_cutscenes,
 		"dead_enemies": dead_enemies,
 		"graveyard_vampires_defeat_notified": graveyard_vampires_defeat_notified,
@@ -139,7 +141,7 @@ func load_game():
 	else:
 		graveyard_vampires_defeat_notified = false
 
-	Global.SwitchScene(data["scene_path"])
+	get_tree().change_scene_to_file(data["scene_path"])
 
 
 func get_data_for_node(node_or_path):

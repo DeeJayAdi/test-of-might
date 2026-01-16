@@ -13,13 +13,7 @@ func update(_delta: float):
 
 func _on_animation_finished():
 	if player.animation_manager.animated_sprite.animation.begins_with("Death"):
-		var death_screen = death_screen_scene.instantiate()
-		get_tree().root.add_child(death_screen)
-		get_tree().paused = true
-		
-		# Disable processing before queue_free to prevent the error
-		player.process_mode = Node.PROCESS_MODE_DISABLED
-		player.queue_free()
+		get_tree().change_scene_to_file("res://scenes/death_screen/death_screen.tscn")
 
 func exit():
 	if player.animation_manager.is_animation_finished_connected(self._on_animation_finished):
