@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cbg0qmbawrgob" path="res://scenes/enemies/Vampires/Vampire_lvl3.tscn" id="5_hc0au"]
 [ext_resource type="PackedScene" uid="uid://cyopic4inmmus" path="res://scenes/enemies/Vampires/Vampire_lvl1.tscn" id="6_75cv5"]
 [ext_resource type="PackedScene" uid="uid://0pviyy6wdofy" path="res://scenes/enemies/Vampires/Vampire_lvl2.tscn" id="7_b2i2j"]
-[ext_resource type="PackedScene" uid="uid://bjpss1bofa42y" path="res://scenes/objects/FlagCompleteLevel.tscn" id="8_flag"]
+[ext_resource type="PackedScene" path="res://scenes/objects/FlagCompleteLevel.tscn" id="8_flag"]
 [ext_resource type="Script" uid="uid://d00ei46gpqljy" path="res://scripts/globals/GraveyardManager.gd" id="9_f2jql"]
 [ext_resource type="PackedScene" uid="uid://c61rnyr13ceff" path="res://scenes/NPC/signs/sign.tscn" id="10_1rwbk"]
 
