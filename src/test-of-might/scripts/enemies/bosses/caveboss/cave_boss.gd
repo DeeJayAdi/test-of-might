@@ -73,7 +73,8 @@ func _on_health_changed(_current, _max_hp):
 		else:
 			# change color briefly to indicate damage without interrupting current action
 			anim_player.modulate = Color(1, 0.5, 0.5)
-			await get_tree().create_timer(0.1).timeout
+			sound_effects_component.play_sound_effect("Hurt")
+			await get_tree().create_timer(0.3).timeout
 			anim_player.modulate = Color(1, 1, 1)
 
 
