@@ -37,6 +37,16 @@ func _ready() -> void:
 		
 	health_comp.on_health_changed.connect(_on_health_changed)
 	health_comp.died.connect(_on_death)
+	
+	await get_tree().process_frame # Czekamy klatkę na załadowanie fizyki
+	if detection_area:
+		var bodies = detection_area.get_overlapping_bodies()
+		for body in bodies:
+			if body.is_in_group("player"):
+				target = body
+				is_player_detected = true
+				if has_node("/root/PersistentMusic"):
+					PersistentMusic.switch_to_battle()
 
 
 func _on_health_changed(_current, _max_hp):

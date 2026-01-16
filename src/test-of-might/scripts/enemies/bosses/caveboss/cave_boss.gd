@@ -39,6 +39,15 @@ func _ready() -> void:
 		
 	health_component.on_health_changed.connect(_on_health_changed)
 	health_component.died.connect(_on_death)
+	await get_tree().process_frame
+	if has_node("DetectionArea"): # Upewnij się, że nazwa węzła to DetectionArea
+		var bodies = $DetectionArea.get_overlapping_bodies() # LUB $DetectionZone zależnie jak nazwałeś węzeł w drzewie
+		for body in bodies:
+			if body.is_in_group("player"):
+				target = body
+				is_player_detected = true
+				if has_node("/root/PersistentMusic"):
+					PersistentMusic.switch_to_battle()
 
 
 func get_facing_direction() -> String:

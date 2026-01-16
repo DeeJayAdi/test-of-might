@@ -10,6 +10,7 @@ extends Control
 
 var player_ref: CharacterBody2D = null
 var inventory_ref: Control = null 
+var is_transaction_pending: bool = false
 
 func _ready():
 	visible = false 
@@ -18,6 +19,7 @@ func _ready():
 func open_shop(player, inventory):
 	player_ref = player
 	inventory_ref = inventory
+	is_transaction_pending = false
 	visible = true
 	
 	update_gold_ui()
@@ -27,46 +29,44 @@ func open_shop(player, inventory):
 	# Opcjonalnie: Pokaż myszkę, jeśli jest ukryta
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	visible = true
-	get_tree().paused = true  # <--- TA LINIA ZATRZYMUJE GRĘ
+	get_tree().paused = true 
 	print("PAUZA WŁĄCZONA")
 
-# Funkcja do przycisku wyjścia (dodaj guzik "X" i podłącz go tutaj)
+# Funkcja do przycisku wyjścia
 func _on_close_button_pressed():
-	visible = false
-	get_tree().paused = false # <--- TA LINIA WZNAWIA GRĘ
-	print("PAUZA WYŁĄCZONA")
+	_on_close_pressed()
 
 func update_gold_ui():
 	if player_ref:
-		# Upewnij się, że w player.gd masz zmienną "gold"
 		gold_label.text = "YourGold: " + str(player_ref.stats_comp.gold)
 
 # --- ZAKŁADKA BUY ---
 func populate_buy_tab():
-	# Czyścimy stare przyciski, żeby się nie dublowały przy każdym otwarciu
 	for child in buy_grid.get_children():
 		child.queue_free()
 		
 	for item in items_for_sale:
 		var btn = Button.new()
-		# Ustawiamy tekst na przycisku
 		btn.text = item.item_name + "\n" + str(item.price) + " G"
 		btn.icon = item.icon
-		
-		# Wygląd przycisku
 		btn.custom_minimum_size = Vector2(100, 100)
 		btn.expand_icon = true
 		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		
-		# Podłączamy funkcję kupowania
 		btn.pressed.connect(func(): _on_buy_item_pressed(item))
-		
 		buy_grid.add_child(btn)
 
 func _on_buy_item_pressed(item: ItemData):
+	if is_transaction_pending:
+		return 
+
 	if player_ref.stats_comp.gold >= item.price:
-		# Wywołujemy funkcję add_item z inventory.gd (którą dodałeś wcześniej)
+		
+		# ### TUTAJ BRAKOWAŁO: WŁĄCZENIE BLOKADY ###
+		is_transaction_pending = true 
+		# -------------------------------------------
+
 		var added = inventory_ref.add_item(item, 1)
 		
 		if added:
@@ -75,6 +75,11 @@ func _on_buy_item_pressed(item: ItemData):
 			print("Kupiono: ", item.item_name)
 		else:
 			print("Brak miejsca!")
+			
+		# ### TUTAJ BRAKOWAŁO: WYŁĄCZENIE BLOKADY PO CZASIE ###
+		get_tree().create_timer(0.2).timeout.connect(func(): is_transaction_pending = false)
+		# -----------------------------------------------------
+
 	else:
 		print("Bieda! Nie stać cię.")
 
@@ -86,12 +91,8 @@ func populate_sell_tab():
 	var slots = inventory_ref.find_children("*", "Panel", true, false)
 	
 	for slot in slots:
-		# --- NOWE ZABEZPIECZENIE ---
-		# Sprawdzamy, czy slot ma w ogóle zmienną 'quantity'.
-		# Jeśli to swap_slot lub equipment_slot, to jej nie ma -> POMIŃ GO.
 		if not "quantity" in slot:
 			continue
-		# ---------------------------
 
 		if slot.get("item") != null:
 			var item = slot.item
@@ -112,9 +113,17 @@ func populate_sell_tab():
 			sell_grid.add_child(btn)
 
 func _on_sell_item_pressed(slot_ref, item, value):
+	if is_transaction_pending:
+		return 
+	
 	if slot_ref.item != item:
-		populate_sell_tab() # Odśwież widok, bo coś się nie zgadza
+		populate_sell_tab() 
 		return
+
+	# ### TUTAJ BRAKOWAŁO: WŁĄCZENIE BLOKADY ###
+	is_transaction_pending = true 
+	# -------------------------------------------
+
 	if slot_ref.quantity > 1:
 		slot_ref.quantity -= 1
 		slot_ref.update_ui()
@@ -123,13 +132,20 @@ func _on_sell_item_pressed(slot_ref, item, value):
 		slot_ref.quantity = 0
 		slot_ref.update_ui()
 
-	player_ref.update_gold(value)
+	if player_ref.stats_comp.has_method("update_gold"):
+		player_ref.stats_comp.update_gold(value)
+	else:
+		player_ref.update_gold(value)
 	update_gold_ui()
 
 	populate_sell_tab()
+	
+	# ### TUTAJ BRAKOWAŁO: WYŁĄCZENIE BLOKADY PO CZASIE ###
+	get_tree().create_timer(0.2).timeout.connect(func(): is_transaction_pending = false)
+	# -----------------------------------------------------
 
 
 func _on_close_pressed(): 
 	visible = false
-	get_tree().paused = false  # <--- TA LINIA MUSI TU BYĆ!
-	print("Gra odpalona!")     # Dodaj ten print dla pewności
+	get_tree().paused = false 
+	print("Gra odpalona!")
