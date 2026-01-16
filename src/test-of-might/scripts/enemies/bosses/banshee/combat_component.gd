@@ -6,8 +6,6 @@ var summon_scene: PackedScene = preload("res://scenes/enemies/bosses/PumpkinWarl
 @export var melee_damage: int = 33
 @export var range_damage: int = 33
 @export var melee_range: float = 40.0
-@export var summon_count_min: int = 2
-@export var summon_count_max: int = 4
 
 var boss: banshee
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=181 format=3 uid="uid://b7c02ge0jmrne"]
+[gd_scene load_steps=182 format=3 uid="uid://b7c02ge0jmrne"]
 
 [ext_resource type="Script" uid="uid://chrh1qwmi3sao" path="res://scripts/enemies/bosses/banshee/banshee.gd" id="1_he1p6"]
 [ext_resource type="Texture2D" uid="uid://17p10npa5ui8" path="res://assets/sprites/enemies/bosses/banshee/banshee - appear.png" id="1_rvknh"]
-[ext_resource type="Resource" path="res://assets/resources/loot_tables/Banshee.tres" id="2_he1p6"]
+[ext_resource type="Resource" uid="uid://ctyf5yx3hauk" path="res://assets/resources/loot_tables/Banshee.tres" id="2_he1p6"]
 [ext_resource type="Texture2D" uid="uid://cmm8j28vxxoea" path="res://assets/sprites/enemies/bosses/banshee/banshee - attack.png" id="2_xafn1"]
 [ext_resource type="Texture2D" uid="uid://hr1fw42msjfc" path="res://assets/sprites/enemies/bosses/banshee/banshee - death.png" id="3_iy68p"]
 [ext_resource type="Texture2D" uid="uid://dqlbcjavl5u6g" path="res://assets/sprites/enemies/bosses/banshee/banshee - disappear.png" id="4_ceexi"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bfw1lkx6074j3" path="res://scripts/enemies/bosses/banshee/states/walk.gd" id="14_604mf"]
 [ext_resource type="Script" uid="uid://b6n5kg7ptdtjn" path="res://scripts/enemies/bosses/pumpkin_warlock/health_component.gd" id="16_yo47g"]
 [ext_resource type="Script" uid="uid://bpopy885234k5" path="res://scripts/enemies/bosses/banshee/combat_component.gd" id="17_he1p6"]
+[ext_resource type="Script" uid="uid://cap0xfxrc0ek8" path="res://scripts/enemies/bosses/banshee/states/scream.gd" id="17_xyx0o"]
 [ext_resource type="Script" uid="uid://bmpp8rnoxii7b" path="res://scripts/enemies/bosses/pumpkin_warlock/sfx_component.gd" id="18_6xhya"]
 [ext_resource type="AudioStream" uid="uid://c5idab838u5k8" path="res://assets/audio/effects/banshee/banshee_hurt.wav" id="19_jfiwv"]
 [ext_resource type="AudioStream" uid="uid://btdx2a2cxbg" path="res://assets/audio/effects/pumpkin_warlock/melee.wav" id="22_oxqyp"]
@@ -1271,7 +1272,6 @@ collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_he1p6")
-attack_cooldown = 5.0
 loot_table = ExtResource("2_he1p6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -1299,7 +1299,6 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-visible = false
 shape = SubResource("CircleShape2D_obsni")
 
 [node name="MeleeArea" type="Area2D" parent="."]
@@ -1332,11 +1331,17 @@ script = ExtResource("13_musf4")
 [node name="Walk" type="Node" parent="StateManager"]
 script = ExtResource("14_604mf")
 
+[node name="Scream" type="Node" parent="StateManager"]
+script = ExtResource("17_xyx0o")
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("16_yo47g")
+max_health = 10000
 
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("17_he1p6")
+melee_damage = 300
+range_damage = 50
 
 [node name="SfxComponent" type="Node2D" parent="."]
 position = Vector2(0, -25)
@@ -1353,8 +1358,11 @@ stream = ExtResource("23_xyx0o")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
+[node name="ScreamTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exit"]
 [connection signal="body_entered" from="MeleeArea" to="." method="_on_meele_area_body_entered"]
 [connection signal="body_exited" from="MeleeArea" to="." method="_on_meele_area_body_exit"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ScreamTimer" to="." method="_on_scream_timer_timeout"]

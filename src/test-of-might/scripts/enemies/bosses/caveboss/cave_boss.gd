@@ -63,14 +63,19 @@ func _on_health_changed(_current, _max_hp):
 		health_bar.value = clamp(_current, 0, _max_hp)
 	
 	var current_state = state_manager.current_state.name.to_lower()
+	if !self.stagger:
+		return
 
-	if current_state != "roam" and current_state != "death" and current_state != "hurt":
-		if state_manager.current_state.name.to_lower() == "attack":
-			#reset attack cooldown to allow interrupting attack
-			attack_timer.stop()
-			can_attack = true
-		if self.stagger:
+	if current_state != "death":
+
+		if current_state == "idle":
 			state_manager.change_state("hurt")
+		else:
+			# change color briefly to indicate damage without interrupting current action
+			anim_player.modulate = Color(1, 0.5, 0.5)
+			sound_effects_component.play_sound_effect("Hurt")
+			await get_tree().create_timer(0.3).timeout
+			anim_player.modulate = Color(1, 1, 1)
 
 
 func _on_death():
