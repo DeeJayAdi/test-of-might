@@ -10,12 +10,13 @@ class_name banshee extends CharacterBody2D
 @onready var combat_comp: Node = $CombatComponent
 @onready var sfx_comp: Node2D = $SfxComponent
 @onready var attack_timer: Timer = $AttackTimer
+@onready var scream_timer: Timer = $ScreamTimer
 
 @export var boss_navigation_region: NavigationRegion2D
 @export var attack_cooldown: float = 1.5
-@export var summon_cooldown: float = 9
+@export var scream_cooldown: float = 8.0
 @export var loot_table: LootTable 
-@export var walk_speed: float = 100
+@export var walk_speed: float = 150
 
 signal died
 
@@ -23,6 +24,7 @@ var target: Node = null
 var is_player_detected: bool = false
 var is_player_in_melee_range: bool = false
 var can_attack = true
+var can_scream = true
 var stagger = false
 
 func _ready() -> void:
@@ -42,12 +44,19 @@ func _on_health_changed(_current, _max_hp):
 		health_bar.value = clamp(_current, 0, _max_hp)
 	
 	var current_state = state_manager.current_state.name.to_lower()
+	if !self.stagger:
+		return
 
-	if current_state != "walk" and current_state != "death" and current_state != "hurt":
-		if self.stagger:
-			attack_timer.stop()
-			can_attack = true
+	if current_state != "death":
+
+		if current_state == "idle":
 			state_manager.change_state("hurt")
+		else:
+			# change color briefly to indicate damage without interrupting current action
+			anim_sprite.modulate = Color(1, 0.5, 0.5)
+			sfx_comp.play_sound_effect("Hurt")
+			await get_tree().create_timer(0.3).timeout
+			anim_sprite.modulate = Color(1, 1, 1)
 
 
 func _on_death():
@@ -119,3 +128,6 @@ func _on_meele_area_body_exit(body):
 func _on_attack_timer_timeout():
 	can_attack = true
 	
+
+func _on_scream_timer_timeout():
+	can_scream = true

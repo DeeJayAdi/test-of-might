@@ -20,13 +20,12 @@ func update(delta: float):
 
 	var nav_agent = boss.get_node("NavigationAgent2D")
 	nav_agent.target_position = boss.target.position
-	var dir = (nav_agent.get_next_path_position() - boss.position)
-	boss.velocity = dir.normalized() * boss.walk_speed
+	
+	var next_pos = nav_agent.get_next_path_position()
+	var dir = (next_pos - boss.position).normalized()
+	boss.velocity = dir * boss.walk_speed
 	boss.move_and_slide()
 	
-	if boss.can_attack and boss.is_player_detected:
-		state_machine.change_state("Attack")
-
 
 func exit():
 	pass

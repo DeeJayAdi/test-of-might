@@ -6,28 +6,19 @@ var locked_target_pos: Vector2
 func enter():
 	if not boss.anim_sprite.animation_finished.is_connected(_on_animation_finished):
 		boss.anim_sprite.animation_finished.connect(_on_animation_finished)
-	boss.can_attack = false
+	boss.can_scream = false
 
-	if boss.is_player_in_melee_range:
-		if boss.target:
-			locked_target_pos = boss.target.global_position
-		else:
-			locked_target_pos = boss.global_position + Vector2.RIGHT.rotated(boss.rotation) * 50
 		
-		boss.play_anim("attack")
-		boss.sfx_comp.play_sound_effect("Melee")
-	else:
-		state_machine.change_state("idle")
-		return
-
-	boss.attack_timer.start(boss.attack_cooldown)
+	boss.play_anim("scream")
+	boss.sfx_comp.play_sound_effect("Scream")
+	boss.scream_timer.start(boss.scream_cooldown)
+	
 
 func _on_animation_finished():
 	var current_anim = boss.anim_sprite.animation
 	
-	if "attack" in current_anim:
-		boss.combat_comp.attack_melee(locked_target_pos)
-
+	if "scream" in current_anim:
+		boss.combat_comp.scream()
 		
 	state_machine.change_state("idle")
 
