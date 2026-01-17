@@ -49,7 +49,7 @@ func _process(_delta):
 	player_icon.rotation = dir.angle() + PI / 2
 
 func _input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_TAB:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_TAB:
 		is_map_expanded = not is_map_expanded
 		update_minimap_state()
 
