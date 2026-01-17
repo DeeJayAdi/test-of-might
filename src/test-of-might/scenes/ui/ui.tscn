@@ -1,11 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://det5vlnlsyq2e"]
+[gd_scene load_steps=14 format=3 uid="uid://det5vlnlsyq2e"]
 
 [ext_resource type="Texture2D" uid="uid://lfcmi1ialqlh" path="res://assets/ui/pasek.png" id="1_m6e0p"]
-[ext_resource type="Texture2D" uid="uid://7pjywbdogoxw" path="res://assets/ui/itemy_slot.png" id="2_27fn8"]
 [ext_resource type="Texture2D" uid="uid://bpi6g36wfqsrs" path="res://assets/ui/pasek_pelny_2.png" id="2_n5ude"]
 [ext_resource type="Texture2D" uid="uid://ccx017gjkwlt1" path="res://assets/ui/Pasek_pusty_2.png" id="2_y4yjw"]
-[ext_resource type="Texture2D" uid="uid://beeyrmwtyrsgv" path="res://assets/ui/ekiwpunek_64.png" id="3_nltto"]
-[ext_resource type="Texture2D" uid="uid://cf3q74ajtsc8k" path="res://assets/ui/mapa_64.png" id="5_n5ude"]
 [ext_resource type="Texture2D" uid="uid://ijd5xt6su0mc" path="res://assets/ui/LVL.png" id="7_y4yjw"]
 [ext_resource type="Texture2D" uid="uid://dgnfr6rsm1k5n" path="res://assets/ui/lvl_pasek.png" id="8_waa4j"]
 [ext_resource type="FontFile" uid="uid://dkctivjq28eq8" path="res://assets/fonts/Jersey10-Regular.ttf" id="9_ok7cu"]
@@ -14,6 +11,25 @@
 [ext_resource type="Texture2D" uid="uid://brswsgd0n1sb1" path="res://assets/skills/spin_attack.png" id="12_n3vwu"]
 [ext_resource type="Texture2D" uid="uid://t14nxco6bq3g" path="res://assets/skills/piercing_strike.png" id="13_0i47d"]
 [ext_resource type="Texture2D" uid="uid://dgn7yrc33ifpe" path="res://assets/skills/damage_boost.png" id="14_mgwkc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circular_mask"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circular_border"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.35, 0.35, 0.35, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("10_abcde")
@@ -36,49 +52,6 @@ offset_bottom = 77.0
 value = 50.0
 texture_under = ExtResource("2_y4yjw")
 texture_progress = ExtResource("2_n5ude")
-
-[node name="Menu_lewo" type="VBoxContainer" parent="."]
-z_as_relative = false
-y_sort_enabled = true
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -67.5
-offset_right = 84.0
-offset_bottom = 67.5
-grow_vertical = 2
-
-[node name="Ekwipunek" type="TextureButton" parent="Menu_lewo"]
-layout_mode = 2
-action_mode = 0
-texture_normal = ExtResource("3_nltto")
-
-[node name="Mapa_dziennik" type="TextureButton" parent="Menu_lewo"]
-layout_mode = 2
-texture_normal = ExtResource("5_n5ude")
-
-[node name="Itemki" type="BoxContainer" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -244.0
-offset_top = -120.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Item_1" type="TextureRect" parent="Itemki"]
-layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("2_27fn8")
-expand_mode = 3
-
-[node name="Item_2" type="TextureRect" parent="Itemki"]
-layout_mode = 2
-texture = ExtResource("2_27fn8")
-expand_mode = 2
 
 [node name="LvL" type="VBoxContainer" parent="."]
 anchors_preset = 1
@@ -303,4 +276,61 @@ theme_override_font_sizes/font_size = 15
 text = "4"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Menu_lewo/Ekwipunek" to="." method="_on_ekwipunek_pressed"]
+[node name="MinimapRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -220.0
+offset_right = 220.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="Mask" type="Panel" parent="MinimapRoot"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circular_mask")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinimapRoot/Mask"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MinimapRoot/Mask/SubViewportContainer"]
+handle_input_locally = false
+canvas_cull_mask = 4294967293
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="MinimapRoot/Mask/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.1, 0.1)
+
+[node name="Border" type="Panel" parent="MinimapRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circular_border")
+
+[node name="PlayerIconRoot" type="Node2D" parent="MinimapRoot"]
+position = Vector2(100, 100)
+
+[node name="Outline" type="Polygon2D" parent="MinimapRoot/PlayerIconRoot"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -13, 11, 11, -11, 11)
+
+[node name="Icon" type="Polygon2D" parent="MinimapRoot/PlayerIconRoot"]
+color = Color(0.8, 0.7, 0, 1)
+polygon = PackedVector2Array(0, -10, 8, 8, -8, 8)
