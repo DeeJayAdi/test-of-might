@@ -70,7 +70,8 @@ func _deferred_physics_process(_delta: float):
 
 	input_manager.process_input(_delta)
 	update_facing_direction(input_manager.dir)
-	move_and_slide()
+	if is_inside_tree():
+		move_and_slide()
 	
 	if _is_teleport_pending:
 		print("Nadpisuję pozycję na: %s" % _teleport_to_position)

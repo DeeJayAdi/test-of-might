@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bq61iiewjpell" path="res://scenes/enemies/bosses/PumpkinWarlock/PumpkinWarlock.tscn" id="4_k2v6i"]
 [ext_resource type="PackedScene" uid="uid://6vnkimp2qfyb" path="res://scenes/enemies/angry_villager.tscn" id="5_dfv3u"]
 [ext_resource type="PackedScene" uid="uid://ehfc7ktqw2o0" path="res://scenes/enemies/crow_terror.tscn" id="6_e70iy"]
-[ext_resource type="PackedScene" uid="uid://bjpss1bofa42y" path="res://scenes/objects/FlagCompleteLevel.tscn" id="7_k526v"]
+[ext_resource type="PackedScene" path="res://scenes/objects/FlagCompleteLevel.tscn" id="7_k526v"]
 [ext_resource type="PackedScene" uid="uid://cjps4k061fu3m" path="res://scenes/enemies/Plant/Plant_lvl3.tscn" id="8_10nlf"]
 [ext_resource type="PackedScene" uid="uid://cg0m04ve5g677" path="res://scenes/enemies/Plant/Plant_lvl2.tscn" id="9_vf311"]
 [ext_resource type="PackedScene" uid="uid://c61rnyr13ceff" path="res://scenes/NPC/signs/sign.tscn" id="10_le4kg"]

@@ -40,13 +40,8 @@ func interact():
 	# 3. CZEKAMY 5 SEKUND
 	await get_tree().create_timer(5).timeout
 
-	# 4. ZAPISUJEMY BOHATERA (HP, EXP, EQ)
-	# SaveManager zapisze wszystko co jest w grupie "Persist" (czyli gracza)
-	print("Zapisuję statystyki bohatera...")
-	SaveManager.save_game()
-	
-	# Czekamy jedną klatkę, żeby plik zdążył się zapisać przed zmianą sceny
-	await get_tree().process_frame 
-	
-	# 5. PRZEJŚCIE DO MAPY CAVE
+	# 4. PRZEJŚCIE DO MAPY CAVE
 	Global.SwitchScene("res://maps/cave/cave.tscn")
+	
+func save():
+	pass

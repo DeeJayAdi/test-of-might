@@ -43,7 +43,6 @@ func _on_start_game_btn_pressed() -> void:
 	SaveManager.played_cutscenes = []
 	SaveManager.dead_enemies = []
 	$VBoxContainer2/ErrorLabel.text = ""
-	get_node("/root/Global").SwitchScene(sceneLink)
 	Global.SwitchScene(sceneLink)
 
 func _play_Sound():
