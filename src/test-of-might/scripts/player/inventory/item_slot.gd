@@ -80,14 +80,14 @@ func use_item():
 
 	var context_menu = PopupMenu.new()
 	add_child(context_menu)
-	context_menu.add_item("Use Item", 0)
+	context_menu.add_item("Use", 0)
 	
 	var is_usable = (item.heal_instant > 0) or (item.heal_per_second > 0 and item.heal_duration > 0)
 
 	if not is_usable:
 		context_menu.set_item_disabled(0, true)
 		
-	context_menu.add_item("Destroy Item", 1)
+	context_menu.add_item("Discard", 1)
 	context_menu.id_pressed.connect(_on_context_menu_item_selected.bind(context_menu))
 	context_menu.popup_hide.connect(context_menu.queue_free)
 	context_menu.popup(Rect2i(get_global_mouse_position(), Vector2i.ZERO))
