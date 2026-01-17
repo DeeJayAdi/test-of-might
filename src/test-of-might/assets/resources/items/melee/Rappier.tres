@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_usqu1")
-item_name = "Rappier"
+item_name = "Rapier"
 price = 200
 rarity = "epic"
 type = "weapon"

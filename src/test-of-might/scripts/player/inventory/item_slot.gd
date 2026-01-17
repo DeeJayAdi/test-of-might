@@ -77,16 +77,53 @@ func use_item():
 		return
 	if not player_node:
 		return
+
+	var context_menu = PopupMenu.new()
+	add_child(context_menu)
+	context_menu.add_item("Use Item", 0)
+	
+	var is_usable = (item.heal_instant > 0) or (item.heal_per_second > 0 and item.heal_duration > 0)
+
+	if not is_usable:
+		context_menu.set_item_disabled(0, true)
+		
+	context_menu.add_item("Destroy Item", 1)
+	context_menu.id_pressed.connect(_on_context_menu_item_selected.bind(context_menu))
+	context_menu.popup_hide.connect(context_menu.queue_free)
+	context_menu.popup(Rect2i(get_global_mouse_position(), Vector2i.ZERO))
+
+func _on_context_menu_item_selected(id: int, menu: PopupMenu):
+	match id:
+		0: 
+			_perform_use_logic()
+		1: 
+			_perform_destroy_logic()
+	
+	menu.queue_free()
+
+func _perform_use_logic():
 	if item.type == "potion":
 		print("Using potion:", item.item_name)
+		
 		if item.heal_instant > 0:
 			player_node.heal(item.heal_instant)
+		
 		if item.heal_per_second > 0 and item.heal_duration > 0:
 			player_node.heal_over_time(item.heal_per_second, item.heal_duration)
+		
 		quantity -= 1
 		if quantity <= 0:
-			item = null		
+			item = null
+		
 		update_ui()
+
+func _perform_destroy_logic():
+	print("Destroying item:", item.item_name)
+	
+	item = null
+	quantity = 0
+	
+	update_ui()
 		
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
