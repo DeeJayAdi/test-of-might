@@ -12,6 +12,7 @@ signal dialog_finished
 var dialog_queue = []
 var current_line_index = 0
 var is_typing = false
+var can_input: bool = true
 
 func _ready():
 	typewriter_timer.timeout.connect(_on_typewriter_timer_timeout)
@@ -23,6 +24,7 @@ func start_dialog(dialog_data: Array):
 
 	get_tree().paused = true
 	self.visible = true
+	can_input = true
 
 	dialog_queue = dialog_data
 	current_line_index = 0
@@ -81,12 +83,23 @@ func _input(event):
 	if not self.visible:
 		return
 		
+	# Blokujemy wszelkie inne klawisze
+	if event is InputEventKey:
+		get_viewport().set_input_as_handled()
+
+	### POPRAWKA: Używamy is_action_pressed (bez "just")
 	if event.is_action_pressed("ui_accept"):
+		
+		# Nasza ręczna blokada "just pressed"
+		if not can_input:
+			return
+			
+		can_input = false
+		get_tree().create_timer(0.1).timeout.connect(func(): can_input = true)
+
 		if is_typing:
 			_skip_typing()
 		else:
 			_advance_dialog()
-		get_viewport().set_input_as_handled()
-
-	elif event is InputEventKey:
+			
 		get_viewport().set_input_as_handled()
