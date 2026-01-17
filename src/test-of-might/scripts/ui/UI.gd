@@ -29,6 +29,12 @@ func _ready():
 	var main_viewport = get_viewport()
 	if main_viewport:
 		minimap_viewport.world_2d = main_viewport.world_2d
+		# Enable Linear Mipmap filtering for the minimap to prevent aliasing/shimmering
+		minimap_viewport.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		
+	# Enable camera smoothing to reduce movement jitter
+	minimap_camera.position_smoothing_enabled = true
+	minimap_camera.position_smoothing_speed = 10.0
 
 func _process(_delta):
 	# Update camera position

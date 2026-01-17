@@ -308,6 +308,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinimapRoot/Mask/SubViewportContainer"]
 handle_input_locally = false
+canvas_cull_mask = 4294967293
 size = Vector2i(200, 200)
 render_target_update_mode = 4
 
